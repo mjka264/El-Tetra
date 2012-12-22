@@ -49,7 +49,7 @@
     [super viewDidLoad];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = @"Moo";
+    label.text = [self.dataSource headingForDisplay:self];
     label.font = [UIFont boldSystemFontOfSize:16];
     label.textAlignment = NSTextAlignmentCenter;
     [label sizeToFit];
@@ -73,19 +73,19 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.dataSource dataForStatTVC:self] count];
+    return [[self.dataSource dataForDisplay:self] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionNumber
 {
-    NSOrderedSet *section = [[self.dataSource dataForStatTVC:self]
+    NSOrderedSet *section = [[self.dataSource dataForDisplay:self]
                              objectAtIndex:sectionNumber];
     return [section count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    StatTableViewControllerData *data = [[[self.dataSource dataForStatTVC:self]
+    StatTableViewControllerData *data = [[[self.dataSource dataForDisplay:self]
                                           objectAtIndex:indexPath.section]
                                          objectAtIndex:indexPath.row];
     //static NSString *CellIdentifier = @"Cell";

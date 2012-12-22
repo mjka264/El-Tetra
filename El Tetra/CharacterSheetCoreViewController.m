@@ -11,6 +11,7 @@
 
 @interface CharacterSheetCoreViewController ()
 @property (nonatomic, strong) CharacterData *characterData;
+@property (nonatomic, strong) NSMutableDictionary *embeddedStatViewControllers;
 @end
 
 @implementation CharacterSheetCoreViewController
@@ -21,7 +22,25 @@
     return _characterData;
 }
 
-- (NSOrderedSet *)dataForStatTVC:(StatTableViewController *)source
+@synthesize embeddedStatViewControllers = _embeddedStatViewControllers;
+- (NSMutableDictionary *)embeddedStatViewControllers
+{
+    if (!_embeddedStatViewControllers) _embeddedStatViewControllers = [[NSMutableDictionary alloc] init];
+    return _embeddedStatViewControllers;
+}
+
+- (NSString *)headingForDisplay:(StatTableViewController *)source
+{
+    NSString *heading;
+    for (NSString* key in [self.embeddedStatViewControllers allKeys]) {
+        if ([self.embeddedStatViewControllers valueForKey:key] == source) {
+            heading = key;
+        }
+    }
+    return heading;
+}
+
+- (NSOrderedSet *)dataForDisplay:(StatTableViewController *)source
 {
     // check which source is being read
     NSDictionary *soul = [self.characterData soulStats];
@@ -56,9 +75,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"StatsDisplay Soul"]) {
-        if ([segue.destinationViewController isKindOfClass:[StatTableViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass:[StatTableViewController class]]) {
+        if ([segue.identifier isEqualToString:EMBEDDED_VIEW_SOUL] ||
+            [segue.identifier isEqualToString:EMBEDDED_VIEW_PRIMARY]) {
             StatTableViewController *destination = segue.destinationViewController;
+            [self.embeddedStatViewControllers setObject:segue.destinationViewController
+                                                     forKey:segue.identifier];
             destination.dataSource = self;
         }
     }
