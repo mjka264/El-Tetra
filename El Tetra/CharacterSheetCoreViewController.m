@@ -21,6 +21,12 @@
     return _characterData;
 }
 
+- (NSString *)headingForView:(StatViewController *)statTVC
+{
+    // check which source is being read
+    return @"Soul";
+}
+
 - (NSOrderedSet *)dataForStatTVC:(StatViewController *)source
 {
     // check which source is being read

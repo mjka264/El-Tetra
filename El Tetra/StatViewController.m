@@ -14,9 +14,12 @@
 @end
 
 
+#pragma mark - StatTableViewControllerData
+
 @implementation StatTableViewControllerData
 @synthesize characterisic = _characterisic;
 @synthesize value = _value;
+
 + (StatTableViewControllerData *)dataWithValue:(NSInteger)value forCharacteristic:(NSString *)characteristic
 {
     StatTableViewControllerData *data = [[StatTableViewControllerData alloc] init];
@@ -25,6 +28,8 @@
     return data;
 }
 @end
+
+#pragma mark - StatTableViewController
 
 @implementation StatViewController
 @synthesize dataSource = _dataSource;

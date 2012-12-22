@@ -18,7 +18,8 @@
 // The data for the following line is a set of sets
 // The outer set is the section
 // The inner set is the stat within the section
-- (NSOrderedSet *)dataForStatTVC:(StatViewController *)StatTVC;
+- (NSOrderedSet *)dataForStatTVC:(StatViewController *)statTVC;
+- (NSString *)headingForView:(StatViewController *)statTVC;
 @end
 
 
