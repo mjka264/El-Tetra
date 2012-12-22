@@ -48,14 +48,13 @@
 {
     [super viewDidLoad];
     
-    UIView *header = self.tableView.tableHeaderView;
     UILabel *label = [[UILabel alloc] init];
     label.text = @"Moo";
-    label.font = [UIFont systemFontOfSize:40];
-    label.center = CGPointMake(40, 20);
-    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:16];
+    label.textAlignment = NSTextAlignmentCenter;
     [label sizeToFit];
-    [header addSubview:label];
+    label.backgroundColor = [UIColor clearColor];
+    self.tableView.tableHeaderView = label;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

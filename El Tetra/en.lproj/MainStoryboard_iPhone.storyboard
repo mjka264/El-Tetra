@@ -66,23 +66,13 @@
                                             <segue destination="vaR-YL-jZL" kind="embed" identifier="StatsDisplay Soul" id="Iwl-ea-fyU"/>
                                         </connections>
                                     </containerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Soul" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEu-ne-1cb">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="3p5-Tx-eAW"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Ahh-pU-VCM" firstAttribute="top" secondItem="EEu-ne-1cb" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="CYM-Ou-ttb"/>
-                                    <constraint firstItem="EEu-ne-1cb" firstAttribute="centerX" secondItem="Ahh-pU-VCM" secondAttribute="centerX" type="default" id="FjW-RA-KuB"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ahh-pU-VCM" secondAttribute="bottom" constant="76" id="NVU-8K-gfY"/>
+                                    <constraint firstItem="Ahh-pU-VCM" firstAttribute="top" secondItem="fJK-go-BKM" secondAttribute="top" type="default" id="UOf-Ly-lJ3"/>
                                     <constraint firstItem="Ahh-pU-VCM" firstAttribute="trailing" secondItem="fJK-go-BKM" secondAttribute="trailing" type="default" id="UZB-rv-1G9"/>
+                                    <constraint firstItem="Ahh-pU-VCM" firstAttribute="bottom" secondItem="fJK-go-BKM" secondAttribute="bottom" type="default" id="cpP-IX-rau"/>
                                     <constraint firstItem="Ahh-pU-VCM" firstAttribute="leading" secondItem="fJK-go-BKM" secondAttribute="leading" type="default" id="d3l-Vb-K0H"/>
-                                    <constraint firstItem="EEu-ne-1cb" firstAttribute="top" secondItem="fJK-go-BKM" secondAttribute="top" type="default" id="eOo-Jh-uYr"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -91,7 +81,7 @@
                             <constraint firstAttribute="centerX" secondItem="fJK-go-BKM" secondAttribute="centerX" type="user" id="3qt-H8-K47"/>
                             <constraint firstItem="fJK-go-BKM" firstAttribute="top" secondItem="HHD-4v-mSz" secondAttribute="top" type="default" id="4rq-89-yVc"/>
                             <constraint firstItem="fJK-go-BKM" firstAttribute="leading" secondItem="HHD-4v-mSz" secondAttribute="leading" constant="79" id="dUJ-9h-ubf"/>
-                            <constraint firstAttribute="bottom" secondItem="fJK-go-BKM" secondAttribute="bottom" constant="123" id="f2h-XI-5v8"/>
+                            <constraint firstAttribute="bottom" secondItem="fJK-go-BKM" secondAttribute="bottom" constant="246" id="wdT-xb-qUH"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="fDP-S6-LyJ"/>
@@ -104,8 +94,8 @@
         <scene sceneID="Xmk-y4-Pd6">
             <objects>
                 <tableViewController id="vaR-YL-jZL" customClass="StatTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="20" sectionHeaderHeight="22" sectionFooterHeight="22" id="l6b-EG-9gD">
-                        <rect key="frame" x="0.0" y="0.0" width="163" height="136"/>
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="22" sectionHeaderHeight="22" sectionFooterHeight="22" id="l6b-EG-9gD">
+                        <rect key="frame" x="0.0" y="0.0" width="163" height="121"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

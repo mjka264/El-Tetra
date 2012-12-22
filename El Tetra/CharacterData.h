@@ -12,9 +12,16 @@
 #define CHARACTER_SOUL_MIND @"Mind"
 #define CHARACTER_SOUL_SPIRIT @"Spirit"
 
+#define CHARACTER_PRIMARY_FEROCITY @"Ferocity"
+#define CHARACTER_PRIMARY_ACCURACY @"Accuracy"
+#define CHARACTER_PRIMARY_AGILITY @"Agility"
+#define CHARACTER_PRIMARY_RESILIENCE @"Resilience"
+#define CHARACTER_PRIMARY_CHI @"Chi"
+
 @interface CharacterData : NSObject
 @property (nonatomic, strong) NSDictionary *soulStats;
 @property (nonatomic, strong) NSDictionary *primaryStats;
 @property (nonatomic, strong) NSDictionary *abilityStats;
 + (NSOrderedSet *)soulStatsPresentationOrder;
++ (NSOrderedSet *)primaryStatsPresentationOrder;
 @end
