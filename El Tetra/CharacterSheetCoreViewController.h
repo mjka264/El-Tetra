@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "StatViewController.h"
+#import "StatTableViewController.h"
 
 @interface CharacterSheetCoreViewController : UIViewController <StatTableViewControllerDataSource>
-- (NSOrderedSet *)dataForStatTVC:(StatViewController *)source;
+- (NSOrderedSet *)dataForStatTVC:(StatTableViewController *)source;
 @end

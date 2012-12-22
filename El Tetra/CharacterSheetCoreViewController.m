@@ -21,13 +21,7 @@
     return _characterData;
 }
 
-- (NSString *)headingForView:(StatViewController *)statTVC
-{
-    // check which source is being read
-    return @"Soul";
-}
-
-- (NSOrderedSet *)dataForStatTVC:(StatViewController *)source
+- (NSOrderedSet *)dataForStatTVC:(StatTableViewController *)source
 {
     // check which source is being read
     NSDictionary *soul = [self.characterData soulStats];
@@ -63,8 +57,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"StatsDisplay Soul"]) {
-        if ([segue.destinationViewController isKindOfClass:[StatViewController class]]) {
-            StatViewController *destination = segue.destinationViewController;
+        if ([segue.destinationViewController isKindOfClass:[StatTableViewController class]]) {
+            StatTableViewController *destination = segue.destinationViewController;
             destination.dataSource = self;
         }
     }

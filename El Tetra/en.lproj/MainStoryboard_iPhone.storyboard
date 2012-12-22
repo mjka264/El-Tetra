@@ -58,19 +58,40 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ahh-pU-VCM">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJK-go-BKM">
+                                <subviews>
+                                    <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ahh-pU-VCM">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="vaR-YL-jZL" kind="embed" identifier="StatsDisplay Soul" id="Iwl-ea-fyU"/>
+                                        </connections>
+                                    </containerView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Soul" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEu-ne-1cb">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="3p5-Tx-eAW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="vaR-YL-jZL" kind="embed" identifier="StatsDisplay Soul" id="Iwl-ea-fyU"/>
-                                </connections>
-                            </containerView>
+                                <constraints>
+                                    <constraint firstItem="Ahh-pU-VCM" firstAttribute="top" secondItem="EEu-ne-1cb" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="CYM-Ou-ttb"/>
+                                    <constraint firstItem="EEu-ne-1cb" firstAttribute="centerX" secondItem="Ahh-pU-VCM" secondAttribute="centerX" type="default" id="FjW-RA-KuB"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ahh-pU-VCM" secondAttribute="bottom" constant="76" id="NVU-8K-gfY"/>
+                                    <constraint firstItem="Ahh-pU-VCM" firstAttribute="trailing" secondItem="fJK-go-BKM" secondAttribute="trailing" type="default" id="UZB-rv-1G9"/>
+                                    <constraint firstItem="Ahh-pU-VCM" firstAttribute="leading" secondItem="fJK-go-BKM" secondAttribute="leading" type="default" id="d3l-Vb-K0H"/>
+                                    <constraint firstItem="EEu-ne-1cb" firstAttribute="top" secondItem="fJK-go-BKM" secondAttribute="top" type="default" id="eOo-Jh-uYr"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ahh-pU-VCM" firstAttribute="top" secondItem="HHD-4v-mSz" secondAttribute="top" type="default" id="6XW-uc-IHK"/>
-                            <constraint firstAttribute="centerX" secondItem="Ahh-pU-VCM" secondAttribute="centerX" type="user" id="mKF-UK-uqC"/>
-                            <constraint firstItem="Ahh-pU-VCM" firstAttribute="leading" secondItem="HHD-4v-mSz" secondAttribute="leading" constant="61" id="yxI-sQ-gNT"/>
-                            <constraint firstAttribute="bottom" secondItem="Ahh-pU-VCM" secondAttribute="bottom" constant="209" id="zrH-6N-i4V"/>
+                            <constraint firstAttribute="centerX" secondItem="fJK-go-BKM" secondAttribute="centerX" type="user" id="3qt-H8-K47"/>
+                            <constraint firstItem="fJK-go-BKM" firstAttribute="top" secondItem="HHD-4v-mSz" secondAttribute="top" type="default" id="4rq-89-yVc"/>
+                            <constraint firstItem="fJK-go-BKM" firstAttribute="leading" secondItem="HHD-4v-mSz" secondAttribute="leading" constant="79" id="dUJ-9h-ubf"/>
+                            <constraint firstAttribute="bottom" secondItem="fJK-go-BKM" secondAttribute="bottom" constant="123" id="f2h-XI-5v8"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="fDP-S6-LyJ"/>
@@ -79,20 +100,20 @@
             </objects>
             <point key="canvasLocation" x="505" y="-632"/>
         </scene>
-        <!--Stat View Controller-->
+        <!--Stat Table View Controller-->
         <scene sceneID="Xmk-y4-Pd6">
             <objects>
-                <tableViewController id="vaR-YL-jZL" customClass="StatViewController" sceneMemberID="viewController">
+                <tableViewController id="vaR-YL-jZL" customClass="StatTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="20" sectionHeaderHeight="22" sectionFooterHeight="22" id="l6b-EG-9gD">
-                        <rect key="frame" x="0.0" y="0.0" width="198" height="158"/>
+                        <rect key="frame" x="0.0" y="0.0" width="163" height="136"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Stat Cell" textLabel="6gg-vA-v01" detailTextLabel="0nx-OA-EHz" style="IBUITableViewCellStyleValue2" id="lP8-Ab-h2l">
-                                <rect key="frame" x="0.0" y="22" width="198" height="20"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Stat Cell" textLabel="6gg-vA-v01" detailTextLabel="0nx-OA-EHz" rowHeight="22" style="IBUITableViewCellStyleValue2" id="lP8-Ab-h2l">
+                                <rect key="frame" x="0.0" y="22" width="163" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="198" height="19"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="163" height="21"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gg-vA-v01">
@@ -142,8 +163,8 @@
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
-        <class className="StatViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatViewController.h"/>
+        <class className="StatTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatTableViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>

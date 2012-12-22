@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Matthew Kameron. All rights reserved.
 //
 
-#import "StatViewController.h"
+#import "StatTableViewController.h"
 
-@interface StatViewController ()
+@interface StatTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
@@ -31,7 +31,7 @@
 
 #pragma mark - StatTableViewController
 
-@implementation StatViewController
+@implementation StatTableViewController
 @synthesize dataSource = _dataSource;
 @synthesize tableView = _tableView;
 
@@ -47,7 +47,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    UIView *header = self.tableView.tableHeaderView;
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"Moo";
+    label.font = [UIFont systemFontOfSize:40];
+    label.center = CGPointMake(40, 20);
+    label.backgroundColor = [UIColor clearColor];
+    [label sizeToFit];
+    [header addSubview:label];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

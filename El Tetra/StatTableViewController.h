@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class StatViewController;
+@class StatTableViewController;
 @class TableViewControllerData;
 
 
@@ -18,13 +18,12 @@
 // The data for the following line is a set of sets
 // The outer set is the section
 // The inner set is the stat within the section
-- (NSOrderedSet *)dataForStatTVC:(StatViewController *)statTVC;
-- (NSString *)headingForView:(StatViewController *)statTVC;
+- (NSOrderedSet *)dataForStatTVC:(StatTableViewController *)statTVC;
 @end
 
 
 
-@interface StatViewController : UITableViewController
+@interface StatTableViewController : UITableViewController
 @property (nonatomic, weak) id <StatTableViewControllerDataSource> dataSource;
 
 @end
