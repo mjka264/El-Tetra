@@ -63,7 +63,7 @@
                                     <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ahh-pU-VCM">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="vaR-YL-jZL" kind="embed" identifier="Soul Stats" id="Iwl-ea-fyU"/>
+                                            <segue destination="vaR-YL-jZL" kind="embed" identifier="" id="Iwl-ea-fyU"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -80,7 +80,7 @@
                                     <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="klB-Zd-vvv">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="oka-Qg-Ooa" kind="embed" identifier="Primary Stats" id="qQn-kk-BX3"/>
+                                            <segue destination="oka-Qg-Ooa" kind="embed" identifier="" id="qQn-kk-BX3"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -98,9 +98,9 @@
                             <constraint firstAttribute="centerX" secondItem="fJK-go-BKM" secondAttribute="centerX" type="user" id="3qt-H8-K47"/>
                             <constraint firstItem="fJK-go-BKM" firstAttribute="top" secondItem="HHD-4v-mSz" secondAttribute="top" type="default" id="4rq-89-yVc"/>
                             <constraint firstItem="DET-Y8-JlC" firstAttribute="trailing" secondItem="fJK-go-BKM" secondAttribute="trailing" type="default" id="9WR-oR-BUD"/>
-                            <constraint firstItem="DET-Y8-JlC" firstAttribute="top" secondItem="HHD-4v-mSz" secondAttribute="top" constant="191" id="OJx-HJ-cc0"/>
+                            <constraint firstItem="DET-Y8-JlC" firstAttribute="top" secondItem="HHD-4v-mSz" secondAttribute="top" constant="150" id="9lF-W7-2Q1"/>
+                            <constraint firstAttribute="bottom" secondItem="DET-Y8-JlC" secondAttribute="bottom" constant="51" id="MdG-Io-Cbb"/>
                             <constraint firstItem="DET-Y8-JlC" firstAttribute="leading" secondItem="fJK-go-BKM" secondAttribute="leading" type="default" id="PbC-IS-yVw"/>
-                            <constraint firstAttribute="bottom" secondItem="DET-Y8-JlC" secondAttribute="bottom" constant="55" id="dIN-LF-OJ4"/>
                             <constraint firstItem="fJK-go-BKM" firstAttribute="leading" secondItem="HHD-4v-mSz" secondAttribute="leading" constant="79" id="dUJ-9h-ubf"/>
                             <constraint firstAttribute="bottom" secondItem="fJK-go-BKM" secondAttribute="bottom" constant="246" id="wdT-xb-qUH"/>
                         </constraints>
@@ -111,10 +111,10 @@
             </objects>
             <point key="canvasLocation" x="505" y="-632"/>
         </scene>
-        <!--Stat Table View Controller-->
+        <!--Stat Table View Controller - SoulStatsViewController-->
         <scene sceneID="Xmk-y4-Pd6">
             <objects>
-                <tableViewController id="vaR-YL-jZL" customClass="StatTableViewController" sceneMemberID="viewController">
+                <tableViewController title="SoulStatsViewController" id="vaR-YL-jZL" customClass="StatTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="22" sectionHeaderHeight="22" sectionFooterHeight="22" id="l6b-EG-9gD">
                         <rect key="frame" x="0.0" y="0.0" width="162" height="121"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -166,12 +166,12 @@
             </objects>
             <point key="canvasLocation" x="505" y="80"/>
         </scene>
-        <!--Stat Table View Controller-->
+        <!--Stat Table View Controller - PrimaryStatsViewController-->
         <scene sceneID="3fP-3L-rG3">
             <objects>
-                <tableViewController id="oka-Qg-Ooa" customClass="StatTableViewController" sceneMemberID="viewController">
+                <tableViewController title="PrimaryStatsViewController" id="oka-Qg-Ooa" customClass="StatTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="22" sectionHeaderHeight="22" sectionFooterHeight="22" id="Moz-em-Gwd">
-                        <rect key="frame" x="0.0" y="0.0" width="162" height="121"/>
+                        <rect key="frame" x="0.0" y="0.0" width="162" height="166"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

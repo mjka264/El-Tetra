@@ -31,7 +31,7 @@
 @synthesize primaryStats = _primaryStats;
 - (NSDictionary *)primaryStats
 {
-    if (_primaryStats) {
+    if (!_primaryStats) {
         NSDictionary *stats = [NSDictionary dictionaryWithObjectsAndKeys:
                                [NSNumber numberWithInt:3],
                                CHARACTER_PRIMARY_FEROCITY,
