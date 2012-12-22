@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Matthew Kameron. All rights reserved.
 //
 
-#import "StatTableViewController.h"
+#import "StatViewController.h"
 
-@interface StatTableViewController ()
+@interface StatViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
@@ -26,7 +26,7 @@
 }
 @end
 
-@implementation StatTableViewController
+@implementation StatViewController
 @synthesize dataSource = _dataSource;
 @synthesize tableView = _tableView;
 
