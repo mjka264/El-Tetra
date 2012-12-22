@@ -30,7 +30,8 @@
         [stats addObject:[StatTableViewControllerData dataWithValue:[[soul valueForKey:stat] integerValue]
                                                   forCharacteristic:stat]];
     }
-    return [stats copy];
+    NSOrderedSet *metaSet = [NSOrderedSet orderedSetWithObject:stats];
+    return metaSet;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
