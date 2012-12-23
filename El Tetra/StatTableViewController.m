@@ -59,7 +59,6 @@
 @property (nonatomic, strong) UILabel *textBit;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *element;
-@property (nonatomic, strong) NSString *colour;
 @end
 @implementation StatTableViewHeader
 @synthesize circleBit = _circleBit;
@@ -67,22 +66,56 @@
 - (UILabel *)textBit {
     if (!_textBit) {
         _textBit = [[UILabel alloc] init];
-        _textBit.text = @"Moo"; // self.title;
+        _textBit.text = self.title;
         _textBit.font = [UIFont boldSystemFontOfSize:16];
         _textBit.textAlignment = NSTextAlignmentCenter;
-        _textBit.backgroundColor = [UIColor clearColor];
+        _textBit.backgroundColor = [UIColor yellowColor];
     }
     return _textBit;
 }
 @synthesize title = _title;
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    self.textBit.text = _title;
+}
 @synthesize element = _element;
-@synthesize colour = _colour;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.textBit.frame = CGRectMake(0, 0, 20, 30);
+    self.textBit.frame = CGRectMake(0, 0, 80, 30);
     //[self.textBit sizeToFit];
     //self.tableView.tableHeaderView = label;
+}
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Make the background white
+    CGContextSetRGBFillColor(context, 1,1,1, 1);
+    CGContextFillRect(context, rect);
+    
+    // Draw the outside of the circle
+    CGContextSetRGBStrokeColor(context, 0, 0, 1, 1);
+    CGContextSetLineWidth(context, 2);
+    CGContextBeginPath(context);
+    CGContextAddArc(context, rect.size.width - rect.size.height/2,
+                    rect.size.height/2, rect.size.height/2 - 1, 0, 2*M_PI, YES);
+    CGContextStrokePath(context);
+    
+    // Fill the middle of the circle
+    CGContextSetRGBFillColor(context, 0, 1, 0, 1);
+    CGContextBeginPath(context);
+    CGContextAddArc(context, rect.size.width - rect.size.height/2,
+                    rect.size.height/2, rect.size.height/2 - 2, 0, 2*M_PI, YES);
+    CGContextFillPath(context);
+    
+    // Write a number in the middle of the circle
+    CGContextSetRGBFillColor(context, 0.0, 0.0, 0.0, 1.0);
+    CGAffineTransform transform = CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
+    CGContextSetTextMatrix(context, transform);
+    CGContextSelectFont(context, "Helvetica", 18.0, kCGEncodingMacRoman);
+    CGContextSetTextDrawingMode(context, kCGTextFill);
+    CGContextShowTextAtPoint(context, rect.size.width - rect.size.height/2 -5, rect.size.height/2 +5, "5", 1);
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -102,7 +135,10 @@
     }
     return self;
 }
-
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    return CGSizeMake(70,25);
+}
 @end
 
 
@@ -131,10 +167,21 @@
 {
     [super viewDidLoad];
     
+    /*
+    UILabel *label = [[UILabel alloc] init];
+    label.text = [self.dataSource headingForDisplay:self];
+    label.font = [UIFont boldSystemFontOfSize:16];
+    label.textAlignment = NSTextAlignmentCenter;
+    [label sizeToFit];
+    label.backgroundColor = [UIColor clearColor];
+    self.tableView.tableHeaderView = label;
+    return;
+    */
+    
     StatTableViewHeader *header = [[StatTableViewHeader alloc] init];
-    header.title = @"Ferocity";
-    header.element = @"Fire";
-    header.colour = @"red";
+    header.title = [self.dataSource headingForDisplay:self];
+    header.element = [self.dataSource elementForDisplay:self];
+    [header sizeToFit];
     self.tableView.tableHeaderView = header;
     
     // Uncomment the following line to preserve selection between presentations.

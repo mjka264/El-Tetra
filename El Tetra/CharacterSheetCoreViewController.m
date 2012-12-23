@@ -28,6 +28,21 @@
     return _characterData;
 }
 
+- (NSString *)elementForDisplay:(StatTableViewController *)source
+{
+    NSString *response;
+    if ([source.title isEqualToString:DTVC_FIRE_STATS]) {
+        response = @"Fire";
+    } else if ([source.title isEqualToString:DTVC_AIR_STATS]) {
+        response = @"Air";
+    } else if ([source.title isEqualToString:DTVC_WATER_STATS]) {
+        response = @"Water";
+    } else if ([source.title isEqualToString:DTVC_EARTH_STATS]) {
+        response = @"Earth";
+    }
+    return response;
+}
+
 - (NSString *)headingForDisplay:(StatTableViewController *)source
 {
     NSString *response;
@@ -36,13 +51,13 @@
     } else if ([source.title isEqualToString:DTVC_PRIMARY]) {
         response = @"Primary Stats";
     } else if ([source.title isEqualToString:DTVC_FIRE_STATS]) {
-        response = @"Fire Skills";
+        response = @"Ferocity";
     } else if ([source.title isEqualToString:DTVC_AIR_STATS]) {
-        response = @"Air Skills";
+        response = @"Precision";
     } else if ([source.title isEqualToString:DTVC_WATER_STATS]) {
-        response = @"Water Skills";
+        response = @"Agility";
     } else if ([source.title isEqualToString:DTVC_EARTH_STATS]) {
-        response = @"Earth Skills";
+        response = @"Resilience";
     }
     return response;
 }

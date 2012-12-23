@@ -20,6 +20,7 @@
 // The inner set is the stat within the section
 - (NSOrderedSet *)dataForDisplay:(StatTableViewController *)statTVC;
 - (NSString *)headingForDisplay:(StatTableViewController *)statTVC;
+- (NSString *)elementForDisplay:(StatTableViewController *)statTVC;
 @end
 
 
