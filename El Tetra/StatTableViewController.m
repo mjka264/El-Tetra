@@ -60,6 +60,7 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *element;
 @property (nonatomic, strong) NSString *statValue;
+- (UIColor *)getColourOfElement:(BOOL)darkerVersion;
 @end
 @implementation StatTableViewHeader
 @synthesize circleBit = _circleBit;
@@ -71,7 +72,7 @@
         _textBit.text = self.title;
         _textBit.font = [UIFont boldSystemFontOfSize:16];
         _textBit.textAlignment = NSTextAlignmentCenter;
-        _textBit.backgroundColor = [UIColor yellowColor];
+        _textBit.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
     }
     return _textBit;
 }
@@ -84,40 +85,56 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.textBit.frame = CGRectMake(0, 0, 80, 30);
+    self.textBit.frame = CGRectMake(0, 0, 80, 25);
     //[self.textBit sizeToFit];
     //self.tableView.tableHeaderView = label;
 }
+- (UIColor *)getColourOfElement:(BOOL)darkerVersion {
+    CGFloat brightness = darkerVersion? 0.6 : 1.0;
+    CGFloat saturation = darkerVersion? 1.0 : 0.2;
+    CGFloat hue;
+    if ([self.element isEqualToString:@"Fire"]) hue = 0.0;
+    else if ([self.element isEqualToString:@"Air"]) hue = 0.18;
+    else if ([self.element isEqualToString:@"Water"]) hue = 0.55;
+    else if ([self.element isEqualToString:@"Earth"]) hue = 0.33;
+        
+    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
+}
 
 - (void)drawRect:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // Make the background white
-    CGContextSetRGBFillColor(context, 1,1,1, 1);
-    CGContextFillRect(context, rect);
-    
-    // Draw the outside of the circle
-    CGContextSetRGBStrokeColor(context, 0, 0, 1, 1);
-    CGContextSetLineWidth(context, 2);
-    CGContextBeginPath(context);
-    CGContextAddArc(context, rect.size.width - rect.size.height/2,
-                    rect.size.height/2, rect.size.height/2 - 1, 0, 2*M_PI, YES);
-    CGContextStrokePath(context);
-    
-    // Fill the middle of the circle
-    CGContextSetRGBFillColor(context, 0, 1, 0, 1);
-    CGContextBeginPath(context);
-    CGContextAddArc(context, rect.size.width - rect.size.height/2,
-                    rect.size.height/2, rect.size.height/2 - 2, 0, 2*M_PI, YES);
-    CGContextFillPath(context);
-    
-    // Write a number in the middle of the circle
-    CGContextSetRGBFillColor(context, 0.0, 0.0, 0.0, 1.0);
-    CGAffineTransform transform = CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
-    CGContextSetTextMatrix(context, transform);
-    CGContextSelectFont(context, "Helvetica", 18.0, kCGEncodingMacRoman);
-    CGContextSetTextDrawingMode(context, kCGTextFill);
-    CGContextShowTextAtPoint(context, rect.size.width - rect.size.height/2 -5, rect.size.height/2 +5, "5", 1);
+    if (self.statValue) {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        // Make the background white
+        CGContextSetRGBFillColor(context, 1,1,1, 1);
+        CGContextFillRect(context, rect);
+        
+        // Draw the outside of the circle
+        [[self getColourOfElement:YES] setStroke];
+        //CGContextSetRGBStrokeColor(context, 0, 0, 1, 1);
+        CGContextSetLineWidth(context, 2);
+        CGContextBeginPath(context);
+        CGContextAddArc(context, rect.size.width - rect.size.height/2,
+                        rect.size.height/2, rect.size.height/2 - 1, 0, 2*M_PI, YES);
+        CGContextStrokePath(context);
+        
+        // Fill the middle of the circle
+        //CGContextSetRGBFillColor(context, 0, 1, 0, 1);
+        [[self getColourOfElement:NO] setFill];
+        CGContextBeginPath(context);
+        CGContextAddArc(context, rect.size.width - rect.size.height/2,
+                        rect.size.height/2, rect.size.height/2 - 2, 0, 2*M_PI, YES);
+        CGContextFillPath(context);
+        
+        // Write a number in the middle of the circle
+        CGContextSetRGBFillColor(context, 0.0, 0.0, 0.0, 1.0);
+        CGAffineTransform transform = CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
+        CGContextSetTextMatrix(context, transform);
+        CGContextSelectFont(context, "Helvetica", 18.0, kCGEncodingMacRoman);
+        CGContextSetTextDrawingMode(context, kCGTextFill);
+        const char *statValue = [self.statValue UTF8String];
+        CGContextShowTextAtPoint(context, rect.size.width - rect.size.height/2 -5, rect.size.height/2 +5, statValue, 1);
+    }
 }
 
 - (id)initWithFrame:(CGRect)frame
