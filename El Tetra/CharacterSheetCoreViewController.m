@@ -15,6 +15,7 @@
 
 #define DTVC_SOUL @"SoulStatsViewController"
 #define DTVC_PRIMARY @"PrimaryStatsViewController"
+#define DTVC_FIRE_STATS @"FireSkillStatsViewController"
 
 @implementation CharacterSheetCoreViewController
 @synthesize characterData = _characterData;
@@ -31,6 +32,8 @@
         response = @"Soul";
     } else if ([source.title isEqualToString:DTVC_PRIMARY]) {
         response = @"Primary Stats";
+    } else if ([source.title isEqualToString:DTVC_FIRE_STATS]) {
+        response = @"Fire Skills";
     }
     return response;
 }
@@ -48,6 +51,9 @@
     } else if ([source.title isEqualToString:DTVC_PRIMARY]) {
         stats = [self.characterData primaryStats];
         orderedStatList = [CharacterData primaryStatsPresentationOrder];
+    } else if ([source.title isEqualToString:DTVC_FIRE_STATS]) {
+        stats = [self.characterData skillStats];
+        orderedStatList = [CharacterData fireSkillsPresentationOrder];
     }
 
     // Now build the orderStats list with the correct things.
