@@ -26,7 +26,6 @@
 
 @interface StatTableViewController : UITableViewController
 @property (nonatomic, weak) id <StatTableViewControllerDataSource> dataSource;
-
 @end
 
 
@@ -39,6 +38,3 @@
 
 
 
-@interface StatTableViewCell : UITableViewCell
-
-@end

@@ -8,11 +8,6 @@
 
 #import "StatTableViewController.h"
 
-@interface StatTableViewController ()
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-
-@end
-
 
 #pragma mark - StatTableViewControllerData
 
@@ -30,12 +25,12 @@
 @end
 
 #pragma mark - StatTableViewCell
-
+@interface StatTableViewCell : UITableViewCell; @end
 @implementation StatTableViewCell
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
+    
     // Either font size 12: 1 line, or size 8: 1 line, or size 8: 2 lines.
     CGSize sizeWith12 = [self.textLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:12]
                                         constrainedToSize:CGSizeMake(self.textLabel.frame.size.width, 1000)
@@ -57,7 +52,67 @@
 }
 @end
 
+#pragma mark - StatTableViewHeader
+
+@interface StatTableViewHeader : UIView
+@property (nonatomic, strong) UIView *circleBit;
+@property (nonatomic, strong) UILabel *textBit;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *element;
+@property (nonatomic, strong) NSString *colour;
+@end
+@implementation StatTableViewHeader
+@synthesize circleBit = _circleBit;
+@synthesize textBit = _textBit;
+- (UILabel *)textBit {
+    if (!_textBit) {
+        _textBit = [[UILabel alloc] init];
+        _textBit.text = @"Moo"; // self.title;
+        _textBit.font = [UIFont boldSystemFontOfSize:16];
+        _textBit.textAlignment = NSTextAlignmentCenter;
+        _textBit.backgroundColor = [UIColor clearColor];
+    }
+    return _textBit;
+}
+@synthesize title = _title;
+@synthesize element = _element;
+@synthesize colour = _colour;
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.textBit.frame = CGRectMake(0, 0, 20, 30);
+    //[self.textBit sizeToFit];
+    //self.tableView.tableHeaderView = label;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addSubview:self.textBit];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self addSubview:self.textBit];
+    }
+    return self;
+}
+
+@end
+
+
+
 #pragma mark - StatTableViewController
+
+@interface StatTableViewController ()
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@end
 
 @implementation StatTableViewController
 @synthesize dataSource = _dataSource;
@@ -76,13 +131,11 @@
 {
     [super viewDidLoad];
     
-    UILabel *label = [[UILabel alloc] init];
-    label.text = [self.dataSource headingForDisplay:self];
-    label.font = [UIFont boldSystemFontOfSize:16];
-    label.textAlignment = NSTextAlignmentCenter;
-    [label sizeToFit];
-    label.backgroundColor = [UIColor clearColor];
-    self.tableView.tableHeaderView = label;
+    StatTableViewHeader *header = [[StatTableViewHeader alloc] init];
+    header.title = @"Ferocity";
+    header.element = @"Fire";
+    header.colour = @"red";
+    self.tableView.tableHeaderView = header;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
