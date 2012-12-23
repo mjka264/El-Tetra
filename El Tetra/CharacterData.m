@@ -10,6 +10,35 @@
 
 @implementation CharacterData
 @synthesize abilityStats = _abilityStats;
+- (NSDictionary *)abilityStats
+{
+    if (!_abilityStats) {
+        NSDictionary *stats = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [NSNumber numberWithInt:3],
+                               CHARACTER_ABILITY_ARTFULWEAPONS,
+                               [NSNumber numberWithInt:2],
+                               CHARACTER_ABILITY_DAOISM,
+                               [NSNumber numberWithInt:1],
+                               CHARACTER_ABILITY_INITIATIVE,
+                               [NSNumber numberWithInt:3],
+                               CHARACTER_ABILITY_LEAPFLOAT,
+                               [NSNumber numberWithInt:2],
+                               CHARACTER_ABILITY_MULTIPLEATTACKS,
+                               [NSNumber numberWithInt:3],
+                               CHARACTER_ABILITY_PRIMALWATER,
+                               [NSNumber numberWithInt:2],
+                               CHARACTER_ABILITY_CRITICALSTRIKES,
+                               [NSNumber numberWithInt:1],
+                               CHARACTER_ABILITY_PRIMALAIR,
+                               [NSNumber numberWithInt:3],
+                               CHARACTER_ABILITY_STRENGTHWITHIN,
+                               [NSNumber numberWithInt:2],
+                               CHARACTER_ABILITY_PROJECTILEWEAPONS,
+                               nil];
+        _abilityStats = stats;
+    }
+    return _abilityStats;
+}
 
 @synthesize soulStats = _soulStats;
 - (NSDictionary *)soulStats
@@ -90,7 +119,8 @@
 
 + (NSOrderedSet *)soulStatsPresentationOrder
 {
-    return [NSOrderedSet orderedSetWithObjects:CHARACTER_SOUL_BODY,
+    return [NSOrderedSet orderedSetWithObjects:
+            CHARACTER_SOUL_BODY,
             CHARACTER_SOUL_MIND,
             CHARACTER_SOUL_SPIRIT,
             nil];
@@ -143,13 +173,57 @@
             nil];
 }
 
++ (NSOrderedSet *)fireAbilitiesPresentationOrder
+{
+    return [NSOrderedSet orderedSetWithObjects:
+            CHARACTER_ABILITY_REND,
+            CHARACTER_ABILITY_SPELLSWORD,
+            CHARACTER_ABILITY_PRIMALFIRE,
+            nil];
+}
 
++ (NSOrderedSet *)airAbilitiesPresentationOrder
+{
+    return [NSOrderedSet orderedSetWithObjects:
+            CHARACTER_ABILITY_ARTFULWEAPONS,
+            CHARACTER_ABILITY_BRUTALWEAPONS,
+            CHARACTER_ABILITY_PROJECTILEWEAPONS,
+            CHARACTER_ABILITY_CRITICALSTRIKES,
+            CHARACTER_ABILITY_PRIMALAIR,
+            nil];
+}
 
++ (NSOrderedSet *)waterAbilitiesPresentationOrder
+{
+    return [NSOrderedSet orderedSetWithObjects:
+            CHARACTER_ABILITY_INITIATIVE,
+            CHARACTER_ABILITY_MULTIPLEATTACKS,
+            CHARACTER_ABILITY_LEAPFLOAT,
+            CHARACTER_ABILITY_PRIMALWATER,
+            nil];
+}
 
++ (NSOrderedSet *)earthAbilitiesPresentationOrder
+{
+    return [NSOrderedSet orderedSetWithObjects:
+            CHARACTER_ABILITY_DEFENSIVEPAUSE,
+            CHARACTER_ABILITY_STRENGTHWITHIN,
+            CHARACTER_ABILITY_PRIMALEARTH,
+            nil];
+}
 
-
-
-
-
++ (NSOrderedSet *)chiAbilitiesPresentationOrder
+{
+    return [NSOrderedSet orderedSetWithObjects:
+            CHARACTER_ABILITY_DAOISM,
+            CHARACTER_ABILITY_OFFWORLDCONTACT,
+            CHARACTER_ABILITY_PRIMALFIRE,
+            CHARACTER_ABILITY_PRIMALAIR,
+            CHARACTER_ABILITY_PRIMALWATER,
+            CHARACTER_ABILITY_PRIMALEARTH,
+            CHARACTER_ABILITY_SHIFTINGBODY,
+            CHARACTER_ABILITY_SHIFTINGMINDSPIRIT,
+            nil];
+}
 
 @end

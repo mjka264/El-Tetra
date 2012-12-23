@@ -31,6 +31,26 @@
 #define CHARACTER_SKILL_EARTH_MIND @"Perception, observation, procedure, tracking"
 #define CHARACTER_SKILL_EARTH_SPIRIT @"Confidence, bravery, diligence, patience"
 
+#define CHARACTER_ABILITY_INITIATIVE @"Initiative"
+#define CHARACTER_ABILITY_ARTFULWEAPONS @"Artful weapons"
+#define CHARACTER_ABILITY_BRUTALWEAPONS @"Brutal weapons"
+#define CHARACTER_ABILITY_PROJECTILEWEAPONS @"Projectile weapons"
+#define CHARACTER_ABILITY_CRITICALSTRIKES @"Critical strikes"
+#define CHARACTER_ABILITY_REND @"Rend"
+#define CHARACTER_ABILITY_DEFENSIVEPAUSE @"Defensive pause"
+#define CHARACTER_ABILITY_STRENGTHWITHIN @"Strength within"
+#define CHARACTER_ABILITY_MULTIPLEATTACKS @"Multiple attacks"
+#define CHARACTER_ABILITY_LEAPFLOAT @"Leap/float"
+#define CHARACTER_ABILITY_SPELLSWORD @"Spellsword"
+#define CHARACTER_ABILITY_DAOISM @"Daoism"
+#define CHARACTER_ABILITY_OFFWORLDCONTACT @"Offworld contact"
+#define CHARACTER_ABILITY_PRIMALFIRE @"Primal fire"
+#define CHARACTER_ABILITY_PRIMALAIR @"Primal air"
+#define CHARACTER_ABILITY_PRIMALWATER @"Primal water"
+#define CHARACTER_ABILITY_PRIMALEARTH @"Primal earth"
+#define CHARACTER_ABILITY_SHIFTINGBODY @"Shifting (body)"
+#define CHARACTER_ABILITY_SHIFTINGMINDSPIRIT @"Shifting (mind, spirit)"
+
 @interface CharacterData : NSObject
 @property (nonatomic, strong) NSDictionary *soulStats;
 @property (nonatomic, strong) NSDictionary *primaryStats;
@@ -42,5 +62,9 @@
 + (NSOrderedSet *)airSkillsPresentationOrder;
 + (NSOrderedSet *)waterSkillsPresentationOrder;
 + (NSOrderedSet *)earthSkillsPresentationOrder;
-
++ (NSOrderedSet *)fireAbilitiesPresentationOrder;
++ (NSOrderedSet *)airAbilitiesPresentationOrder;
++ (NSOrderedSet *)waterAbilitiesPresentationOrder;
++ (NSOrderedSet *)earthAbilitiesPresentationOrder;
++ (NSOrderedSet *)chiAbilitiesPresentationOrder;
 @end

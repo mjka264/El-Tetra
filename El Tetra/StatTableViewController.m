@@ -90,8 +90,8 @@
     //self.tableView.tableHeaderView = label;
 }
 - (UIColor *)getColourOfElement:(BOOL)darkerVersion {
-    CGFloat brightness = darkerVersion? 0.6 : 1.0;
-    CGFloat saturation = darkerVersion? 1.0 : 0.2;
+    CGFloat brightness = darkerVersion? 0.5 : 1.0;
+    CGFloat saturation = darkerVersion? 1.0 : 0.4;
     CGFloat hue;
     if ([self.element isEqualToString:@"Fire"]) hue = 0.0;
     else if ([self.element isEqualToString:@"Air"]) hue = 0.18;
