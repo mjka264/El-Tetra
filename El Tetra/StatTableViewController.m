@@ -29,6 +29,34 @@
 }
 @end
 
+#pragma mark - StatTableViewCell
+
+@implementation StatTableViewCell
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+
+    // Either font size 12: 1 line, or size 8: 1 line, or size 8: 2 lines.
+    CGSize sizeWith12 = [self.textLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:12]
+                                        constrainedToSize:CGSizeMake(self.textLabel.frame.size.width, 1000)
+                                            lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize sizeWith8  = [self.textLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:8]
+                                        constrainedToSize:CGSizeMake(self.textLabel.frame.size.width, 1000)
+                                            lineBreakMode:NSLineBreakByWordWrapping];
+    if (sizeWith12.height <= 25) { // 25 was trial and error
+        self.textLabel.font = [UIFont boldSystemFontOfSize:12];
+        self.textLabel.numberOfLines = 1;
+    } else if (sizeWith8.height <= 20) { // 20 was trial and error
+        self.textLabel.font = [UIFont boldSystemFontOfSize:8];
+        self.textLabel.numberOfLines = 1;
+    } else {
+        self.textLabel.font = [UIFont boldSystemFontOfSize:6];
+        self.textLabel.numberOfLines = 2;
+        self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    }
+}
+@end
+
 #pragma mark - StatTableViewController
 
 @implementation StatTableViewController
@@ -88,64 +116,12 @@
     StatTableViewControllerData *data = [[[self.dataSource dataForDisplay:self]
                                           objectAtIndex:indexPath.section]
                                          objectAtIndex:indexPath.row];
-    //static NSString *CellIdentifier = @"Cell";
+
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Stat Cell" forIndexPath:indexPath];
     
     cell.textLabel.text = data.characterisic;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", data.value];
     return cell;
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
 @end

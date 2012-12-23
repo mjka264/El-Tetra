@@ -16,6 +16,9 @@
 #define DTVC_SOUL @"SoulStatsViewController"
 #define DTVC_PRIMARY @"PrimaryStatsViewController"
 #define DTVC_FIRE_STATS @"FireSkillStatsViewController"
+#define DTVC_AIR_STATS @"AirSkillStatsViewController"
+#define DTVC_WATER_STATS @"WaterSkillStatsViewController"
+#define DTVC_EARTH_STATS @"EarthSkillStatsViewController"
 
 @implementation CharacterSheetCoreViewController
 @synthesize characterData = _characterData;
@@ -34,6 +37,12 @@
         response = @"Primary Stats";
     } else if ([source.title isEqualToString:DTVC_FIRE_STATS]) {
         response = @"Fire Skills";
+    } else if ([source.title isEqualToString:DTVC_AIR_STATS]) {
+        response = @"Air Skills";
+    } else if ([source.title isEqualToString:DTVC_WATER_STATS]) {
+        response = @"Water Skills";
+    } else if ([source.title isEqualToString:DTVC_EARTH_STATS]) {
+        response = @"Earth Skills";
     }
     return response;
 }
@@ -54,6 +63,15 @@
     } else if ([source.title isEqualToString:DTVC_FIRE_STATS]) {
         stats = [self.characterData skillStats];
         orderedStatList = [CharacterData fireSkillsPresentationOrder];
+    } else if ([source.title isEqualToString:DTVC_AIR_STATS]) {
+        stats = [self.characterData skillStats];
+        orderedStatList = [CharacterData airSkillsPresentationOrder];
+    } else if ([source.title isEqualToString:DTVC_WATER_STATS]) {
+        stats = [self.characterData skillStats];
+        orderedStatList = [CharacterData waterSkillsPresentationOrder];
+    } else if ([source.title isEqualToString:DTVC_EARTH_STATS]) {
+        stats = [self.characterData skillStats];
+        orderedStatList = [CharacterData earthSkillsPresentationOrder];
     }
 
     // Now build the orderStats list with the correct things.

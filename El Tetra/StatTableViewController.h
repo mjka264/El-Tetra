@@ -39,3 +39,6 @@
 
 
 
+@interface StatTableViewCell : UITableViewCell
+
+@end
