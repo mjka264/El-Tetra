@@ -59,9 +59,11 @@
 @property (nonatomic, strong) UILabel *textBit;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *element;
+@property (nonatomic, strong) NSString *statValue;
 @end
 @implementation StatTableViewHeader
 @synthesize circleBit = _circleBit;
+@synthesize statValue = _statValue;
 @synthesize textBit = _textBit;
 - (UILabel *)textBit {
     if (!_textBit) {
@@ -167,20 +169,10 @@
 {
     [super viewDidLoad];
     
-    /*
-    UILabel *label = [[UILabel alloc] init];
-    label.text = [self.dataSource headingForDisplay:self];
-    label.font = [UIFont boldSystemFontOfSize:16];
-    label.textAlignment = NSTextAlignmentCenter;
-    [label sizeToFit];
-    label.backgroundColor = [UIColor clearColor];
-    self.tableView.tableHeaderView = label;
-    return;
-    */
-    
     StatTableViewHeader *header = [[StatTableViewHeader alloc] init];
     header.title = [self.dataSource headingForDisplay:self];
     header.element = [self.dataSource elementForDisplay:self];
+    header.statValue = [self.dataSource primaryStatValueForDisplay:self];
     [header sizeToFit];
     self.tableView.tableHeaderView = header;
     

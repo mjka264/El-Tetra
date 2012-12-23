@@ -19,8 +19,10 @@
 // The outer set is the section
 // The inner set is the stat within the section
 - (NSOrderedSet *)dataForDisplay:(StatTableViewController *)statTVC;
+@optional
 - (NSString *)headingForDisplay:(StatTableViewController *)statTVC;
 - (NSString *)elementForDisplay:(StatTableViewController *)statTVC;
+- (NSString *)primaryStatValueForDisplay:(StatTableViewController *)statTVC;
 @end
 
 

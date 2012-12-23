@@ -43,6 +43,21 @@
     return response;
 }
 
+- (NSString *)primaryStatValueForDisplay:(StatTableViewController *)source
+{
+    NSString *response;
+    if ([source.title isEqualToString:DTVC_FIRE_STATS]) {
+        response = [[self.characterData primaryStats] valueForKey:CHARACTER_PRIMARY_FEROCITY];
+    } else if ([source.title isEqualToString:DTVC_AIR_STATS]) {
+        response = [[self.characterData primaryStats] valueForKey:CHARACTER_PRIMARY_ACCURACY];
+    } else if ([source.title isEqualToString:DTVC_WATER_STATS]) {
+        response = [[self.characterData primaryStats] valueForKey:CHARACTER_PRIMARY_AGILITY];
+    } else if ([source.title isEqualToString:DTVC_EARTH_STATS]) {
+        response = [[self.characterData primaryStats] valueForKey:CHARACTER_PRIMARY_RESILIENCE];
+    }
+    return response;
+}
+
 - (NSString *)headingForDisplay:(StatTableViewController *)source
 {
     NSString *response;
