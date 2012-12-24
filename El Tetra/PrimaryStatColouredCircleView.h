@@ -17,8 +17,9 @@
 #define ELEMENT_CHI @"Chi"
 
 @protocol PrimaryStatColouredCircleView <NSObject>
-- (NSNumber *)getNumberForCircle:(PrimaryStatColouredCircleView *)source;
-- (NSString *)getElementForCircle:(PrimaryStatColouredCircleView *)source;
+- (NSNumber *)numberForCircle:(PrimaryStatColouredCircleView *)source;
+- (NSString *)elementForCircle:(PrimaryStatColouredCircleView *)source;
+- (NSNumber *)fontSizeForNumber:(PrimaryStatColouredCircleView *)source;
 @end
 
 @interface PrimaryStatColouredCircleView : UIView

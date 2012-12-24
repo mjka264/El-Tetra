@@ -10,22 +10,83 @@
 
 @implementation PrimaryStatColouredCircleView
 
+- (UIColor *)getColourForCircle:(BOOL)perimeterColour {
+    CGFloat brightness = perimeterColour? 0.5 : 1.0;
+    CGFloat saturation = perimeterColour? 1.0 : 0.4;
+    CGFloat hue;
+    NSString *element = [self.dataSource elementForCircle:self];
+
+    if ([element isEqualToString:ELEMENT_FIRE]) hue = 0.0;
+    else if ([element isEqualToString:ELEMENT_AIR]) hue = 0.18;
+    else if ([element isEqualToString:ELEMENT_WATER]) hue = 0.55;
+    else if ([element isEqualToString:ELEMENT_EARTH]) hue = 0.33;
+    
+    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
+}
+
+- (void)setupSelf
+{
+    
+}
+    
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    // Drawing code
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+
+    }
+    return self;
 }
-*/
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    return CGSizeMake(70,25);
+}
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Make the background white
+    //CGContextSetRGBFillColor(context, 1,1,1, 1);
+    //CGContextFillRect(context, rect);
+    
+    CGPoint centre = CGPointMake(rect.size.width/2, rect.size.height/2);
+    CGFloat radius = rect.size.height < rect.size.width ? rect.size.height/2 : rect.size.width/2;
+    
+    // Draw the outside of the circle
+    [[self getColourForCircle:YES] setStroke];
+    //CGContextSetRGBStrokeColor(context, 0, 0, 1, 1);
+    CGContextSetLineWidth(context, 2);
+    CGContextBeginPath(context);
+    CGContextAddArc(context, centre.x, centre.y, radius-1, 0, 2*M_PI, YES);
+    CGContextStrokePath(context);
+    
+    // Fill the middle of the circle
+    //CGContextSetRGBFillColor(context, 0, 1, 0, 1);
+    [[self getColourForCircle:NO] setFill];
+    CGContextBeginPath(context);
+    CGContextAddArc(context, centre.x, centre.y, radius-1, 0, 2*M_PI, YES);
+    CGContextFillPath(context);
+    
+    // Write a number in the middle of the circle
+    const char *statText = [[NSString stringWithFormat:@"%@", [self.dataSource numberForCircle:self]] UTF8String];
+    NSInteger fontSize = [[self.dataSource fontSizeForNumber:self] integerValue];
+    CGContextSetRGBFillColor(context, 0.0, 0.0, 0.0, 1.0);
+    CGAffineTransform transform = CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
+    CGContextSetTextMatrix(context, transform);
+    CGContextSelectFont(context, "Helvetiva", fontSize, kCGEncodingMacRoman);
+    CGContextSetTextDrawingMode(context, kCGTextFill);
+
+    CGContextShowTextAtPoint(context, rect.size.width - rect.size.height/2 -5, rect.size.height/2 +5, statText, 1);
+}
+
 
 @end
