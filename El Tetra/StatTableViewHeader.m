@@ -14,6 +14,10 @@
 @synthesize circleView = _circleView;
 @synthesize headingLabel = _headingLabel;
 @synthesize dataSource = _dataSource;
+- (id <StatTableViewHeaderDataSource>) dataSource {
+    if (!_dataSource) _dataSource = [[ElTetraDummyDelegate alloc] init];
+    return _dataSource;
+}
 
 #define CIRCLE_RADIUS 35
 

@@ -31,8 +31,18 @@
 
 @implementation StatTableViewCell
 
+/*
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    return [self initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:reuseIdentifier];
+}
+*/
+
 - (void)layoutSubviews
 {
+
+    [self addSubview:self.detailTextLabel];
+    NSLog(@"%@", self.detailTextLabel.text);
     [super layoutSubviews];
     
     // Either font size 12: 1 line, or size 8: 1 line, or size 8: 2 lines.
@@ -53,6 +63,8 @@
         self.textLabel.numberOfLines = 2;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     }
+
+    //self.detailTextLabel.text = @"12";
 }
 @end
 
@@ -73,6 +85,11 @@
     return _dataSource;
 }
 
+- (UITableView *)tableView {
+    if (!_tableView) _tableView = (UITableView *) self.view;
+    return _tableView;
+}
+
 @synthesize tableView = _tableView;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -88,15 +105,15 @@
 {
     [super viewDidLoad];
     
-    //self.tableView = [[UITableView alloc] init];
-    
     StatTableViewHeader *header = [[StatTableViewHeader alloc] init];
-    //UILabel *header = [[UILabel alloc] init];
-    //header.text = @"Moo";
-    // TO DO
-    // header.dataSource = self;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     [header sizeToFit];
     self.tableView.tableHeaderView = header;
+    
+    // The next line of code didn't work because it always instantiated my class with default style
+    // So I couldn't save the left detail style. I would have had to reimplement the subviews.
+    //[self.tableView registerClass:[StatTableViewCell class] forCellReuseIdentifier:@"Stat Cell"];
 }
 
 #pragma mark - Table view data source
