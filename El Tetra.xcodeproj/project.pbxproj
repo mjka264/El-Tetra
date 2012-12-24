@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */; };
 		C2975274168551CB00092860 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975273168551CB00092860 /* UIKit.framework */; };
 		C2975276168551CB00092860 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975275168551CB00092860 /* Foundation.framework */; };
 		C2975278168551CB00092860 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975277168551CB00092860 /* CoreGraphics.framework */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimaryStatColouredCircleView.h; sourceTree = "<group>"; };
+		C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimaryStatColouredCircleView.m; sourceTree = "<group>"; };
 		C297526F168551CB00092860 /* El Tetra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "El Tetra.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2975273168551CB00092860 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2975275168551CB00092860 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -132,6 +135,8 @@
 				C29752B21685629400092860 /* CharacterSheetCoreViewController.m */,
 				C29752C61685734A00092860 /* StatTableViewController.h */,
 				C29752C71685734A00092860 /* StatTableViewController.m */,
+				C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */,
+				C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */,
 				C297527A168551CB00092860 /* Supporting Files */,
 			);
 			path = "El Tetra";
@@ -290,6 +295,7 @@
 				C29752B31685629400092860 /* CharacterSheetCoreViewController.m in Sources */,
 				C29752C516856F3700092860 /* CharacterData.m in Sources */,
 				C29752C81685734A00092860 /* StatTableViewController.m in Sources */,
+				C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
