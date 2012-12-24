@@ -130,6 +130,12 @@
 #pragma mark - Table view data source
 
 @synthesize hideTableData = _hideTableData;
+- (void)setHideTableData:(BOOL)hideTableData {
+    if (hideTableData != _hideTableData) {
+        _hideTableData = hideTableData;
+        [self.tableView reloadData];
+    }
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

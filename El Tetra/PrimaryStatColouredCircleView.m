@@ -21,6 +21,8 @@
     else if ([element isEqualToString:ELEMENT_AIR]) hue = 0.18;
     else if ([element isEqualToString:ELEMENT_WATER]) hue = 0.55;
     else if ([element isEqualToString:ELEMENT_EARTH]) hue = 0.33;
+    else if ([element isEqualToString:ELEMENT_CHI]) hue = 0.77;
+    else hue = 0.09;
     
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
 }

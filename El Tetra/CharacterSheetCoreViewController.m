@@ -11,20 +11,27 @@
 
 @interface CharacterSheetCoreViewController ()
 @property (nonatomic, strong) CharacterData *characterData;
+@property (nonatomic, strong) NSMutableSet *statTableViewControllers;
+- (void)logRequestFromStatTableViewController:(StatTableViewController *)controller;
 @end
 
-#define DTVC_SOUL @"SoulStatsViewController"
-#define DTVC_PRIMARY @"PrimaryStatsViewController"
-#define DTVC_FIRE_STATS @"FireSkillStatsViewController"
-#define DTVC_AIR_STATS @"AirSkillStatsViewController"
-#define DTVC_WATER_STATS @"WaterSkillStatsViewController"
-#define DTVC_EARTH_STATS @"EarthSkillStatsViewController"
-#define DTVC_FIRE_ABILITIES @"FireAbilityStatsViewController"
-#define DTVC_AIR_ABILITIES @"AirAbilityStatsViewController"
-#define DTVC_WATER_ABILITIES @"WaterAbilityStatsViewController"
-#define DTVC_EARTH_ABILITIES @"EarthAbilityStatsViewController"
+#define DTVC_SOUL @"SoulStatsController"
+#define DTVC_PRIMARY @"PrimaryStatsController"
+#define DTVC_FIRE_STATS @"FireStatsController"
+#define DTVC_AIR_STATS @"AirStatsController"
+#define DTVC_WATER_STATS @"WaterStatsController"
+#define DTVC_EARTH_STATS @"EarthStatsController"
+#define DTVC_CHI_STATS @"ChiStatsController"
 
 @implementation CharacterSheetCoreViewController
+@synthesize statTableViewControllers = _statTableViewControllers;
+- (NSMutableSet *)statTableViewControllers {
+    if (!_statTableViewControllers) {
+        _statTableViewControllers = [[NSMutableSet alloc] init];
+    }
+    return _statTableViewControllers;
+}
+
 @synthesize characterData = _characterData;
 - (CharacterData *)characterData
 {
@@ -34,38 +41,38 @@
 
 - (NSString *)elementForDisplay:(StatTableViewController *)source
 {
+    [self logRequestFromStatTableViewController:source];
+    
     NSString *response;
-    if ([source.title isEqualToString:DTVC_FIRE_STATS] ||
-        [source.title isEqualToString:DTVC_FIRE_ABILITIES]) {
+    if ([source.title isEqualToString:DTVC_FIRE_STATS])  {
         response = @"Fire";
-    } else if ([source.title isEqualToString:DTVC_AIR_STATS] ||
-               [source.title isEqualToString:DTVC_AIR_ABILITIES]) {
+    } else if ([source.title isEqualToString:DTVC_AIR_STATS])  {
         response = @"Air";
-    } else if ([source.title isEqualToString:DTVC_WATER_STATS] ||
-               [source.title isEqualToString:DTVC_WATER_ABILITIES]) {
+    } else if ([source.title isEqualToString:DTVC_WATER_STATS]) {
         response = @"Water";
-    } else if ([source.title isEqualToString:DTVC_EARTH_STATS] ||
-               [source.title isEqualToString:DTVC_EARTH_ABILITIES]) {
+    } else if ([source.title isEqualToString:DTVC_EARTH_STATS]) {
         response = @"Earth";
+    } else if ([source.title isEqualToString:DTVC_CHI_STATS]) {
+        response = @"Chi";
     }
     return response;
 }
 
 - (NSString *)primaryStatValueForDisplay:(StatTableViewController *)source
 {
+    [self logRequestFromStatTableViewController:source];
+    
     NSNumber *response;
-    if ([source.title isEqualToString:DTVC_FIRE_STATS] ||
-        [source.title isEqualToString:DTVC_FIRE_ABILITIES]) {
+    if ([source.title isEqualToString:DTVC_FIRE_STATS]) {
         response = [[self.characterData primaryStats] valueForKey:CHARACTER_PRIMARY_FEROCITY];
-    } else if ([source.title isEqualToString:DTVC_AIR_STATS] ||
-               [source.title isEqualToString:DTVC_AIR_ABILITIES]) {
+    } else if ([source.title isEqualToString:DTVC_AIR_STATS]) {
         response = [[self.characterData primaryStats] valueForKey:CHARACTER_PRIMARY_ACCURACY];
-    } else if ([source.title isEqualToString:DTVC_WATER_STATS] ||
-               [source.title isEqualToString:DTVC_WATER_ABILITIES]) {
+    } else if ([source.title isEqualToString:DTVC_WATER_STATS]) {
         response = [[self.characterData primaryStats] valueForKey:CHARACTER_PRIMARY_AGILITY];
-    } else if ([source.title isEqualToString:DTVC_EARTH_STATS] ||
-               [source.title isEqualToString:DTVC_EARTH_ABILITIES]) {
+    } else if ([source.title isEqualToString:DTVC_EARTH_STATS]) {
         response = [[self.characterData primaryStats] valueForKey:CHARACTER_PRIMARY_RESILIENCE];
+    } else if ([source.title isEqualToString:DTVC_CHI_STATS]) {
+        response = [[self.characterData primaryStats] valueForKey:CHARACTER_PRIMARY_CHI];
     }
     
     if (response) {
@@ -77,29 +84,31 @@
 
 - (NSString *)headingForDisplay:(StatTableViewController *)source
 {
+    [self logRequestFromStatTableViewController:source];
+    
     NSString *response;
     if ([source.title isEqualToString:DTVC_SOUL]) {
         response = @"Soul";
     } else if ([source.title isEqualToString:DTVC_PRIMARY]) {
         response = @"Primary Stats";
-    } else if ([source.title isEqualToString:DTVC_FIRE_STATS] ||
-               [source.title isEqualToString:DTVC_FIRE_ABILITIES]) {
-        response = @"Ferocity";
-    } else if ([source.title isEqualToString:DTVC_AIR_STATS] ||
-               [source.title isEqualToString:DTVC_AIR_ABILITIES]) {
-        response = @"Precision";
-    } else if ([source.title isEqualToString:DTVC_WATER_STATS] ||
-               [source.title isEqualToString:DTVC_WATER_ABILITIES]) {
-        response = @"Agility";
-    } else if ([source.title isEqualToString:DTVC_EARTH_STATS] ||
-               [source.title isEqualToString:DTVC_EARTH_ABILITIES]) {
-        response = @"Resilience";
+    } else if ([source.title isEqualToString:DTVC_FIRE_STATS]) {
+        response = @"Fire";
+    } else if ([source.title isEqualToString:DTVC_AIR_STATS]) {
+        response = @"Air";
+    } else if ([source.title isEqualToString:DTVC_WATER_STATS]) {
+        response = @"Water";
+    } else if ([source.title isEqualToString:DTVC_EARTH_STATS]) {
+        response = @"Earth";
+    } else if ([source.title isEqualToString:DTVC_CHI_STATS]) {
+        response = @"Chi";
     }
     return response;
 }
 
 - (NSOrderedSet *)dataForDisplay:(StatTableViewController *)source
 {
+    [self logRequestFromStatTableViewController:source];
+    
     NSDictionary *stats; // The actual stats pulled from the model
     NSOrderedSet *orderedStatList; // The order in which they should be presented, also from the model
     NSMutableOrderedSet *orderedStats = [[NSMutableOrderedSet alloc] init]; // what we are building
@@ -123,18 +132,8 @@
     } else if ([source.title isEqualToString:DTVC_EARTH_STATS]) {
         stats = [self.characterData skillStats];
         orderedStatList = [CharacterData earthSkillsPresentationOrder];
-    } else if ([source.title isEqualToString:DTVC_FIRE_ABILITIES]) {
-        stats = [self.characterData abilityStats];
-        orderedStatList = [CharacterData fireAbilitiesPresentationOrder];
-    } else if ([source.title isEqualToString:DTVC_AIR_ABILITIES]) {
-        stats = [self.characterData abilityStats];
-        orderedStatList = [CharacterData airAbilitiesPresentationOrder];
-    } else if ([source.title isEqualToString:DTVC_WATER_ABILITIES]) {
-        stats = [self.characterData abilityStats];
-        orderedStatList = [CharacterData waterAbilitiesPresentationOrder];
-    } else if ([source.title isEqualToString:DTVC_EARTH_ABILITIES]) {
-        stats = [self.characterData abilityStats];
-        orderedStatList = [CharacterData earthAbilitiesPresentationOrder];
+    } else if ([source.title isEqualToString:DTVC_CHI_STATS]) {
+        orderedStatList = nil;
     }
 
     // Now build the orderStats list with the correct things.
@@ -161,9 +160,29 @@
     return self;
 }
 
+- (void)logRequestFromStatTableViewController:(StatTableViewController *)controller {
+    if (![self.statTableViewControllers containsObject:controller]) {
+        [self.statTableViewControllers addObject:controller];
+    }
+}
+
+- (void)swipeHandler:(UISwipeGestureRecognizer *)gesture {
+    [self.statTableViewControllers enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        StatTableViewController *controller = obj;
+        controller.hideTableData = !controller.hideTableData;
+    }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandler:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeLeft];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandler:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeRight];
 }
 
 - (void)didReceiveMemoryWarning

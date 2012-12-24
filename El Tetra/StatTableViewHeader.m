@@ -40,17 +40,25 @@
 }
 
 - (PrimaryStatColouredCircleView *)circleView {
-    if (!_circleView) {
-        _circleView = [[PrimaryStatColouredCircleView alloc] init];
-        _circleView.dataSource = self.dataSource;
+    if ([self.dataSource elementForCircle:self]) {
+        if (!_circleView) {
+            _circleView = [[PrimaryStatColouredCircleView alloc] init];
+            _circleView.dataSource = self.dataSource;
+        }
+    } else {
+        _circleView = nil;
     }
     return _circleView;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.headingLabel.frame = CGRectMake(0, 0, self.bounds.size.width - CIRCLE_RADIUS, self.bounds.size.height);
-    self.circleView.frame = CGRectMake(self.bounds.size.width - CIRCLE_RADIUS, 0, CIRCLE_RADIUS, CIRCLE_RADIUS);
+    if (self.circleView) {
+        self.headingLabel.frame = CGRectMake(0, 0, self.bounds.size.width - CIRCLE_RADIUS, self.bounds.size.height);
+        self.circleView.frame = CGRectMake(self.bounds.size.width - CIRCLE_RADIUS, 0, CIRCLE_RADIUS, CIRCLE_RADIUS);
+    } else {
+        self.headingLabel.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+    }
 }
 
 - (void)setupSelf {
