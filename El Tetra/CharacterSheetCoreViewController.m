@@ -166,23 +166,35 @@
     }
 }
 
-- (void)swipeHandler:(UISwipeGestureRecognizer *)gesture {
+- (void)swipeHandlerRight:(UISwipeGestureRecognizer *)gesture {
     [self.statTableViewControllers enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
         StatTableViewController *controller = obj;
-        controller.hideTableData = !controller.hideTableData;
+        controller.hideTableData = YES;
+    }];
+    
+    //for (UIContainerView *subview in self.view.subviews) {
+        //if subview.
+    //}
+}
+
+- (void)swipeHandlerLeft:(UISwipeGestureRecognizer *)gesture {
+    [self.statTableViewControllers enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        StatTableViewController *controller = obj;
+        controller.hideTableData = NO;
     }];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandler:)];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:swipeLeft];
-    
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandler:)];
+
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandlerRight:)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swipeRight];
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandlerLeft:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeLeft];
 }
 
 - (void)didReceiveMemoryWarning
