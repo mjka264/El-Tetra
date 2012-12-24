@@ -31,18 +31,10 @@
 
 @implementation StatTableViewCell
 
-/*
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    return [self initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:reuseIdentifier];
-}
-*/
+
 
 - (void)layoutSubviews
 {
-
-    [self addSubview:self.detailTextLabel];
-    NSLog(@"%@", self.detailTextLabel.text);
     [super layoutSubviews];
     
     // Either font size 12: 1 line, or size 8: 1 line, or size 8: 2 lines.
@@ -63,8 +55,6 @@
         self.textLabel.numberOfLines = 2;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     }
-
-    //self.detailTextLabel.text = @"12";
 }
 @end
 
@@ -77,6 +67,8 @@
 @interface StatTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @end
+
+
 
 @implementation StatTableViewController
 @synthesize dataSource = _dataSource;
@@ -118,9 +110,17 @@
 
 #pragma mark - Table view data source
 
+@synthesize hideTableData = _hideTableData;
+@synthesize statMode = _statMode;
+- (NSString *)statMode {
+    if (!_statMode) _statMode = STAT_MODE_SKILLS;
+    return _statMode;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.dataSource dataForDisplay:self] count];
+    if (self.hideTableData) return 0;
+    else return [[self.dataSource dataForDisplay:self] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionNumber
