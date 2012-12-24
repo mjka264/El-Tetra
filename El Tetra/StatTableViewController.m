@@ -63,7 +63,7 @@
 #pragma mark - StatTableViewController
 
 @interface StatTableViewController ()
-@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation StatTableViewController
