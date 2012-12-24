@@ -72,10 +72,27 @@
 
 @implementation StatTableViewController
 @synthesize dataSource = _dataSource;
-- (id<StatTableViewControllerDataSource>)dataSource {
-    if (!_dataSource) _dataSource =  [[ElTetraDummyDelegate alloc] init];
-    return _dataSource;
+
+#pragma mark - StatTableViewHeaderDataSource
+
+- (NSString *)textForHeading: (UIView *)source {
+    return [self.dataSource headingForDisplay:self];
 }
+- (NSNumber *)fontSizeForHeading: (UIView *)source {
+    return [NSNumber numberWithInt:16];
+}
+- (NSNumber *)numberForCircle:(UIView *)source {
+    return [NSNumber numberWithInt:16];
+}
+- (NSString *)elementForCircle:(UIView *)source {
+    return [self.dataSource elementForDisplay:self];
+}
+- (NSNumber *)fontSizeForNumber:(UIView *)source {
+    return [NSNumber numberWithInt:16];
+}
+
+
+
 
 - (UITableView *)tableView {
     if (!_tableView) _tableView = (UITableView *) self.view;
@@ -98,10 +115,12 @@
     [super viewDidLoad];
     
     StatTableViewHeader *header = [[StatTableViewHeader alloc] init];
+    header.dataSource = self;
+    [header sizeToFit];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    [header sizeToFit];
     self.tableView.tableHeaderView = header;
+
     
     // The next line of code didn't work because it always instantiated my class with default style
     // So I couldn't save the left detail style. I would have had to reimplement the subviews.
@@ -111,11 +130,6 @@
 #pragma mark - Table view data source
 
 @synthesize hideTableData = _hideTableData;
-@synthesize statMode = _statMode;
-- (NSString *)statMode {
-    if (!_statMode) _statMode = STAT_MODE_SKILLS;
-    return _statMode;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

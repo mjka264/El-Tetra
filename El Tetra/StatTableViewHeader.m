@@ -10,22 +10,29 @@
 #import "ElTetraDummyDelegate.h"
 
 
+
+
 @implementation StatTableViewHeader
 @synthesize circleView = _circleView;
 @synthesize headingLabel = _headingLabel;
 @synthesize dataSource = _dataSource;
-- (id <StatTableViewHeaderDataSource>) dataSource {
-    if (!_dataSource) _dataSource = [[ElTetraDummyDelegate alloc] init];
-    return _dataSource;
-}
+
+
 
 #define CIRCLE_RADIUS 35
+
+
+- (void)setDataSource:(id<StatTableViewHeaderDataSource>) newSource {
+    if (_dataSource != newSource) {
+        _dataSource = newSource;
+        [self setupSelf];
+    }
+}
+
 
 - (UILabel *)headingLabel {
     if (!_headingLabel) {
         _headingLabel = [[UILabel alloc] init];
-        _headingLabel.text = [self.dataSource textForHeading:self];
-        _headingLabel.font = [UIFont boldSystemFontOfSize:[[self.dataSource fontSizeForHeading:self] integerValue]];
         _headingLabel.textAlignment = NSTextAlignmentCenter;
         _headingLabel.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
     }
@@ -49,6 +56,9 @@
 - (void)setupSelf {
     [self addSubview:self.headingLabel];
     [self addSubview:self.circleView];
+    self.headingLabel.text = [self.dataSource textForHeading:self];
+    self.headingLabel.font = [UIFont boldSystemFontOfSize:[[self.dataSource fontSizeForHeading:self] integerValue]];
+    self.circleView.dataSource = self.dataSource;
 }
 
 - (id)initWithFrame:(CGRect)frame

@@ -13,15 +13,9 @@
 @class TableViewControllerData;
 
 
-#define STAT_MODE_ABILITIES @"Ability Mode"
-#define STAT_MODE_SKILLS @"Skill Mode"
-
-
-// BUG SET TO WEAK
-@interface StatTableViewController : UITableViewController
+@interface StatTableViewController : UITableViewController <StatTableViewHeaderDataSource>
 @property (nonatomic) BOOL hideTableData;
-@property (nonatomic, strong) NSString *statMode;
-@property (nonatomic, strong) id <StatTableViewControllerDataSource> dataSource;
+@property (nonatomic, weak) id <StatTableViewControllerDataSource> dataSource;
 @end
 
 
