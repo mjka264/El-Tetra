@@ -7,28 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ElTetraProtocols.h"
 
 @class StatTableViewController;
 @class TableViewControllerData;
 
 
 
-
-@protocol StatTableViewControllerDataSource <NSObject>
-// The data for the following line is a set of sets
-// The outer set is the section
-// The inner set is the stat within the section
-- (NSOrderedSet *)dataForDisplay:(StatTableViewController *)statTVC;
-@optional
-- (NSString *)headingForDisplay:(StatTableViewController *)statTVC;
-- (NSString *)elementForDisplay:(StatTableViewController *)statTVC;
-- (NSString *)primaryStatValueForDisplay:(StatTableViewController *)statTVC;
-@end
-
-
+// SET TO WEAK
 
 @interface StatTableViewController : UITableViewController
-@property (nonatomic, weak) id <StatTableViewControllerDataSource> dataSource;
+@property (nonatomic, strong) id <StatTableViewControllerDataSource> dataSource;
 @end
 
 

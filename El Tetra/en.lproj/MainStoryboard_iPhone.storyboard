@@ -45,6 +45,11 @@
         <scene sceneID="ijX-tj-itc">
             <objects>
                 <viewController id="5m8-Xd-W0v" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8EU-up-3iB" customClass="StatTableViewHeader">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                     <tabBarItem key="tabBarItem" title="Item" id="BN1-Od-KcO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpP-NX-pem" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -210,15 +215,26 @@
             </objects>
             <point key="canvasLocation" x="1019" y="-1232"/>
         </scene>
-        <!--View Controller - Item-->
+        <!--Stat Table View Controller - Item-->
         <scene sceneID="o53-tV-ldx">
             <objects>
-                <viewController id="jXB-pA-061" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="oQc-ut-dbH" customClass="PrimaryStatColouredCircleView">
+                <viewController id="jXB-pA-061" customClass="StatTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Kwm-At-2Tk">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Stat Cell" id="Inp-Ok-4Yq">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="17R-rc-vMc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3j-oH-Bc4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -470,7 +486,7 @@
                                 <subviews>
                                     <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRh-HX-5xR">
                                         <connections>
-                                            <segue destination="a73-3t-jUP" kind="embed" id="Nap-Pk-nfg"/>
+                                            <segue destination="a73-3t-jUP" kind="embed" id="HTr-qK-uwH"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -767,6 +783,23 @@
             <point key="canvasLocation" x="1045" y="-114"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CharacterSheetCoreViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterSheetCoreViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="StatTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatTableViewCell.h"/>
+        </class>
+        <class className="StatTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatTableViewController.h"/>
+        </class>
+        <class className="StatTableViewHeader" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatTableViewHeader.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

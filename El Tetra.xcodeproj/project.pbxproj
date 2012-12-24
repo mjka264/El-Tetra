@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */; };
+		C264857A16887C7C00F3B648 /* StatTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = C264857916887C7C00F3B648 /* StatTableViewHeader.m */; };
+		C26485811688865D00F3B648 /* ElTetraDummyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C26485801688865D00F3B648 /* ElTetraDummyDelegate.m */; };
 		C2975274168551CB00092860 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975273168551CB00092860 /* UIKit.framework */; };
 		C2975276168551CB00092860 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975275168551CB00092860 /* Foundation.framework */; };
 		C2975278168551CB00092860 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975277168551CB00092860 /* CoreGraphics.framework */; };
@@ -42,6 +44,11 @@
 /* Begin PBXFileReference section */
 		C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimaryStatColouredCircleView.h; sourceTree = "<group>"; };
 		C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimaryStatColouredCircleView.m; sourceTree = "<group>"; };
+		C264857816887C7C00F3B648 /* StatTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewHeader.h; sourceTree = "<group>"; };
+		C264857916887C7C00F3B648 /* StatTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewHeader.m; sourceTree = "<group>"; };
+		C264857D168881D500F3B648 /* ElTetraProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ElTetraProtocols.h; path = ../ElTetraProtocols.h; sourceTree = "<group>"; };
+		C264857F1688865D00F3B648 /* ElTetraDummyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElTetraDummyDelegate.h; sourceTree = "<group>"; };
+		C26485801688865D00F3B648 /* ElTetraDummyDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElTetraDummyDelegate.m; sourceTree = "<group>"; };
 		C297526F168551CB00092860 /* El Tetra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "El Tetra.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2975273168551CB00092860 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2975275168551CB00092860 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -135,8 +142,11 @@
 				C29752B21685629400092860 /* CharacterSheetCoreViewController.m */,
 				C29752C61685734A00092860 /* StatTableViewController.h */,
 				C29752C71685734A00092860 /* StatTableViewController.m */,
-				C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */,
-				C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */,
+				C264857816887C7C00F3B648 /* StatTableViewHeader.h */,
+				C264857916887C7C00F3B648 /* StatTableViewHeader.m */,
+				C264857F1688865D00F3B648 /* ElTetraDummyDelegate.h */,
+				C26485801688865D00F3B648 /* ElTetraDummyDelegate.m */,
+				C264857D168881D500F3B648 /* ElTetraProtocols.h */,
 				C297527A168551CB00092860 /* Supporting Files */,
 			);
 			path = "El Tetra";
@@ -145,6 +155,8 @@
 		C297527A168551CB00092860 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */,
+				C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */,
 				C2975282168551CB00092860 /* ElTertaAppDelegate.h */,
 				C2975283168551CB00092860 /* ElTertaAppDelegate.m */,
 				C297528E168551CB00092860 /* MainStoryboard_iPad.storyboard */,
@@ -296,6 +308,8 @@
 				C29752C516856F3700092860 /* CharacterData.m in Sources */,
 				C29752C81685734A00092860 /* StatTableViewController.m in Sources */,
 				C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */,
+				C264857A16887C7C00F3B648 /* StatTableViewHeader.m in Sources */,
+				C26485811688865D00F3B648 /* ElTetraDummyDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
