@@ -16,7 +16,7 @@
 @synthesize soulStatBody = _soulStatBody;
 @synthesize soulStatMind = _soulStatMind;
 @synthesize soulStatSpirit = _soulStatSpirit;
-
+/*
 - (NSOrderedSet *)dataForDisplay:(StatTableViewController *)source
 {
     if ([source.title isEqualToString:DTVC_SOUL] ||
@@ -53,7 +53,7 @@
     self.soulStatMind.text = [NSString stringWithFormat:@"%@",[stats objectForKey:CHARACTER_SOUL_MIND]];
     self.soulStatSpirit.text = [NSString stringWithFormat:@"%@",[stats objectForKey:CHARACTER_SOUL_SPIRIT]];
 }
-
+*/
 - (void)setupSelf {
 
 }

@@ -8,40 +8,47 @@
 
 #import <Foundation/Foundation.h>
 
+// The implementation of dataStatGroupWhenDisplayingAllForIndex depends on this list starting at 0
 typedef enum {
-    CharacterDataStatGroupSoul = 1,
-    CharacterDataStatGroupPrimary = 2,
-    CharacterDataStatGroupFireSkills = 3,
-    CharacterDataStatGroupAirSkills = 4,
-    CharacterDataStatGroupWaterSkills = 5,
-    CharacterDataStatGroupEarthSkills = 6,
-    CharacterDataStatGroupAbilities = 7
+    CharacterDataStatGroupSoul = 0,
+    CharacterDataStatGroupPrimary = 1,
+    CharacterDataStatGroupFireSkills = 2,
+    CharacterDataStatGroupAirSkills = 3,
+    CharacterDataStatGroupWaterSkills = 4,
+    CharacterDataStatGroupEarthSkills = 5,
+    CharacterDataStatGroupAbilities = 6
 } t_characterDataStatGroup;
 
 typedef enum {
-    CharacterDataElementFire = 1,
-    CharacterDataElementAir = 2,
-    CharacterDataElementWater = 3,
-    CharacterDataElementEarth = 4,
-    CharacterDataElementChi = 5,
-    CharacterDataElementFireChi = 6,
-    CharacterDataElementAirChi = 7,
-    CharacterDataElementWaterChi = 8,
-    CharacterDataElementEarthChi = 9,
+    CharacterDataElementFire = 0,
+    CharacterDataElementAir = 1,
+    CharacterDataElementWater = 2,
+    CharacterDataElementEarth = 3,
+    CharacterDataElementChi = 4,
+    CharacterDataElementFireChi = 5,
+    CharacterDataElementAirChi = 6,
+    CharacterDataElementWaterChi = 7,
+    CharacterDataElementEarthChi = 8,
 } t_characterDataElement;
 
-//typedef NSString* t_characterData;
+// The (id) returned by the first two methods is the parameter to these other methods
+@interface CharacterData : NSObject <NSCopying>
+- (id)characterWithAllStats;
+- (id)characterWithStatGroup:(t_characterDataStatGroup)group;
++ (NSInteger)numberOfStatGroupsFrom:(id)characterData;
++ (NSInteger)numberOfEntriesFrom:(id)characterData;
++ (NSInteger)numberOfEntriesFrom:(id)characterData inStatGroup:(t_characterDataElement)group;
++ (NSString *)sectionHeadingFrom:(id)characterData;
++ (NSString *)sectionHeadingFrom:(id)characterData inStatGroup:(t_characterDataElement)group;
++ (NSString *)statDescriptionFrom:(id)characterData atIndex:(NSInteger)index;
++ (NSString *)statDescriptionFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group;
++ (NSNumber *)statValueFrom:(id)characterData atIndex:(NSInteger)index;
++ (NSNumber *)statValueFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group;
++ (t_characterDataElement)statElementFrom:(id)characterData atIndex:(NSInteger)index;
++ (t_characterDataElement)statElementFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group;
++ (t_characterDataElement)statElementforHeadingFrom:(id)characterData;
++ (NSInteger)dataStatGroupForSectionNumber:(NSInteger)index;
 
-@interface CharacterData : NSObject
-- (id)dataWithAllStats;
-- (id)dataWithStatGroup:(t_characterDataStatGroup)group;
-+ (NSString *)headingFrom:(id)characterData;
-+ (NSInteger)numberOfSectionsFrom:(id)characterData;
-+ (NSString *)numberOfEntriesFrom:(id)characterData atSection:(NSInteger)section;
-+ (NSString *)sectionHeadingFrom:(id)characterData atSection:(NSInteger)section;
-+ (NSString *)itemDescriptionFrom:(id)characterData atIndexPath:(NSIndexPath *)indexPath;
-+ (NSNumber *)itemValueFrom:(id)characterData atIndexPath:(NSIndexPath *)indexPath;
-+ (t_characterDataElement)itemElementFrom:(id)characterData atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 

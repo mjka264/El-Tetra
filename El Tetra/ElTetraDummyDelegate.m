@@ -10,7 +10,7 @@
 #import "CharacterData.h"
 #import "StatTableViewController.h"
 
-
+/*
 @interface ElTetraDummyDelegate()
 @property (nonatomic, strong) CharacterData *characterData;
 @end
@@ -97,3 +97,4 @@
 
 
 @end
+*/

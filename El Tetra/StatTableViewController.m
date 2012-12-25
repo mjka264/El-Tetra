@@ -9,6 +9,7 @@
 #import "StatTableViewController.h"
 #import "PrimaryStatColouredCircleView.h"
 #import "ElTetraDummyDelegate.h"
+#import "CharacterData.h"
 
 
 #pragma mark - StatTableViewCell
@@ -61,8 +62,11 @@
 
 #pragma mark - StatTableViewHeaderDataSource
 
+
+
 - (NSString *)textForHeading: (UIView *)source {
-    return [self.dataSource headingForDisplay:self];
+    return [CharacterData sectionHeadingFrom:[self.dataSource characterData:self]];
+    //return [self.dataSource headingForDisplay:self];
 }
 - (NSNumber *)fontSizeForHeading: (UIView *)source {
     return [NSNumber numberWithInt:16];
@@ -70,8 +74,9 @@
 - (NSNumber *)numberForCircle:(UIView *)source {
     return [NSNumber numberWithInt:16];
 }
-- (NSString *)elementForCircle:(UIView *)source {
-    return [self.dataSource elementForDisplay:self];
+- (NSInteger)elementForCircle:(UIView *)source {
+    return [CharacterData statElementforHeadingFrom:[self.dataSource characterData:self]];
+    //return [self.dataSource elementForDisplay:self];
 }
 - (NSNumber *)fontSizeForNumber:(UIView *)source {
     return [NSNumber numberWithInt:16];
@@ -138,18 +143,27 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.hideTableData) return 0;
-    else return [[self.dataSource dataForDisplay:self] count];
+    else return [CharacterData numberOfEntriesFrom:[self.dataSource characterData:self]];
+        
+        //[[self.dataSource dataForDisplay:self] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionNumber
 {
-    NSOrderedSet *section = [[self.dataSource dataForDisplay:self]
-                             objectAtIndex:sectionNumber];
-    return [section count];
+    return [CharacterData numberOfEntriesFrom:[self.dataSource characterData:self]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Stat Cell" forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[StatTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"Stat Cell"];
+    }
+    
+    cell.textLabel.text = [CharacterData statDescriptionFrom:[self.dataSource characterData:self] atIndex:indexPath.row];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [CharacterData statValueFrom:[self.dataSource characterData:self] atIndex:indexPath.row]];
+    
+    /*
     StatTableViewControllerData *data = [[[self.dataSource dataForDisplay:self]
                                           objectAtIndex:indexPath.section]
                                          objectAtIndex:indexPath.row];
@@ -160,7 +174,7 @@
     }
     
     cell.textLabel.text = data.characterisic;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", data.value];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", data.value];*/
     return cell;
 }
 

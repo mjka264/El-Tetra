@@ -7,13 +7,17 @@
 //
 
 #import "CharacterSheetSkillsViewController.h"
+#import "CharacterData.h"
 
 
 @interface CharacterSheetSkillsViewController ()
-//@property (nonatomic, strong) CharacterData *characterData;
 @property (nonatomic, strong) NSMutableSet *statTableViewControllers;
+@property (nonatomic, strong) CharacterData *characterData;
 - (void)logRequestFromStatTableViewController:(StatTableViewController *)controller;
+@property (nonatomic, strong) NSDictionary *controllerIdentityStatGroups;
 @end
+
+
 
 
 @implementation CharacterSheetSkillsViewController
@@ -25,6 +29,35 @@
     return _statTableViewControllers;
 }
 
+- (CharacterData *)characterData:(UIViewController *)source {
+    return [self.characterData characterWithStatGroup:
+            [[self.controllerIdentityStatGroups objectForKey:source.description] integerValue]];
+}
+
+// This identifies the controller names in the UI and convert them to CharacterData's language
+@synthesize controllerIdentityStatGroups = _controllerIdentityStatGroups;
+- (NSDictionary *)controllerIdentityStatGroups {
+    if (!_controllerIdentityStatGroups) {
+        _controllerIdentityStatGroups = [NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSNumber numberWithInt:CharacterDataStatGroupSoul],
+                                         @"SoulStatsController",
+                                         [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
+                                         @"PrimaryStatsController",
+                                         [NSNumber numberWithInt:CharacterDataStatGroupFireSkills],
+                                         @"FireStatsController",
+                                         [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
+                                         @"AirStatsController",
+                                         [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
+                                         @"WaterStatsController",
+                                         [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
+                                         @"EarthStatsController",
+                                         [NSNumber numberWithInt:CharacterDataStatGroupAbilities],
+                                         @"AbilityStatsController", nil];
+    }
+    return _controllerIdentityStatGroups;
+}
+
+
 @synthesize characterData = _characterData;
 - (CharacterData *)characterData
 {
@@ -32,6 +65,8 @@
     return _characterData;
 }
 
+
+/*
 - (NSString *)elementForDisplay:(StatTableViewController *)source
 {
     [self logRequestFromStatTableViewController:source];
@@ -152,6 +187,7 @@
     }
     return [metaset copy];
 }
+*/
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

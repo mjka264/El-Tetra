@@ -11,11 +11,15 @@
 @interface CharacterData ()
 // These two dictionaries are each dictionaries of non-mutable arrays
 // They are accessed using the t_characterDataStatGroup keys (in .h) and correspond to one another
-@property (nonatomic, strong, readonly) NSDictionary *statDescriptions; // of arrays
+@property (nonatomic, strong) NSDictionary *statDescriptions; // of arrays
 @property (nonatomic, strong) NSDictionary *statValues;       // of arrays
 
 // This is the same as the above, although it currently only has data under the element key
-@property (nonatomic, strong, readonly) NSDictionary *statElements;     // of arrays
+@property (nonatomic, strong) NSDictionary *statElements;     // of arrays
+
+// When a Character Data is passed as an ID, this property allows it to work out what was searched for
+@property (nonatomic) NSInteger savedLookupKey;
+
 
 @end
 
@@ -145,247 +149,95 @@
 }
 
 
+@synthesize savedLookupKey = _dataGroupKey;
 
 
-- (id)dataWithAllStats {
+- (CharacterData *)characterWithAllStats {
     return [self copy];
 }
 
-- (id)dataWithStatGroup:(t_characterData)group;
+// Makes a copy of the class with the key saved for future lookups
+- (CharacterData *)characterWithStatGroup:(t_characterDataStatGroup)group {
+    CharacterData *data = [self copy];
+    data.savedLookupKey = group;
+    return data;
+}
 
-+ (NSString *)headingFrom:(id)characterData;
-
-+ (NSInteger)numberOfSectionsFrom:(id)characterData;
-
-+ (NSString *)numberOfEntriesFrom:(id)characterData atSection:(NSInteger)section;
-
-+ (NSString *)sectionHeadingFrom:(id)characterData atSection:(NSInteger)section;
-
-+ (NSString *)itemDescriptionFrom:(id)characterData atIndexPath:(NSIndexPath *)indexPath;
-
-+ (NSNumber *)itemValueFrom:(id)characterData atIndexPath:(NSIndexPath *)indexPath;
-
-+ (t_characterDataElement)itemElementFrom:(id)characterData atIndexPath:(NSIndexPath *)indexPath;
-
-
-
-
-
-@synthesize abilityStats = _abilityStats;
-- (NSDictionary *)abilityStats
-{
-    if (!_abilityStats) {
-        NSDictionary *stats = [NSDictionary dictionaryWithObjectsAndKeys:
-                               [NSNumber numberWithInt:3],
-                               CHARACTER_ABILITY_ARTFULWEAPONS,
-                               [NSNumber numberWithInt:2],
-                               CHARACTER_ABILITY_DAOISM,
-                               [NSNumber numberWithInt:1],
-                               CHARACTER_ABILITY_INITIATIVE,
-                               [NSNumber numberWithInt:3],
-                               CHARACTER_ABILITY_LEAPFLOAT,
-                               [NSNumber numberWithInt:2],
-                               CHARACTER_ABILITY_MULTIPLEATTACKS,
-                               [NSNumber numberWithInt:3],
-                               CHARACTER_ABILITY_PRIMALWATER,
-                               [NSNumber numberWithInt:2],
-                               CHARACTER_ABILITY_CRITICALSTRIKES,
-                               [NSNumber numberWithInt:1],
-                               CHARACTER_ABILITY_PRIMALAIR,
-                               [NSNumber numberWithInt:3],
-                               CHARACTER_ABILITY_STRENGTHWITHIN,
-                               [NSNumber numberWithInt:2],
-                               CHARACTER_ABILITY_PROJECTILEWEAPONS,
-                               nil];
-        _abilityStats = stats;
++ (NSInteger)numberOfStatGroupsFrom:(CharacterData *)character {
+    if (character.savedLookupKey) {
+        return 1;
+    } else {
+        return [character.statDescriptions count];
     }
-    return _abilityStats;
 }
 
-@synthesize soulStats = _soulStats;
-- (NSDictionary *)soulStats
-{
-    if (!_soulStats) {
-        NSDictionary *stats = [NSDictionary dictionaryWithObjectsAndKeys:
-                               [NSNumber numberWithInt:3],
-                               CHARACTER_SOUL_BODY,
-                               [NSNumber numberWithInt:2],
-                               CHARACTER_SOUL_MIND,
-                               [NSNumber numberWithInt:1],
-                               CHARACTER_SOUL_SPIRIT,
-                               nil];
-        _soulStats = stats;
++ (NSInteger)numberOfEntriesFrom:(CharacterData *)character {
+    return [CharacterData numberOfEntriesFrom:character inStatGroup:character.savedLookupKey];
+}
+
++ (NSInteger)numberOfEntriesFrom:(CharacterData *)character inStatGroup:(t_characterDataElement)group {
+    return [[character.statValues objectForKey:[NSNumber numberWithInt:group]] count];
+}
+
++ (NSString *)sectionHeadingFrom:(CharacterData *)character {
+    return [CharacterData sectionHeadingFrom:character inStatGroup:character.savedLookupKey];
+}
+
++ (NSString *)sectionHeadingFrom:(CharacterData *)character inStatGroup:(t_characterDataElement)group {
+    return @"FireBlah";
+}
+
++ (NSString *)statDescriptionFrom:(CharacterData *)character atIndex:(NSInteger)index {
+    return [CharacterData statDescriptionFrom:character atIndex:index inStatGroup:character.savedLookupKey];
+}
+
++ (NSString *)statDescriptionFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group {
+    return [[character.statDescriptions objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index];
+}
+            
++ (NSNumber *)statValueFrom:(CharacterData *)character atIndex:(NSInteger)index {
+    return [CharacterData statValueFrom:character atIndex:index inStatGroup:character.savedLookupKey];
+}
+
++ (NSNumber *)statValueFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group {
+    return [[character.statValues objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index];
+}
+
++ (t_characterDataElement)statElementFrom:(CharacterData *)character atIndex:(NSInteger)index {
+    return [CharacterData statElementFrom:character atIndex:index inStatGroup:character.savedLookupKey];
+}
+
++ (t_characterDataElement)statElementFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group {
+    return [[[character.statElements objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index] integerValue];
+}
+
++ (t_characterDataElement)statElementforHeadingFrom:(CharacterData *)characterData {
+    switch (characterData.savedLookupKey) {
+        case CharacterDataStatGroupFireSkills:
+            return CharacterDataElementFire;
+        case CharacterDataStatGroupAirSkills:
+            return CharacterDataElementAir;
+        case CharacterDataStatGroupWaterSkills:
+            return CharacterDataElementWater;
+        case CharacterDataStatGroupEarthSkills:
+            return CharacterDataElementEarth;
+        default:
+            return CharacterDataElementChi;
     }
-    return _soulStats;
 }
 
-@synthesize primaryStats = _primaryStats;
-- (NSDictionary *)primaryStats
-{
-    if (!_primaryStats) {
-        NSDictionary *stats = [NSDictionary dictionaryWithObjectsAndKeys:
-                               [NSNumber numberWithInt:3],
-                               CHARACTER_PRIMARY_FEROCITY,
-                               [NSNumber numberWithInt:2],
-                               CHARACTER_PRIMARY_ACCURACY,
-                               [NSNumber numberWithInt:1],
-                               CHARACTER_PRIMARY_AGILITY,
-                               [NSNumber numberWithInt:3],
-                               CHARACTER_PRIMARY_RESILIENCE,
-                               [NSNumber numberWithInt:2],
-                               CHARACTER_PRIMARY_CHI,
-                               nil];
-        _primaryStats = stats;
-    }
-    return _primaryStats;
+// This depends on the enum for t_characterDataStatGroup starting at 0 and being in order
++ (NSInteger)dataStatGroupForSectionNumber:(NSInteger)index {
+    return index;
 }
 
-@synthesize skillStats = _skillStats;
-- (NSDictionary *)skillStats
+- (id)copyWithZone:(NSZone *)zone
 {
-    NSNumber *fireStat   = [self.primaryStats objectForKey:CHARACTER_PRIMARY_FEROCITY];
-    NSNumber *airStat    = [self.primaryStats objectForKey:CHARACTER_PRIMARY_ACCURACY];
-    NSNumber *waterStat  = [self.primaryStats objectForKey:CHARACTER_PRIMARY_AGILITY];
-    NSNumber *earthStat  = [self.primaryStats objectForKey:CHARACTER_PRIMARY_RESILIENCE];
-    NSNumber *bodyStat   = [self.soulStats objectForKey:CHARACTER_SOUL_BODY];
-    NSNumber *mindStat   = [self.soulStats objectForKey:CHARACTER_SOUL_MIND];
-    NSNumber *spiritStat = [self.soulStats objectForKey:CHARACTER_SOUL_SPIRIT];
-
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            fireStat < bodyStat? fireStat : bodyStat,
-            CHARACTER_SKILL_FIRE_BODY,
-            fireStat < mindStat? fireStat : mindStat,
-            CHARACTER_SKILL_FIRE_MIND,
-            fireStat < spiritStat? fireStat : spiritStat,
-            CHARACTER_SKILL_FIRE_SPIRIT,
-            airStat < bodyStat? airStat : bodyStat,
-            CHARACTER_SKILL_AIR_BODY,
-            airStat < mindStat? airStat : mindStat,
-            CHARACTER_SKILL_AIR_MIND,
-            airStat < spiritStat? airStat : spiritStat,
-            CHARACTER_SKILL_AIR_SPIRIT,
-            waterStat < bodyStat? waterStat : bodyStat,
-            CHARACTER_SKILL_WATER_BODY,
-            waterStat < mindStat? waterStat : mindStat,
-            CHARACTER_SKILL_WATER_MIND,
-            waterStat < spiritStat? waterStat : spiritStat,
-            CHARACTER_SKILL_WATER_SPIRIT,
-            earthStat < bodyStat? earthStat : bodyStat,
-            CHARACTER_SKILL_EARTH_BODY,
-            earthStat < mindStat? earthStat : mindStat,
-            CHARACTER_SKILL_EARTH_MIND,
-            earthStat < spiritStat? earthStat : spiritStat,
-            CHARACTER_SKILL_EARTH_SPIRIT,
-            nil];
-}
-
-+ (NSOrderedSet *)soulStatsPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_SOUL_BODY,
-            CHARACTER_SOUL_MIND,
-            CHARACTER_SOUL_SPIRIT,
-            nil];
-}
-
-+ (NSOrderedSet *)primaryStatsPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_PRIMARY_FEROCITY,
-            CHARACTER_PRIMARY_ACCURACY,
-            CHARACTER_PRIMARY_AGILITY,
-            CHARACTER_PRIMARY_RESILIENCE,
-            CHARACTER_PRIMARY_CHI,
-            nil];
-}
-
-+ (NSOrderedSet *)fireSkillsPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_SKILL_FIRE_BODY,
-            CHARACTER_SKILL_FIRE_MIND,
-            CHARACTER_SKILL_FIRE_SPIRIT,
-            nil];
-}
-
-+ (NSOrderedSet *)waterSkillsPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_SKILL_WATER_BODY,
-            CHARACTER_SKILL_WATER_MIND,
-            CHARACTER_SKILL_WATER_SPIRIT,
-            nil];
-}
-
-+ (NSOrderedSet *)airSkillsPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_SKILL_AIR_BODY,
-            CHARACTER_SKILL_AIR_MIND,
-            CHARACTER_SKILL_AIR_SPIRIT,
-            nil];
-}
-
-+ (NSOrderedSet *)earthSkillsPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_SKILL_EARTH_BODY,
-            CHARACTER_SKILL_EARTH_MIND,
-            CHARACTER_SKILL_EARTH_SPIRIT,
-            nil];
-}
-
-+ (NSOrderedSet *)fireAbilitiesPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_ABILITY_REND,
-            CHARACTER_ABILITY_SPELLSWORD,
-            CHARACTER_ABILITY_PRIMALFIRE,
-            nil];
-}
-
-+ (NSOrderedSet *)airAbilitiesPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_ABILITY_ARTFULWEAPONS,
-            CHARACTER_ABILITY_BRUTALWEAPONS,
-            CHARACTER_ABILITY_PROJECTILEWEAPONS,
-            CHARACTER_ABILITY_CRITICALSTRIKES,
-            CHARACTER_ABILITY_PRIMALAIR,
-            nil];
-}
-
-+ (NSOrderedSet *)waterAbilitiesPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_ABILITY_INITIATIVE,
-            CHARACTER_ABILITY_MULTIPLEATTACKS,
-            CHARACTER_ABILITY_LEAPFLOAT,
-            CHARACTER_ABILITY_PRIMALWATER,
-            nil];
-}
-
-+ (NSOrderedSet *)earthAbilitiesPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_ABILITY_DEFENSIVEPAUSE,
-            CHARACTER_ABILITY_STRENGTHWITHIN,
-            CHARACTER_ABILITY_PRIMALEARTH,
-            nil];
-}
-
-+ (NSOrderedSet *)chiAbilitiesPresentationOrder
-{
-    return [NSOrderedSet orderedSetWithObjects:
-            CHARACTER_ABILITY_DAOISM,
-            CHARACTER_ABILITY_OFFWORLDCONTACT,
-            CHARACTER_ABILITY_PRIMALFIRE,
-            CHARACTER_ABILITY_PRIMALAIR,
-            CHARACTER_ABILITY_PRIMALWATER,
-            CHARACTER_ABILITY_PRIMALEARTH,
-            CHARACTER_ABILITY_SHIFTINGBODY,
-            CHARACTER_ABILITY_SHIFTINGMINDSPIRIT,
-            nil];
+	CharacterData *copy = [[CharacterData allocWithZone: zone] init];
+    copy.statDescriptions = self.statDescriptions;
+    copy.statValues = self.statValues;
+    copy.statElements = self.statElements;
+    return copy;
 }
 
 @end

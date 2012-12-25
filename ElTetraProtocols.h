@@ -12,18 +12,17 @@
 - (NSString *)textForHeading: (UIView *)source;
 - (NSNumber *)fontSizeForHeading: (UIView *)source;
 - (NSNumber *)numberForCircle:(UIView *)source;
-- (NSString *)elementForCircle:(UIView *)source;
+- (NSInteger)elementForCircle:(UIView *)source;
 - (NSNumber *)fontSizeForNumber:(UIView *)source;
 @end
 
 
+// This id is something that CharacterData can process
 @protocol StatTableViewControllerDataSource <NSObject>
-// The data for the following line is a set of sets
-// The outer set is the section
-// The inner set is the stat within the section
-- (NSOrderedSet *)dataForDisplay:(UIViewController *)statTVC;
-@optional
-- (NSString *)headingForDisplay:(UIViewController *)statTVC;
-- (NSString *)elementForDisplay:(UIViewController *)statTVC;
-- (NSString *)primaryStatValueForDisplay:(UIViewController *)statTVC;
+- (id)characterData:(UIViewController *)source;
 @end
+
+
+// BUG: There is ineffeciency as easch time a StatTableViewController gets data from the CharacterSheetViewController, it is regenerated rather than being looked up from a cache.
+
+// BUG: CharacterData.copyWithZone should really be using staticly defined variables (ie globals) for its easy dictionaries rather than creating them again and again. Temporarily, I dropped the readonly attribute to achieve a similar thing.
