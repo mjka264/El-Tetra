@@ -8,6 +8,24 @@
 
 #import "CharacterData.h"
 
+@interface CharacterData ()
+@property (nonatomic, strong) NSDictionary *soulStats;
+@property (nonatomic, strong) NSDictionary *primaryStats;
+@property (nonatomic, strong) NSDictionary *abilityStats;
+@property (nonatomic, readonly, strong) NSDictionary *skillStats;
++ (NSOrderedSet *)soulStatsPresentationOrder;
++ (NSOrderedSet *)primaryStatsPresentationOrder;
++ (NSOrderedSet *)fireSkillsPresentationOrder;
++ (NSOrderedSet *)airSkillsPresentationOrder;
++ (NSOrderedSet *)waterSkillsPresentationOrder;
++ (NSOrderedSet *)earthSkillsPresentationOrder;
++ (NSOrderedSet *)fireAbilitiesPresentationOrder;
++ (NSOrderedSet *)airAbilitiesPresentationOrder;
++ (NSOrderedSet *)waterAbilitiesPresentationOrder;
++ (NSOrderedSet *)earthAbilitiesPresentationOrder;
++ (NSOrderedSet *)chiAbilitiesPresentationOrder;
+@end
+
 @implementation CharacterData
 @synthesize abilityStats = _abilityStats;
 - (NSDictionary *)abilityStats

@@ -18,13 +18,3 @@
 @property (nonatomic, weak) id <StatTableViewControllerDataSource> dataSource;
 @end
 
-
-
-@interface StatTableViewControllerData : NSObject
-@property (nonatomic, strong) NSString *characterisic;
-@property (nonatomic) NSInteger value;
-+ (StatTableViewControllerData *)dataWithValue:(NSInteger)value forCharacteristic:(NSString *)characteristic;
-@end
-
-
-

@@ -51,20 +51,9 @@
 #define CHARACTER_ABILITY_SHIFTINGBODY @"Shifting (body)"
 #define CHARACTER_ABILITY_SHIFTINGMINDSPIRIT @"Shifting (mind, spirit)"
 
+typedef const char * t_characterData;
+
 @interface CharacterData : NSObject
-@property (nonatomic, strong) NSDictionary *soulStats;
-@property (nonatomic, strong) NSDictionary *primaryStats;
-@property (nonatomic, strong) NSDictionary *abilityStats;
-@property (nonatomic, readonly, strong) NSDictionary *skillStats;
-+ (NSOrderedSet *)soulStatsPresentationOrder;
-+ (NSOrderedSet *)primaryStatsPresentationOrder;
-+ (NSOrderedSet *)fireSkillsPresentationOrder;
-+ (NSOrderedSet *)airSkillsPresentationOrder;
-+ (NSOrderedSet *)waterSkillsPresentationOrder;
-+ (NSOrderedSet *)earthSkillsPresentationOrder;
-+ (NSOrderedSet *)fireAbilitiesPresentationOrder;
-+ (NSOrderedSet *)airAbilitiesPresentationOrder;
-+ (NSOrderedSet *)waterAbilitiesPresentationOrder;
-+ (NSOrderedSet *)earthAbilitiesPresentationOrder;
-+ (NSOrderedSet *)chiAbilitiesPresentationOrder;
+- (id)dataWithAllStats;
+- (id)dataWithStatsInGroup:(t_characterData)group;
 @end

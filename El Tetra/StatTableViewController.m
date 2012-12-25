@@ -10,20 +10,6 @@
 #import "PrimaryStatColouredCircleView.h"
 #import "ElTetraDummyDelegate.h"
 
-#pragma mark - StatTableViewControllerData
-
-@implementation StatTableViewControllerData
-@synthesize characterisic = _characterisic;
-@synthesize value = _value;
-
-+ (StatTableViewControllerData *)dataWithValue:(NSInteger)value forCharacteristic:(NSString *)characteristic
-{
-    StatTableViewControllerData *data = [[StatTableViewControllerData alloc] init];
-    data.characterisic = characteristic;
-    data.value = value;
-    return data;
-}
-@end
 
 #pragma mark - StatTableViewCell
 @interface StatTableViewCell : UITableViewCell;
