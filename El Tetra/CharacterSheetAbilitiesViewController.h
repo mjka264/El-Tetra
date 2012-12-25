@@ -10,5 +10,7 @@
 #import "CharacterSheetSkillsViewController.h"
 
 @interface CharacterSheetAbilitiesViewController : CharacterSheetSkillsViewController
-
+@property (nonatomic, weak) IBOutlet UILabel *soulStatBody;
+@property (nonatomic, weak) IBOutlet UILabel *soulStatMind;
+@property (nonatomic, weak) IBOutlet UILabel *soulStatSpirit;
 @end

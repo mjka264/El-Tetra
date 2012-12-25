@@ -114,6 +114,18 @@
 {
     [super viewDidLoad];
     
+    /* This code will allow for a normal heading in some cases.
+    UIView *header;
+    if ([self elementForCircle:self.view]) {
+        header = [[StatTableViewHeader alloc] init];
+        ((StatTableViewHeader *)header).dataSource = self;
+        [header sizeToFit];
+    } else {
+        header = [[UILabel alloc] init];
+        ((UILabel *)header).text = @"Moo";
+        [header sizeToFit];
+    }*/
+    
     StatTableViewHeader *header = [[StatTableViewHeader alloc] init];
     header.dataSource = self;
     [header sizeToFit];

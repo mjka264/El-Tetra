@@ -13,10 +13,14 @@
 @end
 
 @implementation CharacterSheetAbilitiesViewController
+@synthesize soulStatBody = _soulStatBody;
+@synthesize soulStatMind = _soulStatMind;
+@synthesize soulStatSpirit = _soulStatSpirit;
 
 - (NSOrderedSet *)dataForDisplay:(StatTableViewController *)source
 {
-    if ([source.title isEqualToString:DTVC_SOUL]) {
+    if ([source.title isEqualToString:DTVC_SOUL] ||
+        [source.title isEqualToString:DTVC_ABILITY_STATS]) {
         return [super dataForDisplay:source];
     } else {
         return nil;
@@ -43,5 +47,24 @@
     return response;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    NSDictionary *stats = [super.characterData soulStats];
+    self.soulStatBody.text = [NSString stringWithFormat:@"%@",[stats objectForKey:CHARACTER_SOUL_BODY]];
+    self.soulStatMind.text = [NSString stringWithFormat:@"%@",[stats objectForKey:CHARACTER_SOUL_MIND]];
+    self.soulStatSpirit.text = [NSString stringWithFormat:@"%@",[stats objectForKey:CHARACTER_SOUL_SPIRIT]];
+}
+
+- (void)setupSelf {
+
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self setupSelf];
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupSelf];
+}
 
 @end

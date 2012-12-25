@@ -7,10 +7,10 @@
 //
 
 #import "CharacterSheetSkillsViewController.h"
-#import "CharacterData.h"
+
 
 @interface CharacterSheetSkillsViewController ()
-@property (nonatomic, strong) CharacterData *characterData;
+//@property (nonatomic, strong) CharacterData *characterData;
 @property (nonatomic, strong) NSMutableSet *statTableViewControllers;
 - (void)logRequestFromStatTableViewController:(StatTableViewController *)controller;
 @end
@@ -103,45 +103,54 @@
     [self logRequestFromStatTableViewController:source];
     
     NSDictionary *stats; // The actual stats pulled from the model
-    NSOrderedSet *orderedStatList; // The order in which they should be presented, also from the model
-    NSMutableOrderedSet *orderedStats = [[NSMutableOrderedSet alloc] init]; // what we are building
+    NSOrderedSet *orderedStatLists; // The 2d set referring to the order in which they should be presented
     
     // These ifs load the correct data from the model
     if ([source.title isEqualToString:DTVC_SOUL]) {
         stats = [self.characterData soulStats];
-        orderedStatList = [CharacterData soulStatsPresentationOrder];
+        orderedStatLists = [NSOrderedSet orderedSetWithObject:[CharacterData soulStatsPresentationOrder]];
     } else if ([source.title isEqualToString:DTVC_PRIMARY]) {
         stats = [self.characterData primaryStats];
-        orderedStatList = [CharacterData primaryStatsPresentationOrder];
+        orderedStatLists = [NSOrderedSet orderedSetWithObject:[CharacterData primaryStatsPresentationOrder]];
     } else if ([source.title isEqualToString:DTVC_FIRE_STATS]) {
         stats = [self.characterData skillStats];
-        orderedStatList = [CharacterData fireSkillsPresentationOrder];
+        orderedStatLists = [NSOrderedSet orderedSetWithObject:[CharacterData fireSkillsPresentationOrder]];
     } else if ([source.title isEqualToString:DTVC_AIR_STATS]) {
         stats = [self.characterData skillStats];
-        orderedStatList = [CharacterData airSkillsPresentationOrder];
+        orderedStatLists = [NSOrderedSet orderedSetWithObject:[CharacterData airSkillsPresentationOrder]];
     } else if ([source.title isEqualToString:DTVC_WATER_STATS]) {
         stats = [self.characterData skillStats];
-        orderedStatList = [CharacterData waterSkillsPresentationOrder];
+        orderedStatLists = [NSOrderedSet orderedSetWithObject:[CharacterData waterSkillsPresentationOrder]];
     } else if ([source.title isEqualToString:DTVC_EARTH_STATS]) {
         stats = [self.characterData skillStats];
-        orderedStatList = [CharacterData earthSkillsPresentationOrder];
+        orderedStatLists = [NSOrderedSet orderedSetWithObject:[CharacterData earthSkillsPresentationOrder]];
+    } else if ([source.title isEqualToString:DTVC_ABILITY_STATS]) {
+        stats = [self.characterData abilityStats];
+        orderedStatLists = [NSOrderedSet orderedSetWithObjects:
+                            [CharacterData fireAbilitiesPresentationOrder],
+                            [CharacterData airAbilitiesPresentationOrder],
+                            [CharacterData waterAbilitiesPresentationOrder],
+                            [CharacterData earthAbilitiesPresentationOrder],
+                            [CharacterData chiAbilitiesPresentationOrder], nil];
     } else if ([source.title isEqualToString:DTVC_CHI_STATS]) {
-        orderedStatList = nil;
+        orderedStatLists = nil;
     }
 
     // Now build the orderStats list with the correct things.
     // Store this data in StatTableViewControllerData objects, as requested by StatTableViewController
-    for (NSString *statName in orderedStatList) {
-        if ([stats valueForKey:statName]) {
-            [orderedStats addObject:[StatTableViewControllerData
-                                     dataWithValue:[[stats valueForKey:statName] integerValue]
-                                     forCharacteristic:statName]];
+    NSMutableOrderedSet *metaset = [[NSMutableOrderedSet alloc] init];
+    for (NSOrderedSet *eachOrderedList in orderedStatLists) {
+        NSMutableOrderedSet *orderedStats = [[NSMutableOrderedSet alloc] init]; // what we are building
+        for (NSString *statName in eachOrderedList) {
+            if ([stats valueForKey:statName]) {
+                [orderedStats addObject:[StatTableViewControllerData
+                                         dataWithValue:[[stats valueForKey:statName] integerValue]
+                                         forCharacteristic:statName]];
+            }
         }
+        [metaset addObject:[orderedStats copy]];
     }
-    
-    // The return value is a set of sets. The outer set defines sections. For now, just the one section.
-    NSOrderedSet *metaset = [NSOrderedSet orderedSetWithObject:orderedStats];
-    return metaset;
+    return [metaset copy];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
