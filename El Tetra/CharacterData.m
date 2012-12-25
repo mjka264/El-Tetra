@@ -9,59 +9,84 @@
 #import "CharacterData.h"
 
 @interface CharacterData ()
-@property (nonatomic, strong) NSArray *soulDescriptions;
-@property (nonatomic, strong) NSArray *primaryStatDescriptions;
-@property (nonatomic, strong) NSArray *fireSkillDescriptions;
-@property (nonatomic, strong) NSArray *airSkillDescriptions;
-@property (nonatomic, strong) NSArray *waterSkillDescriptions;
-@property (nonatomic, strong) NSArray *earthSkillDescriptions;
-@property (nonatomic, strong) NSArray *abilityDescriptions;
+// These two dictionaries are each dictionaries of non-mutable arrays
+// They are accessed using the t_statCategory keys and correspond to one another
+@property (nonatomic, strong, readonly) NSDictionary *statDescriptions; // of arrays
+@property (nonatomic, strong) NSDictionary *statValues;       // of arrays
+
+// This is the same as the above, although it currently only has data under the element key
+@property (nonatomic, strong) NSDictionary *statElements;     // of arrays
+
 @end
 
 
+typedef enum {
+    StatCategorySoul = 1,
+    StatCategoryPrimary = 2,
+    StatCategoryFireSkills = 3,
+    StatCategoryAirSkills = 4,
+    StatCategorWaterkills = 5,
+    StatCategoryEarthSkills = 6,
+    StatCategoryAbilities = 7
+} t_statCategory;
 
-#define CHARACTER_SOUL_BODY @"Body"
-#define CHARACTER_SOUL_MIND @"Mind"
-#define CHARACTER_SOUL_SPIRIT @"Spirit"
 
-#define CHARACTER_PRIMARY_FEROCITY @"Ferocity"
-#define CHARACTER_PRIMARY_ACCURACY @"Accuracy"
-#define CHARACTER_PRIMARY_AGILITY @"Agility"
-#define CHARACTER_PRIMARY_RESILIENCE @"Resilience"
-#define CHARACTER_PRIMARY_CHI @"Chi"
+@implementation CharacterData
 
-#define CHARACTER_SKILL_FIRE_BODY @"Power, speed, lifting"
-#define CHARACTER_SKILL_FIRE_MIND @"Instinct, innovation, insight, synthesis"
-#define CHARACTER_SKILL_FIRE_SPIRIT @"Passion, agression, assertion, intimidation"
-#define CHARACTER_SKILL_AIR_BODY @"Craft, lockpicking"
-#define CHARACTER_SKILL_AIR_MIND @"Logic, science, reasoning, investigation, memory"
-#define CHARACTER_SKILL_AIR_SPIRIT @"Culture, disguise, trickery, cunning"
-#define CHARACTER_SKILL_WATER_BODY @"Balance, stealth, reflexes"
-#define CHARACTER_SKILL_WATER_MIND @"Language, interpretation"
-#define CHARACTER_SKILL_WATER_SPIRIT @"Empathy, charm, misdirection"
-#define CHARACTER_SKILL_EARTH_BODY @"Fortitude, stamina, labour"
-#define CHARACTER_SKILL_EARTH_MIND @"Perception, observation, procedure, tracking"
-#define CHARACTER_SKILL_EARTH_SPIRIT @"Confidence, bravery, diligence, patience"
+[NSNumber num ]
 
-#define CHARACTER_ABILITY_INITIATIVE @"Initiative"
-#define CHARACTER_ABILITY_ARTFULWEAPONS @"Artful weapons"
-#define CHARACTER_ABILITY_BRUTALWEAPONS @"Brutal weapons"
-#define CHARACTER_ABILITY_PROJECTILEWEAPONS @"Projectile weapons"
-#define CHARACTER_ABILITY_CRITICALSTRIKES @"Critical strikes"
-#define CHARACTER_ABILITY_REND @"Rend"
-#define CHARACTER_ABILITY_DEFENSIVEPAUSE @"Defensive pause"
-#define CHARACTER_ABILITY_STRENGTHWITHIN @"Strength within"
-#define CHARACTER_ABILITY_MULTIPLEATTACKS @"Multiple attacks"
-#define CHARACTER_ABILITY_LEAPFLOAT @"Leap/float"
-#define CHARACTER_ABILITY_SPELLSWORD @"Spellsword"
-#define CHARACTER_ABILITY_DAOISM @"Daoism"
-#define CHARACTER_ABILITY_OFFWORLDCONTACT @"Offworld contact"
-#define CHARACTER_ABILITY_PRIMALFIRE @"Primal fire"
-#define CHARACTER_ABILITY_PRIMALAIR @"Primal air"
-#define CHARACTER_ABILITY_PRIMALWATER @"Primal water"
-#define CHARACTER_ABILITY_PRIMALEARTH @"Primal earth"
-#define CHARACTER_ABILITY_SHIFTINGBODY @"Shifting (body)"
-#define CHARACTER_ABILITY_SHIFTINGMINDSPIRIT @"Shifting (mind, spirit)"
+@synthesize statDescriptions = _statDescriptions;
+- (NSDictionary *)statDescriptions {
+    if (!_statDescriptions) {
+        _statDescriptions =
+        [NSDictionary dictionaryWithObjectsAndKey
+         [NSArray arrayWithObjects:@"Body", @"Mind", @"Spirit", nil],
+         [NSNumber numberWithInt:StatCategorySoul],
+         
+         [NSArray arrayWithObjects:@"Ferocity", @"Accuracy", @"Agility", @"Resilience", @"Chi", nil],
+         [NSNumber numberWithInt:StatCategoryPrimary],
+         
+         [NSArray arrayWithObjects:
+          @"Power, speed, lifting",
+          @"Instinct, innovation, insight, synthesis",
+          @"Passion, agression, assertion, intimidation", nil],
+         [NSNumber numberWithInt:StatCategoryFireSkills],
+         
+         [NSArray arrayWithObjects:
+          @"Craft, lockpicking",
+          @"Logic, science, reasoning, investigation, memory",
+          @"Culture, disguise, trickery, cunning", nil],
+         [NSNumber numberWithInt:StatCategoryAirSkills],
+         
+         [NSArray arrayWithObjects:
+          @"Balance, stealth, reflexes",
+          @"Language, interpretation",
+          @"Empathy, charm, misdirection", nil],
+         [NSNumber numberWithInt:StatCategorWaterkills],
+         
+         [NSArray arrayWithObjects:
+          @"Fortitude, stamina, labour",
+          @"Perception, observation, procedure, tracking",
+          @"Confidence, bravery, diligence, patience", nil],
+         [NSNumber numberWithInt:StatCategoryEarthSkills],
+         
+         [NSArray arrayWithObjects:
+          @"Rend", @"Spellsword",
+          @"Artful weapons", @"Brutal weapons", @"Critical strikes", @"Projectile weapons",
+          @"Initiative", @"Leap/float", @"Multiple attacks",
+          @"Defensive pause", @"Strength within",
+          @"Daoism", @"Shifting (body)", @"Shifting (mind, spirit)", @"Offworld contact",
+          @"Primal fire", @"Primal air", @"Primal water", @"Primal earth", nil],
+         [NSNumber numberWithInt:StatCategoryAbilities],
+         nil];
+    }
+    return _statDescriptions;
+}
+
+
+
+
+
 
 
 
@@ -88,7 +113,7 @@
 
 
 
-@implementation CharacterData
+
 @synthesize abilityStats = _abilityStats;
 - (NSDictionary *)abilityStats
 {
