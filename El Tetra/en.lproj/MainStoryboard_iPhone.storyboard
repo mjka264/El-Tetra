@@ -89,17 +89,17 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Skp-Ab-OS6">
+                            <containerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Skp-Ab-OS6">
                                 <connections>
                                     <segue destination="rjv-GC-fO5" kind="embed" id="9wx-o9-Nld"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kku-EP-Zwv">
+                            <containerView tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kku-EP-Zwv">
                                 <connections>
                                     <segue destination="Msw-pQ-j2q" kind="embed" id="XF7-hm-I2a"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNp-EA-CkY">
+                            <containerView tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNp-EA-CkY">
                                 <connections>
                                     <segue destination="cwk-AT-f5r" kind="embed" id="6uq-IS-jD7"/>
                                 </connections>
@@ -109,12 +109,12 @@
                                     <segue destination="URK-Li-r15" kind="embed" id="zuX-et-NvN"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FPz-zd-b0E">
+                            <containerView tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FPz-zd-b0E">
                                 <connections>
                                     <segue destination="aIv-jm-t91" kind="embed" id="h8B-hL-Spy"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JtJ-GJ-Sqj">
+                            <containerView tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JtJ-GJ-Sqj">
                                 <connections>
                                     <segue destination="oka-Qg-Ooa" kind="embed" id="ZPS-jI-C8D"/>
                                 </connections>

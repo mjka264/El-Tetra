@@ -23,6 +23,14 @@
 #define DTVC_EARTH_STATS @"EarthStatsController"
 #define DTVC_CHI_STATS @"ChiStatsController"
 
+#define SUBVIEW_TAG_SOUL 0
+#define SUBVIEW_TAG_FIRE 1
+#define SUBVIEW_TAG_AIR 2
+#define SUBVIEW_TAG_WATER 3
+#define SUBVIEW_TAG_EARTH 4
+#define SUBVIEW_TAG_CHI 5
+
+
 @implementation CharacterSheetCoreViewController
 @synthesize statTableViewControllers = _statTableViewControllers;
 - (NSMutableSet *)statTableViewControllers {
@@ -172,9 +180,13 @@
         controller.hideTableData = YES;
     }];
     
-    //for (UIContainerView *subview in self.view.subviews) {
-        //if subview.
-    //}
+    for (UIView *subview in self.view.subviews) {
+        if (subview.tag == SUBVIEW_TAG_SOUL) {
+            subview.frame = CGRectZero;
+        } else if (subview.tag >= SUBVIEW_TAG_FIRE && subview.tag <= SUBVIEW_TAG_CHI) {
+            subview.frame = CGRectMake(0,subview.tag*40-40,134,40);
+        }
+    }
 }
 
 - (void)swipeHandlerLeft:(UISwipeGestureRecognizer *)gesture {
@@ -182,6 +194,22 @@
         StatTableViewController *controller = obj;
         controller.hideTableData = NO;
     }];
+    
+    for (UIView *subview in self.view.subviews) {
+        if (subview.tag == SUBVIEW_TAG_SOUL) {
+            subview.frame = CGRectMake(93,1,134,100);
+        } else if (subview.tag == SUBVIEW_TAG_FIRE) {
+            subview.frame = CGRectMake(0,109,134,100);
+        } else if (subview.tag == SUBVIEW_TAG_AIR) {
+            subview.frame = CGRectMake(186,109,134,100);
+        } else if (subview.tag == SUBVIEW_TAG_WATER) {
+            subview.frame = CGRectMake(0,217,134,100);
+        } else if (subview.tag == SUBVIEW_TAG_EARTH) {
+            subview.frame = CGRectMake(186,217,134,100);
+        } else if (subview.tag == SUBVIEW_TAG_CHI) {
+            subview.frame = CGRectMake(90,325,140,41);
+        }
+    }
 }
 
 - (void)viewDidLoad
