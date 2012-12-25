@@ -11,8 +11,9 @@
 @interface CharacterData ()
 // These two dictionaries are each dictionaries of non-mutable arrays
 // They are accessed using the t_characterDataStatGroup keys (in .h) and correspond to one another
-@property (nonatomic, strong) NSDictionary *statDescriptions; // of arrays
-@property (nonatomic, strong) NSDictionary *statValues;       // of arrays
+@property (nonatomic, strong) NSDictionary *statDescriptions;    // of arrays
+@property (nonatomic, strong) NSDictionary *statValues;          // of arrays
+@property (nonatomic, strong) NSDictionary *statGroupHeadings;   // of strings
 
 // This is the same as the above, although it currently only has data under the element key
 @property (nonatomic, strong) NSDictionary *statElements;     // of arrays
@@ -25,6 +26,23 @@
 
 
 @implementation CharacterData
+
+@synthesize statGroupHeadings = _statGroupHeadings;
+- (NSDictionary *)statGroupHeadings {
+    if (!_statGroupHeadings) {
+        _statGroupHeadings =
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         @"Soul", [NSNumber numberWithInt:CharacterDataStatGroupSoul],
+         @"Primary Stats", [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
+         @"Ferocity", [NSNumber numberWithInt:CharacterDataStatGroupFireSkills],
+         @"Air", [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
+         @"Water", [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
+         @"Earth", [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
+         @"Chi", [NSNumber numberWithInt:CharacterDataStatGroupChiSkills],
+         @"Abilities", [NSNumber numberWithInt:CharacterDataStatGroupAbilities], nil];
+    }
+    return _statGroupHeadings;
+}
 
 @synthesize statDescriptions = _statDescriptions;
 - (NSDictionary *)statDescriptions {
@@ -151,7 +169,6 @@
     return _statValues;
 }
 
-
 @synthesize savedLookupKey = _dataGroupKey;
 
 
@@ -187,7 +204,7 @@
 }
 
 + (NSString *)sectionHeadingFrom:(CharacterData *)character inStatGroup:(t_characterDataElement)group {
-    return @"ColdBlah";
+    return [character.statGroupHeadings objectForKey:[NSNumber numberWithInt:group]];
 }
 
 + (NSString *)statDescriptionFrom:(CharacterData *)character atIndex:(NSInteger)index {
