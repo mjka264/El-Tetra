@@ -6,32 +6,17 @@
 //  Copyright (c) 2012 Matthew Kameron. All rights reserved.
 //
 
-#import "CharacterSheetCoreViewController.h"
+#import "CharacterSheetSkillsViewController.h"
 #import "CharacterData.h"
 
-@interface CharacterSheetCoreViewController ()
+@interface CharacterSheetSkillsViewController ()
 @property (nonatomic, strong) CharacterData *characterData;
 @property (nonatomic, strong) NSMutableSet *statTableViewControllers;
 - (void)logRequestFromStatTableViewController:(StatTableViewController *)controller;
 @end
 
-#define DTVC_SOUL @"SoulStatsController"
-#define DTVC_PRIMARY @"PrimaryStatsController"
-#define DTVC_FIRE_STATS @"FireStatsController"
-#define DTVC_AIR_STATS @"AirStatsController"
-#define DTVC_WATER_STATS @"WaterStatsController"
-#define DTVC_EARTH_STATS @"EarthStatsController"
-#define DTVC_CHI_STATS @"ChiStatsController"
 
-#define SUBVIEW_TAG_SOUL 0
-#define SUBVIEW_TAG_FIRE 1
-#define SUBVIEW_TAG_AIR 2
-#define SUBVIEW_TAG_WATER 3
-#define SUBVIEW_TAG_EARTH 4
-#define SUBVIEW_TAG_CHI 5
-
-
-@implementation CharacterSheetCoreViewController
+@implementation CharacterSheetSkillsViewController
 @synthesize statTableViewControllers = _statTableViewControllers;
 - (NSMutableSet *)statTableViewControllers {
     if (!_statTableViewControllers) {
@@ -174,6 +159,7 @@
     }
 }
 
+/*
 - (void)swipeHandlerRight:(UISwipeGestureRecognizer *)gesture {
     [self.statTableViewControllers enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
         StatTableViewController *controller = obj;
@@ -211,6 +197,7 @@
         }
     }
 }
+ 
 
 - (void)viewDidLoad
 {
@@ -224,6 +211,7 @@
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:swipeLeft];
 }
+ */
 
 - (void)didReceiveMemoryWarning
 {

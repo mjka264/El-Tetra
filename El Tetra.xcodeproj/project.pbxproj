@@ -26,9 +26,10 @@
 		C297529D168551CB00092860 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975275168551CB00092860 /* Foundation.framework */; };
 		C29752A5168551CB00092860 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C29752A3168551CB00092860 /* InfoPlist.strings */; };
 		C29752A8168551CB00092860 /* El_TetraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752A7168551CB00092860 /* El_TetraTests.m */; };
-		C29752B31685629400092860 /* CharacterSheetCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752B21685629400092860 /* CharacterSheetCoreViewController.m */; };
+		C29752B31685629400092860 /* CharacterSheetSkillsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752B21685629400092860 /* CharacterSheetSkillsViewController.m */; };
 		C29752C516856F3700092860 /* CharacterData.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752C416856F3700092860 /* CharacterData.m */; };
 		C29752C81685734A00092860 /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752C71685734A00092860 /* StatTableViewController.m */; };
+		C2E5F59A16892E4F00A434B1 /* CharacterSheetAbilitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E5F59916892E4F00A434B1 /* CharacterSheetAbilitiesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,12 +71,14 @@
 		C29752A4168551CB00092860 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C29752A6168551CB00092860 /* El_TetraTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = El_TetraTests.h; sourceTree = "<group>"; };
 		C29752A7168551CB00092860 /* El_TetraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = El_TetraTests.m; sourceTree = "<group>"; };
-		C29752B11685629400092860 /* CharacterSheetCoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSheetCoreViewController.h; sourceTree = "<group>"; };
-		C29752B21685629400092860 /* CharacterSheetCoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSheetCoreViewController.m; sourceTree = "<group>"; };
+		C29752B11685629400092860 /* CharacterSheetSkillsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSheetSkillsViewController.h; sourceTree = "<group>"; };
+		C29752B21685629400092860 /* CharacterSheetSkillsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSheetSkillsViewController.m; sourceTree = "<group>"; };
 		C29752C316856F3700092860 /* CharacterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterData.h; sourceTree = "<group>"; };
 		C29752C416856F3700092860 /* CharacterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterData.m; sourceTree = "<group>"; };
 		C29752C61685734A00092860 /* StatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewController.h; sourceTree = "<group>"; };
 		C29752C71685734A00092860 /* StatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewController.m; sourceTree = "<group>"; };
+		C2E5F59816892E4F00A434B1 /* CharacterSheetAbilitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSheetAbilitiesViewController.h; sourceTree = "<group>"; };
+		C2E5F59916892E4F00A434B1 /* CharacterSheetAbilitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSheetAbilitiesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,8 +141,10 @@
 				C29752C316856F3700092860 /* CharacterData.h */,
 				C29752C416856F3700092860 /* CharacterData.m */,
 				C297528B168551CB00092860 /* MainStoryboard_iPhone.storyboard */,
-				C29752B11685629400092860 /* CharacterSheetCoreViewController.h */,
-				C29752B21685629400092860 /* CharacterSheetCoreViewController.m */,
+				C2E5F59816892E4F00A434B1 /* CharacterSheetAbilitiesViewController.h */,
+				C2E5F59916892E4F00A434B1 /* CharacterSheetAbilitiesViewController.m */,
+				C29752B11685629400092860 /* CharacterSheetSkillsViewController.h */,
+				C29752B21685629400092860 /* CharacterSheetSkillsViewController.m */,
 				C29752C61685734A00092860 /* StatTableViewController.h */,
 				C29752C71685734A00092860 /* StatTableViewController.m */,
 				C264857816887C7C00F3B648 /* StatTableViewHeader.h */,
@@ -304,12 +309,13 @@
 			files = (
 				C2975280168551CB00092860 /* main.m in Sources */,
 				C2975284168551CB00092860 /* ElTertaAppDelegate.m in Sources */,
-				C29752B31685629400092860 /* CharacterSheetCoreViewController.m in Sources */,
+				C29752B31685629400092860 /* CharacterSheetSkillsViewController.m in Sources */,
 				C29752C516856F3700092860 /* CharacterData.m in Sources */,
 				C29752C81685734A00092860 /* StatTableViewController.m in Sources */,
 				C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */,
 				C264857A16887C7C00F3B648 /* StatTableViewHeader.m in Sources */,
 				C26485811688865D00F3B648 /* ElTetraDummyDelegate.m in Sources */,
+				C2E5F59A16892E4F00A434B1 /* CharacterSheetAbilitiesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
