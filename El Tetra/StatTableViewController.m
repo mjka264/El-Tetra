@@ -72,7 +72,8 @@
     return [NSNumber numberWithInt:16];
 }
 - (NSNumber *)numberForCircle:(UIView *)source {
-    return [NSNumber numberWithInt:16];
+    return [CharacterData primaryStatForSkillGroupFrom:[self.dataSource characterData:self]];
+    //return [NSNumber numberWithInt:3];
 }
 - (NSInteger)elementForCircle:(UIView *)source {
     return [CharacterData statElementforHeadingFrom:[self.dataSource characterData:self]];

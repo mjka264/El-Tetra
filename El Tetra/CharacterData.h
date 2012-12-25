@@ -49,6 +49,7 @@ typedef enum {
 + (t_characterDataElement)statElementFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group;
 + (t_characterDataElement)statElementforHeadingFrom:(id)characterData;
 + (NSInteger)dataStatGroupForSectionNumber:(NSInteger)index;
++ (NSNumber *)primaryStatForSkillGroupFrom:(id)characterData;
 
 @end
 

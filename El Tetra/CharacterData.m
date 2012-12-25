@@ -34,6 +34,8 @@
          [NSArray arrayWithObjects:@"Body", @"Mind", @"Spirit", nil],
          [NSNumber numberWithInt:CharacterDataStatGroupSoul],
          
+         // The order of these stats is hardcoded below in the function primaryStatForSkillGroupFrom
+         // If the order changes here, it needs to change there too
          [NSArray arrayWithObjects:@"Ferocity", @"Accuracy", @"Agility", @"Resilience", @"Chi", nil],
          [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
          
@@ -210,6 +212,17 @@
 
 + (t_characterDataElement)statElementFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group {
     return [[[character.statElements objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index] integerValue];
+}
+
++ (NSNumber *)primaryStatForSkillGroupFrom:(CharacterData *)character {
+    NSInteger index;
+    if (character.savedLookupKey == CharacterDataStatGroupFireSkills) index = 0;
+    else if (character.savedLookupKey == CharacterDataStatGroupAirSkills) index = 1;
+    else if (character.savedLookupKey == CharacterDataStatGroupWaterSkills) index = 2;
+    else if (character.savedLookupKey == CharacterDataStatGroupEarthSkills) index = 3;
+    else if (character.savedLookupKey == CharacterDataStatGroupChiSkills) index = 4;
+    
+    return [[character.statValues objectForKey:[NSNumber numberWithInt:CharacterDataStatGroupPrimary]] objectAtIndex:index];
 }
 
 + (t_characterDataElement)statElementforHeadingFrom:(CharacterData *)characterData {
