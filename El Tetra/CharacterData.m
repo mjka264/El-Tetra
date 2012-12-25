@@ -96,52 +96,53 @@
 @synthesize statValues = _statValues;
 - (NSDictionary *)statValues {
     if (!_statValues) {
+        _statValues =
         [NSDictionary dictionaryWithObjectsAndKeys:
          [NSArray arrayWithObjects:
-          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:5],
           [NSNumber numberWithInt:3],
-          [NSNumber numberWithInt:4], nil],
+          [NSNumber numberWithInt:11], nil],
          [NSNumber numberWithInt:CharacterDataStatGroupSoul],
          
          [NSArray arrayWithObjects:
-          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:8],
           [NSNumber numberWithInt:3],
-          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:7],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
          [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
          
          [NSArray arrayWithObjects:
-          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:5],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
          [NSNumber numberWithInt:CharacterDataStatGroupFireSkills],
          
          [NSArray arrayWithObjects:
-          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:6],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
          [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
          
          [NSArray arrayWithObjects:
-          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:7],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
          [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
          
          [NSArray arrayWithObjects:
-          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:2],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
          [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
          
          [NSArray arrayWithObjects:
-          [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
-          [NSNumber numberWithInt:3], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
-          [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
-          [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
-          [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
-          [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], nil],
+          [NSNumber numberWithInt:5], [NSNumber numberWithInt:6],
+          [NSNumber numberWithInt:3], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7], [NSNumber numberWithInt:8],
+          [NSNumber numberWithInt:5], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7],
+          [NSNumber numberWithInt:5], [NSNumber numberWithInt:6],
+          [NSNumber numberWithInt:5], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7], [NSNumber numberWithInt:8],
+          [NSNumber numberWithInt:5], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7], [NSNumber numberWithInt:8], nil],
          [NSNumber numberWithInt:CharacterDataStatGroupAbilities],
          nil];
     }
@@ -184,7 +185,7 @@
 }
 
 + (NSString *)sectionHeadingFrom:(CharacterData *)character inStatGroup:(t_characterDataElement)group {
-    return @"FireBlah";
+    return @"ColdBlah";
 }
 
 + (NSString *)statDescriptionFrom:(CharacterData *)character atIndex:(NSInteger)index {
@@ -221,14 +222,16 @@
             return CharacterDataElementWater;
         case CharacterDataStatGroupEarthSkills:
             return CharacterDataElementEarth;
-        default:
+        case CharacterDataStatGroupChiSkills:
             return CharacterDataElementChi;
+        default:
+            return 0;
     }
 }
 
-// This depends on the enum for t_characterDataStatGroup starting at 0 and being in order
+// This depends on the enum for t_characterDataStatGroup starting at 1 and being in order
 + (NSInteger)dataStatGroupForSectionNumber:(NSInteger)index {
-    return index;
+    return index + 1;
 }
 
 - (id)copyWithZone:(NSZone *)zone

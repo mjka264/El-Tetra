@@ -30,8 +30,9 @@
 }
 
 - (CharacterData *)characterData:(UIViewController *)source {
+    NSLog(@"%@", source.title);
     return [self.characterData characterWithStatGroup:
-            [[self.controllerIdentityStatGroups objectForKey:source.description] integerValue]];
+            [[self.controllerIdentityStatGroups objectForKey:source.title] integerValue]];
 }
 
 // This identifies the controller names in the UI and convert them to CharacterData's language
@@ -51,6 +52,8 @@
                                          @"WaterStatsController",
                                          [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
                                          @"EarthStatsController",
+                                         [NSNumber numberWithInt:CharacterDataStatGroupChiSkills],
+                                         @"ChiStatsController",
                                          [NSNumber numberWithInt:CharacterDataStatGroupAbilities],
                                          @"AbilityStatsController", nil];
     }

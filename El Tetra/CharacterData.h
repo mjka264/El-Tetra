@@ -8,27 +8,28 @@
 
 #import <Foundation/Foundation.h>
 
-// The implementation of dataStatGroupWhenDisplayingAllForIndex depends on this list starting at 0
+// The implementation of dataStatGroupWhenDisplayingAllForIndex depends on this list starting at 1
 typedef enum {
-    CharacterDataStatGroupSoul = 0,
-    CharacterDataStatGroupPrimary = 1,
-    CharacterDataStatGroupFireSkills = 2,
-    CharacterDataStatGroupAirSkills = 3,
-    CharacterDataStatGroupWaterSkills = 4,
-    CharacterDataStatGroupEarthSkills = 5,
-    CharacterDataStatGroupAbilities = 6
+    CharacterDataStatGroupSoul = 1,
+    CharacterDataStatGroupPrimary = 2,
+    CharacterDataStatGroupFireSkills = 3,
+    CharacterDataStatGroupAirSkills = 4,
+    CharacterDataStatGroupWaterSkills = 5,
+    CharacterDataStatGroupEarthSkills = 6,
+    CharacterDataStatGroupAbilities = 7,
+    CharacterDataStatGroupChiSkills = 99
 } t_characterDataStatGroup;
 
 typedef enum {
-    CharacterDataElementFire = 0,
-    CharacterDataElementAir = 1,
-    CharacterDataElementWater = 2,
-    CharacterDataElementEarth = 3,
-    CharacterDataElementChi = 4,
-    CharacterDataElementFireChi = 5,
-    CharacterDataElementAirChi = 6,
-    CharacterDataElementWaterChi = 7,
-    CharacterDataElementEarthChi = 8,
+    CharacterDataElementFire = 1,
+    CharacterDataElementAir = 2,
+    CharacterDataElementWater = 3,
+    CharacterDataElementEarth = 4,
+    CharacterDataElementChi = 5,
+    CharacterDataElementFireChi = 6,
+    CharacterDataElementAirChi = 7,
+    CharacterDataElementWaterChi = 8,
+    CharacterDataElementEarthChi = 9,
 } t_characterDataElement;
 
 // The (id) returned by the first two methods is the parameter to these other methods
