@@ -10,65 +10,52 @@
 
 @interface CharacterData ()
 // These two dictionaries are each dictionaries of non-mutable arrays
-// They are accessed using the t_statCategory keys and correspond to one another
+// They are accessed using the t_characterDataStatGroup keys (in .h) and correspond to one another
 @property (nonatomic, strong, readonly) NSDictionary *statDescriptions; // of arrays
 @property (nonatomic, strong) NSDictionary *statValues;       // of arrays
 
 // This is the same as the above, although it currently only has data under the element key
-@property (nonatomic, strong) NSDictionary *statElements;     // of arrays
+@property (nonatomic, strong, readonly) NSDictionary *statElements;     // of arrays
 
 @end
 
 
-typedef enum {
-    StatCategorySoul = 1,
-    StatCategoryPrimary = 2,
-    StatCategoryFireSkills = 3,
-    StatCategoryAirSkills = 4,
-    StatCategorWaterkills = 5,
-    StatCategoryEarthSkills = 6,
-    StatCategoryAbilities = 7
-} t_statCategory;
-
-
 @implementation CharacterData
-
-[NSNumber num ]
 
 @synthesize statDescriptions = _statDescriptions;
 - (NSDictionary *)statDescriptions {
     if (!_statDescriptions) {
         _statDescriptions =
-        [NSDictionary dictionaryWithObjectsAndKey
+        [NSDictionary dictionaryWithObjectsAndKeys:
          [NSArray arrayWithObjects:@"Body", @"Mind", @"Spirit", nil],
-         [NSNumber numberWithInt:StatCategorySoul],
+         [NSNumber numberWithInt:CharacterDataStatGroupSoul],
          
          [NSArray arrayWithObjects:@"Ferocity", @"Accuracy", @"Agility", @"Resilience", @"Chi", nil],
-         [NSNumber numberWithInt:StatCategoryPrimary],
+         [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
          
          [NSArray arrayWithObjects:
           @"Power, speed, lifting",
           @"Instinct, innovation, insight, synthesis",
           @"Passion, agression, assertion, intimidation", nil],
-         [NSNumber numberWithInt:StatCategoryFireSkills],
+         [NSNumber numberWithInt:CharacterDataStatGroupFireSkills],
          
          [NSArray arrayWithObjects:
           @"Craft, lockpicking",
           @"Logic, science, reasoning, investigation, memory",
           @"Culture, disguise, trickery, cunning", nil],
-         [NSNumber numberWithInt:StatCategoryAirSkills],
+         [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
          
          [NSArray arrayWithObjects:
           @"Balance, stealth, reflexes",
           @"Language, interpretation",
           @"Empathy, charm, misdirection", nil],
-         [NSNumber numberWithInt:StatCategorWaterkills],
+         [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
          
          [NSArray arrayWithObjects:
           @"Fortitude, stamina, labour",
           @"Perception, observation, procedure, tracking",
           @"Confidence, bravery, diligence, patience", nil],
-         [NSNumber numberWithInt:StatCategoryEarthSkills],
+         [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
          
          [NSArray arrayWithObjects:
           @"Rend", @"Spellsword",
@@ -77,15 +64,85 @@ typedef enum {
           @"Defensive pause", @"Strength within",
           @"Daoism", @"Shifting (body)", @"Shifting (mind, spirit)", @"Offworld contact",
           @"Primal fire", @"Primal air", @"Primal water", @"Primal earth", nil],
-         [NSNumber numberWithInt:StatCategoryAbilities],
+         [NSNumber numberWithInt:CharacterDataStatGroupAbilities],
          nil];
     }
     return _statDescriptions;
 }
 
+@synthesize statElements = _statElements;
+- (NSDictionary *)statElements {
+    if (!_statElements) {
+        _statElements =
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         [NSArray arrayWithObjects:
+          [NSNumber numberWithInt: CharacterDataElementFire], [NSNumber numberWithInt: CharacterDataElementFire],
+          [NSNumber numberWithInt: CharacterDataElementAir], [NSNumber numberWithInt: CharacterDataElementAir], [NSNumber numberWithInt: CharacterDataElementAir], [NSNumber numberWithInt: CharacterDataElementAir],
+          [NSNumber numberWithInt: CharacterDataElementWater], [NSNumber numberWithInt: CharacterDataElementWater], [NSNumber numberWithInt: CharacterDataElementWater],
+          [NSNumber numberWithInt: CharacterDataElementEarth], [NSNumber numberWithInt: CharacterDataElementEarth],
+          [NSNumber numberWithInt: CharacterDataElementChi], [NSNumber numberWithInt: CharacterDataElementChi], [NSNumber numberWithInt: CharacterDataElementChi], [NSNumber numberWithInt: CharacterDataElementChi],
+          [NSNumber numberWithInt: CharacterDataElementFireChi], [NSNumber numberWithInt: CharacterDataElementAirChi], [NSNumber numberWithInt: CharacterDataElementWaterChi], [NSNumber numberWithInt: CharacterDataElementEarthChi],
+          nil],
+         [NSNumber numberWithInt:CharacterDataStatGroupAbilities],
+         nil];
+    }
+    return _statElements;
+}
 
-
-
+@synthesize statValues = _statValues;
+- (NSDictionary *)statValues {
+    if (!_statValues) {
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         [NSArray arrayWithObjects:
+          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:3],
+          [NSNumber numberWithInt:4], nil],
+         [NSNumber numberWithInt:CharacterDataStatGroupSoul],
+         
+         [NSArray arrayWithObjects:
+          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:3],
+          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:3],
+          [NSNumber numberWithInt:4], nil],
+         [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
+         
+         [NSArray arrayWithObjects:
+          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:3],
+          [NSNumber numberWithInt:4], nil],
+         [NSNumber numberWithInt:CharacterDataStatGroupFireSkills],
+         
+         [NSArray arrayWithObjects:
+          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:3],
+          [NSNumber numberWithInt:4], nil],
+         [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
+         
+         [NSArray arrayWithObjects:
+          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:3],
+          [NSNumber numberWithInt:4], nil],
+         [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
+         
+         [NSArray arrayWithObjects:
+          [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:3],
+          [NSNumber numberWithInt:4], nil],
+         [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
+         
+         [NSArray arrayWithObjects:
+          [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:3], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
+          [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], [NSNumber numberWithInt:1], nil],
+         [NSNumber numberWithInt:CharacterDataStatGroupAbilities],
+         nil];
+    }
+    return _statValues;
+}
 
 
 

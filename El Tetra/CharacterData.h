@@ -24,17 +24,17 @@ typedef enum {
     CharacterDataElementWater = 3,
     CharacterDataElementEarth = 4,
     CharacterDataElementChi = 5,
-    CharacterDataElementFire = 6,
-    CharacterDataElementAir = 7,
-    CharacterDataElementWater = 8,
-    CharacterDataElementEarth = 9,
+    CharacterDataElementFireChi = 6,
+    CharacterDataElementAirChi = 7,
+    CharacterDataElementWaterChi = 8,
+    CharacterDataElementEarthChi = 9,
 } t_characterDataElement;
 
 //typedef NSString* t_characterData;
 
 @interface CharacterData : NSObject
 - (id)dataWithAllStats;
-- (id)dataWithStatGroup:(t_characterData)group;
+- (id)dataWithStatGroup:(t_characterDataStatGroup)group;
 + (NSString *)headingFrom:(id)characterData;
 + (NSInteger)numberOfSectionsFrom:(id)characterData;
 + (NSString *)numberOfEntriesFrom:(id)characterData atSection:(NSInteger)section;
