@@ -106,18 +106,6 @@
 {
     [super viewDidLoad];
     
-    /* This code will allow for a normal heading in some cases.
-    UIView *header;
-    if ([self elementForCircle:self.view]) {
-        header = [[StatTableViewHeader alloc] init];
-        ((StatTableViewHeader *)header).dataSource = self;
-        [header sizeToFit];
-    } else {
-        header = [[UILabel alloc] init];
-        ((UILabel *)header).text = @"Moo";
-        [header sizeToFit];
-    }*/
-    
     StatTableViewHeader *header = [[StatTableViewHeader alloc] init];
     header.dataSource = self;
     [header sizeToFit];
@@ -125,7 +113,6 @@
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = header;
 
-    
     // The next line of code didn't work because it always instantiated my class with default style
     // So I couldn't save the left detail style. I would have had to reimplement the subviews.
     //[self.tableView registerClass:[StatTableViewCell class] forCellReuseIdentifier:@"Stat Cell"];
@@ -164,18 +151,6 @@
     cell.textLabel.text = [CharacterData statDescriptionFrom:[self.dataSource characterData:self] atIndex:indexPath.row];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [CharacterData statValueFrom:[self.dataSource characterData:self] atIndex:indexPath.row]];
     
-    /*
-    StatTableViewControllerData *data = [[[self.dataSource dataForDisplay:self]
-                                          objectAtIndex:indexPath.section]
-                                         objectAtIndex:indexPath.row];
-
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Stat Cell" forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[StatTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"Stat Cell"];
-    }
-    
-    cell.textLabel.text = data.characterisic;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", data.value];*/
     return cell;
 }
 

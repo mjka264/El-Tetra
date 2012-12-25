@@ -35,9 +35,9 @@
          @"Soul", [NSNumber numberWithInt:CharacterDataStatGroupSoul],
          @"Primary Stats", [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
          @"Ferocity", [NSNumber numberWithInt:CharacterDataStatGroupFireSkills],
-         @"Air", [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
-         @"Water", [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
-         @"Earth", [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
+         @"Precision", [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
+         @"Agility", [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
+         @"Resilience", [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
          @"Chi", [NSNumber numberWithInt:CharacterDataStatGroupChiSkills],
          @"Abilities", [NSNumber numberWithInt:CharacterDataStatGroupAbilities], nil];
     }
