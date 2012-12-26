@@ -10,6 +10,8 @@
 		C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */; };
 		C264857A16887C7C00F3B648 /* StatTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = C264857916887C7C00F3B648 /* StatTableViewHeader.m */; };
 		C26485811688865D00F3B648 /* ElTetraDummyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C26485801688865D00F3B648 /* ElTetraDummyDelegate.m */; };
+		C27AB562168B232000CA0D39 /* CharacterLoadoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C27AB561168B232000CA0D39 /* CharacterLoadoutViewController.m */; };
+		C27AB56B168B2A2F00CA0D39 /* CharacterLoadoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C27AB56A168B2A2F00CA0D39 /* CharacterLoadoutView.m */; };
 		C2975274168551CB00092860 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975273168551CB00092860 /* UIKit.framework */; };
 		C2975276168551CB00092860 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975275168551CB00092860 /* Foundation.framework */; };
 		C2975278168551CB00092860 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975277168551CB00092860 /* CoreGraphics.framework */; };
@@ -49,6 +51,10 @@
 		C264857D168881D500F3B648 /* ElTetraProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ElTetraProtocols.h; path = ../ElTetraProtocols.h; sourceTree = "<group>"; };
 		C264857F1688865D00F3B648 /* ElTetraDummyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElTetraDummyDelegate.h; sourceTree = "<group>"; };
 		C26485801688865D00F3B648 /* ElTetraDummyDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElTetraDummyDelegate.m; sourceTree = "<group>"; };
+		C27AB560168B232000CA0D39 /* CharacterLoadoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterLoadoutViewController.h; sourceTree = "<group>"; };
+		C27AB561168B232000CA0D39 /* CharacterLoadoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterLoadoutViewController.m; sourceTree = "<group>"; };
+		C27AB569168B2A2F00CA0D39 /* CharacterLoadoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterLoadoutView.h; sourceTree = "<group>"; };
+		C27AB56A168B2A2F00CA0D39 /* CharacterLoadoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterLoadoutView.m; sourceTree = "<group>"; };
 		C297526F168551CB00092860 /* El Tetra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "El Tetra.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2975273168551CB00092860 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2975275168551CB00092860 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -102,6 +108,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C27AB564168B232D00CA0D39 /* StatTableView */ = {
+			isa = PBXGroup;
+			children = (
+				C264857816887C7C00F3B648 /* StatTableViewHeader.h */,
+				C264857916887C7C00F3B648 /* StatTableViewHeader.m */,
+				C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */,
+				C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */,
+				C29752C61685734A00092860 /* StatTableViewController.h */,
+				C29752C71685734A00092860 /* StatTableViewController.m */,
+			);
+			name = StatTableView;
+			sourceTree = "<group>";
+		};
 		C2975264168551CB00092860 = {
 			isa = PBXGroup;
 			children = (
@@ -140,9 +159,12 @@
 				C297528B168551CB00092860 /* MainStoryboard_iPhone.storyboard */,
 				C29752B11685629400092860 /* CharacterSheetViewController.h */,
 				C29752B21685629400092860 /* CharacterSheetViewController.m */,
-				C29752C61685734A00092860 /* StatTableViewController.h */,
-				C29752C71685734A00092860 /* StatTableViewController.m */,
+				C27AB569168B2A2F00CA0D39 /* CharacterLoadoutView.h */,
+				C27AB56A168B2A2F00CA0D39 /* CharacterLoadoutView.m */,
+				C27AB560168B232000CA0D39 /* CharacterLoadoutViewController.h */,
+				C27AB561168B232000CA0D39 /* CharacterLoadoutViewController.m */,
 				C264857D168881D500F3B648 /* ElTetraProtocols.h */,
+				C27AB564168B232D00CA0D39 /* StatTableView */,
 				C297527A168551CB00092860 /* Supporting Files */,
 			);
 			path = "El Tetra";
@@ -151,12 +173,8 @@
 		C297527A168551CB00092860 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C264857816887C7C00F3B648 /* StatTableViewHeader.h */,
-				C264857916887C7C00F3B648 /* StatTableViewHeader.m */,
 				C264857F1688865D00F3B648 /* ElTetraDummyDelegate.h */,
 				C26485801688865D00F3B648 /* ElTetraDummyDelegate.m */,
-				C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */,
-				C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */,
 				C2975282168551CB00092860 /* ElTertaAppDelegate.h */,
 				C2975283168551CB00092860 /* ElTertaAppDelegate.m */,
 				C297528E168551CB00092860 /* MainStoryboard_iPad.storyboard */,
@@ -310,6 +328,8 @@
 				C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */,
 				C264857A16887C7C00F3B648 /* StatTableViewHeader.m in Sources */,
 				C26485811688865D00F3B648 /* ElTetraDummyDelegate.m in Sources */,
+				C27AB562168B232000CA0D39 /* CharacterLoadoutViewController.m in Sources */,
+				C27AB56B168B2A2F00CA0D39 /* CharacterLoadoutView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
