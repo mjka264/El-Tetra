@@ -131,7 +131,9 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.hideTableData) return 0;
-    else return [CharacterData numberOfEntriesFrom:[self.dataSource characterData:self]];
+    else return [CharacterData numberOfStatGroupsFrom:[self.dataSource characterData:self]];
+        
+        //[CharacterData numberOfEntriesFrom:[self.dataSource characterData:self]];
         
         //[[self.dataSource dataForDisplay:self] count];
 }

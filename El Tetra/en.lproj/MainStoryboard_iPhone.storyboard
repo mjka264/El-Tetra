@@ -828,6 +828,11 @@
     <classes>
         <class className="CharacterSheetSkillsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterSheetSkillsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="soulStatBody" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="soulStatMind" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="soulStatSpirit" candidateClass="UILabel"/>
+            </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>

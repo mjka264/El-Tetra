@@ -12,6 +12,9 @@
 
 @interface CharacterSheetSkillsViewController : UIViewController <StatTableViewControllerDataSource>
 //- (NSOrderedSet *)dataForDisplay:(StatTableViewController *)source;
+@property (nonatomic, weak) IBOutlet UILabel *soulStatBody;
+@property (nonatomic, weak) IBOutlet UILabel *soulStatMind;
+@property (nonatomic, weak) IBOutlet UILabel *soulStatSpirit;
 @end
 
 

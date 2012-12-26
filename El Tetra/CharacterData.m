@@ -195,7 +195,7 @@
     return [CharacterData numberOfEntriesFrom:character inStatGroup:character.savedLookupKey];
 }
 
-+ (NSInteger)numberOfEntriesFrom:(CharacterData *)character inStatGroup:(t_characterDataElement)group {
++ (NSInteger)numberOfEntriesFrom:(CharacterData *)character inStatGroup:(t_characterDataStatGroup)group {
     return [[character.statValues objectForKey:[NSNumber numberWithInt:group]] count];
 }
 
@@ -203,7 +203,7 @@
     return [CharacterData sectionHeadingFrom:character inStatGroup:character.savedLookupKey];
 }
 
-+ (NSString *)sectionHeadingFrom:(CharacterData *)character inStatGroup:(t_characterDataElement)group {
++ (NSString *)sectionHeadingFrom:(CharacterData *)character inStatGroup:(t_characterDataStatGroup)group {
     return [character.statGroupHeadings objectForKey:[NSNumber numberWithInt:group]];
 }
 
@@ -211,7 +211,7 @@
     return [CharacterData statDescriptionFrom:character atIndex:index inStatGroup:character.savedLookupKey];
 }
 
-+ (NSString *)statDescriptionFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group {
++ (NSString *)statDescriptionFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataStatGroup)group {
     return [[character.statDescriptions objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index];
 }
             
@@ -219,7 +219,7 @@
     return [CharacterData statValueFrom:character atIndex:index inStatGroup:character.savedLookupKey];
 }
 
-+ (NSNumber *)statValueFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group {
++ (NSNumber *)statValueFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataStatGroup)group {
     return [[character.statValues objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index];
 }
 
@@ -227,20 +227,35 @@
     return [CharacterData statElementFrom:character atIndex:index inStatGroup:character.savedLookupKey];
 }
 
-+ (t_characterDataElement)statElementFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group {
++ (t_characterDataElement)statElementFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataStatGroup)group {
     return [[[character.statElements objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index] integerValue];
 }
 
 + (NSNumber *)primaryStatForSkillGroupFrom:(CharacterData *)character {
+    return [CharacterData primaryStatForSkillGroupFrom:character inStatGroup:character.savedLookupKey];
+}
+
++ (NSNumber *)primaryStatForSkillGroupFrom:(CharacterData *)character inStatGroup:(t_characterDataStatGroup)group {
     NSInteger index;
-    if (character.savedLookupKey == CharacterDataStatGroupFireSkills) index = 0;
-    else if (character.savedLookupKey == CharacterDataStatGroupAirSkills) index = 1;
-    else if (character.savedLookupKey == CharacterDataStatGroupWaterSkills) index = 2;
-    else if (character.savedLookupKey == CharacterDataStatGroupEarthSkills) index = 3;
-    else if (character.savedLookupKey == CharacterDataStatGroupChiSkills) index = 4;
+    if (group == CharacterDataStatGroupFireSkills) index = 0;
+    else if (group == CharacterDataStatGroupAirSkills) index = 1;
+    else if (group == CharacterDataStatGroupWaterSkills) index = 2;
+    else if (group == CharacterDataStatGroupEarthSkills) index = 3;
+    else if (group == CharacterDataStatGroupChiSkills) index = 4;
     
     return [[character.statValues objectForKey:[NSNumber numberWithInt:CharacterDataStatGroupPrimary]] objectAtIndex:index];
 }
+
++ (NSNumber *)soulStatFrom:(CharacterData *)character forStat:(t_characterDataSoulStat)stat {
+    NSInteger index;
+    if (stat == CharacterDataSoulStatBody) index = 0;
+    else if (stat == CharacterDataSoulStatMind) index = 1;
+    else if (stat == CharacterDataSoulStatSpirit) index = 2;
+    
+    return [[character.statValues objectForKey:[NSNumber numberWithInt:CharacterDataStatGroupSoul]] objectAtIndex:index];
+
+}
+
 
 + (t_characterDataElement)statElementforHeadingFrom:(CharacterData *)characterData {
     switch (characterData.savedLookupKey) {

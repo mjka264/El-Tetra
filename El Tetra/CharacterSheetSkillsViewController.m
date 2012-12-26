@@ -18,6 +18,27 @@
 
 @implementation CharacterSheetSkillsViewController
 
+@synthesize soulStatBody = _soulStatBody;
+- (void)setSoulStatBody:(UILabel *)soulStatBody {
+    if (_soulStatBody != soulStatBody) {
+        _soulStatBody = soulStatBody;
+        _soulStatBody.text = [NSString stringWithFormat:@"%@", [CharacterData soulStatFrom:self.characterData forStat:CharacterDataSoulStatBody]];
+    }
+}
+@synthesize soulStatMind = _soulStatMind;
+- (void)setSoulStatMind:(UILabel *)soulStatMind {
+    if (_soulStatMind != soulStatMind) {
+        _soulStatMind = soulStatMind;
+        _soulStatMind.text = [NSString stringWithFormat:@"%@", [CharacterData soulStatFrom:self.characterData forStat:CharacterDataSoulStatMind]];
+    }
+}
+@synthesize soulStatSpirit = _soulStatSpirit;
+- (void)setSoulStatSpirit:(UILabel *)soulStatSpirit {
+    if (_soulStatSpirit != soulStatSpirit) {
+        _soulStatSpirit = soulStatSpirit;
+        _soulStatSpirit.text = [NSString stringWithFormat:@"%@", [CharacterData soulStatFrom:self.characterData forStat:CharacterDataSoulStatSpirit]];
+    }
+}
 
 - (CharacterData *)characterData:(UIViewController *)source {
     return [self.characterData characterWithStatGroup:

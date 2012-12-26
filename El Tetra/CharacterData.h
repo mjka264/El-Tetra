@@ -32,25 +32,32 @@ typedef enum {
     CharacterDataElementEarthChi = 9,
 } t_characterDataElement;
 
+typedef enum {
+    CharacterDataSoulStatBody = 1,
+    CharacterDataSoulStatMind = 2,
+    CharacterDataSoulStatSpirit = 3
+} t_characterDataSoulStat;
+
 // The (id) returned by the first two methods is the parameter to these other methods
 @interface CharacterData : NSObject <NSCopying>
 - (id)characterWithAllStats;
 - (id)characterWithStatGroup:(t_characterDataStatGroup)group;
 + (NSInteger)numberOfStatGroupsFrom:(id)characterData;
 + (NSInteger)numberOfEntriesFrom:(id)characterData;
-+ (NSInteger)numberOfEntriesFrom:(id)characterData inStatGroup:(t_characterDataElement)group;
++ (NSInteger)numberOfEntriesFrom:(id)characterData inStatGroup:(t_characterDataStatGroup)group;
 + (NSString *)sectionHeadingFrom:(id)characterData;
-+ (NSString *)sectionHeadingFrom:(id)characterData inStatGroup:(t_characterDataElement)group;
++ (NSString *)sectionHeadingFrom:(id)characterData inStatGroup:(t_characterDataStatGroup)group;
 + (NSString *)statDescriptionFrom:(id)characterData atIndex:(NSInteger)index;
-+ (NSString *)statDescriptionFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group;
++ (NSString *)statDescriptionFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_characterDataStatGroup)group;
 + (NSNumber *)statValueFrom:(id)characterData atIndex:(NSInteger)index;
-+ (NSNumber *)statValueFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group;
++ (NSNumber *)statValueFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_characterDataStatGroup)group;
 + (t_characterDataElement)statElementFrom:(id)characterData atIndex:(NSInteger)index;
-+ (t_characterDataElement)statElementFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_characterDataElement)group;
++ (t_characterDataElement)statElementFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_characterDataStatGroup)group;
 + (t_characterDataElement)statElementforHeadingFrom:(id)characterData;
 + (NSInteger)dataStatGroupForSectionNumber:(NSInteger)index;
 + (NSNumber *)primaryStatForSkillGroupFrom:(id)characterData;
-
++ (NSNumber *)primaryStatForSkillGroupFrom:(id)characterData inStatGroup:(t_characterDataStatGroup)group;
++ (NSNumber *)soulStatFrom:(id)characterData forStat:(t_characterDataSoulStat)stat;
 @end
 
 
