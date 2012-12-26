@@ -39,10 +39,10 @@
             </objects>
             <point key="canvasLocation" x="-100" y="-1138"/>
         </scene>
-        <!--Character Sheet Skills View Controller - Item-->
+        <!--Character Sheet View Controller - Item-->
         <scene sceneID="mrh-ri-3fJ">
             <objects>
-                <viewController id="eE2-aZ-BW6" customClass="CharacterSheetSkillsViewController" sceneMemberID="viewController">
+                <viewController id="eE2-aZ-BW6" customClass="CharacterSheetViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HHD-4v-mSz">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -398,10 +398,10 @@
             </objects>
             <point key="canvasLocation" x="1129" y="-620"/>
         </scene>
-        <!--Character Sheet Skills View Controller - Item-->
+        <!--Character Sheet View Controller - Item-->
         <scene sceneID="qd6-Xc-Z8J">
             <objects>
-                <viewController id="ygy-o0-oUb" customClass="CharacterSheetSkillsViewController" sceneMemberID="viewController">
+                <viewController id="ygy-o0-oUb" customClass="CharacterSheetViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ac3-eP-dl1">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -826,14 +826,6 @@
         </scene>
     </scenes>
     <classes>
-        <class className="CharacterSheetSkillsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterSheetSkillsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="soulStatBody" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="soulStatMind" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="soulStatSpirit" candidateClass="UILabel"/>
-            </relationships>
-        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>

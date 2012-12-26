@@ -6,17 +6,17 @@
 //  Copyright (c) 2012 Matthew Kameron. All rights reserved.
 //
 
-#import "CharacterSheetSkillsViewController.h"
+#import "CharacterSheetViewController.h"
 #import "CharacterData.h"
 
 
-@interface CharacterSheetSkillsViewController ()
+@interface CharacterSheetViewController ()
 @property (nonatomic, strong) CharacterData *characterData;
 @property (nonatomic, strong) NSDictionary *controllerIdentityStatGroups;
 @end
 
 
-@implementation CharacterSheetSkillsViewController
+@implementation CharacterSheetViewController
 
 @synthesize soulStatBody = _soulStatBody;
 - (void)setSoulStatBody:(UILabel *)soulStatBody {

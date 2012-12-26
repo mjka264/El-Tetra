@@ -10,7 +10,7 @@
 #import "StatTableViewController.h"
 #import "CharacterData.h"
 
-@interface CharacterSheetSkillsViewController : UIViewController <StatTableViewControllerDataSource>
+@interface CharacterSheetViewController : UIViewController <StatTableViewControllerDataSource>
 //- (NSOrderedSet *)dataForDisplay:(StatTableViewController *)source;
 @property (nonatomic, weak) IBOutlet UILabel *soulStatBody;
 @property (nonatomic, weak) IBOutlet UILabel *soulStatMind;
