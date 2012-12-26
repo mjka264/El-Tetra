@@ -837,7 +837,7 @@
         <!--Page View Controller-->
         <scene sceneID="pe4-Kk-QQY">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="gVb-nc-PdK" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="gVb-nc-PdK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B0S-Sc-twP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1012" y="305"/>
@@ -873,39 +873,6 @@
             <point key="canvasLocation" x="1384" y="285"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CharacterLoadoutView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterLoadoutView.h"/>
-        </class>
-        <class className="CharacterLoadoutViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterLoadoutViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="loadoutName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="CharacterSheetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterSheetViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="pageViewContent" candidateClass="NSArray"/>
-                <relationship kind="outlet" name="pageViewController" candidateClass="UIPageViewController"/>
-                <relationship kind="outlet" name="soulStatBody" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="soulStatMind" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="soulStatSpirit" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="StatTableViewCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatTableViewCell.h"/>
-        </class>
-        <class className="StatTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

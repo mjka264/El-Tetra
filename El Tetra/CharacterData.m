@@ -236,7 +236,7 @@
 }
 
 + (NSNumber *)primaryStatForSkillGroupFrom:(CharacterData *)character inStatGroup:(t_characterDataStatGroup)group {
-    NSInteger index;
+    NSInteger index = 0;
     if (group == CharacterDataStatGroupFireSkills) index = 0;
     else if (group == CharacterDataStatGroupAirSkills) index = 1;
     else if (group == CharacterDataStatGroupWaterSkills) index = 2;
@@ -247,7 +247,7 @@
 }
 
 + (NSNumber *)soulStatFrom:(CharacterData *)character forStat:(t_characterDataSoulStat)stat {
-    NSInteger index;
+    NSInteger index = 0;
     if (stat == CharacterDataSoulStatBody) index = 0;
     else if (stat == CharacterDataSoulStatMind) index = 1;
     else if (stat == CharacterDataSoulStatSpirit) index = 2;
