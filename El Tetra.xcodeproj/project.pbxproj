@@ -142,10 +142,6 @@
 				C29752B21685629400092860 /* CharacterSheetViewController.m */,
 				C29752C61685734A00092860 /* StatTableViewController.h */,
 				C29752C71685734A00092860 /* StatTableViewController.m */,
-				C264857816887C7C00F3B648 /* StatTableViewHeader.h */,
-				C264857916887C7C00F3B648 /* StatTableViewHeader.m */,
-				C264857F1688865D00F3B648 /* ElTetraDummyDelegate.h */,
-				C26485801688865D00F3B648 /* ElTetraDummyDelegate.m */,
 				C264857D168881D500F3B648 /* ElTetraProtocols.h */,
 				C297527A168551CB00092860 /* Supporting Files */,
 			);
@@ -155,6 +151,10 @@
 		C297527A168551CB00092860 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C264857816887C7C00F3B648 /* StatTableViewHeader.h */,
+				C264857916887C7C00F3B648 /* StatTableViewHeader.m */,
+				C264857F1688865D00F3B648 /* ElTetraDummyDelegate.h */,
+				C26485801688865D00F3B648 /* ElTetraDummyDelegate.m */,
 				C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */,
 				C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */,
 				C2975282168551CB00092860 /* ElTertaAppDelegate.h */,
