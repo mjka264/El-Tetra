@@ -7,6 +7,7 @@
 //
 
 #import "CharacterLoadoutViewController.h"
+#import "CharacterLoadout.h"
 
 @interface CharacterLoadoutViewController ()
 
@@ -15,7 +16,7 @@
 @implementation CharacterLoadoutViewController
 @synthesize loadoutName = _loadoutName;
 @synthesize dataObject = _dataObject;
-- (void)setDataObject:(NSString *)dataObject {
+- (void)setDataObject:(CharacterLoadout *)dataObject {
     _dataObject = dataObject;
     self.loadoutName.text = _dataObject;
 }
@@ -33,7 +34,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.loadoutName.text = self.dataObject;
+    self.loadoutName.text = [self.dataObject weaponDescriptorMainhand];
 }
 
 - (void)didReceiveMemoryWarning

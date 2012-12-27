@@ -15,90 +15,14 @@
 @property (nonatomic, strong) CharacterStats *characterStats;
 @property (nonatomic, strong) NSDictionary *controllerIdentityStatGroups;
 
-@property (nonatomic, strong) CharacterLoadout *characterLoadouts;
+// Controller bits needed for the loadout stuff
+@property (nonatomic, strong) NSMutableArray *characterLoadouts; // of CharacterLoadout
+//@property (nonatomic, weak) UIStoryboard *storyBoard;            // used to make the controllers
 
 @end
 
 
 @implementation CharacterSheetViewController
-
-@synthesize characterLoadouts = _characterLoadouts;
-
-/*
-// init done - first setup for WWW page modified
-@synthesize pageViewContent = _pageViewContent;
-- (NSArray *) pageViewContent {
-    if (!_pageViewContent) _pageViewContent = [NSArray arrayWithObjects:@"AAA", @"BBB", @"CCC", @"DDD", nil];
-    return _pageViewContent;
-}
-@synthesize pageViewController = _pageViewController;
-*/
-
-// Convenience methods
-- (CharacterLoadoutViewController *)viewControllerAtIndex:(NSUInteger)index
-{
-    // Return the data view controller for the given index.
-    if (([self.pageViewContent count] == 0) ||
-        (index >= [self.pageViewContent count])) {
-        return nil;
-    }
-    
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone"
-                                                         bundle:nil];
-    
-    
-    // Create a new view controller and pass suitable data.
-    CharacterLoadoutViewController *loadoutController = [storyBoard instantiateViewControllerWithIdentifier:@"CharacterLoadoutViewControllerTemplate"];
-    
-    loadoutController.dataObject =
-    [self.pageViewContent objectAtIndex:index];
-    return loadoutController;
-}
-
-- (NSUInteger)indexOfViewController:(CharacterLoadoutViewController *)viewController
-{
-    return [self.pageViewContent indexOfObject:viewController.dataObject];
-}
-
-// Now the protocol:
-
-- (UIViewController *)pageViewController:
-(UIPageViewController *)pageViewController viewControllerBeforeViewController:
-(UIViewController *)viewController
-{
-    NSUInteger index = [self indexOfViewController:
-                        (CharacterLoadoutViewController *)viewController];
-    if ((index == 0) || (index == NSNotFound)) {
-        return nil;
-    }
-    
-    index--;
-    return [self viewControllerAtIndex:index];
-}
-
-- (UIViewController *)pageViewController:
-(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
-{
-    NSUInteger index = [self indexOfViewController:
-                        (CharacterLoadoutViewController *)viewController];
-    if (index == NSNotFound) {
-        return nil;
-    }
-    
-    index++;
-    if (index == [self.pageViewContent count]) {
-        return nil;
-    }
-    return [self viewControllerAtIndex:index];
-}
-
-
-
-
-
-
-
-
 
 @synthesize soulStatBody = _soulStatBody;
 - (void)setSoulStatBody:(UILabel *)soulStatBody {
@@ -153,12 +77,107 @@
 }
 
 
-@synthesize characterStats = _characterData;
-- (CharacterStats *)characterData
+@synthesize characterStats = _characterStats;
+- (CharacterStats *)characterStats
 {
-    if (!_characterData) _characterData = [[CharacterStats alloc] init];
-    return _characterData;
+    if (!_characterStats) _characterStats = [[CharacterStats alloc] init];
+    return _characterStats;
 }
+
+
+#pragma mark -
+#pragma mark CharacterLoadout (PageViewController protocol)
+
+@synthesize characterLoadouts = _characterLoadouts;
+- (NSMutableArray *)characterLoadouts {
+    if (!_characterLoadouts) {
+        _characterLoadouts = [NSMutableArray arrayWithObjects:
+                              [CharacterLoadout loadoutWithWeapons:CharacterLoadoutWeaponsAxe
+                                                            armour:CharacterLoadoutArmourHeavy
+                                                              gear:nil],
+                              [CharacterLoadout loadoutWithWeapons:CharacterLoadoutWeaponsSword
+                                                            armour:CharacterLoadoutArmourMilitary
+                                                              gear:nil],
+                              [CharacterLoadout loadoutWithWeapons:CharacterLoadoutWeaponsAxe
+                                                            armour:CharacterLoadoutArmourStandard
+                                                              gear:nil],
+                              nil];
+    }
+    return _characterLoadouts;
+}
+
+/*
+ // init done - first setup for WWW page modified
+ @synthesize pageViewContent = _pageViewContent;
+ - (NSArray *) pageViewContent {
+ if (!_pageViewContent) _pageViewContent = [NSArray arrayWithObjects:@"AAA", @"BBB", @"CCC", @"DDD", nil];
+ return _pageViewContent;
+ }
+ @synthesize pageViewController = _pageViewController;
+ */
+
+//@synthesize storyBoard = _storyboard;
+
+
+- (CharacterLoadoutViewController *)loadoutControllerAtIndex:(NSInteger)index {
+    if ([self.characterLoadouts count] == 0 ||
+        index >= [self.characterLoadouts count] ||
+        index < 0) {
+        return nil;
+    }
+    
+    CharacterLoadoutViewController *loadoutController = [self.storyboard instantiateViewControllerWithIdentifier:@"CharacterLoadoutViewControllerTemplate"];
+    loadoutController.dataObject = [self.characterLoadouts objectAtIndex:index];
+    
+    return loadoutController;
+}
+
+/*
+ - (CharacterLoadoutViewController *)viewControllerAtIndex:(NSUInteger)index
+ {
+ // Return the data view controller for the given index.
+ if (([self.pageViewContent count] == 0) ||
+ (index >= [self.pageViewContent count])) {
+ return nil;
+ }
+ 
+ UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone"
+ bundle:nil];
+ 
+ 
+ // Create a new view controller and pass suitable data.
+ CharacterLoadoutViewController *loadoutController = [storyBoard instantiateViewControllerWithIdentifier:@"CharacterLoadoutViewControllerTemplate"];
+ 
+ loadoutController.dataObject =
+ [self.pageViewContent objectAtIndex:index];
+ return loadoutController;
+ }
+ */
+
+- (NSUInteger)indexOfLoadoutController:(CharacterLoadoutViewController *)loadoutController
+{
+    return [self.characterLoadouts indexOfObject:loadoutController.dataObject];
+}
+
+// Now the protocol:
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(CharacterLoadoutViewController *)loadoutController
+{
+    NSInteger index = [self indexOfLoadoutController: loadoutController] - 1;
+    if (index != NSNotFound) return [self loadoutControllerAtIndex:index];
+    else return nil;
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(CharacterLoadoutViewController *)loadoutController
+{
+    NSInteger index = [self indexOfLoadoutController: loadoutController] + 1;
+    if (index != NSNotFound) return [self loadoutControllerAtIndex:index];
+    else return nil;
+}
+
+#pragma mark -
+#pragma mark prepareForSegue - Passes data onto the included controllers
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -170,9 +189,8 @@
         destination.dataSource = self;
         
         CharacterLoadoutViewController *initialLoadoutController =
-        [self viewControllerAtIndex:0];
-        NSArray *viewControllers =
-        [NSArray arrayWithObject:initialLoadoutController];
+        [self loadoutControllerAtIndex:0];
+        NSArray *viewControllers = [NSArray arrayWithObject:initialLoadoutController];
         
         [destination setViewControllers:viewControllers
                                  direction:UIPageViewControllerNavigationDirectionForward
