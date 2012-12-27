@@ -13,6 +13,7 @@
 		C27AB562168B232000CA0D39 /* CharacterLoadoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C27AB561168B232000CA0D39 /* CharacterLoadoutViewController.m */; };
 		C27AB56B168B2A2F00CA0D39 /* CharacterLoadoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C27AB56A168B2A2F00CA0D39 /* CharacterLoadoutView.m */; };
 		C27B1FE5168BE10600258807 /* CharacterLoadout.m in Sources */ = {isa = PBXBuildFile; fileRef = C27B1FE4168BE10600258807 /* CharacterLoadout.m */; };
+		C27B1FE9168C74E800258807 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = C27B1FE8168C74E800258807 /* Item.m */; };
 		C2975274168551CB00092860 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975273168551CB00092860 /* UIKit.framework */; };
 		C2975276168551CB00092860 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975275168551CB00092860 /* Foundation.framework */; };
 		C2975278168551CB00092860 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975277168551CB00092860 /* CoreGraphics.framework */; };
@@ -58,6 +59,8 @@
 		C27AB56A168B2A2F00CA0D39 /* CharacterLoadoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterLoadoutView.m; sourceTree = "<group>"; };
 		C27B1FE3168BE10600258807 /* CharacterLoadout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterLoadout.h; sourceTree = "<group>"; };
 		C27B1FE4168BE10600258807 /* CharacterLoadout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterLoadout.m; sourceTree = "<group>"; };
+		C27B1FE7168C74E800258807 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		C27B1FE8168C74E800258807 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		C297526F168551CB00092860 /* El Tetra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "El Tetra.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2975273168551CB00092860 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2975275168551CB00092860 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -159,6 +162,8 @@
 			children = (
 				C29752C316856F3700092860 /* CharacterStats.h */,
 				C29752C416856F3700092860 /* CharacterStats.m */,
+				C27B1FE7168C74E800258807 /* Item.h */,
+				C27B1FE8168C74E800258807 /* Item.m */,
 				C27B1FE3168BE10600258807 /* CharacterLoadout.h */,
 				C27B1FE4168BE10600258807 /* CharacterLoadout.m */,
 				C297528B168551CB00092860 /* MainStoryboard_iPhone.storyboard */,
@@ -336,6 +341,7 @@
 				C27AB562168B232000CA0D39 /* CharacterLoadoutViewController.m in Sources */,
 				C27AB56B168B2A2F00CA0D39 /* CharacterLoadoutView.m in Sources */,
 				C27B1FE5168BE10600258807 /* CharacterLoadout.m in Sources */,
+				C27B1FE9168C74E800258807 /* Item.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

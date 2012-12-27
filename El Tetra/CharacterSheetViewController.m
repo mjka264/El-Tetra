@@ -91,17 +91,7 @@
 @synthesize characterLoadouts = _characterLoadouts;
 - (NSMutableArray *)characterLoadouts {
     if (!_characterLoadouts) {
-        _characterLoadouts = [NSMutableArray arrayWithObjects:
-                              [CharacterLoadout loadoutWithWeapons:CharacterLoadoutWeaponsAxe
-                                                            armour:CharacterLoadoutArmourHeavy
-                                                              gear:nil],
-                              [CharacterLoadout loadoutWithWeapons:CharacterLoadoutWeaponsSword
-                                                            armour:CharacterLoadoutArmourMilitary
-                                                              gear:nil],
-                              [CharacterLoadout loadoutWithWeapons:CharacterLoadoutWeaponsAxe
-                                                            armour:CharacterLoadoutArmourStandard
-                                                              gear:nil],
-                              nil];
+        _characterLoadouts = [NSMutableArray arrayWithObject: [CharacterLoadout defaultLoadout]];
     }
     return _characterLoadouts;
 }

@@ -855,17 +855,25 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WyW-iB-b87">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ND6-gI-tgu" firstAttribute="top" secondItem="ucj-YC-0HI" secondAttribute="top" constant="70" id="7qZ-hD-PFc"/>
+                            <constraint firstItem="WyW-iB-b87" firstAttribute="top" secondItem="ucj-YC-0HI" secondAttribute="top" constant="80" id="d8B-Ml-aFh"/>
+                            <constraint firstAttribute="trailing" secondItem="WyW-iB-b87" secondAttribute="trailing" constant="111" id="lcM-mh-yiJ"/>
                             <constraint firstItem="ND6-gI-tgu" firstAttribute="leading" secondItem="ucj-YC-0HI" secondAttribute="leading" constant="74" id="mAh-i2-OA5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gag-TO-oLg"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="loadoutName" destination="ND6-gI-tgu" id="zM7-KO-Sgk"/>
+                        <outlet property="mainhandView" destination="ND6-gI-tgu" id="4ya-lz-5mi"/>
+                        <outlet property="offhandView" destination="WyW-iB-b87" id="41S-PQ-SqH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPM-bN-GPH" userLabel="First Responder" sceneMemberID="firstResponder"/>

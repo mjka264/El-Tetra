@@ -10,17 +10,21 @@
 #import "CharacterLoadout.h"
 
 @interface CharacterLoadoutViewController ()
-
+- (void)refreshDataObject;
 @end
 
 @implementation CharacterLoadoutViewController
-@synthesize loadoutName = _loadoutName;
+//@synthesize loadoutName = _loadoutName;
 @synthesize dataObject = _dataObject;
 - (void)setDataObject:(CharacterLoadout *)dataObject {
     _dataObject = dataObject;
-    self.loadoutName.text = _dataObject;
+    [self refreshDataObject];
 }
 
+- (void)refreshDataObject {
+    self.mainhandView.text = self.dataObject.mainhand.name;
+    self.offhandView.text = self.dataObject.offhand.name;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.loadoutName.text = [self.dataObject weaponDescriptorMainhand];
+    [self refreshDataObject];
 }
 
 - (void)didReceiveMemoryWarning

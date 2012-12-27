@@ -177,7 +177,7 @@
 }
 
 // Makes a copy of the class with the key saved for future lookups
-- (CharacterStats *)characterWithStatGroup:(t_characterStatGroup)group {
+- (CharacterStats *)characterWithStatGroup:(t_CharacterStatGroup)group {
     CharacterStats *data = [self copy];
     data.savedLookupKey = group;
     return data;
@@ -195,7 +195,7 @@
     return [CharacterStats numberOfEntriesFrom:character inStatGroup:character.savedLookupKey];
 }
 
-+ (NSInteger)numberOfEntriesFrom:(CharacterStats *)character inStatGroup:(t_characterStatGroup)group {
++ (NSInteger)numberOfEntriesFrom:(CharacterStats *)character inStatGroup:(t_CharacterStatGroup)group {
     return [[character.statValues objectForKey:[NSNumber numberWithInt:group]] count];
 }
 
@@ -203,7 +203,7 @@
     return [CharacterStats sectionHeadingFrom:character inStatGroup:character.savedLookupKey];
 }
 
-+ (NSString *)sectionHeadingFrom:(CharacterStats *)character inStatGroup:(t_characterStatGroup)group {
++ (NSString *)sectionHeadingFrom:(CharacterStats *)character inStatGroup:(t_CharacterStatGroup)group {
     return [character.statGroupHeadings objectForKey:[NSNumber numberWithInt:group]];
 }
 
@@ -211,7 +211,7 @@
     return [CharacterStats statDescriptionFrom:character atIndex:index inStatGroup:character.savedLookupKey];
 }
 
-+ (NSString *)statDescriptionFrom:(CharacterStats *)character atIndex:(NSInteger)index inStatGroup:(t_characterStatGroup)group {
++ (NSString *)statDescriptionFrom:(CharacterStats *)character atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group {
     return [[character.statDescriptions objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index];
 }
             
@@ -219,15 +219,15 @@
     return [CharacterStats statValueFrom:character atIndex:index inStatGroup:character.savedLookupKey];
 }
 
-+ (NSNumber *)statValueFrom:(CharacterStats *)character atIndex:(NSInteger)index inStatGroup:(t_characterStatGroup)group {
++ (NSNumber *)statValueFrom:(CharacterStats *)character atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group {
     return [[character.statValues objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index];
 }
 
-+ (t_characterStatElement)statElementFrom:(CharacterStats *)character atIndex:(NSInteger)index {
++ (t_CharacterStatElement)statElementFrom:(CharacterStats *)character atIndex:(NSInteger)index {
     return [CharacterStats statElementFrom:character atIndex:index inStatGroup:character.savedLookupKey];
 }
 
-+ (t_characterStatElement)statElementFrom:(CharacterStats *)character atIndex:(NSInteger)index inStatGroup:(t_characterStatGroup)group {
++ (t_CharacterStatElement)statElementFrom:(CharacterStats *)character atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group {
     return [[[character.statElements objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index] integerValue];
 }
 
@@ -235,7 +235,7 @@
     return [CharacterStats primaryStatForSkillGroupFrom:character inStatGroup:character.savedLookupKey];
 }
 
-+ (NSNumber *)primaryStatForSkillGroupFrom:(CharacterStats *)character inStatGroup:(t_characterStatGroup)group {
++ (NSNumber *)primaryStatForSkillGroupFrom:(CharacterStats *)character inStatGroup:(t_CharacterStatGroup)group {
     NSInteger index = 0;
     if (group == CharacterStatGroupFireSkills) index = 0;
     else if (group == CharacterStatGroupAirSkills) index = 1;
@@ -246,7 +246,7 @@
     return [[character.statValues objectForKey:[NSNumber numberWithInt:CharacterStatGroupPrimary]] objectAtIndex:index];
 }
 
-+ (NSNumber *)soulStatFrom:(CharacterStats *)character forStat:(t_characterStatSoul)stat {
++ (NSNumber *)soulStatFrom:(CharacterStats *)character forStat:(t_CharacterStatSoul)stat {
     NSInteger index = 0;
     if (stat == CharacterStatSoulBody) index = 0;
     else if (stat == CharacterStatSoulMind) index = 1;
@@ -257,7 +257,7 @@
 }
 
 
-+ (t_characterStatElement)statElementforHeadingFrom:(CharacterStats *)characterData {
++ (t_CharacterStatElement)statElementforHeadingFrom:(CharacterStats *)characterData {
     switch (characterData.savedLookupKey) {
         case CharacterStatGroupFireSkills:
             return CharacterStatElementFire;

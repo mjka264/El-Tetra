@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CharacterLoadout.h"
 
 @interface CharacterLoadoutViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UILabel *loadoutName;
-@property (strong, nonatomic) id dataObject;
+@property (nonatomic, weak) IBOutlet UILabel *mainhandView;
+@property (nonatomic, weak) IBOutlet UILabel *offhandView;
+
+@property (weak, nonatomic) CharacterLoadout *dataObject;
 @end

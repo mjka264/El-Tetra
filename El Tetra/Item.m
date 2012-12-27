@@ -1,0 +1,103 @@
+//
+//  CharacterItem.m
+//  El Tetra
+//
+//  Created by Matthew Kameron on 27/12/12.
+//  Copyright (c) 2012 Matthew Kameron. All rights reserved.
+//
+
+#import "Item.h"
+
+static NSArray *_allItems;
+
+@implementation Item
+
+@synthesize name = _name;
+@synthesize itemType = _itemType;
+@synthesize weaponCombatStyle = _weaponCombatStyle;
+@synthesize weaponDefensePermitted = _weaponDefensePermitted;
+@synthesize defenseGained = _defenseGained;
+@synthesize attackModifier = _attackModifier;
+@synthesize damageModifier = _damageModifier;
+@synthesize speedModifier = _speedModifier;
+@synthesize soakModifier = _soakModifier;
+@synthesize bodyModifier = _bodyModifier;
+@synthesize miscellaneousProperties = _miscellaneousProperties;
+- (NSArray *)miscellaneousProperties {
+    if (!_miscellaneousProperties) _miscellaneousProperties = [NSArray array];
+    return _miscellaneousProperties;
+}
+
++ (NSArray *)allItems {
+    if (!_allItems) {
+        _allItems = [NSArray arrayWithObjects:
+                     [Item initStandardWeaponWithName:@"Longsword"
+                                                 type:ItemTypeWeaponMainhand
+                                                style:ItemCombatStyleEitherMelee
+                                     defensePermitted:ItemWeaponDefensePermittedAny
+                                        defenseGained:ItemDefenseGainedNone
+                                               damage:10 speed:0 miscellaneous:[NSArray array]],
+                     [Item initStandardWeaponWithName:@"Shortsword"
+                                                 type:ItemTypeWeaponMainhand
+                                                style:ItemCombatStyleArtful
+                                     defensePermitted:ItemWeaponDefensePermittedAny
+                                        defenseGained:ItemDefenseGainedParry
+                                               damage:5 speed:5 miscellaneous:[NSArray array]],
+                     [Item initStandardWeaponWithName:@"Free hand"
+                                                 type:ItemTypeWeaponOffhand
+                                                style:ItemCombatStyleEitherMelee
+                                     defensePermitted:ItemWeaponDefensePermittedNA
+                                        defenseGained:ItemDefenseGainedNone
+                                               damage:0 speed:5 miscellaneous:[NSArray array]],
+                     nil];
+    }
+    return _allItems;
+}
+
++ (Item *)initStandardWeaponWithName:(NSString *)name
+                                type:(t_ItemType)type
+                               style:(t_ItemCombatStyle)style
+                    defensePermitted:(t_ItemWeaponDefensePermitted)defenses
+                       defenseGained:(t_ItemDefenseGained)newDefenses
+                              damage:(NSInteger)damage
+                               speed:(NSInteger)speed
+                       miscellaneous:(NSArray *)properties {
+    return [Item initItemWithName:name type:type style:style defensePermitted:defenses defenseGained:newDefenses attack:0 damage:damage speed:speed soak:0 body:0 miscellaneous:properties];
+}
+
++ (Item *)initStandardArmourWithName:(NSString *)name
+                                type:(t_ItemType)type
+                               speed:(NSInteger)speed
+                                soak:(NSInteger)soak
+                                body:(NSInteger)body
+                       miscellaneous:(NSArray *)properties {
+    return [Item initItemWithName:name type:type style:ItemCombatStyleNA defensePermitted:ItemWeaponDefensePermittedNA defenseGained:ItemDefenseGainedNone attack:0 damage:0 speed:speed soak:soak body:body miscellaneous:properties];
+}
+
++ (Item *)initItemWithName:(NSString *)name
+                      type:(t_ItemType)type
+                     style:(t_ItemCombatStyle)style
+          defensePermitted:(t_ItemWeaponDefensePermitted)defenses
+             defenseGained:(t_ItemDefenseGained)newDefenses
+                    attack:(NSInteger)attack
+                    damage:(NSInteger)damage
+                     speed:(NSInteger)speed
+                      soak:(NSInteger)soak
+                      body:(NSInteger)body
+             miscellaneous:(NSArray *)properties {
+    Item *item = [[Item alloc] init];
+    item.name = name;
+    item.itemType = type;
+    item.weaponCombatStyle = style;
+    item.weaponDefensePermitted = defenses;
+    item.defenseGained = newDefenses;
+    item.attackModifier = [NSNumber numberWithInt:attack];
+    item.damageModifier = [NSNumber numberWithInt:damage];
+    item.speedModifier = [NSNumber numberWithInt:speed];
+    item.soakModifier = [NSNumber numberWithInt:soak];
+    item.bodyModifier = [NSNumber numberWithInt:body];
+    item.miscellaneousProperties = properties;
+    return item;
+}
+
+@end
