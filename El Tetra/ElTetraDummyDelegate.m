@@ -7,7 +7,7 @@
 //
 
 #import "ElTetraDummyDelegate.h"
-#import "CharacterData.h"
+#import "CharacterStats.h"
 #import "StatTableViewController.h"
 
 /*

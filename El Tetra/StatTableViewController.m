@@ -9,7 +9,7 @@
 #import "StatTableViewController.h"
 #import "PrimaryStatColouredCircleView.h"
 #import "ElTetraDummyDelegate.h"
-#import "CharacterData.h"
+#import "CharacterStats.h"
 
 
 #pragma mark - StatTableViewCell
@@ -65,18 +65,18 @@
 
 
 - (NSString *)textForHeading: (UIView *)source {
-    return [CharacterData sectionHeadingFrom:[self.dataSource characterData:self]];
+    return [CharacterStats sectionHeadingFrom:[self.dataSource characterData:self]];
     //return [self.dataSource headingForDisplay:self];
 }
 - (NSNumber *)fontSizeForHeading: (UIView *)source {
     return [NSNumber numberWithInt:16];
 }
 - (NSNumber *)numberForCircle:(UIView *)source {
-    return [CharacterData primaryStatForSkillGroupFrom:[self.dataSource characterData:self]];
+    return [CharacterStats primaryStatForSkillGroupFrom:[self.dataSource characterData:self]];
     //return [NSNumber numberWithInt:3];
 }
 - (NSInteger)elementForCircle:(UIView *)source {
-    return [CharacterData statElementforHeadingFrom:[self.dataSource characterData:self]];
+    return [CharacterStats statElementforHeadingFrom:[self.dataSource characterData:self]];
     //return [self.dataSource elementForDisplay:self];
 }
 - (NSNumber *)fontSizeForNumber:(UIView *)source {
@@ -131,7 +131,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.hideTableData) return 0;
-    else return [CharacterData numberOfStatGroupsFrom:[self.dataSource characterData:self]];
+    else return [CharacterStats numberOfStatGroupsFrom:[self.dataSource characterData:self]];
         
         //[CharacterData numberOfEntriesFrom:[self.dataSource characterData:self]];
         
@@ -140,7 +140,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionNumber
 {
-    return [CharacterData numberOfEntriesFrom:[self.dataSource characterData:self]];
+    return [CharacterStats numberOfEntriesFrom:[self.dataSource characterData:self]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -150,8 +150,8 @@
         cell = [[StatTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"Stat Cell"];
     }
     
-    cell.textLabel.text = [CharacterData statDescriptionFrom:[self.dataSource characterData:self] atIndex:indexPath.row];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [CharacterData statValueFrom:[self.dataSource characterData:self] atIndex:indexPath.row]];
+    cell.textLabel.text = [CharacterStats statDescriptionFrom:[self.dataSource characterData:self] atIndex:indexPath.row];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [CharacterStats statValueFrom:[self.dataSource characterData:self] atIndex:indexPath.row]];
     
     return cell;
 }

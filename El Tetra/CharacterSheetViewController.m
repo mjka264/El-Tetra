@@ -7,17 +7,24 @@
 //
 
 #import "CharacterSheetViewController.h"
-#import "CharacterData.h"
+#import "CharacterStats.h"
 #import "CharacterLoadoutViewController.h"
+#import "CharacterLoadout.h"
 
 @interface CharacterSheetViewController ()
-@property (nonatomic, strong) CharacterData *characterData;
+@property (nonatomic, strong) CharacterStats *characterStats;
 @property (nonatomic, strong) NSDictionary *controllerIdentityStatGroups;
+
+@property (nonatomic, strong) CharacterLoadout *characterLoadouts;
+
 @end
 
 
 @implementation CharacterSheetViewController
 
+@synthesize characterLoadouts = _characterLoadouts;
+
+/*
 // init done - first setup for WWW page modified
 @synthesize pageViewContent = _pageViewContent;
 - (NSArray *) pageViewContent {
@@ -25,7 +32,7 @@
     return _pageViewContent;
 }
 @synthesize pageViewController = _pageViewController;
-
+*/
 
 // Convenience methods
 - (CharacterLoadoutViewController *)viewControllerAtIndex:(NSUInteger)index
@@ -97,26 +104,26 @@
 - (void)setSoulStatBody:(UILabel *)soulStatBody {
     if (_soulStatBody != soulStatBody) {
         _soulStatBody = soulStatBody;
-        _soulStatBody.text = [NSString stringWithFormat:@"%@", [CharacterData soulStatFrom:self.characterData forStat:CharacterDataSoulStatBody]];
+        _soulStatBody.text = [NSString stringWithFormat:@"%@", [CharacterStats soulStatFrom:self.characterStats forStat:CharacterStatSoulBody]];
     }
 }
 @synthesize soulStatMind = _soulStatMind;
 - (void)setSoulStatMind:(UILabel *)soulStatMind {
     if (_soulStatMind != soulStatMind) {
         _soulStatMind = soulStatMind;
-        _soulStatMind.text = [NSString stringWithFormat:@"%@", [CharacterData soulStatFrom:self.characterData forStat:CharacterDataSoulStatMind]];
+        _soulStatMind.text = [NSString stringWithFormat:@"%@", [CharacterStats soulStatFrom:self.characterStats forStat:CharacterStatSoulMind]];
     }
 }
 @synthesize soulStatSpirit = _soulStatSpirit;
 - (void)setSoulStatSpirit:(UILabel *)soulStatSpirit {
     if (_soulStatSpirit != soulStatSpirit) {
         _soulStatSpirit = soulStatSpirit;
-        _soulStatSpirit.text = [NSString stringWithFormat:@"%@", [CharacterData soulStatFrom:self.characterData forStat:CharacterDataSoulStatSpirit]];
+        _soulStatSpirit.text = [NSString stringWithFormat:@"%@", [CharacterStats soulStatFrom:self.characterStats forStat:CharacterStatSoulSpirit]];
     }
 }
 
-- (CharacterData *)characterData:(UIViewController *)source {
-    return [self.characterData characterWithStatGroup:
+- (CharacterStats *)characterData:(UIViewController *)source {
+    return [self.characterStats characterWithStatGroup:
             [[self.controllerIdentityStatGroups objectForKey:source.title] integerValue]];
 }
 
@@ -125,31 +132,31 @@
 - (NSDictionary *)controllerIdentityStatGroups {
     if (!_controllerIdentityStatGroups) {
         _controllerIdentityStatGroups = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSNumber numberWithInt:CharacterDataStatGroupSoul],
+                                         [NSNumber numberWithInt:CharacterStatGroupSoul],
                                          @"SoulStatsController",
-                                         [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
+                                         [NSNumber numberWithInt:CharacterStatGroupPrimary],
                                          @"PrimaryStatsController",
-                                         [NSNumber numberWithInt:CharacterDataStatGroupFireSkills],
+                                         [NSNumber numberWithInt:CharacterStatGroupFireSkills],
                                          @"FireStatsController",
-                                         [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
+                                         [NSNumber numberWithInt:CharacterStatGroupAirSkills],
                                          @"AirStatsController",
-                                         [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
+                                         [NSNumber numberWithInt:CharacterStatGroupWaterSkills],
                                          @"WaterStatsController",
-                                         [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
+                                         [NSNumber numberWithInt:CharacterStatGroupEarthSkills],
                                          @"EarthStatsController",
-                                         [NSNumber numberWithInt:CharacterDataStatGroupChiSkills],
+                                         [NSNumber numberWithInt:CharacterStatGroupChiSkills],
                                          @"ChiStatsController",
-                                         [NSNumber numberWithInt:CharacterDataStatGroupAbilities],
+                                         [NSNumber numberWithInt:CharacterStatGroupAbilities],
                                          @"AbilityStatsController", nil];
     }
     return _controllerIdentityStatGroups;
 }
 
 
-@synthesize characterData = _characterData;
-- (CharacterData *)characterData
+@synthesize characterStats = _characterData;
+- (CharacterStats *)characterData
 {
-    if (!_characterData) _characterData = [[CharacterData alloc] init];
+    if (!_characterData) _characterData = [[CharacterStats alloc] init];
     return _characterData;
 }
 

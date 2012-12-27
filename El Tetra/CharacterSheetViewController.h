@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "StatTableViewController.h"
-#import "CharacterData.h"
+#import "CharacterStats.h"
 
 @interface CharacterSheetViewController : UIViewController
 <StatTableViewControllerDataSource, UIPageViewControllerDataSource>
 
 @property (nonatomic, weak) IBOutlet UIPageViewController *pageViewController;
-@property (nonatomic, strong) IBOutlet NSArray *pageViewContent;
+//@property (nonatomic, strong) IBOutlet NSArray *pageViewContent;
            
 @property (nonatomic, weak) IBOutlet UILabel *soulStatBody;
 @property (nonatomic, weak) IBOutlet UILabel *soulStatMind;

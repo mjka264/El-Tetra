@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Matthew Kameron. All rights reserved.
 //
 
-#import "CharacterData.h"
+#import "CharacterStats.h"
 
-@interface CharacterData ()
+@interface CharacterStats ()
 // These two dictionaries are each dictionaries of non-mutable arrays
 // They are accessed using the t_characterDataStatGroup keys (in .h) and correspond to one another
 @property (nonatomic, strong) NSDictionary *statDescriptions;    // of arrays
@@ -25,21 +25,21 @@
 @end
 
 
-@implementation CharacterData
+@implementation CharacterStats
 
 @synthesize statGroupHeadings = _statGroupHeadings;
 - (NSDictionary *)statGroupHeadings {
     if (!_statGroupHeadings) {
         _statGroupHeadings =
         [NSDictionary dictionaryWithObjectsAndKeys:
-         @"Soul", [NSNumber numberWithInt:CharacterDataStatGroupSoul],
-         @"Primary Stats", [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
-         @"Ferocity", [NSNumber numberWithInt:CharacterDataStatGroupFireSkills],
-         @"Precision", [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
-         @"Agility", [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
-         @"Resilience", [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
-         @"Chi", [NSNumber numberWithInt:CharacterDataStatGroupChiSkills],
-         @"Abilities", [NSNumber numberWithInt:CharacterDataStatGroupAbilities], nil];
+         @"Soul", [NSNumber numberWithInt:CharacterStatGroupSoul],
+         @"Primary Stats", [NSNumber numberWithInt:CharacterStatGroupPrimary],
+         @"Ferocity", [NSNumber numberWithInt:CharacterStatGroupFireSkills],
+         @"Precision", [NSNumber numberWithInt:CharacterStatGroupAirSkills],
+         @"Agility", [NSNumber numberWithInt:CharacterStatGroupWaterSkills],
+         @"Resilience", [NSNumber numberWithInt:CharacterStatGroupEarthSkills],
+         @"Chi", [NSNumber numberWithInt:CharacterStatGroupChiSkills],
+         @"Abilities", [NSNumber numberWithInt:CharacterStatGroupAbilities], nil];
     }
     return _statGroupHeadings;
 }
@@ -50,36 +50,36 @@
         _statDescriptions =
         [NSDictionary dictionaryWithObjectsAndKeys:
          [NSArray arrayWithObjects:@"Body", @"Mind", @"Spirit", nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupSoul],
+         [NSNumber numberWithInt:CharacterStatGroupSoul],
          
          // The order of these stats is hardcoded below in the function primaryStatForSkillGroupFrom
          // If the order changes here, it needs to change there too
          [NSArray arrayWithObjects:@"Ferocity", @"Accuracy", @"Agility", @"Resilience", @"Chi", nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
+         [NSNumber numberWithInt:CharacterStatGroupPrimary],
          
          [NSArray arrayWithObjects:
           @"Power, speed, lifting",
           @"Instinct, innovation, insight, synthesis",
           @"Passion, agression, assertion, intimidation", nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupFireSkills],
+         [NSNumber numberWithInt:CharacterStatGroupFireSkills],
          
          [NSArray arrayWithObjects:
           @"Craft, lockpicking",
           @"Logic, science, reasoning, investigation, memory",
           @"Culture, disguise, trickery, cunning", nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
+         [NSNumber numberWithInt:CharacterStatGroupAirSkills],
          
          [NSArray arrayWithObjects:
           @"Balance, stealth, reflexes",
           @"Language, interpretation",
           @"Empathy, charm, misdirection", nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
+         [NSNumber numberWithInt:CharacterStatGroupWaterSkills],
          
          [NSArray arrayWithObjects:
           @"Fortitude, stamina, labour",
           @"Perception, observation, procedure, tracking",
           @"Confidence, bravery, diligence, patience", nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
+         [NSNumber numberWithInt:CharacterStatGroupEarthSkills],
          
          [NSArray arrayWithObjects:
           @"Rend", @"Spellsword",
@@ -88,7 +88,7 @@
           @"Defensive pause", @"Strength within",
           @"Daoism", @"Shifting (body)", @"Shifting (mind, spirit)", @"Offworld contact",
           @"Primal fire", @"Primal air", @"Primal water", @"Primal earth", nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupAbilities],
+         [NSNumber numberWithInt:CharacterStatGroupAbilities],
          nil];
     }
     return _statDescriptions;
@@ -100,14 +100,14 @@
         _statElements =
         [NSDictionary dictionaryWithObjectsAndKeys:
          [NSArray arrayWithObjects:
-          [NSNumber numberWithInt: CharacterDataElementFire], [NSNumber numberWithInt: CharacterDataElementFire],
-          [NSNumber numberWithInt: CharacterDataElementAir], [NSNumber numberWithInt: CharacterDataElementAir], [NSNumber numberWithInt: CharacterDataElementAir], [NSNumber numberWithInt: CharacterDataElementAir],
-          [NSNumber numberWithInt: CharacterDataElementWater], [NSNumber numberWithInt: CharacterDataElementWater], [NSNumber numberWithInt: CharacterDataElementWater],
-          [NSNumber numberWithInt: CharacterDataElementEarth], [NSNumber numberWithInt: CharacterDataElementEarth],
-          [NSNumber numberWithInt: CharacterDataElementChi], [NSNumber numberWithInt: CharacterDataElementChi], [NSNumber numberWithInt: CharacterDataElementChi], [NSNumber numberWithInt: CharacterDataElementChi],
-          [NSNumber numberWithInt: CharacterDataElementFireChi], [NSNumber numberWithInt: CharacterDataElementAirChi], [NSNumber numberWithInt: CharacterDataElementWaterChi], [NSNumber numberWithInt: CharacterDataElementEarthChi],
+          [NSNumber numberWithInt: CharacterStatElementFire], [NSNumber numberWithInt: CharacterStatElementFire],
+          [NSNumber numberWithInt: CharacterStatElementAir], [NSNumber numberWithInt: CharacterStatElementAir], [NSNumber numberWithInt: CharacterStatElementAir], [NSNumber numberWithInt: CharacterStatElementAir],
+          [NSNumber numberWithInt: CharacterStatElementWater], [NSNumber numberWithInt: CharacterStatElementWater], [NSNumber numberWithInt: CharacterStatElementWater],
+          [NSNumber numberWithInt: CharacterStatElementEarth], [NSNumber numberWithInt: CharacterStatElementEarth],
+          [NSNumber numberWithInt: CharacterStatElementChi], [NSNumber numberWithInt: CharacterStatElementChi], [NSNumber numberWithInt: CharacterStatElementChi], [NSNumber numberWithInt: CharacterStatElementChi],
+          [NSNumber numberWithInt: CharacterStatElementFireChi], [NSNumber numberWithInt: CharacterStatElementAirChi], [NSNumber numberWithInt: CharacterStatElementWaterChi], [NSNumber numberWithInt: CharacterStatElementEarthChi],
           nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupAbilities],
+         [NSNumber numberWithInt:CharacterStatGroupAbilities],
          nil];
     }
     return _statElements;
@@ -122,7 +122,7 @@
           [NSNumber numberWithInt:5],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:11], nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupSoul],
+         [NSNumber numberWithInt:CharacterStatGroupSoul],
          
          [NSArray arrayWithObjects:
           [NSNumber numberWithInt:8],
@@ -130,31 +130,31 @@
           [NSNumber numberWithInt:7],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupPrimary],
+         [NSNumber numberWithInt:CharacterStatGroupPrimary],
          
          [NSArray arrayWithObjects:
           [NSNumber numberWithInt:5],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupFireSkills],
+         [NSNumber numberWithInt:CharacterStatGroupFireSkills],
          
          [NSArray arrayWithObjects:
           [NSNumber numberWithInt:6],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupAirSkills],
+         [NSNumber numberWithInt:CharacterStatGroupAirSkills],
          
          [NSArray arrayWithObjects:
           [NSNumber numberWithInt:7],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupWaterSkills],
+         [NSNumber numberWithInt:CharacterStatGroupWaterSkills],
          
          [NSArray arrayWithObjects:
           [NSNumber numberWithInt:2],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupEarthSkills],
+         [NSNumber numberWithInt:CharacterStatGroupEarthSkills],
          
          [NSArray arrayWithObjects:
           [NSNumber numberWithInt:5], [NSNumber numberWithInt:6],
@@ -163,7 +163,7 @@
           [NSNumber numberWithInt:5], [NSNumber numberWithInt:6],
           [NSNumber numberWithInt:5], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7], [NSNumber numberWithInt:8],
           [NSNumber numberWithInt:5], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7], [NSNumber numberWithInt:8], nil],
-         [NSNumber numberWithInt:CharacterDataStatGroupAbilities],
+         [NSNumber numberWithInt:CharacterStatGroupAbilities],
          nil];
     }
     return _statValues;
@@ -172,18 +172,18 @@
 @synthesize savedLookupKey = _dataGroupKey;
 
 
-- (CharacterData *)characterWithAllStats {
+- (CharacterStats *)characterWithAllStats {
     return [self copy];
 }
 
 // Makes a copy of the class with the key saved for future lookups
-- (CharacterData *)characterWithStatGroup:(t_characterDataStatGroup)group {
-    CharacterData *data = [self copy];
+- (CharacterStats *)characterWithStatGroup:(t_characterStatGroup)group {
+    CharacterStats *data = [self copy];
     data.savedLookupKey = group;
     return data;
 }
 
-+ (NSInteger)numberOfStatGroupsFrom:(CharacterData *)character {
++ (NSInteger)numberOfStatGroupsFrom:(CharacterStats *)character {
     if (character.savedLookupKey) {
         return 1;
     } else {
@@ -191,73 +191,73 @@
     }
 }
 
-+ (NSInteger)numberOfEntriesFrom:(CharacterData *)character {
-    return [CharacterData numberOfEntriesFrom:character inStatGroup:character.savedLookupKey];
++ (NSInteger)numberOfEntriesFrom:(CharacterStats *)character {
+    return [CharacterStats numberOfEntriesFrom:character inStatGroup:character.savedLookupKey];
 }
 
-+ (NSInteger)numberOfEntriesFrom:(CharacterData *)character inStatGroup:(t_characterDataStatGroup)group {
++ (NSInteger)numberOfEntriesFrom:(CharacterStats *)character inStatGroup:(t_characterStatGroup)group {
     return [[character.statValues objectForKey:[NSNumber numberWithInt:group]] count];
 }
 
-+ (NSString *)sectionHeadingFrom:(CharacterData *)character {
-    return [CharacterData sectionHeadingFrom:character inStatGroup:character.savedLookupKey];
++ (NSString *)sectionHeadingFrom:(CharacterStats *)character {
+    return [CharacterStats sectionHeadingFrom:character inStatGroup:character.savedLookupKey];
 }
 
-+ (NSString *)sectionHeadingFrom:(CharacterData *)character inStatGroup:(t_characterDataStatGroup)group {
++ (NSString *)sectionHeadingFrom:(CharacterStats *)character inStatGroup:(t_characterStatGroup)group {
     return [character.statGroupHeadings objectForKey:[NSNumber numberWithInt:group]];
 }
 
-+ (NSString *)statDescriptionFrom:(CharacterData *)character atIndex:(NSInteger)index {
-    return [CharacterData statDescriptionFrom:character atIndex:index inStatGroup:character.savedLookupKey];
++ (NSString *)statDescriptionFrom:(CharacterStats *)character atIndex:(NSInteger)index {
+    return [CharacterStats statDescriptionFrom:character atIndex:index inStatGroup:character.savedLookupKey];
 }
 
-+ (NSString *)statDescriptionFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataStatGroup)group {
++ (NSString *)statDescriptionFrom:(CharacterStats *)character atIndex:(NSInteger)index inStatGroup:(t_characterStatGroup)group {
     return [[character.statDescriptions objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index];
 }
             
-+ (NSNumber *)statValueFrom:(CharacterData *)character atIndex:(NSInteger)index {
-    return [CharacterData statValueFrom:character atIndex:index inStatGroup:character.savedLookupKey];
++ (NSNumber *)statValueFrom:(CharacterStats *)character atIndex:(NSInteger)index {
+    return [CharacterStats statValueFrom:character atIndex:index inStatGroup:character.savedLookupKey];
 }
 
-+ (NSNumber *)statValueFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataStatGroup)group {
++ (NSNumber *)statValueFrom:(CharacterStats *)character atIndex:(NSInteger)index inStatGroup:(t_characterStatGroup)group {
     return [[character.statValues objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index];
 }
 
-+ (t_characterDataElement)statElementFrom:(CharacterData *)character atIndex:(NSInteger)index {
-    return [CharacterData statElementFrom:character atIndex:index inStatGroup:character.savedLookupKey];
++ (t_characterStatElement)statElementFrom:(CharacterStats *)character atIndex:(NSInteger)index {
+    return [CharacterStats statElementFrom:character atIndex:index inStatGroup:character.savedLookupKey];
 }
 
-+ (t_characterDataElement)statElementFrom:(CharacterData *)character atIndex:(NSInteger)index inStatGroup:(t_characterDataStatGroup)group {
++ (t_characterStatElement)statElementFrom:(CharacterStats *)character atIndex:(NSInteger)index inStatGroup:(t_characterStatGroup)group {
     return [[[character.statElements objectForKey:[NSNumber numberWithInt:group]] objectAtIndex:index] integerValue];
 }
 
-+ (NSNumber *)primaryStatForSkillGroupFrom:(CharacterData *)character {
-    return [CharacterData primaryStatForSkillGroupFrom:character inStatGroup:character.savedLookupKey];
++ (NSNumber *)primaryStatForSkillGroupFrom:(CharacterStats *)character {
+    return [CharacterStats primaryStatForSkillGroupFrom:character inStatGroup:character.savedLookupKey];
 }
 
-+ (NSNumber *)primaryStatForSkillGroupFrom:(CharacterData *)character inStatGroup:(t_characterDataStatGroup)group {
++ (NSNumber *)primaryStatForSkillGroupFrom:(CharacterStats *)character inStatGroup:(t_characterStatGroup)group {
     NSInteger index = 0;
-    if (group == CharacterDataStatGroupFireSkills) index = 0;
-    else if (group == CharacterDataStatGroupAirSkills) index = 1;
-    else if (group == CharacterDataStatGroupWaterSkills) index = 2;
-    else if (group == CharacterDataStatGroupEarthSkills) index = 3;
-    else if (group == CharacterDataStatGroupChiSkills) index = 4;
+    if (group == CharacterStatGroupFireSkills) index = 0;
+    else if (group == CharacterStatGroupAirSkills) index = 1;
+    else if (group == CharacterStatGroupWaterSkills) index = 2;
+    else if (group == CharacterStatGroupEarthSkills) index = 3;
+    else if (group == CharacterStatGroupChiSkills) index = 4;
     
     return [[character.statValues objectForKey:[NSNumber numberWithInt:CharacterDataStatGroupPrimary]] objectAtIndex:index];
 }
 
-+ (NSNumber *)soulStatFrom:(CharacterData *)character forStat:(t_characterDataSoulStat)stat {
++ (NSNumber *)soulStatFrom:(CharacterStats *)character forStat:(t_characterStatSoul)stat {
     NSInteger index = 0;
-    if (stat == CharacterDataSoulStatBody) index = 0;
-    else if (stat == CharacterDataSoulStatMind) index = 1;
-    else if (stat == CharacterDataSoulStatSpirit) index = 2;
+    if (stat == CharacterStatSoulBody) index = 0;
+    else if (stat == CharacterStatSoulMind) index = 1;
+    else if (stat == CharacterStatSoulSpirit) index = 2;
     
     return [[character.statValues objectForKey:[NSNumber numberWithInt:CharacterDataStatGroupSoul]] objectAtIndex:index];
 
 }
 
 
-+ (t_characterDataElement)statElementforHeadingFrom:(CharacterData *)characterData {
++ (t_characterStatElement)statElementforHeadingFrom:(CharacterStats *)characterData {
     switch (characterData.savedLookupKey) {
         case CharacterDataStatGroupFireSkills:
             return CharacterDataElementFire;
@@ -281,7 +281,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-	CharacterData *copy = [[CharacterData allocWithZone: zone] init];
+	CharacterStats *copy = [[CharacterStats allocWithZone: zone] init];
     copy.statDescriptions = self.statDescriptions;
     copy.statValues = self.statValues;
     copy.statElements = self.statElements;

@@ -8,7 +8,7 @@
 
 #import "PrimaryStatColouredCircleView.h"
 #import "ElTetraDummyDelegate.h"
-#import "CharacterData.h"
+#import "CharacterStats.h"
 
 @implementation PrimaryStatColouredCircleView
 
@@ -19,11 +19,11 @@
     
     NSInteger element = [self.dataSource elementForCircle:self];
 
-    if (element == CharacterDataElementFire) hue = 0.0;
-    else if (element == CharacterDataElementAir) hue = 0.18;
-    else if (element == CharacterDataElementWater) hue = 0.55;
-    else if (element == CharacterDataElementEarth) hue = 0.33;
-    else if (element == CharacterDataElementChi) hue = 0.77;
+    if (element == CharacterStatElementFire) hue = 0.0;
+    else if (element == CharacterStatElementAir) hue = 0.18;
+    else if (element == CharacterStatElementWater) hue = 0.55;
+    else if (element == CharacterStatElementEarth) hue = 0.33;
+    else if (element == CharacterStatElementChi) hue = 0.77;
     else hue = 0.09;
     
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
