@@ -243,7 +243,7 @@
     else if (group == CharacterStatGroupEarthSkills) index = 3;
     else if (group == CharacterStatGroupChiSkills) index = 4;
     
-    return [[character.statValues objectForKey:[NSNumber numberWithInt:CharacterDataStatGroupPrimary]] objectAtIndex:index];
+    return [[character.statValues objectForKey:[NSNumber numberWithInt:CharacterStatGroupPrimary]] objectAtIndex:index];
 }
 
 + (NSNumber *)soulStatFrom:(CharacterStats *)character forStat:(t_characterStatSoul)stat {
@@ -252,23 +252,23 @@
     else if (stat == CharacterStatSoulMind) index = 1;
     else if (stat == CharacterStatSoulSpirit) index = 2;
     
-    return [[character.statValues objectForKey:[NSNumber numberWithInt:CharacterDataStatGroupSoul]] objectAtIndex:index];
+    return [[character.statValues objectForKey:[NSNumber numberWithInt:CharacterStatGroupSoul]] objectAtIndex:index];
 
 }
 
 
 + (t_characterStatElement)statElementforHeadingFrom:(CharacterStats *)characterData {
     switch (characterData.savedLookupKey) {
-        case CharacterDataStatGroupFireSkills:
-            return CharacterDataElementFire;
-        case CharacterDataStatGroupAirSkills:
-            return CharacterDataElementAir;
-        case CharacterDataStatGroupWaterSkills:
-            return CharacterDataElementWater;
-        case CharacterDataStatGroupEarthSkills:
-            return CharacterDataElementEarth;
-        case CharacterDataStatGroupChiSkills:
-            return CharacterDataElementChi;
+        case CharacterStatGroupFireSkills:
+            return CharacterStatElementFire;
+        case CharacterStatGroupAirSkills:
+            return CharacterStatElementAir;
+        case CharacterStatGroupWaterSkills:
+            return CharacterStatElementWater;
+        case CharacterStatGroupEarthSkills:
+            return CharacterStatElementEarth;
+        case CharacterStatGroupChiSkills:
+            return CharacterStatElementChi;
         default:
             return 0;
     }
