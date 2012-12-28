@@ -18,9 +18,11 @@
 shouldAllowSelectionForCellAtIndexPath:(Indexpath *)Indexpath
 usingCharacterLoadout:
 */
+- (void)dismissMePlease;
 @end
 
 @interface CharacterLoadoutEditorViewController : UITableViewController
+- (IBAction)unloadCharacterLoadoutViewController:(id)sender;
 @property (nonatomic, weak) id<CharacterLoadoutEditorViewControllerDelegate> delegate;
 @property (nonatomic, weak) CharacterLoadout *loadout;
 @end

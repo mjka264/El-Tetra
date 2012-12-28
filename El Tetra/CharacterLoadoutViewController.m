@@ -188,6 +188,10 @@
     }
 }
 
+- (void)dismissMePlease {
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
 - (IBAction)newLoadoutPressed:(UIBarButtonItem *)sender {
 }
 

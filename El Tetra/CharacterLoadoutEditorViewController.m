@@ -66,4 +66,7 @@
      */
 }
 
+- (IBAction)unloadCharacterLoadoutViewController:(id)sender {
+    [self.delegate dismissMePlease];
+}
 @end
