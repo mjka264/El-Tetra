@@ -58,7 +58,7 @@ static NSArray *_allItems;
                      [Item initStandardArmourWithName:@"Heavy armour"
                                                 speed:-5
                                                  soak:3
-                                        miscellaneous:[NSArray arrayWithObject:@"Body penalty: -1"]],
+                                        miscellaneous:[NSArray arrayWithObject:@"Body skills: -1"]],
                      nil];
     }
     return _allItems;
@@ -126,5 +126,32 @@ static NSArray *_allItems;
             nil];
 }
 
+NSString *explicitSign(NSNumber *num) {
+    NSInteger x = [num integerValue];
+    if (x > 0) {
+        return [NSString stringWithFormat:@"+%d", x];
+    } else {
+        return [NSString stringWithFormat:@"%d", x];
+    }
+}
+
+- (NSString *)itemPropertiesSummaryForTableView {
+    //NSMutableString *s = [[NSMutableString alloc] init];
+    NSMutableArray *properties = [[NSMutableArray alloc] init];
+    if (self.weaponCombatStyle == ItemCombatStyleArtful) [properties addObject:@"Artful"];
+    if (self.weaponCombatStyle == ItemCombatStyleBrutal) [properties addObject:@"Brutal"];
+    if (self.weaponCombatStyle == ItemCombatStyleRanged) [properties addObject:@"Ranged"];
+    if (self.weaponDefensePermitted == ItemWeaponDefensePermittedBasic) [properties addObject:@"basic defense only"];
+    if (self.weaponDefensePermitted == ItemWeaponDefensePermittedBasicOrBlock) [properties addObject:@"cannot be parried"];
+    if (self.weaponDefensePermitted == ItemWeaponDefensePermittedBasicOrParry) [properties addObject:@"cannot be blocked"];
+    if (self.defenseGained == ItemDefenseGainedBlock || self.defenseGained == ItemDefenseGainedBlock) [properties addObject:@"Block"];
+    if (self.defenseGained == ItemDefenseGainedParry || self.defenseGained == ItemDefenseGainedBlock) [properties addObject:@"Parry"];
+    if ([self.speedModifier integerValue] != 0) [properties addObject:[NSString stringWithFormat:@"Speed: %@", explicitSign(self.speedModifier)]];
+    if ([self.attackModifier integerValue] != 0) [properties addObject:[NSString stringWithFormat:@"Attack: %@", explicitSign(self.attackModifier)]];
+    if ([self.damageModifier integerValue] != 0) [properties addObject:[NSString stringWithFormat:@"Damage: %@", explicitSign(self.damageModifier)]];
+    if ([self.soakModifier integerValue] != 0) [properties addObject:[NSString stringWithFormat:@"Soak: %@", explicitSign(self.soakModifier)]];
+    if ([self.miscellaneousProperties count]) [properties addObject:[self.miscellaneousProperties componentsJoinedByString:@", "]];
+    return [properties componentsJoinedByString:@", "];
+}
 
 @end

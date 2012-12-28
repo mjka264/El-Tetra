@@ -47,6 +47,7 @@
     NSInteger itemType = [[[Item itemCategories] objectAtIndex:indexPath.section] integerValue];
     Item *item = [[Item allItemsWithType:itemType] objectAtIndex:indexPath.row];
     cell.textLabel.text = item.name;
+    cell.detailTextLabel.text = [item itemPropertiesSummaryForTableView];
     
     return cell;
 }

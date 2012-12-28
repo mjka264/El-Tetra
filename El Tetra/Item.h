@@ -53,6 +53,7 @@ typedef enum {
 @property (nonatomic, strong) NSNumber *soakModifier;
 @property (nonatomic, strong) NSNumber *bodyModifier;
 @property (nonatomic, strong) NSArray *miscellaneousProperties;  // of NSStrings
+
 + (NSArray *)itemCategories;
 + (NSArray *)allItems;
 + (NSArray *)allItemsWithType:(t_ItemType)type;
@@ -78,5 +79,5 @@ typedef enum {
                      speed:(NSInteger)speed
                       soak:(NSInteger)soak
              miscellaneous:(NSArray *)properties;
-
+- (NSString *)itemPropertiesSummaryForTableView; // Does not include name
 @end
