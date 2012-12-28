@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *armourView;
 @property (weak, nonatomic) IBOutlet UILabel *basicDefenseView;
 @property (weak, nonatomic) IBOutlet UILabel *specialDefenseView;
+@property (weak, nonatomic) IBOutlet UILabel *specialDefenseNameView;
 @property (weak, nonatomic) IBOutlet UILabel *magicDefenseView;
 @property (weak, nonatomic) IBOutlet UILabel *soakView;
 @property (weak, nonatomic) IBOutlet UILabel *armourSpecialView;

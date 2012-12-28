@@ -100,27 +100,36 @@
     // Link the data sources together
     self.characterLoadout.characterStats = [self.dataSource dataSourceCharacterStats];
 
-    // Weapon name and armour name
-    NSMutableAttributedString *weapons = [[NSMutableAttributedString alloc]
-                                          initWithString:[self.characterLoadout mainhandName]
-                                          attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor blackColor]]];
-    /*NSString *offhand = [self.characterLoadout offhandName];
-    if (offhand) {
-        [weapons appendAttributedString:[[NSAttributedString alloc]
-                                         initWithString:[@" and " stringByAppendingString:offhand]
-                                         attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor grayColor]]]];
-    }*/
+    // Weapon names
     NSString *weaponSpecials = [[[self.characterLoadout mainhandSpecials] valueForKey:@"description"] componentsJoinedByString:@", "];
-    if (weaponSpecials) {
+    if (!weaponSpecials) {
+        self.mainhandView.text = [self.characterLoadout mainhandName];
+    } else {
+        NSMutableAttributedString *weapons = [[NSMutableAttributedString alloc]
+                                              initWithString:[self.characterLoadout mainhandName]
+                                              attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor blackColor]]];
         [weapons appendAttributedString:[[NSAttributedString alloc]
                                          initWithString:[@"  " stringByAppendingString:weaponSpecials]
                                          attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor orangeColor]]]];
+        self.mainhandView.attributedText = weapons;
     }
-    self.mainhandView.attributedText = weapons;
     self.offhandView.text = [self.characterLoadout offhandName]? [@"and " stringByAppendingString:[self.characterLoadout offhandName]]:@"";
-    self.armourView.text = [self.characterLoadout armourName];
     
-    // Other combat stats
+    // Armour name
+    NSString *armourSpecials = [[[self.characterLoadout armourSpecials] valueForKey:@"description"] componentsJoinedByString:@", "];
+    if (!armourSpecials) {
+        self.armourView.text = [self.characterLoadout armourName];
+    } else {
+        NSMutableAttributedString *armour = [[NSMutableAttributedString alloc]
+                                             initWithString:armourSpecials
+                                             attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor orangeColor]]];
+        [armour appendAttributedString: [[NSAttributedString alloc]
+                                         initWithString:[@"  " stringByAppendingString:[self.characterLoadout armourName]]
+                                         attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor blackColor]]]];
+        self.armourView.attributedText = armour;
+    }
+    
+    // Other offensive stats
     self.attackView.attributedText = [self generateModifedStatDice:[self.characterLoadout derivedAttack:YES]
                                                          attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor yellowColor]]
                                                            modifier:[self.characterLoadout derivedAttack:NO]
@@ -136,18 +145,10 @@
                                                           modifier:[self.characterLoadout derivedDamage:NO]
                                                         attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor blackColor]]];
     
-    //self.speedView.text = [[[self.characterLoadout derivedSpeed] valueForKey:@"description"] componentsJoinedByString:@": "];
-    
-    //self.attackView.text = [[[self.characterLoadout derivedAttack] valueForKey:@"description"] componentsJoinedByString:@": "];
-    
-    
-    //self.damageView.text = [[[self.characterLoadout derivedDamage] valueForKey:@"description"] componentsJoinedByString:@": "];
-    
-    if ([[self.characterLoadout mainhandSpecials] count]) {
-        self.weaponSpecialView.text = [[[self.characterLoadout mainhandSpecials] valueForKey:@"description"] componentsJoinedByString:@","];
-    } else {
-        self.weaponSpecialView.text = @" ";
-    }
+    // Defensive stats
+    self.basicDefenseView.text = [[self.characterLoadout derivedBasicDefense] description];
+    self.magicDefenseView.text = [[self.characterLoadout derivedMagicDefense] description];
+    self.soakView.text = [[self.characterLoadout derivedSoak] description];
     
 }
 

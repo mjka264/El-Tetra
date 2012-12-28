@@ -58,7 +58,7 @@ static NSArray *_allItems;
                      [Item initStandardArmourWithName:@"Heavy armour"
                                                 speed:-5
                                                  soak:3
-                                        miscellaneous:[NSArray arrayWithObject:@"Body check: -1"]],
+                                        miscellaneous:[NSArray arrayWithObject:@"Body penalty: -1"]],
                      nil];
     }
     return _allItems;

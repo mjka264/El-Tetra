@@ -94,7 +94,6 @@
 
 - (NSNumber *)deriveBySelector:(SEL)sel {
     __block NSInteger modifier = 0;
-    NSLog(@"%@", [self mainhandName]);
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     modifier += [[self.mainhand performSelector:sel] intValue];
