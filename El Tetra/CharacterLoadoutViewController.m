@@ -11,6 +11,22 @@
 
 @interface CharacterLoadoutViewController ()
 - (void)refreshLoadout;
+
+/*
+- (NSAttributedString *)generateAttributedStringWithFirstPart:(NSString *)firstPart
+                                                   Attributes:(NSDictionary *)firstAttributes
+                                                   secondPart:(NSString *)secondPart
+                                                   Attributes:(NSDictionary *)secondAttributes;
+*/
+- (NSAttributedString *)generateModifedStatLabel:(NSString *)label
+                                      attributes:(NSDictionary *)labelAttributes
+                                            dice:(NSNumber *)dice
+                                      attributes:(NSDictionary *)diceAttributes
+                                        modifier:(NSNumber *)modifier
+                                      attributes:(NSDictionary *)modifierAttributes;
+- (NSDictionary *)makeAttributesSize:(NSInteger)fontSize
+                                bold:(BOOL)bold
+                              colour:(UIColor *)colour;
 @end
 
 @implementation CharacterLoadoutViewController
@@ -21,88 +37,111 @@
     [self refreshLoadout];
 }
 
+- (NSAttributedString *)generateModifedStatLabel:(NSString *)label
+                                      attributes:(NSDictionary *)labelAttributes
+                                            dice:(NSNumber *)dice
+                                      attributes:(NSDictionary *)diceAttributes
+                                        modifier:(NSNumber *)modifier
+                                      attributes:(NSDictionary *)modifierAttributes {
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc]
+                                         initWithString:label attributes:labelAttributes];
+    if (dice) [string appendAttributedString:[[NSMutableAttributedString alloc]
+                                    initWithString:[NSString stringWithFormat:@" %@", dice] attributes:diceAttributes]];
+    if ([modifier integerValue]) [string appendAttributedString:[[NSMutableAttributedString alloc]
+                                                      initWithString:[NSString stringWithFormat:@" + %@", modifier] attributes:modifierAttributes]];
+    return string;
+}
+
+- (NSAttributedString *)generateModifedStatDice:(NSNumber *)dice
+                                      attributes:(NSDictionary *)diceAttributes
+                                        modifier:(NSNumber *)modifier
+                                      attributes:(NSDictionary *)modifierAttributes {
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] init];
+    if (dice) [string appendAttributedString:[[NSMutableAttributedString alloc]
+                                              initWithString:[NSString stringWithFormat:@" %@", dice] attributes:diceAttributes]];
+    if ([modifier integerValue]) [string appendAttributedString:[[NSMutableAttributedString alloc]
+                                                                 initWithString:[NSString stringWithFormat:@" + %@", modifier] attributes:modifierAttributes]];
+    return string;
+}
+
+- (NSDictionary *)makeAttributesSize:(NSInteger)fontSize
+                                bold:(BOOL)bold
+                              colour:(UIColor *)colour {
+    NSShadow *shadow;
+    if (colour == [UIColor yellowColor]) {
+        shadow = [[NSShadow alloc] init];
+        shadow.shadowColor = [UIColor yellowColor];
+        shadow.shadowOffset = CGSizeMake(2, 2);
+        colour = [UIColor blackColor];
+    }
+    if (shadow)
+        if (bold)
+            return [NSDictionary dictionaryWithObjectsAndKeys:
+                    [UIFont boldSystemFontOfSize:fontSize], NSFontAttributeName,
+                    shadow, NSShadowAttributeName,
+                    colour, NSForegroundColorAttributeName, nil];
+        else
+            return [NSDictionary dictionaryWithObjectsAndKeys:
+                    [UIFont systemFontOfSize:fontSize], NSFontAttributeName,
+                    shadow, NSShadowAttributeName,
+                    colour, NSForegroundColorAttributeName, nil];
+    else
+        if (bold)
+            return [NSDictionary dictionaryWithObjectsAndKeys:
+                    [UIFont boldSystemFontOfSize:fontSize], NSFontAttributeName,
+                    colour, NSForegroundColorAttributeName, nil];
+        else
+            return [NSDictionary dictionaryWithObjectsAndKeys:
+                    [UIFont systemFontOfSize:fontSize], NSFontAttributeName,
+                    colour, NSForegroundColorAttributeName, nil];
+}
+
 - (void)refreshLoadout {
     // Link the data sources together
     self.characterLoadout.characterStats = [self.dataSource dataSourceCharacterStats];
-    
-    // Setup the special attibute tags to put with the NSAttributedStrings
-    NSDictionary *headingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       [UIFont boldSystemFontOfSize:14], NSFontAttributeName,
-                                       [UIColor blackColor], NSForegroundColorAttributeName, nil];
-    NSDictionary *grayAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIFont systemFontOfSize:10], NSFontAttributeName,
-                                    [UIColor grayColor], NSForegroundColorAttributeName, nil];
-    NSDictionary *orangeAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      [UIFont boldSystemFontOfSize:10], NSFontAttributeName,
-                                      [UIColor orangeColor], NSForegroundColorAttributeName, nil];
-    NSDictionary *blueAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIFont systemFontOfSize:10], NSFontAttributeName,
-                                    [UIColor blueColor], NSForegroundColorAttributeName, nil];
 
-    // weaponView
+    // Weapon name and armour name
     NSMutableAttributedString *weapons = [[NSMutableAttributedString alloc]
                                           initWithString:[self.characterLoadout mainhandName]
-                                          attributes:headingAttributes];
-    NSString *offhand = [self.characterLoadout offhandName];
+                                          attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor blackColor]]];
+    /*NSString *offhand = [self.characterLoadout offhandName];
     if (offhand) {
         [weapons appendAttributedString:[[NSAttributedString alloc]
                                          initWithString:[@" and " stringByAppendingString:offhand]
-                                         attributes:grayAttributes]];
-    }
+                                         attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor grayColor]]]];
+    }*/
     NSString *weaponSpecials = [[[self.characterLoadout mainhandSpecials] valueForKey:@"description"] componentsJoinedByString:@", "];
     if (weaponSpecials) {
         [weapons appendAttributedString:[[NSAttributedString alloc]
                                          initWithString:[@"  " stringByAppendingString:weaponSpecials]
-                                         attributes:orangeAttributes]];
+                                         attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor orangeColor]]]];
     }
+    self.mainhandView.attributedText = weapons;
+    self.offhandView.text = [self.characterLoadout offhandName]? [@"and " stringByAppendingString:[self.characterLoadout offhandName]]:@"";
+    self.armourView.text = [self.characterLoadout armourName];
     
-    /*
+    // Other combat stats
+    self.attackView.attributedText = [self generateModifedStatDice:[self.characterLoadout derivedAttack:YES]
+                                                         attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor yellowColor]]
+                                                           modifier:[self.characterLoadout derivedAttack:NO]
+                                                         attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor blackColor]]];
     
-    NSString *mainhand = ;
-    NSString *offhand = ;
-    
-    if (offhand) {
-        offhand = [@" and " stringByAppendingString:offhand];
-    }
-    if (weaponSpecials) weaponSpecials = [@"  " stringByAppendingString:weaponSpecials];
-    */
-    
-    //if (offhand) {
-        
-    //}
-    
-    //if ([[self.characterLoadout mainhandSpecials] count]) {
-    //    self.weaponSpecialView.text = [[[self.characterLoadout mainhandSpecials] valueForKey:@"description"] componentsJoinedByString:@","];
-    //} else {
-    //    self.weaponSpecialView.text = @" ";
-    //}
-    /*
-    NSMutableAttributedString *weapons = [[NSMutableAttributedString alloc]
-                                          initWithString:[NSString stringWithFormat:@"%@%@%@", mainhand, offhand, weaponSpecials]];
-    if (offhand) [weapons setAttributes:grayAttributes range:NSMakeRange([mainhand length], [offhand length])];
-    if (weaponSpecials) [weapons setAttributes:orangeAttributes range:NSMakeRange([mainhand length] + [offhand length], [weaponSpecials length])];
-    */
-    /*
-    
+    self.speedView.attributedText = [self generateModifedStatDice:[self.characterLoadout derivedSpeed:YES]
+                                                        attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor blueColor]]
+                                                           modifier:[self.characterLoadout derivedSpeed:NO]
+                                                        attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor blackColor]]];
 
-
-       [weapons set]
-        //weapons = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ and %@", mainhand, offhand]
-        //                                                 attributes:headingAttributes];
-        [weapons setAttributes:grayAttributes range:NSMakeRange([mainhand length], [[weapons string] length] - [mainhand length])];
-    } else {
-        weapons = [[NSMutableAttributedString alloc] initWithString:mainhand
-                                                         attributes:headingAttributes];
-    }
-     */
-    [self.weaponView setAttributedText:weapons];
+    self.damageView.attributedText = [self generateModifedStatDice:[self.characterLoadout derivedDamage:YES]
+                                                        attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor redColor]]
+                                                          modifier:[self.characterLoadout derivedDamage:NO]
+                                                        attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor blackColor]]];
+    
+    //self.speedView.text = [[[self.characterLoadout derivedSpeed] valueForKey:@"description"] componentsJoinedByString:@": "];
+    
+    //self.attackView.text = [[[self.characterLoadout derivedAttack] valueForKey:@"description"] componentsJoinedByString:@": "];
     
     
-
-    
-    self.speedView.text = [[[self.characterLoadout derivedSpeed] valueForKey:@"description"] componentsJoinedByString:@": "];
-    self.attackView.text = [[[self.characterLoadout derivedAttack] valueForKey:@"description"] componentsJoinedByString:@": "];
-    self.damageView.text = [[[self.characterLoadout derivedDamage] valueForKey:@"description"] componentsJoinedByString:@": "];
+    //self.damageView.text = [[[self.characterLoadout derivedDamage] valueForKey:@"description"] componentsJoinedByString:@": "];
     
     if ([[self.characterLoadout mainhandSpecials] count]) {
         self.weaponSpecialView.text = [[[self.characterLoadout mainhandSpecials] valueForKey:@"description"] componentsJoinedByString:@","];

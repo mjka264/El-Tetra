@@ -42,7 +42,7 @@ static NSArray *_allItems;
                                                 style:ItemCombatStyleArtful
                                      defensePermitted:ItemWeaponDefensePermittedAny
                                         defenseGained:ItemDefenseGainedParry
-                                               damage:5 speed:5 miscellaneous:[NSArray arrayWithObject:@"Awesome"]],
+                                               damage:5 speed:5 miscellaneous:[NSArray array]],
                      [Item initStandardWeaponWithName:@"Free hand"
                                                  type:ItemTypeWeaponOffhand
                                                 style:ItemCombatStyleEitherMelee

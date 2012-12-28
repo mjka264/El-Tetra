@@ -42,10 +42,10 @@
 
 - (t_ItemWeaponDefensePermitted)weaponDefensePermitted;
 
-// These return two NSNumbers: the number of dice to roll then the modifier
-- (NSArray *)derivedSpeed;
-- (NSArray *)derivedAttack;
-- (NSArray *)derivedDamage;
+// These return either the dice pool or the modifier depending on the parameter
+- (NSNumber *)derivedSpeed:(BOOL)dicePoolNotModifier;
+- (NSNumber *)derivedAttack:(BOOL)dicePoolNotModifier;
+- (NSNumber *)derivedDamage:(BOOL)dicePoolNotModifier;
 
 - (NSNumber *)derivedBasicDefense;
 - (t_ItemDefenseGained)derivedSpecialDefenseType;

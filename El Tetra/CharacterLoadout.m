@@ -32,6 +32,7 @@
     CharacterLoadout *loadout = [[CharacterLoadout alloc] init];
     loadout.mainhand = [[Item allItems] objectAtIndex:1];
     loadout.offhand = [[Item allItems] objectAtIndex:2];
+    loadout.armour = [[Item allItems] objectAtIndex:4];
     return loadout;
 }
 
@@ -93,7 +94,7 @@
 
 - (NSNumber *)deriveBySelector:(SEL)sel {
     __block NSInteger modifier = 0;
-    
+    NSLog(@"%@", [self mainhandName]);
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     modifier += [[self.mainhand performSelector:sel] intValue];
@@ -108,33 +109,33 @@
 }
 
 
-- (NSArray *)derivedSpeed {
-    return [NSArray arrayWithObjects:
-            [self.characterStats effectiveStatInitiative],
-            [self deriveBySelector:@selector(speedModifier)], nil];
+- (NSNumber *)derivedSpeed:(BOOL)dicePoolNotModifier {
+    if (dicePoolNotModifier) return [self.characterStats effectiveStatInitiative];
+    else return [self deriveBySelector:@selector(speedModifier)];
 }
 
-- (NSArray *)derivedAttack {
-    NSNumber *attackDice;
-    if (self.mainhand.weaponCombatStyle == ItemCombatStyleArtful) {
-        attackDice = [self.characterStats effectiveStatAttackArtful];
-    } else if (self.mainhand.weaponCombatStyle == ItemCombatStyleBrutal) {
-        attackDice = [self.characterStats effectiveStatAttackArtful];
-    } else if (self.mainhand.weaponCombatStyle == ItemCombatStyleEitherMelee) {
-        attackDice = MAX([self.characterStats effectiveStatAttackArtful],
-                         [self.characterStats effectiveStatAttackBrutal]);
-    } else if (self.mainhand.weaponCombatStyle == ItemCombatStyleRanged) {
-        attackDice = [self.characterStats effectiveStatAttackProjectile];
+- (NSNumber *)derivedAttack:(BOOL)dicePoolNotModifier {
+    if (dicePoolNotModifier) {
+        NSNumber *attackDice;
+        if (self.mainhand.weaponCombatStyle == ItemCombatStyleArtful) {
+            attackDice = [self.characterStats effectiveStatAttackArtful];
+        } else if (self.mainhand.weaponCombatStyle == ItemCombatStyleBrutal) {
+            attackDice = [self.characterStats effectiveStatAttackArtful];
+        } else if (self.mainhand.weaponCombatStyle == ItemCombatStyleEitherMelee) {
+            attackDice = MAX([self.characterStats effectiveStatAttackArtful],
+                             [self.characterStats effectiveStatAttackBrutal]);
+        } else if (self.mainhand.weaponCombatStyle == ItemCombatStyleRanged) {
+            attackDice = [self.characterStats effectiveStatAttackProjectile];
+        }
+        return attackDice;
+    } else {
+        return [self deriveBySelector:@selector(attackModifier)];
     }
-        
-    return [NSArray arrayWithObjects:
-            attackDice, [self deriveBySelector:@selector(attackModifier)], nil];
 }
 
-- (NSArray *)derivedDamage {
-    return [NSArray arrayWithObjects:
-            [self.characterStats effectiveStatDamage],
-            [self deriveBySelector:@selector(damageModifier)], nil];
+- (NSNumber *)derivedDamage:(BOOL)dicePoolNotModifier {
+    if (dicePoolNotModifier) return [self.characterStats effectiveStatDamage];
+    else return [self deriveBySelector:@selector(damageModifier)];
 }
 
 // BUG this should really live in CharacterStats
