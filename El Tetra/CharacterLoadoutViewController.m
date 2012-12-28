@@ -149,7 +149,33 @@
     self.basicDefenseView.text = [[self.characterLoadout derivedBasicDefense] description];
     self.magicDefenseView.text = [[self.characterLoadout derivedMagicDefense] description];
     self.soakView.text = [[self.characterLoadout derivedSoak] description];
+    if ([self.characterLoadout derivedBlockDefense]) {
+        self.blockDefenseTitleView.text = @"Block";
+        self.blockDefenseValueView.text = [[self.characterLoadout derivedBlockDefense] description];
+    } else {
+        self.blockDefenseTitleView.text = @"no block skill";
+        self.blockDefenseValueView.text = @"";
+    }
+    if ([self.characterLoadout derivedParryDefense]) {
+        self.parryDefenseTitleView.text = @"Parry";
+        self.parryDefenseValueView.text = [[self.characterLoadout derivedParryDefense] description];
+    } else {
+        self.parryDefenseTitleView.text = @"no parry skill";
+        self.parryDefenseValueView.text = @"";
+    }
     
+    /*
+    
+    - (NSNumber *)derivedParryDefense; // nil if no parry
+    - (NSNumber *)derivedBlockDefense; // nil if no block
+    
+    if ([self.characterLoadout derivedSpecialDefenseType] == ItemDefenseGainedNone) {
+        self.specialDefenseView.text = @"";
+        self.specialDefenseNameView.text = @"No special defense";
+    } else if ([self.characterLoadout derivedSpecialDefenseType == ItemDef])
+        self.specialDefenseView.text = [[self.characterLoadout derivedSpecialDefenseValue] description];
+    }
+    */
 }
 
                            

@@ -46,10 +46,9 @@
 - (NSNumber *)derivedSpeed:(BOOL)dicePoolNotModifier;
 - (NSNumber *)derivedAttack:(BOOL)dicePoolNotModifier;
 - (NSNumber *)derivedDamage:(BOOL)dicePoolNotModifier;
-
+- (NSNumber *)derivedParryDefense; // nil if no parry
+- (NSNumber *)derivedBlockDefense; // nil if no block
 - (NSNumber *)derivedBasicDefense;
-- (t_ItemDefenseGained)derivedSpecialDefenseType;
-- (NSNumber *)derivedSpecialDefenseValue;
 - (NSNumber *)derivedMagicDefense;
 - (NSNumber *)derivedSoak;
 

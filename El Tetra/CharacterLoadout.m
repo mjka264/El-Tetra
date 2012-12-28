@@ -15,6 +15,7 @@
 @property (nonatomic, strong) Item *armour;
 @property (nonatomic, strong) NSArray *gear;   // of Item
 - (NSNumber *)deriveBySelector:(SEL)sel;
+- (t_ItemDefenseGained)derivedSpecialDefenseType;
 @end
 
 @implementation CharacterLoadout
@@ -149,7 +150,7 @@
 
 - (t_ItemDefenseGained)derivedSpecialDefenseType {
     BOOL parryOffered = FALSE;
-    BOOL blockOffered = TRUE;
+    BOOL blockOffered = FALSE;
     if (self.mainhand.defenseGained == ItemDefenseGainedParry ||
         self.mainhand.defenseGained == ItemDefenseGainedBoth) parryOffered = TRUE;
     if (self.mainhand.defenseGained == ItemDefenseGainedBlock ||
@@ -165,14 +166,29 @@
     else return ItemDefenseGainedNone;
 }
 
-- (NSNumber *)derivedSpecialDefenseValue {
-    return [[self class] calculateDefenseValueBasedOnStatValue:[self.characterStats effectiveStatDodge]:TRUE];
-}
-
 - (NSNumber *)derivedMagicDefense {
     return [[self class] calculateDefenseValueBasedOnStatValue:[self.characterStats effectiveStatMagicDefense]:FALSE];
-
 }
+
+- (NSNumber *)derivedParryDefense {
+    if ([self derivedSpecialDefenseType] == ItemDefenseGainedParry) {
+        return [NSNumber numberWithInteger:[[self derivedBasicDefense] integerValue] + 5];
+    } else if ([self derivedSpecialDefenseType] == ItemDefenseGainedBoth) {
+        return [NSNumber numberWithInteger:[[self derivedBasicDefense] integerValue] + 10];
+    } else {
+        return nil;
+    }
+}
+
+- (NSNumber *)derivedBlockDefense {
+    if ([self derivedSpecialDefenseType] == ItemDefenseGainedBlock ||
+        [self derivedSpecialDefenseType] == ItemDefenseGainedBoth) {
+        return [NSNumber numberWithInteger:[[self derivedBasicDefense] integerValue] + 5];
+    } else {
+        return nil;
+    }
+}
+
 - (NSNumber *)derivedSoak {
     return [[self class] calculateDefenseValueBasedOnStatValue:[self.characterStats effectiveStatSoak]:FALSE];
 }
