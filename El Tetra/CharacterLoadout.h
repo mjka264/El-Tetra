@@ -9,10 +9,48 @@
 #import <Foundation/Foundation.h>
 #import "Item.h"
 
+@protocol CharacterLoadoutAssistsDerivation <NSObject>
+- (NSNumber *)effectiveStatInitiative;
+- (NSNumber *)effectiveStatAttackArtful;
+- (NSNumber *)effectiveStatAttackBrutal;
+- (NSNumber *)effectiveStatAttackProjectile;
+- (NSNumber *)effectiveStatDamage;
+- (NSNumber *)effectiveStatDodge;
+- (NSNumber *)effectiveStatSoak;
+- (NSNumber *)effectiveStatMagicDefense;
+@end
+
 @interface CharacterLoadout : NSObject
 + (CharacterLoadout *)defaultLoadout;
-@property (nonatomic, strong) Item *mainhand;
-@property (nonatomic, strong) Item *offhand;
-@property (nonatomic, strong) Item *armour;
-@property (nonatomic, strong) NSArray *gear;   // of Item
++ (CharacterLoadout *)defaultLoadoutTwo;
+
++ (NSNumber *)calculateDefenseValueBasedOnStatValue:(NSNumber *)statValue:(BOOL)isSpecialDefense;
+
+// This has to be set to link the character loadout with a character stats
+// Once this is done, each of the derived calculations will work correctly
+@property (nonatomic, weak) id<CharacterLoadoutAssistsDerivation>characterStats;
+
+- (NSString *)mainhandName;
+- (NSString *)offhandName;
+- (NSString *)armourName;
+- (NSArray *)gearNames;        // of NSString
+
+- (NSArray *)mainhandSpecials; // of NSString
+- (NSArray *)offhandSpecials;  // of NSString
+- (NSArray *)armourSpecials;   // of NSString
+- (NSArray *)gearSpecials;     // of NSString
+
+- (t_ItemWeaponDefensePermitted)weaponDefensePermitted;
+
+// These return two NSNumbers: the number of dice to roll then the modifier
+- (NSArray *)derivedSpeed;
+- (NSArray *)derivedAttack;
+- (NSArray *)derivedDamage;
+
+- (NSNumber *)derivedBasicDefense;
+- (t_ItemDefenseGained)derivedSpecialDefenseType;
+- (NSNumber *)derivedSpecialDefenseValue;
+- (NSNumber *)derivedMagicDefense;
+- (NSNumber *)derivedSoak;
+
 @end

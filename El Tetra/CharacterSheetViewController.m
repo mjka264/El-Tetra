@@ -91,7 +91,10 @@
 @synthesize characterLoadouts = _characterLoadouts;
 - (NSMutableArray *)characterLoadouts {
     if (!_characterLoadouts) {
-        _characterLoadouts = [NSMutableArray arrayWithObject: [CharacterLoadout defaultLoadout]];
+        _characterLoadouts = [NSMutableArray arrayWithObjects:
+                              [CharacterLoadout defaultLoadout],
+                              [CharacterLoadout defaultLoadoutTwo],
+                              nil];
     }
     return _characterLoadouts;
 }
@@ -117,7 +120,9 @@
     }
     
     CharacterLoadoutViewController *loadoutController = [self.storyboard instantiateViewControllerWithIdentifier:@"CharacterLoadoutViewControllerTemplate"];
-    loadoutController.dataObject = [self.characterLoadouts objectAtIndex:index];
+    
+    loadoutController.characterLoadout = [self.characterLoadouts objectAtIndex:index];
+    loadoutController.dataSource = self;
     
     return loadoutController;
 }
@@ -146,7 +151,7 @@
 
 - (NSUInteger)indexOfLoadoutController:(CharacterLoadoutViewController *)loadoutController
 {
-    return [self.characterLoadouts indexOfObject:loadoutController.dataObject];
+    return [self.characterLoadouts indexOfObject:loadoutController.characterLoadout];
 }
 
 // Now the protocol:
@@ -187,6 +192,13 @@
                                   animated:NO
                                 completion:nil];
     }
+}
+
+#pragma mark -
+#pragma mark CharacterLoadoutViewControllerDataSource
+
+- (id)dataSourceCharacterStats {
+    return self.characterStats;
 }
 
 @end

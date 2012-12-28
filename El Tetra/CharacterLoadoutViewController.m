@@ -10,22 +10,35 @@
 #import "CharacterLoadout.h"
 
 @interface CharacterLoadoutViewController ()
-- (void)refreshDataObject;
+- (void)refreshLoadout;
 @end
 
 @implementation CharacterLoadoutViewController
 //@synthesize loadoutName = _loadoutName;
-@synthesize dataObject = _dataObject;
-- (void)setDataObject:(CharacterLoadout *)dataObject {
-    _dataObject = dataObject;
-    [self refreshDataObject];
+@synthesize characterLoadout = _characterLoadout;
+- (void)setCharacterLoadout:(CharacterLoadout *)dataObject {
+    _characterLoadout = dataObject;
+    [self refreshLoadout];
 }
 
-- (void)refreshDataObject {
-    self.mainhandView.text = self.dataObject.mainhand.name;
-    self.offhandView.text = self.dataObject.offhand.name;
+- (void)refreshLoadout {
+    self.characterLoadout.characterStats = [self.dataSource dataSourceCharacterStats];
+    
+    self.mainhandView.text = [self.characterLoadout mainhandName];
+    self.offhandView.text = [self.characterLoadout offhandName];
+    self.speedView.text = [[[self.characterLoadout derivedSpeed] valueForKey:@"description"] componentsJoinedByString:@": "];
+    self.attackView.text = [[[self.characterLoadout derivedAttack] valueForKey:@"description"] componentsJoinedByString:@": "];
+    self.damageView.text = [[[self.characterLoadout derivedDamage] valueForKey:@"description"] componentsJoinedByString:@": "];
+    
+    if ([[self.characterLoadout mainhandSpecials] count]) {
+        self.weaponSpecialView.text = [[[self.characterLoadout mainhandSpecials] valueForKey:@"description"] componentsJoinedByString:@","];
+    } else {
+        self.weaponSpecialView.text = @" ";
+    }
+    
 }
 
+                           
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -38,7 +51,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self refreshDataObject];
+    [self refreshLoadout];
 }
 
 - (void)didReceiveMemoryWarning

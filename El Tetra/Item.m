@@ -49,6 +49,16 @@ static NSArray *_allItems;
                                      defensePermitted:ItemWeaponDefensePermittedNA
                                         defenseGained:ItemDefenseGainedNone
                                                damage:0 speed:5 miscellaneous:[NSArray array]],
+                     [Item initStandardWeaponWithName:@"Polearm"
+                                                 type:ItemTypeWeaponDualhand
+                                                style:ItemCombatStyleBrutal
+                                     defensePermitted:ItemWeaponDefensePermittedAny
+                                        defenseGained:ItemDefenseGainedNone
+                                               damage:10 speed:0 miscellaneous:[NSArray arrayWithObject:@"Reach"]],
+                     [Item initStandardArmourWithName:@"Heavy armour"
+                                                speed:-5
+                                                 soak:3
+                                        miscellaneous:[NSArray arrayWithObject:@"Body check: -1"]],
                      nil];
     }
     return _allItems;
@@ -62,16 +72,14 @@ static NSArray *_allItems;
                               damage:(NSInteger)damage
                                speed:(NSInteger)speed
                        miscellaneous:(NSArray *)properties {
-    return [Item initItemWithName:name type:type style:style defensePermitted:defenses defenseGained:newDefenses attack:0 damage:damage speed:speed soak:0 body:0 miscellaneous:properties];
+    return [Item initItemWithName:name type:type style:style defensePermitted:defenses defenseGained:newDefenses attack:0 damage:damage speed:speed soak:0 miscellaneous:properties];
 }
 
 + (Item *)initStandardArmourWithName:(NSString *)name
-                                type:(t_ItemType)type
                                speed:(NSInteger)speed
                                 soak:(NSInteger)soak
-                                body:(NSInteger)body
                        miscellaneous:(NSArray *)properties {
-    return [Item initItemWithName:name type:type style:ItemCombatStyleNA defensePermitted:ItemWeaponDefensePermittedNA defenseGained:ItemDefenseGainedNone attack:0 damage:0 speed:speed soak:soak body:body miscellaneous:properties];
+    return [Item initItemWithName:name type:ItemTypeArmour style:ItemCombatStyleNA defensePermitted:ItemWeaponDefensePermittedNA defenseGained:ItemDefenseGainedNone attack:0 damage:0 speed:speed soak:soak miscellaneous:properties];
 }
 
 + (Item *)initItemWithName:(NSString *)name
@@ -83,7 +91,6 @@ static NSArray *_allItems;
                     damage:(NSInteger)damage
                      speed:(NSInteger)speed
                       soak:(NSInteger)soak
-                      body:(NSInteger)body
              miscellaneous:(NSArray *)properties {
     Item *item = [[Item alloc] init];
     item.name = name;
@@ -95,7 +102,6 @@ static NSArray *_allItems;
     item.damageModifier = [NSNumber numberWithInt:damage];
     item.speedModifier = [NSNumber numberWithInt:speed];
     item.soakModifier = [NSNumber numberWithInt:soak];
-    item.bodyModifier = [NSNumber numberWithInt:body];
     item.miscellaneousProperties = properties;
     return item;
 }

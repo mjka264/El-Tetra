@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CharacterLoadout.h"
 
 // The implementation of dataStatGroupWhenDisplayingAllForIndex depends on this list starting at 1
 typedef enum {
@@ -39,7 +40,7 @@ typedef enum {
 } t_CharacterStatSoul;
 
 // The (id) returned by the first two methods is the parameter to these other methods
-@interface CharacterStats : NSObject <NSCopying>
+@interface CharacterStats : NSObject <NSCopying,CharacterLoadoutAssistsDerivation>
 - (id)characterWithAllStats;
 - (id)characterWithStatGroup:(t_CharacterStatGroup)group;
 + (NSInteger)numberOfStatGroupsFrom:(id)characterData;

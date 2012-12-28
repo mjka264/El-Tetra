@@ -61,10 +61,8 @@ typedef enum {
                                speed:(NSInteger)speed
                        miscellaneous:(NSArray *)properties;
 + (Item *)initStandardArmourWithName:(NSString *)name
-                                type:(t_ItemType)type
                                speed:(NSInteger)speed
                                 soak:(NSInteger)soak
-                                body:(NSInteger)body
                        miscellaneous:(NSArray *)properties;
 + (Item *)initItemWithName:(NSString *)name
                       type:(t_ItemType)type
@@ -75,6 +73,6 @@ typedef enum {
                     damage:(NSInteger)damage
                      speed:(NSInteger)speed
                       soak:(NSInteger)soak
-                      body:(NSInteger)body
              miscellaneous:(NSArray *)properties;
+
 @end

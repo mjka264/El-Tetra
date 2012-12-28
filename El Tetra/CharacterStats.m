@@ -21,6 +21,8 @@
 // When a Character Data is passed as an ID, this property allows it to work out what was searched for
 @property (nonatomic) NSInteger savedLookupKey;
 
+- (NSNumber *)abilityValueWithDescription:(NSString *)description;
+- (NSNumber *)primaryStatValueWithDescription:(NSString *)description;
 
 @end
 
@@ -159,7 +161,7 @@
          [NSArray arrayWithObjects:
           [NSNumber numberWithInt:5], [NSNumber numberWithInt:6],
           [NSNumber numberWithInt:3], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7], [NSNumber numberWithInt:8],
-          [NSNumber numberWithInt:5], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7],
+          [NSNumber numberWithInt:6], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7],
           [NSNumber numberWithInt:5], [NSNumber numberWithInt:6],
           [NSNumber numberWithInt:5], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7], [NSNumber numberWithInt:8],
           [NSNumber numberWithInt:5], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7], [NSNumber numberWithInt:8], nil],
@@ -235,6 +237,8 @@
     return [CharacterStats primaryStatForSkillGroupFrom:character inStatGroup:character.savedLookupKey];
 }
 
+// BUG: rewrite this with strings not indexes
+// Also, #define those strings within this file
 + (NSNumber *)primaryStatForSkillGroupFrom:(CharacterStats *)character inStatGroup:(t_CharacterStatGroup)group {
     NSInteger index = 0;
     if (group == CharacterStatGroupFireSkills) index = 0;
@@ -286,6 +290,45 @@
     copy.statValues = self.statValues;
     copy.statElements = self.statElements;
     return copy;
+}
+
+
+- (NSNumber *)abilityValueWithDescription:(NSString *)description {
+    NSInteger index = [((NSArray *)[self.statDescriptions objectForKey:[NSNumber numberWithInt:CharacterStatGroupAbilities]]) indexOfObject:description];
+    return [[self.statValues objectForKey:[NSNumber numberWithInt:CharacterStatGroupAbilities]] objectAtIndex:index];
+}
+
+- (NSNumber *)primaryStatValueWithDescription:(NSString *)description {
+    NSInteger index = [((NSArray *)[self.statDescriptions objectForKey:[NSNumber numberWithInt:CharacterStatGroupPrimary]]) indexOfObject:description];
+    return [[self.statValues objectForKey:[NSNumber numberWithInt:CharacterStatGroupPrimary]] objectAtIndex:index];
+}
+
+// BUG the strings below need to be #defined
+
+#pragma mark CharacterLoadoutAssistsDerivation protocol
+- (NSNumber *)effectiveStatInitiative {
+    return [self abilityValueWithDescription:@"Initiative"];
+}
+- (NSNumber *)effectiveStatAttackArtful {
+    return [self abilityValueWithDescription:@"Artful weapons"];
+}
+- (NSNumber *)effectiveStatAttackBrutal {
+    return [self abilityValueWithDescription:@"Brutal weapons"];
+}
+- (NSNumber *)effectiveStatAttackProjectile {
+    return [self abilityValueWithDescription:@"Projectile weapons"];
+}
+- (NSNumber *)effectiveStatDamage {
+    return [self primaryStatValueWithDescription:@"Ferocity"];
+}
+- (NSNumber *)effectiveStatDodge {
+    return [self primaryStatValueWithDescription:@"Agility"];
+}
+- (NSNumber *)effectiveStatSoak {
+    return [self primaryStatValueWithDescription:@"Resilience"];
+}
+- (NSNumber *)effectiveStatMagicDefense {
+    return [self primaryStatValueWithDescription:@"Chi"];
 }
 
 @end

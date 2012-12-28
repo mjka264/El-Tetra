@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "StatTableViewController.h"
 #import "CharacterStats.h"
+#import "CharacterLoadoutViewController.h"
 
 @interface CharacterSheetViewController : UIViewController
-<StatTableViewControllerDataSource, UIPageViewControllerDataSource>
+<StatTableViewControllerDataSource, UIPageViewControllerDataSource, CharacterLoadoutViewControllerDataSource>
 
 @property (nonatomic, weak) IBOutlet UIPageViewController *pageViewController;
 //@property (nonatomic, strong) IBOutlet NSArray *pageViewContent;
