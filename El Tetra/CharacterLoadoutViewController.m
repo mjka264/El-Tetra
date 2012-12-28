@@ -13,18 +13,11 @@
 @interface CharacterLoadoutViewController ()
 - (void)refreshLoadout;
 
-/*
-- (NSAttributedString *)generateAttributedStringWithFirstPart:(NSString *)firstPart
-                                                   Attributes:(NSDictionary *)firstAttributes
-                                                   secondPart:(NSString *)secondPart
-                                                   Attributes:(NSDictionary *)secondAttributes;
-*/
-- (NSAttributedString *)generateModifedStatLabel:(NSString *)label
-                                      attributes:(NSDictionary *)labelAttributes
-                                            dice:(NSNumber *)dice
-                                      attributes:(NSDictionary *)diceAttributes
-                                        modifier:(NSNumber *)modifier
-                                      attributes:(NSDictionary *)modifierAttributes;
+- (NSAttributedString *)generateModifedStatDice:(NSNumber *)dice
+                                     attributes:(NSDictionary *)diceAttributes
+                                       modifier:(NSNumber *)modifier
+                                     attributes:(NSDictionary *)modifierAttributes;
+
 - (NSDictionary *)makeAttributesSize:(NSInteger)fontSize
                                 bold:(BOOL)bold
                               colour:(UIColor *)colour;
@@ -38,21 +31,6 @@
     [self refreshLoadout];
 }
 
-- (NSAttributedString *)generateModifedStatLabel:(NSString *)label
-                                      attributes:(NSDictionary *)labelAttributes
-                                            dice:(NSNumber *)dice
-                                      attributes:(NSDictionary *)diceAttributes
-                                        modifier:(NSNumber *)modifier
-                                      attributes:(NSDictionary *)modifierAttributes {
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc]
-                                         initWithString:label attributes:labelAttributes];
-    if (dice) [string appendAttributedString:[[NSMutableAttributedString alloc]
-                                    initWithString:[NSString stringWithFormat:@" %@", dice] attributes:diceAttributes]];
-    if ([modifier integerValue]) [string appendAttributedString:[[NSMutableAttributedString alloc]
-                                                      initWithString:[NSString stringWithFormat:@" + %@", modifier] attributes:modifierAttributes]];
-    return string;
-}
-
 - (NSAttributedString *)generateModifedStatDice:(NSNumber *)dice
                                       attributes:(NSDictionary *)diceAttributes
                                         modifier:(NSNumber *)modifier
@@ -60,8 +38,13 @@
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] init];
     if (dice) [string appendAttributedString:[[NSMutableAttributedString alloc]
                                               initWithString:[NSString stringWithFormat:@" %@", dice] attributes:diceAttributes]];
-    if ([modifier integerValue]) [string appendAttributedString:[[NSMutableAttributedString alloc]
-                                                                 initWithString:[NSString stringWithFormat:@" + %@", modifier] attributes:modifierAttributes]];
+    NSString *operator = [modifier integerValue] > 0? @"+":@"-";
+    if ([modifier integerValue] < 0) modifier = [NSNumber numberWithInteger:-[modifier integerValue]];
+    if ([modifier integerValue]) {
+        [string appendAttributedString:[[NSMutableAttributedString alloc]
+                                        initWithString:[NSString stringWithFormat:@" %@ %@", operator, modifier]
+                                        attributes:modifierAttributes]];
+    }
     return string;
 }
 

@@ -41,6 +41,7 @@
     CharacterLoadout *loadout = [[CharacterLoadout alloc] init];
     loadout.mainhand = [[Item allItems] objectAtIndex:3];
     loadout.offhand = nil;
+    loadout.armour = [[Item allItems] objectAtIndex:4];
     return loadout;
 }
 

@@ -81,7 +81,7 @@
     CGContextSetTextMatrix(context, transform);
     CGContextSelectFont(context, "Helvetica", fontSize, kCGEncodingMacRoman);
     CGContextSetTextDrawingMode(context, kCGTextFill);
-    CGSize sizeOfText = [@"3" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:fontSize]];
+    CGSize sizeOfText = [[NSString stringWithCString:statText encoding:NSASCIIStringEncoding] sizeWithFont:[UIFont fontWithName:@"Helvetica" size:fontSize]];
     CGContextShowTextAtPoint(context, centre.x-sizeOfText.width/2, centre.y+sizeOfText.height/4, statText, 1);
 }
 
