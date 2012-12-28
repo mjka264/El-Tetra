@@ -8,6 +8,7 @@
 
 #import "CharacterLoadoutViewController.h"
 #import "CharacterLoadout.h"
+#import "CharacterLoadoutView.h"
 
 @interface CharacterLoadoutViewController ()
 - (void)refreshLoadout;
@@ -142,16 +143,21 @@
     if ([self.characterLoadout derivedBlockDefense]) {
         self.blockDefenseTitleView.text = @"Block";
         self.blockDefenseValueView.text = [[self.characterLoadout derivedBlockDefense] description];
+        ((CharacterLoadoutView *)self.view).blockHidden = NO;
     } else {
         self.blockDefenseTitleView.text = @"";
         self.blockDefenseValueView.text = @"";
+        ((CharacterLoadoutView *)self.view).blockHidden = YES;
     }
     if ([self.characterLoadout derivedParryDefense]) {
         self.parryDefenseTitleView.text = @"Parry";
         self.parryDefenseValueView.text = [[self.characterLoadout derivedParryDefense] description];
+        ((CharacterLoadoutView *)self.view).parryHidden = NO;
     } else {
         self.parryDefenseTitleView.text = @"";
         self.parryDefenseValueView.text = @"";
+        ((CharacterLoadoutView *)self.view).parryHidden = YES;
+        
     }
     
     /*
