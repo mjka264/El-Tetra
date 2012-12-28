@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+// If I add a new type, I need to change the class method itemCategories too 
 typedef enum {
-    ItemTypeWeaponMainhand = 1,
-    ItemTypeWeaponOffhand = 2,
-    ItemTypeWeaponDualhand = 3,
+    ItemTypeWeaponDualhand = 1,
+    ItemTypeWeaponMainhand = 2,
+    ItemTypeWeaponOffhand = 3,
     ItemTypeArmour = 4,
     ItemTypeGear = 5
 } t_ItemType;
+// See comment above
 
 typedef enum {
     ItemCombatStyleArtful = 1,
@@ -51,7 +53,9 @@ typedef enum {
 @property (nonatomic, strong) NSNumber *soakModifier;
 @property (nonatomic, strong) NSNumber *bodyModifier;
 @property (nonatomic, strong) NSArray *miscellaneousProperties;  // of NSStrings
++ (NSArray *)itemCategories;
 + (NSArray *)allItems;
++ (NSArray *)allItemsWithType:(t_ItemType)type;
 + (Item *)initStandardWeaponWithName:(NSString *)name
                                 type:(t_ItemType)type
                                style:(t_ItemCombatStyle)style

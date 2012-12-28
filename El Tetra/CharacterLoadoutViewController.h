@@ -8,16 +8,25 @@
 
 #import <UIKit/UIKit.h>
 #import "CharacterLoadout.h"
+#import "CharacterLoadoutEditorViewController.h"
+
 
 @protocol CharacterLoadoutViewControllerDataSource <NSObject>
 - (id)dataSourceCharacterStats;
 @end
 
-@interface CharacterLoadoutViewController : UIViewController
+@interface CharacterLoadoutViewController : UIViewController <CharacterLoadoutEditorViewControllerDelegate>
 
 // These fields are both set by the parent controller
 @property (weak, nonatomic) CharacterLoadout *characterLoadout; 
 @property (weak, nonatomic) id<CharacterLoadoutViewControllerDataSource> dataSource;
+
+- (IBAction)newLoadoutPressed:(UIBarButtonItem *)sender;
+- (IBAction)editLoadoutPressed:(UIBarButtonItem *)sender;
+- (IBAction)trashLoadoutPressed:(UIBarButtonItem *)sender;
+
+@property (weak, nonatomic) IBOutlet UIToolbar *menuBarTrash;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarHeading;
 
 @property (nonatomic, weak) IBOutlet UILabel *weaponsView;
 @property (weak, nonatomic) IBOutlet UILabel *weaponSpecialsView;

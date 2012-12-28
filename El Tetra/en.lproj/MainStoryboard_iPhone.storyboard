@@ -852,10 +852,25 @@
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjx-in-lwb" userLabel="sdgds">
                                 <items>
-                                    <barButtonItem systemItem="trash" id="F4n-YR-Wc9"/>
+                                    <barButtonItem systemItem="trash" id="F4n-YR-Wc9">
+                                        <connections>
+                                            <action selector="trashLoadoutPressed:" destination="qoL-AJ-Pqe" id="kg8-wl-67V"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="qea-wu-Epf"/>
-                                    <barButtonItem systemItem="edit" id="CFj-yq-mPI"/>
-                                    <barButtonItem systemItem="add" id="GQB-Xj-fQi"/>
+                                    <barButtonItem title="Loadout" style="plain" id="56B-Tk-3vu"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="DHc-n7-XMQ"/>
+                                    <barButtonItem systemItem="edit" id="CFj-yq-mPI">
+                                        <connections>
+                                            <action selector="editLoadoutPressed:" destination="qoL-AJ-Pqe" id="ruU-GU-ylI"/>
+                                            <segue destination="W7i-BL-IGg" kind="modal" id="Fpd-wU-67w"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="add" id="GQB-Xj-fQi">
+                                        <connections>
+                                            <action selector="newLoadoutPressed:" destination="qoL-AJ-Pqe" id="yXJ-Mz-Oij"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mainhand" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zq6-ko-gdM">
@@ -999,20 +1014,21 @@
                             <constraint firstItem="jI8-Rn-ldK" firstAttribute="leading" secondItem="ImI-FH-1K0" secondAttribute="leading" type="default" id="1kB-bW-w2a"/>
                             <constraint firstItem="wf1-T2-mun" firstAttribute="bottom" secondItem="2Td-ZV-Nkx" secondAttribute="bottom" type="default" id="240-Dk-KKi"/>
                             <constraint firstAttribute="bottom" secondItem="2Td-ZV-Nkx" secondAttribute="bottom" constant="30" id="3o3-5e-Be9"/>
+                            <constraint firstItem="jjx-in-lwb" firstAttribute="leading" secondItem="ucj-YC-0HI" secondAttribute="leading" type="default" id="5iw-oh-qKG"/>
                             <constraint firstItem="uZj-jk-RhV" firstAttribute="top" secondItem="ImI-FH-1K0" secondAttribute="top" type="default" id="9eV-27-E4W"/>
                             <constraint firstItem="uZj-jk-RhV" firstAttribute="baseline" secondItem="kex-5f-12N" secondAttribute="baseline" type="default" id="9pc-9z-Vqw"/>
                             <constraint firstItem="xMY-dR-D0t" firstAttribute="leading" secondItem="Wqr-O7-GpJ" secondAttribute="leading" type="default" id="A6t-44-T4I"/>
                             <constraint firstItem="V0G-b8-CAl" firstAttribute="leading" secondItem="Wqr-O7-GpJ" secondAttribute="leading" type="default" id="CKP-Er-Obp"/>
                             <constraint firstItem="PdD-TV-YU0" firstAttribute="baseline" secondItem="Nu2-dq-7b3" secondAttribute="baseline" type="default" id="D28-rh-EvB"/>
-                            <constraint firstItem="PdD-TV-YU0" firstAttribute="leading" secondItem="ucj-YC-0HI" secondAttribute="leading" constant="118" id="DTQ-UU-mgc"/>
                             <constraint firstItem="Dgy-m4-bDz" firstAttribute="trailing" secondItem="3PH-Oc-DAa" secondAttribute="trailing" type="default" id="Dgx-y0-EpX"/>
                             <constraint firstItem="wf1-T2-mun" firstAttribute="trailing" secondItem="Ycx-sm-UJ8" secondAttribute="trailing" type="default" id="Ekh-y6-wHK"/>
+                            <constraint firstItem="PdD-TV-YU0" firstAttribute="leading" secondItem="ucj-YC-0HI" secondAttribute="leading" constant="118" id="Ens-h4-F8p"/>
                             <constraint firstAttribute="bottom" secondItem="xMY-dR-D0t" secondAttribute="bottom" constant="3" id="F9e-uc-m4r"/>
                             <constraint firstItem="wf1-T2-mun" firstAttribute="trailing" secondItem="ImI-FH-1K0" secondAttribute="trailing" type="default" id="FVF-h2-tuW"/>
                             <constraint firstItem="3PH-Oc-DAa" firstAttribute="leading" secondItem="kNf-UH-FDb" secondAttribute="leading" type="default" id="FX5-yJ-UpP"/>
+                            <constraint firstItem="jjx-in-lwb" firstAttribute="trailing" secondItem="ucj-YC-0HI" secondAttribute="trailing" type="default" id="Fes-rt-FsQ"/>
                             <constraint firstItem="zkM-qa-BWJ" firstAttribute="top" secondItem="jI8-Rn-ldK" secondAttribute="top" type="default" id="G8G-md-hWN"/>
                             <constraint firstItem="U8E-zz-l6z" firstAttribute="top" secondItem="Ycx-sm-UJ8" secondAttribute="top" type="default" id="HcU-9V-rIn"/>
-                            <constraint firstItem="jjx-in-lwb" firstAttribute="leading" secondItem="ucj-YC-0HI" secondAttribute="leading" type="default" id="InA-Ue-qog"/>
                             <constraint firstItem="zq6-ko-gdM" firstAttribute="leading" secondItem="ucj-YC-0HI" secondAttribute="leading" constant="10" id="K8j-XS-rkp"/>
                             <constraint firstItem="zQF-Yt-t1z" firstAttribute="bottom" secondItem="3PH-Oc-DAa" secondAttribute="bottom" type="default" id="LgS-IC-C9t"/>
                             <constraint firstItem="ImI-FH-1K0" firstAttribute="baseline" secondItem="kNf-UH-FDb" secondAttribute="baseline" type="default" id="MzM-TZ-qAM"/>
@@ -1064,7 +1080,6 @@
                             <constraint firstItem="3PH-Oc-DAa" firstAttribute="top" secondItem="zQF-Yt-t1z" secondAttribute="top" type="default" id="xka-xI-b8i"/>
                             <constraint firstItem="wf1-T2-mun" firstAttribute="leading" secondItem="Ycx-sm-UJ8" secondAttribute="leading" type="default" id="xq6-sU-yul"/>
                             <constraint firstAttribute="trailing" secondItem="hKi-0Z-ik5" secondAttribute="trailing" constant="75" id="yNW-k2-Deo"/>
-                            <constraint firstItem="jjx-in-lwb" firstAttribute="trailing" secondItem="ucj-YC-0HI" secondAttribute="trailing" type="default" id="yeU-dm-n2w"/>
                             <constraint firstItem="jI8-Rn-ldK" firstAttribute="trailing" secondItem="ImI-FH-1K0" secondAttribute="trailing" type="default" id="yoe-Z9-dgB"/>
                         </constraints>
                     </view>
@@ -1079,6 +1094,8 @@
                         <outlet property="blockDefenseValueView" destination="jI8-Rn-ldK" id="Lzh-c5-o0v"/>
                         <outlet property="damageView" destination="kNf-UH-FDb" id="0r9-Ux-SZ2"/>
                         <outlet property="magicDefenseView" destination="wf1-T2-mun" id="lWz-20-Cyl"/>
+                        <outlet property="menuBarHeading" destination="56B-Tk-3vu" id="hw3-Gd-ycQ"/>
+                        <outlet property="menuBarTrash" destination="jjx-in-lwb" id="HvM-h2-79m"/>
                         <outlet property="parryDefenseTitleView" destination="uZj-jk-RhV" id="HWe-hE-Uoo"/>
                         <outlet property="parryDefenseValueView" destination="ImI-FH-1K0" id="rux-Kj-0fl"/>
                         <outlet property="soakView" destination="Ycx-sm-UJ8" id="iop-Pf-6VJ"/>
@@ -1091,14 +1108,61 @@
             </objects>
             <point key="canvasLocation" x="1391" y="277"/>
         </scene>
+        <!--Character Loadout Editor View Controller-->
+        <scene sceneID="BoQ-my-Dro">
+            <objects>
+                <tableViewController id="W7i-BL-IGg" customClass="CharacterLoadoutEditorViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="bvs-tD-sLK">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Loadout Item Cell" textLabel="Al8-rk-A8d" detailTextLabel="cRZ-7a-gwp" style="IBUITableViewCellStyleSubtitle" id="ngo-7p-AhY">
+                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Al8-rk-A8d">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRZ-7a-gwp">
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="W7i-BL-IGg" id="gUq-HA-R68"/>
+                            <outlet property="delegate" destination="W7i-BL-IGg" id="qkp-ZJ-RVh"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cZX-Sd-NWg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1858" y="141"/>
+        </scene>
     </scenes>
     <classes>
+        <class className="CharacterLoadoutEditorViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterLoadoutEditorViewController.h"/>
+        </class>
         <class className="CharacterLoadoutView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterLoadoutView.h"/>
         </class>
         <class className="CharacterLoadoutViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterLoadoutViewController.h"/>
             <relationships>
+                <relationship kind="action" name="editLoadoutPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="newLoadoutPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="trashLoadoutPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="armourSpecialsView" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="armourView" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="attackView" candidateClass="UILabel"/>
@@ -1109,6 +1173,8 @@
                 <relationship kind="outlet" name="gearSpecialView" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="gearView" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="magicDefenseView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="menuBarHeading" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="menuBarTrash" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="parryDefenseTitleView" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="parryDefenseValueView" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="soakView" candidateClass="UILabel"/>

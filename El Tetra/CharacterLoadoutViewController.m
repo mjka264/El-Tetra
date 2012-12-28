@@ -7,7 +7,6 @@
 //
 
 #import "CharacterLoadoutViewController.h"
-#import "CharacterLoadout.h"
 #import "CharacterLoadoutView.h"
 
 @interface CharacterLoadoutViewController ()
@@ -84,6 +83,9 @@
     // Link the data sources together
     self.characterLoadout.characterStats = [self.dataSource dataSourceCharacterStats];
 
+    // Header stuff
+    self.menuBarHeading.title = self.characterLoadout.name;
+    
     // Weapon (mainhand and offhand)
     if (![self.characterLoadout offhandName]) {
         self.weaponsView.text = [self.characterLoadout mainhandName];
@@ -178,4 +180,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[CharacterLoadoutEditorViewController class]]) {
+        CharacterLoadoutEditorViewController *destination = segue.destinationViewController;
+        destination.delegate = self;
+        destination.loadout = self.characterLoadout;
+    }
+}
+
+- (IBAction)newLoadoutPressed:(UIBarButtonItem *)sender {
+}
+
+- (IBAction)editLoadoutPressed:(UIBarButtonItem *)sender {
+}
+
+- (IBAction)trashLoadoutPressed:(UIBarButtonItem *)sender {
+}
 @end

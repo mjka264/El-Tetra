@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */; };
 		C260999D168DBB2A000ADB58 /* CharacterLoadoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C260999C168DBB2A000ADB58 /* CharacterLoadoutView.m */; };
+		C26099A1168DD408000ADB58 /* CharacterLoadoutEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26099A0168DD408000ADB58 /* CharacterLoadoutEditorViewController.m */; };
 		C264857A16887C7C00F3B648 /* StatTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = C264857916887C7C00F3B648 /* StatTableViewHeader.m */; };
 		C26485811688865D00F3B648 /* ElTetraDummyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C26485801688865D00F3B648 /* ElTetraDummyDelegate.m */; };
 		C27AB562168B232000CA0D39 /* CharacterLoadoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C27AB561168B232000CA0D39 /* CharacterLoadoutViewController.m */; };
@@ -50,6 +51,8 @@
 		C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimaryStatColouredCircleView.m; sourceTree = "<group>"; };
 		C260999B168DBB29000ADB58 /* CharacterLoadoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterLoadoutView.h; sourceTree = "<group>"; };
 		C260999C168DBB2A000ADB58 /* CharacterLoadoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterLoadoutView.m; sourceTree = "<group>"; };
+		C260999F168DD408000ADB58 /* CharacterLoadoutEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterLoadoutEditorViewController.h; sourceTree = "<group>"; };
+		C26099A0168DD408000ADB58 /* CharacterLoadoutEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterLoadoutEditorViewController.m; sourceTree = "<group>"; };
 		C264857816887C7C00F3B648 /* StatTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewHeader.h; sourceTree = "<group>"; };
 		C264857916887C7C00F3B648 /* StatTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewHeader.m; sourceTree = "<group>"; };
 		C264857D168881D500F3B648 /* ElTetraProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ElTetraProtocols.h; path = ../ElTetraProtocols.h; sourceTree = "<group>"; };
@@ -114,6 +117,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C260999E168DD2CF000ADB58 /* CharacterLoadoutView */ = {
+			isa = PBXGroup;
+			children = (
+				C260999B168DBB29000ADB58 /* CharacterLoadoutView.h */,
+				C260999C168DBB2A000ADB58 /* CharacterLoadoutView.m */,
+			);
+			name = CharacterLoadoutView;
+			sourceTree = "<group>";
+		};
 		C27AB564168B232D00CA0D39 /* StatTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,20 +172,21 @@
 		C2975279168551CB00092860 /* El Tetra */ = {
 			isa = PBXGroup;
 			children = (
+				C260999F168DD408000ADB58 /* CharacterLoadoutEditorViewController.h */,
+				C26099A0168DD408000ADB58 /* CharacterLoadoutEditorViewController.m */,
 				C29752C316856F3700092860 /* CharacterStats.h */,
 				C29752C416856F3700092860 /* CharacterStats.m */,
-				C27B1FE7168C74E800258807 /* Item.h */,
-				C27B1FE8168C74E800258807 /* Item.m */,
-				C27B1FE3168BE10600258807 /* CharacterLoadout.h */,
-				C27B1FE4168BE10600258807 /* CharacterLoadout.m */,
 				C297528B168551CB00092860 /* MainStoryboard_iPhone.storyboard */,
 				C29752B11685629400092860 /* CharacterSheetViewController.h */,
 				C29752B21685629400092860 /* CharacterSheetViewController.m */,
+				C264857D168881D500F3B648 /* ElTetraProtocols.h */,
 				C27AB560168B232000CA0D39 /* CharacterLoadoutViewController.h */,
 				C27AB561168B232000CA0D39 /* CharacterLoadoutViewController.m */,
-				C260999B168DBB29000ADB58 /* CharacterLoadoutView.h */,
-				C260999C168DBB2A000ADB58 /* CharacterLoadoutView.m */,
-				C264857D168881D500F3B648 /* ElTetraProtocols.h */,
+				C27B1FE3168BE10600258807 /* CharacterLoadout.h */,
+				C27B1FE4168BE10600258807 /* CharacterLoadout.m */,
+				C27B1FE7168C74E800258807 /* Item.h */,
+				C27B1FE8168C74E800258807 /* Item.m */,
+				C260999E168DD2CF000ADB58 /* CharacterLoadoutView */,
 				C27AB564168B232D00CA0D39 /* StatTableView */,
 				C297527A168551CB00092860 /* Supporting Files */,
 			);
@@ -342,6 +355,7 @@
 				C27B1FE5168BE10600258807 /* CharacterLoadout.m in Sources */,
 				C27B1FE9168C74E800258807 /* Item.m in Sources */,
 				C260999D168DBB2A000ADB58 /* CharacterLoadoutView.m in Sources */,
+				C26099A1168DD408000ADB58 /* CharacterLoadoutEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

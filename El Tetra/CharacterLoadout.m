@@ -20,6 +20,7 @@
 
 @implementation CharacterLoadout
 
+@synthesize name = _name;
 @synthesize mainhand = _mainhand;
 @synthesize offhand = _offhand;
 @synthesize armour = _armour;
@@ -31,6 +32,7 @@
 
 + (CharacterLoadout *)defaultLoadout {
     CharacterLoadout *loadout = [[CharacterLoadout alloc] init];
+    loadout.name = @"Soft";
     loadout.mainhand = [[Item allItems] objectAtIndex:1];
     loadout.offhand = [[Item allItems] objectAtIndex:2];
     loadout.armour = [[Item allItems] objectAtIndex:4];
@@ -39,6 +41,7 @@
 
 + (CharacterLoadout *)defaultLoadoutTwo {
     CharacterLoadout *loadout = [[CharacterLoadout alloc] init];
+    loadout.name = @"Chunky";
     loadout.mainhand = [[Item allItems] objectAtIndex:3];
     loadout.offhand = nil;
     loadout.armour = [[Item allItems] objectAtIndex:4];

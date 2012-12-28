@@ -29,6 +29,7 @@
 // This has to be set to link the character loadout with a character stats
 // Once this is done, each of the derived calculations will work correctly
 @property (nonatomic, weak) id<CharacterLoadoutAssistsDerivation>characterStats;
+@property (nonatomic, strong) NSString *name;  // The name of the loadout for display in the title bar
 
 - (NSString *)mainhandName;
 - (NSString *)offhandName;

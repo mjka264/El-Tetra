@@ -64,6 +64,16 @@ static NSArray *_allItems;
     return _allItems;
 }
 
++ (NSArray *)allItemsWithType:(t_ItemType)type {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    [[self allItems] enumerateObjectsUsingBlock:^(Item *obj, NSUInteger idx, BOOL *stop) {
+        if (obj.itemType == type) {
+            [array addObject:obj];
+        }
+    }];
+    return array;
+}
+
 + (Item *)initStandardWeaponWithName:(NSString *)name
                                 type:(t_ItemType)type
                                style:(t_ItemCombatStyle)style
@@ -105,5 +115,16 @@ static NSArray *_allItems;
     item.miscellaneousProperties = properties;
     return item;
 }
+
++ (NSArray *)itemCategories {
+    return [NSArray arrayWithObjects:
+            [NSNumber numberWithInteger:ItemTypeWeaponDualhand],
+             [NSNumber numberWithInteger:ItemTypeWeaponMainhand],
+             [NSNumber numberWithInteger:ItemTypeWeaponOffhand],
+             [NSNumber numberWithInteger:ItemTypeArmour],
+             [NSNumber numberWithInteger:ItemTypeGear],
+            nil];
+}
+
 
 @end
