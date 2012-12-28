@@ -100,35 +100,25 @@
     // Link the data sources together
     self.characterLoadout.characterStats = [self.dataSource dataSourceCharacterStats];
 
-    // Weapon names
-    NSString *weaponSpecials = [[[self.characterLoadout mainhandSpecials] valueForKey:@"description"] componentsJoinedByString:@", "];
-    if (!weaponSpecials) {
-        self.mainhandView.text = [self.characterLoadout mainhandName];
+    // Weapon (mainhand and offhand)
+    if (![self.characterLoadout offhandName]) {
+        self.weaponsView.text = [self.characterLoadout mainhandName];
     } else {
         NSMutableAttributedString *weapons = [[NSMutableAttributedString alloc]
                                               initWithString:[self.characterLoadout mainhandName]
                                               attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor blackColor]]];
         [weapons appendAttributedString:[[NSAttributedString alloc]
-                                         initWithString:[@"  " stringByAppendingString:weaponSpecials]
-                                         attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor orangeColor]]]];
-        self.mainhandView.attributedText = weapons;
+                                         initWithString:[@"  and " stringByAppendingString:[self.characterLoadout offhandName]]
+                                         attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor grayColor]]]];
+        self.weaponsView.attributedText = weapons;
     }
-    self.offhandView.text = [self.characterLoadout offhandName]? [@"and " stringByAppendingString:[self.characterLoadout offhandName]]:@"";
+    //self.offhandView.text = [self.characterLoadout offhandName]? [@"and " stringByAppendingString:[self.characterLoadout offhandName]]:@"";
     
-    // Armour name
-    NSString *armourSpecials = [[[self.characterLoadout armourSpecials] valueForKey:@"description"] componentsJoinedByString:@", "];
-    if (!armourSpecials) {
-        self.armourView.text = [self.characterLoadout armourName];
-    } else {
-        NSMutableAttributedString *armour = [[NSMutableAttributedString alloc]
-                                             initWithString:armourSpecials
-                                             attributes:[self makeAttributesSize:10 bold:NO colour:[UIColor orangeColor]]];
-        [armour appendAttributedString: [[NSAttributedString alloc]
-                                         initWithString:[@"  " stringByAppendingString:[self.characterLoadout armourName]]
-                                         attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor blackColor]]]];
-        self.armourView.attributedText = armour;
-    }
-    
+    // Weapon specials and armour
+    self.weaponSpecialsView.text = [[[self.characterLoadout mainhandSpecials] valueForKey:@"description"] componentsJoinedByString:@", "];
+    self.armourView.text = [self.characterLoadout armourName];
+    self.armourSpecialsView.text = [[[self.characterLoadout armourSpecials] valueForKey:@"description"] componentsJoinedByString:@", "];
+
     // Other offensive stats
     self.attackView.attributedText = [self generateModifedStatDice:[self.characterLoadout derivedAttack:YES]
                                                          attributes:[self makeAttributesSize:14 bold:YES colour:[UIColor yellowColor]]
@@ -153,14 +143,14 @@
         self.blockDefenseTitleView.text = @"Block";
         self.blockDefenseValueView.text = [[self.characterLoadout derivedBlockDefense] description];
     } else {
-        self.blockDefenseTitleView.text = @"no block skill";
+        self.blockDefenseTitleView.text = @"";
         self.blockDefenseValueView.text = @"";
     }
     if ([self.characterLoadout derivedParryDefense]) {
         self.parryDefenseTitleView.text = @"Parry";
         self.parryDefenseValueView.text = [[self.characterLoadout derivedParryDefense] description];
     } else {
-        self.parryDefenseTitleView.text = @"no parry skill";
+        self.parryDefenseTitleView.text = @"";
         self.parryDefenseValueView.text = @"";
     }
     
@@ -177,7 +167,6 @@
     }
     */
 }
-
                            
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

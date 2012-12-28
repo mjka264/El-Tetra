@@ -19,14 +19,15 @@
 @property (weak, nonatomic) CharacterLoadout *characterLoadout; 
 @property (weak, nonatomic) id<CharacterLoadoutViewControllerDataSource> dataSource;
 
-@property (nonatomic, weak) IBOutlet UILabel *mainhandView;
-@property (nonatomic, weak) IBOutlet UILabel *offhandView;
+@property (nonatomic, weak) IBOutlet UILabel *weaponsView;
+@property (weak, nonatomic) IBOutlet UILabel *weaponSpecialsView;
 @property (weak, nonatomic) IBOutlet UILabel *speedView;
 @property (weak, nonatomic) IBOutlet UILabel *attackView;
 @property (weak, nonatomic) IBOutlet UILabel *damageView;
-@property (weak, nonatomic) IBOutlet UILabel *weaponSpecialView;
 
 @property (weak, nonatomic) IBOutlet UILabel *armourView;
+@property (weak, nonatomic) IBOutlet UILabel *armourSpecialsView;
+
 @property (weak, nonatomic) IBOutlet UILabel *basicDefenseView;
 @property (weak, nonatomic) IBOutlet UILabel *blockDefenseTitleView;
 @property (weak, nonatomic) IBOutlet UILabel *parryDefenseTitleView;
@@ -35,7 +36,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *magicDefenseView;
 @property (weak, nonatomic) IBOutlet UILabel *soakView;
-@property (weak, nonatomic) IBOutlet UILabel *armourSpecialView;
 
 @property (weak, nonatomic) IBOutlet UILabel *gearView;
 @property (weak, nonatomic) IBOutlet UILabel *gearSpecialView;
