@@ -19,8 +19,7 @@
 @property (weak, nonatomic) CharacterLoadout *characterLoadout; 
 @property (weak, nonatomic) id<CharacterLoadoutViewControllerDataSource> dataSource;
 
-@property (nonatomic, weak) IBOutlet UILabel *mainhandView;
-@property (nonatomic, weak) IBOutlet UILabel *offhandView;
+@property (nonatomic, weak) IBOutlet UILabel *weaponView;
 @property (weak, nonatomic) IBOutlet UILabel *speedView;
 @property (weak, nonatomic) IBOutlet UILabel *attackView;
 @property (weak, nonatomic) IBOutlet UILabel *damageView;
