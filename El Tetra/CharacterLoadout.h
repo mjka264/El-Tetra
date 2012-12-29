@@ -53,4 +53,6 @@
 - (NSNumber *)derivedMagicDefense;
 - (NSNumber *)derivedSoak;
 
+- (NSArray *)allItems;
+- (BOOL)isEquippingItem:(Item *)item;
 @end

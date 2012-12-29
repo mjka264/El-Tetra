@@ -144,19 +144,6 @@
         ((CharacterLoadoutView *)self.view).parryHidden = YES;
         
     }
-    
-    /*
-    
-    - (NSNumber *)derivedParryDefense; // nil if no parry
-    - (NSNumber *)derivedBlockDefense; // nil if no block
-    
-    if ([self.characterLoadout derivedSpecialDefenseType] == ItemDefenseGainedNone) {
-        self.specialDefenseView.text = @"";
-        self.specialDefenseNameView.text = @"No special defense";
-    } else if ([self.characterLoadout derivedSpecialDefenseType == ItemDef])
-        self.specialDefenseView.text = [[self.characterLoadout derivedSpecialDefenseValue] description];
-    }
-    */
 }
                            
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

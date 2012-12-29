@@ -80,4 +80,5 @@ typedef enum {
                       soak:(NSInteger)soak
              miscellaneous:(NSArray *)properties;
 - (NSString *)itemPropertiesSummaryForTableView; // Does not include name
+
 @end

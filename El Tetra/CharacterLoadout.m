@@ -197,4 +197,24 @@
     return [[self class] calculateDefenseValueBasedOnStatValue:[self.characterStats effectiveStatSoak]:FALSE];
 }
 
+- (NSArray *)allItems {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    if (self.mainhand) [array addObject:self.mainhand];
+    if (self.offhand) [array addObject:self.offhand];
+    if (self.armour) [array addObject:self.armour];
+    if (self.gear) [array addObjectsFromArray:self.gear];
+    return array;
+}
+
+- (BOOL)isEquippingItem:(Item *)item {
+    __block BOOL matchFound = FALSE;
+    [[self allItems] enumerateObjectsUsingBlock:^(Item *obj, NSUInteger idx, BOOL *stop) {
+        if (obj == item) {
+            matchFound = TRUE;
+            *stop = TRUE;
+        }
+    }];
+    return matchFound;
+}
+
 @end

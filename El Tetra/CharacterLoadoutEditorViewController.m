@@ -28,6 +28,10 @@
 
 #pragma mark - Table view data source
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"Moo";
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[Item itemCategories] count];
@@ -48,6 +52,12 @@
     Item *item = [[Item allItemsWithType:itemType] objectAtIndex:indexPath.row];
     cell.textLabel.text = item.name;
     cell.detailTextLabel.text = [item itemPropertiesSummaryForTableView];
+    
+    if ([self.loadout isEquippingItem:item]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     return cell;
 }
