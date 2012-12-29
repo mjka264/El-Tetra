@@ -14,8 +14,8 @@
 
 @protocol CharacterLoadoutViewControllerDataSource <NSObject>
 - (id)dataSourceCharacterStats:(CharacterLoadoutViewController *)sender;
-- (void)createNewCharacterloadout:(CharacterLoadoutViewController *)sender;
-
+- (void)createNewCharacterLoadout:(CharacterLoadoutViewController *)sender;
+- (void)deleteCurrentCharacterLoadout:(CharacterLoadoutViewController *)sender;
 @end
 
 @interface CharacterLoadoutViewController : UIViewController <CharacterLoadoutEditorViewControllerDelegate>

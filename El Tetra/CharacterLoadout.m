@@ -247,6 +247,7 @@
     new.offhand = self.offhand;
     new.armour = self.armour;
     new.gear = [self.gear copy];
+    new.name = [self.name stringByAppendingString:@" copy"];
     return new;
 }
 

@@ -188,9 +188,10 @@
 }
 
 - (IBAction)newLoadoutPressed:(UIBarButtonItem *)sender {
-    [self.dataSource createNewCharacterloadout:self];
+    [self.dataSource createNewCharacterLoadout:self];
 }
 
 - (IBAction)trashLoadoutPressed:(UIBarButtonItem *)sender {
+    [self.dataSource deleteCurrentCharacterLoadout:self];
 }
 @end
