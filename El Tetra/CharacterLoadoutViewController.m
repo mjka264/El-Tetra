@@ -189,6 +189,7 @@
 
 #pragma mark newLoadoutPressed
 - (IBAction)newLoadoutPressed:(UIBarButtonItem *)sender {
+    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Loadout"
                                                     message:nil
                                                    delegate:self
@@ -213,21 +214,22 @@
 
 #pragma mark trashLoadoutPressed
 
-- (IBAction)trashLoadoutPressed:(UIBarButtonItem *)sender {    
+- (IBAction)trashLoadoutPressed:(UIBarButtonItem *)sender {
+    //[self.dataSource deleteCurrentCharacterLoadout:self];
+
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Moo"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:@"Delete Loadout"
                                               otherButtonTitles:nil];
     
-    [sheet showFromToolbar:[self menuBar]];
-    //[sheet showFromRect:CGRectMake(0, 0, 300, 300) inView:self.view animated:YES];
-    //[sheet showFromBarButtonItem:sender animated:YES];
-    //[sheet showFromToolbar:]
+    [sheet showFromTabBar:[self tabBarController].tabBar];
 }
 
-- (void)deleteCurrentCharacterLoadout:(CharacterLoadoutViewController *)sender {
-    NSLog(@"Deleting code");
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [self.dataSource deleteCurrentCharacterLoadout:self];
+    }
 }
 
 @end

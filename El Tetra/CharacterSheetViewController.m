@@ -115,22 +115,23 @@
     return loadoutController;
 }
 
-- (NSUInteger)indexOfLoadoutController:(CharacterLoadoutViewController *)loadoutController
+- (NSInteger)indexOfLoadoutController:(CharacterLoadoutViewController *)loadoutController
 {
-    return [self.characterLoadouts indexOfObject:loadoutController.characterLoadout];
+    NSInteger num = [self.characterLoadouts indexOfObject:loadoutController.characterLoadout];
+    return num;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(CharacterLoadoutViewController *)loadoutController
 {
-    NSInteger index = [self indexOfLoadoutController: loadoutController] - 1;
-    if (index != NSNotFound) return [self loadoutControllerAtIndex:index];
+    NSInteger index = [self indexOfLoadoutController: loadoutController];
+    if (index != NSNotFound) return [self loadoutControllerAtIndex:(index-1)];
     else return nil;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(CharacterLoadoutViewController *)loadoutController
 {
-    NSInteger index = [self indexOfLoadoutController: loadoutController] + 1;
-    if (index != NSNotFound) return [self loadoutControllerAtIndex:index];
+    NSInteger index = [self indexOfLoadoutController: loadoutController];
+    if (index != NSNotFound) return [self loadoutControllerAtIndex:(index+1)];
     else return nil;
 }
 
@@ -159,10 +160,32 @@
                                      }];
 }
 
+// This is really annoying. When I wrote it with animated:YES, it refused to clear its cache
+// Which meant that it kept the view controllers even though they were invalied (eg before first or after last)
+// Sicne I have no access to their data structure, I couldn't fix that.
+// So, for the moment, I have just turned off the animation. Hopefully they'll fix that at some stage!
+NSInteger _indexOfDataThatNeedsToReplaceTheNulledCharacterLoadoutPointer;
+//
 - (void)deleteCurrentCharacterLoadout:(CharacterLoadoutViewController *)sender {
-
+    NSUInteger deletingIndex = [self indexOfLoadoutController:sender];
+    NSUInteger newIndex;
+    NSInteger direction;
+    if (deletingIndex > 0) {
+        newIndex = deletingIndex - 1;
+        direction = UIPageViewControllerNavigationDirectionReverse;
+    } else {
+        newIndex = deletingIndex;
+        direction = UIPageViewControllerNavigationDirectionForward;
+    }
+    
+    [self.characterLoadouts removeObjectAtIndex:deletingIndex];
+    
+    [self.pageViewController setViewControllers:[NSArray arrayWithObject:[self loadoutControllerAtIndex:newIndex]]
+                                      direction:direction
+                                       animated:NO
+                                     completion:^(BOOL finished) {
+                                      }];
 }
-
 
 
 #pragma mark -
@@ -178,6 +201,7 @@
         UIPageViewController *destination = segue.destinationViewController;
         self.pageViewController = destination;
         destination.dataSource = self;
+        destination.delegate = self;
         
         CharacterLoadoutViewController *initialLoadoutController =
         [self loadoutControllerAtIndex:0];
