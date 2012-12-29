@@ -11,10 +11,17 @@
 #import "CharacterStats.h"
 #import "CharacterLoadoutViewController.h"
 
+@class CharacterSheetViewController;
+
+@protocol CharacterSheetViewControllerDataSource <NSObject>
+- (CharacterStats *)characterStats:(CharacterSheetViewController *)source;
+@end
+
 @interface CharacterSheetViewController : UIViewController
 <StatTableViewControllerDataSource, UIPageViewControllerDataSource, CharacterLoadoutViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (nonatomic, weak) UIPageViewController *pageViewController;
+@property (nonatomic, weak) id<CharacterSheetViewControllerDataSource> dataSource;
            
 @property (nonatomic, weak) IBOutlet UILabel *soulStatBody;
 @property (nonatomic, weak) IBOutlet UILabel *soulStatMind;

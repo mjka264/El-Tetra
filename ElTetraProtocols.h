@@ -19,7 +19,7 @@
 
 // This id is something that CharacterData can process
 @protocol StatTableViewControllerDataSource <NSObject>
-- (id)characterData:(UIViewController *)source;
+- (id)characterStats:(UIViewController *)source;
 @end
 
 

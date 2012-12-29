@@ -65,18 +65,18 @@
 
 
 - (NSString *)textForHeading: (UIView *)source {
-    return [CharacterStats sectionHeadingFrom:[self.dataSource characterData:self]];
+    return [CharacterStats sectionHeadingFrom:[self.dataSource characterStats:self]];
     //return [self.dataSource headingForDisplay:self];
 }
 - (NSNumber *)fontSizeForHeading: (UIView *)source {
     return [NSNumber numberWithInt:16];
 }
 - (NSNumber *)numberForCircle:(UIView *)source {
-    return [CharacterStats primaryStatForSkillGroupFrom:[self.dataSource characterData:self]];
+    return [CharacterStats primaryStatForSkillGroupFrom:[self.dataSource characterStats:self]];
     //return [NSNumber numberWithInt:3];
 }
 - (NSInteger)elementForCircle:(UIView *)source {
-    return [CharacterStats statElementforHeadingFrom:[self.dataSource characterData:self]];
+    return [CharacterStats statElementforHeadingFrom:[self.dataSource characterStats:self]];
     //return [self.dataSource elementForDisplay:self];
 }
 - (NSNumber *)fontSizeForNumber:(UIView *)source {
@@ -131,12 +131,12 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.hideTableData) return 0;
-    else return [CharacterStats numberOfStatGroupsFrom:[self.dataSource characterData:self]];
+    else return [CharacterStats numberOfStatGroupsFrom:[self.dataSource characterStats:self]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionNumber
 {
-    return [CharacterStats numberOfEntriesFrom:[self.dataSource characterData:self]];
+    return [CharacterStats numberOfEntriesFrom:[self.dataSource characterStats:self]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -146,8 +146,8 @@
         cell = [[StatTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"Stat Cell"];
     }
     
-    cell.textLabel.text = [CharacterStats statDescriptionFrom:[self.dataSource characterData:self] atIndex:indexPath.row];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [CharacterStats statValueFrom:[self.dataSource characterData:self] atIndex:indexPath.row]];
+    cell.textLabel.text = [CharacterStats statDescriptionFrom:[self.dataSource characterStats:self] atIndex:indexPath.row];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [CharacterStats statValueFrom:[self.dataSource characterStats:self] atIndex:indexPath.row]];
     
     return cell;
 }

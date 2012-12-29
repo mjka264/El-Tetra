@@ -12,7 +12,7 @@
 #import "CharacterLoadout.h"
 
 @interface CharacterSheetViewController ()
-@property (nonatomic, strong) CharacterStats *characterStats;
+@property (nonatomic, strong, readonly) CharacterStats *characterStats;
 @property (nonatomic, strong) NSDictionary *controllerIdentityStatGroups;
 
 
@@ -47,7 +47,7 @@
     }
 }
 
-- (CharacterStats *)characterData:(UIViewController *)source {
+- (CharacterStats *)characterStats:(UIViewController *)source {
     return [self.characterStats characterWithStatGroup:
             [[self.controllerIdentityStatGroups objectForKey:source.title] integerValue]];
 }
@@ -77,12 +77,9 @@
     return _controllerIdentityStatGroups;
 }
 
-
-@synthesize characterStats = _characterStats;
 - (CharacterStats *)characterStats
 {
-    if (!_characterStats) _characterStats = [[CharacterStats alloc] init];
-    return _characterStats;
+    return [self.dataSource characterStats:self];
 }
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C23AF153168F782500F695D4 /* CharacterSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23AF152168F782500F695D4 /* CharacterSelectorTableViewController.m */; };
 		C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */; };
 		C260999D168DBB2A000ADB58 /* CharacterLoadoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C260999C168DBB2A000ADB58 /* CharacterLoadoutView.m */; };
 		C26099A1168DD408000ADB58 /* CharacterLoadoutEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26099A0168DD408000ADB58 /* CharacterLoadoutEditorViewController.m */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C23AF151168F782500F695D4 /* CharacterSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSelectorTableViewController.h; sourceTree = "<group>"; };
+		C23AF152168F782500F695D4 /* CharacterSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSelectorTableViewController.m; sourceTree = "<group>"; };
 		C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimaryStatColouredCircleView.h; sourceTree = "<group>"; };
 		C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimaryStatColouredCircleView.m; sourceTree = "<group>"; };
 		C260999B168DBB29000ADB58 /* CharacterLoadoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterLoadoutView.h; sourceTree = "<group>"; };
@@ -120,6 +123,14 @@
 		C260999E168DD2CF000ADB58 /* CharacterLoadoutView */ = {
 			isa = PBXGroup;
 			children = (
+				C260999F168DD408000ADB58 /* CharacterLoadoutEditorViewController.h */,
+				C26099A0168DD408000ADB58 /* CharacterLoadoutEditorViewController.m */,
+				C27AB560168B232000CA0D39 /* CharacterLoadoutViewController.h */,
+				C27AB561168B232000CA0D39 /* CharacterLoadoutViewController.m */,
+				C27B1FE3168BE10600258807 /* CharacterLoadout.h */,
+				C27B1FE4168BE10600258807 /* CharacterLoadout.m */,
+				C27B1FE7168C74E800258807 /* Item.h */,
+				C27B1FE8168C74E800258807 /* Item.m */,
 				C260999B168DBB29000ADB58 /* CharacterLoadoutView.h */,
 				C260999C168DBB2A000ADB58 /* CharacterLoadoutView.m */,
 			);
@@ -129,6 +140,7 @@
 		C27AB564168B232D00CA0D39 /* StatTableView */ = {
 			isa = PBXGroup;
 			children = (
+				C264857D168881D500F3B648 /* ElTetraProtocols.h */,
 				C264857816887C7C00F3B648 /* StatTableViewHeader.h */,
 				C264857916887C7C00F3B648 /* StatTableViewHeader.m */,
 				C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */,
@@ -172,20 +184,13 @@
 		C2975279168551CB00092860 /* El Tetra */ = {
 			isa = PBXGroup;
 			children = (
-				C260999F168DD408000ADB58 /* CharacterLoadoutEditorViewController.h */,
-				C26099A0168DD408000ADB58 /* CharacterLoadoutEditorViewController.m */,
 				C29752C316856F3700092860 /* CharacterStats.h */,
 				C29752C416856F3700092860 /* CharacterStats.m */,
 				C297528B168551CB00092860 /* MainStoryboard_iPhone.storyboard */,
+				C23AF151168F782500F695D4 /* CharacterSelectorTableViewController.h */,
+				C23AF152168F782500F695D4 /* CharacterSelectorTableViewController.m */,
 				C29752B11685629400092860 /* CharacterSheetViewController.h */,
 				C29752B21685629400092860 /* CharacterSheetViewController.m */,
-				C264857D168881D500F3B648 /* ElTetraProtocols.h */,
-				C27AB560168B232000CA0D39 /* CharacterLoadoutViewController.h */,
-				C27AB561168B232000CA0D39 /* CharacterLoadoutViewController.m */,
-				C27B1FE3168BE10600258807 /* CharacterLoadout.h */,
-				C27B1FE4168BE10600258807 /* CharacterLoadout.m */,
-				C27B1FE7168C74E800258807 /* Item.h */,
-				C27B1FE8168C74E800258807 /* Item.m */,
 				C260999E168DD2CF000ADB58 /* CharacterLoadoutView */,
 				C27AB564168B232D00CA0D39 /* StatTableView */,
 				C297527A168551CB00092860 /* Supporting Files */,
@@ -356,6 +361,7 @@
 				C27B1FE9168C74E800258807 /* Item.m in Sources */,
 				C260999D168DBB2A000ADB58 /* CharacterLoadoutView.m in Sources */,
 				C26099A1168DD408000ADB58 /* CharacterLoadoutEditorViewController.m in Sources */,
+				C23AF153168F782500F695D4 /* CharacterSelectorTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
