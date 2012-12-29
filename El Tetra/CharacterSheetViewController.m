@@ -93,7 +93,7 @@
     if (!_characterLoadouts) {
         _characterLoadouts = [NSMutableArray arrayWithObjects:
                               [CharacterLoadout defaultLoadout],
-                              [CharacterLoadout defaultLoadoutTwo],
+                              [CharacterLoadout defaultLoadout],
                               nil];
     }
     return _characterLoadouts;

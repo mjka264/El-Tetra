@@ -23,7 +23,8 @@ typedef enum {
     ItemCombatStyleBrutal = 2,
     ItemCombatStyleRanged = 3,
     ItemCombatStyleEitherMelee = 4,
-    ItemCombatStyleNA = 5
+    ItemCombatStyleNoTrainingRequired = 5,
+    ItemCombatStyleNA = 6
 } t_ItemCombatStyle;
 
 typedef enum {
@@ -57,6 +58,12 @@ typedef enum {
 + (NSArray *)itemCategories;
 + (NSArray *)allItems;
 + (NSArray *)allItemsWithType:(t_ItemType)type;
+
++ (Item *)itemWithName:(NSString *)name;
++ (Item *)defaultMainhand;
++ (Item *)defaultOffhand;
++ (Item *)defaultArmour;
+
 + (Item *)initStandardWeaponWithName:(NSString *)name
                                 type:(t_ItemType)type
                                style:(t_ItemCombatStyle)style

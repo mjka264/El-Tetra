@@ -56,7 +56,7 @@
          
          // The order of these stats is hardcoded below in the function primaryStatForSkillGroupFrom
          // If the order changes here, it needs to change there too
-         [NSArray arrayWithObjects:@"Ferocity", @"Accuracy", @"Agility", @"Resilience", @"Chi", nil],
+         [NSArray arrayWithObjects:@"Ferocity", @"Precision", @"Agility", @"Resilience", @"Chi", nil],
          [NSNumber numberWithInt:CharacterStatGroupPrimary],
          
          [NSArray arrayWithObjects:
@@ -329,6 +329,9 @@
 }
 - (NSNumber *)effectiveStatMagicDefense {
     return [self primaryStatValueWithDescription:@"Chi"];
+}
+- (NSNumber *)effectiveStatRawPrecision {
+    return [self primaryStatValueWithDescription:@"Precision"];
 }
 
 @end

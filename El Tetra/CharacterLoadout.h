@@ -18,13 +18,13 @@
 - (NSNumber *)effectiveStatDodge;
 - (NSNumber *)effectiveStatSoak;
 - (NSNumber *)effectiveStatMagicDefense;
+- (NSNumber *)effectiveStatRawPrecision;
 @end
 
 @interface CharacterLoadout : NSObject
 + (CharacterLoadout *)defaultLoadout;
-+ (CharacterLoadout *)defaultLoadoutTwo;
 
-+ (NSNumber *)calculateDefenseValueBasedOnStatValue:(NSNumber *)statValue:(BOOL)isSpecialDefense;
++ (NSNumber *)calculateDefenseValueBasedOnStatValue:(NSNumber *)statValue;
 
 // This has to be set to link the character loadout with a character stats
 // Once this is done, each of the derived calculations will work correctly
@@ -55,4 +55,6 @@
 
 - (NSArray *)allItems;
 - (BOOL)isEquippingItem:(Item *)item;
+- (void)equipItem:(Item *)item;
+
 @end

@@ -19,6 +19,7 @@ shouldAllowSelectionForCellAtIndexPath:(Indexpath *)Indexpath
 usingCharacterLoadout:
 */
 - (void)dismissMePlease;
+
 @end
 
 @interface CharacterLoadoutEditorViewController : UITableViewController

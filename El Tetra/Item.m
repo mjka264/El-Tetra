@@ -28,9 +28,55 @@ static NSArray *_allItems;
     return _miscellaneousProperties;
 }
 
++ (Item *)itemWithName:(NSString *)name {
+    __block Item *returnValue;
+    [[Item allItems] enumerateObjectsUsingBlock:^(Item *obj, NSUInteger idx, BOOL *stop) {
+        if ([name isEqualToString:obj.name]) {
+            returnValue = obj;
+            *stop = YES;
+        }
+    }];
+    return returnValue;
+}
+
++ (Item *)defaultMainhand {
+    return [Item itemWithName:@"Quarterstaff"];
+}
++ (Item *)defaultOffhand {
+    return [Item itemWithName:@"Free hand"];
+}
++ (Item *)defaultArmour {
+    return [Item itemWithName:@"Leather armour"];
+}
+
 + (NSArray *)allItems {
     if (!_allItems) {
         _allItems = [NSArray arrayWithObjects:
+                     [Item initStandardWeaponWithName:@"Quarterstaff"
+                                                 type:ItemTypeWeaponDualhand
+                                                style:ItemCombatStyleNoTrainingRequired
+                                     defensePermitted:ItemWeaponDefensePermittedAny
+                                        defenseGained:ItemDefenseGainedParry
+                                               damage:0 speed:0 miscellaneous:[NSArray array]],
+                     [Item initStandardWeaponWithName:@"Greataxe"
+                                                 type:ItemTypeWeaponDualhand
+                                                style:ItemCombatStyleBrutal
+                                     defensePermitted:ItemWeaponDefensePermittedBasic
+                                        defenseGained:ItemDefenseGainedNone
+                                               damage:10 speed:0 miscellaneous:[NSArray array]],
+                     [Item initStandardWeaponWithName:@"Bastard Sword"
+                                                 type:ItemTypeWeaponDualhand
+                                                style:ItemCombatStyleArtful
+                                     defensePermitted:ItemWeaponDefensePermittedAny
+                                        defenseGained:ItemDefenseGainedNone
+                                               damage:10 speed:5 miscellaneous:[NSArray array]],
+                     [Item initStandardWeaponWithName:@"Polearm"
+                                                 type:ItemTypeWeaponDualhand
+                                                style:ItemCombatStyleBrutal
+                                     defensePermitted:ItemWeaponDefensePermittedAny
+                                        defenseGained:ItemDefenseGainedNone
+                                               damage:10 speed:0 miscellaneous:[NSArray arrayWithObject:@"Reach"]],
+                     
                      [Item initStandardWeaponWithName:@"Longsword"
                                                  type:ItemTypeWeaponMainhand
                                                 style:ItemCombatStyleEitherMelee
@@ -43,22 +89,67 @@ static NSArray *_allItems;
                                      defensePermitted:ItemWeaponDefensePermittedAny
                                         defenseGained:ItemDefenseGainedParry
                                                damage:5 speed:5 miscellaneous:[NSArray array]],
+                     [Item initStandardWeaponWithName:@"Dagger"
+                                                 type:ItemTypeWeaponMainhand
+                                                style:ItemCombatStyleArtful
+                                     defensePermitted:ItemWeaponDefensePermittedAny
+                                        defenseGained:ItemDefenseGainedNone
+                                               damage:5 speed:10 miscellaneous:[NSArray array]],
+                     [Item initStandardWeaponWithName:@"Mace"
+                                                 type:ItemTypeWeaponMainhand
+                                                style:ItemCombatStyleBrutal
+                                     defensePermitted:ItemWeaponDefensePermittedBasic
+                                        defenseGained:ItemDefenseGainedNone
+                                               damage:5 speed:5 miscellaneous:[NSArray array]],
+                     
                      [Item initStandardWeaponWithName:@"Free hand"
                                                  type:ItemTypeWeaponOffhand
                                                 style:ItemCombatStyleEitherMelee
                                      defensePermitted:ItemWeaponDefensePermittedNA
                                         defenseGained:ItemDefenseGainedNone
                                                damage:0 speed:5 miscellaneous:[NSArray array]],
-                     [Item initStandardWeaponWithName:@"Polearm"
+                     [Item initStandardWeaponWithName:@"Wakizashi"
+                                                 type:ItemTypeWeaponOffhand
+                                                style:ItemCombatStyleArtful
+                                     defensePermitted:ItemWeaponDefensePermittedNA
+                                        defenseGained:ItemDefenseGainedParry
+                                               damage:0 speed:0 miscellaneous:[NSArray array]],
+                     [Item initStandardWeaponWithName:@"Shield"
+                                                 type:ItemTypeWeaponOffhand
+                                                style:ItemCombatStyleEitherMelee
+                                     defensePermitted:ItemWeaponDefensePermittedNA
+                                        defenseGained:ItemDefenseGainedBlock
+                                               damage:0 speed:-5 miscellaneous:[NSArray array]],
+                     
+                     [Item initStandardWeaponWithName:@"Bow"
                                                  type:ItemTypeWeaponDualhand
-                                                style:ItemCombatStyleBrutal
-                                     defensePermitted:ItemWeaponDefensePermittedAny
+                                                style:ItemCombatStyleRanged
+                                     defensePermitted:ItemWeaponDefensePermittedBasicOrBlock
                                         defenseGained:ItemDefenseGainedNone
-                                               damage:10 speed:0 miscellaneous:[NSArray arrayWithObject:@"Reach"]],
-                     [Item initStandardArmourWithName:@"Heavy armour"
+                                               damage:5 speed:5 miscellaneous:[NSArray array]],
+                     [Item initStandardWeaponWithName:@"Crossbow"
+                                                 type:ItemTypeWeaponDualhand
+                                                style:ItemCombatStyleRanged
+                                     defensePermitted:ItemWeaponDefensePermittedBasicOrBlock
+                                        defenseGained:ItemDefenseGainedNone
+                                               damage:10 speed:-5 miscellaneous:[NSArray array]],
+                     
+                     [Item initStandardArmourWithName:@"No armour"
+                                                speed:0
+                                                 soak:-3
+                                        miscellaneous:[NSArray array]],
+                     [Item initStandardArmourWithName:@"Leather armour"
+                                                speed:0
+                                                 soak:0
+                                        miscellaneous:[NSArray array]],
+                     [Item initStandardArmourWithName:@"Chainmail"
                                                 speed:-5
                                                  soak:3
                                         miscellaneous:[NSArray arrayWithObject:@"Body skills: -1"]],
+                     [Item initStandardArmourWithName:@"Plate"
+                                                speed:-10
+                                                 soak:6
+                                        miscellaneous:[NSArray arrayWithObjects:@"Body skills: -2", @"Max one action per turn", nil]],
                      nil];
     }
     return _allItems;
@@ -141,6 +232,7 @@ NSString *explicitSign(NSNumber *num) {
     if (self.weaponCombatStyle == ItemCombatStyleArtful) [properties addObject:@"Artful"];
     if (self.weaponCombatStyle == ItemCombatStyleBrutal) [properties addObject:@"Brutal"];
     if (self.weaponCombatStyle == ItemCombatStyleRanged) [properties addObject:@"Ranged"];
+    if (self.weaponCombatStyle == ItemCombatStyleNoTrainingRequired) [properties addObject:@"No training required"];
     if (self.weaponDefensePermitted == ItemWeaponDefensePermittedBasic) [properties addObject:@"basic defense only"];
     if (self.weaponDefensePermitted == ItemWeaponDefensePermittedBasicOrBlock) [properties addObject:@"cannot be parried"];
     if (self.weaponDefensePermitted == ItemWeaponDefensePermittedBasicOrParry) [properties addObject:@"cannot be blocked"];

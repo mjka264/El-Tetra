@@ -14,7 +14,7 @@
 @property (nonatomic, strong) Item *offhand;
 @property (nonatomic, strong) Item *armour;
 @property (nonatomic, strong) NSArray *gear;   // of Item
-- (NSNumber *)deriveBySelector:(SEL)sel;
+- (NSNumber *)deriveSumBySelector:(SEL)sel;
 - (t_ItemDefenseGained)derivedSpecialDefenseType;
 @end
 
@@ -22,7 +22,24 @@
 
 @synthesize name = _name;
 @synthesize mainhand = _mainhand;
+- (void)setMainhand:(Item *)mainhand {
+    _mainhand = mainhand;
+    if (_mainhand.itemType == ItemTypeWeaponDualhand) {
+        self.offhand = nil;
+    } else if (_mainhand.itemType == ItemTypeWeaponMainhand) {
+        if (!self.offhand) {
+            self.offhand = [Item defaultOffhand];
+        }
+    }
+}
 @synthesize offhand = _offhand;
+- (void)setOffhand:(Item *)offhand {
+    if (self.mainhand.itemType == ItemTypeWeaponMainhand) {
+        _offhand = offhand;
+    } else {
+        _offhand = nil;
+    }
+}
 @synthesize armour = _armour;
 @synthesize gear = _gear;
 - (NSArray *)gear {
@@ -32,19 +49,10 @@
 
 + (CharacterLoadout *)defaultLoadout {
     CharacterLoadout *loadout = [[CharacterLoadout alloc] init];
-    loadout.name = @"Soft";
-    loadout.mainhand = [[Item allItems] objectAtIndex:1];
-    loadout.offhand = [[Item allItems] objectAtIndex:2];
-    loadout.armour = [[Item allItems] objectAtIndex:4];
-    return loadout;
-}
-
-+ (CharacterLoadout *)defaultLoadoutTwo {
-    CharacterLoadout *loadout = [[CharacterLoadout alloc] init];
-    loadout.name = @"Chunky";
-    loadout.mainhand = [[Item allItems] objectAtIndex:3];
-    loadout.offhand = nil;
-    loadout.armour = [[Item allItems] objectAtIndex:4];
+    loadout.name = @"Default";
+    loadout.mainhand = [Item defaultMainhand];
+    //loadout.offhand = [Item defaultOffhand];
+    loadout.armour = [Item defaultArmour];
     return loadout;
 }
 
@@ -97,7 +105,7 @@
 
 
 
-- (NSNumber *)deriveBySelector:(SEL)sel {
+- (NSNumber *)deriveSumBySelector:(SEL)sel {
     __block NSInteger modifier = 0;
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -115,7 +123,7 @@
 
 - (NSNumber *)derivedSpeed:(BOOL)dicePoolNotModifier {
     if (dicePoolNotModifier) return [self.characterStats effectiveStatInitiative];
-    else return [self deriveBySelector:@selector(speedModifier)];
+    else return [self deriveSumBySelector:@selector(speedModifier)];
 }
 
 - (NSNumber *)derivedAttack:(BOOL)dicePoolNotModifier {
@@ -130,26 +138,27 @@
                              [self.characterStats effectiveStatAttackBrutal]);
         } else if (self.mainhand.weaponCombatStyle == ItemCombatStyleRanged) {
             attackDice = [self.characterStats effectiveStatAttackProjectile];
+        } else if (self.mainhand.weaponCombatStyle == ItemCombatStyleNoTrainingRequired) {
+            attackDice = [self.characterStats effectiveStatRawPrecision];
         }
         return attackDice;
     } else {
-        return [self deriveBySelector:@selector(attackModifier)];
+        return [self deriveSumBySelector:@selector(attackModifier)];
     }
 }
 
 - (NSNumber *)derivedDamage:(BOOL)dicePoolNotModifier {
     if (dicePoolNotModifier) return [self.characterStats effectiveStatDamage];
-    else return [self deriveBySelector:@selector(damageModifier)];
+    else return [self deriveSumBySelector:@selector(damageModifier)];
 }
 
 // BUG this should really live in CharacterStats
-+ (NSNumber *)calculateDefenseValueBasedOnStatValue:(NSNumber *) statValue:(BOOL)isSpecialDefense {
-    if (isSpecialDefense) return [NSNumber numberWithInt:18 + 2 * [statValue integerValue]];
-    else return [NSNumber numberWithInt:13 + 2 * [statValue integerValue]];
++ (NSNumber *)calculateDefenseValueBasedOnStatValue:(NSNumber *)statValue {
+    return [NSNumber numberWithInt:13 + 2 * [statValue integerValue]];
 }
 
 - (NSNumber *)derivedBasicDefense {
-    return [[self class] calculateDefenseValueBasedOnStatValue:[self.characterStats effectiveStatDodge]:FALSE];
+    return [[self class] calculateDefenseValueBasedOnStatValue:[self.characterStats effectiveStatDodge]];
 }
 
 - (t_ItemDefenseGained)derivedSpecialDefenseType {
@@ -171,7 +180,7 @@
 }
 
 - (NSNumber *)derivedMagicDefense {
-    return [[self class] calculateDefenseValueBasedOnStatValue:[self.characterStats effectiveStatMagicDefense]:FALSE];
+    return [[self class] calculateDefenseValueBasedOnStatValue:[self.characterStats effectiveStatMagicDefense]];
 }
 
 - (NSNumber *)derivedParryDefense {
@@ -194,7 +203,9 @@
 }
 
 - (NSNumber *)derivedSoak {
-    return [[self class] calculateDefenseValueBasedOnStatValue:[self.characterStats effectiveStatSoak]:FALSE];
+    NSInteger soak = [[[self class] calculateDefenseValueBasedOnStatValue:[self.characterStats effectiveStatSoak]] integerValue];
+    soak += [[self deriveSumBySelector:@selector(soakModifier)] integerValue];
+    return [NSNumber numberWithInteger:soak];
 }
 
 - (NSArray *)allItems {
@@ -216,5 +227,19 @@
     }];
     return matchFound;
 }
+
+- (void)equipItem:(Item *)item {
+    if (item.itemType == ItemTypeWeaponDualhand ||
+        item.itemType == ItemTypeWeaponMainhand) {
+        self.mainhand = item;
+    } else if (item.itemType == ItemTypeWeaponOffhand) {
+        self.offhand = item;
+    } else if (item.itemType == ItemTypeArmour) {
+        self.armour = item;
+    } else if (item.itemType == ItemTypeGear) {
+        [NSException raise:@"Not yet implemented" format:@"Not year implemented"];
+    }
+}
+
 
 @end

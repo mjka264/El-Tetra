@@ -30,6 +30,7 @@
     [self refreshLoadout];
 }
 
+
 - (NSAttributedString *)generateModifedStatDice:(NSNumber *)dice
                                       attributes:(NSDictionary *)diceAttributes
                                         modifier:(NSNumber *)modifier
@@ -174,6 +175,9 @@
         destination.loadout = self.characterLoadout;
     }
 }
+
+#pragma mark -
+#pragma mark CharacterLoadoutEditorViewController Delegate
 
 - (void)dismissMePlease {
     [self dismissViewControllerAnimated:YES completion:^{}];

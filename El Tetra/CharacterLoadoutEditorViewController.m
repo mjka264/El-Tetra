@@ -29,7 +29,13 @@
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"Moo";
+    NSInteger itemType = [[[Item itemCategories] objectAtIndex:section] integerValue];
+    if (itemType == ItemTypeWeaponDualhand) return @"Two-handed weapons";
+    else if (itemType == ItemTypeWeaponMainhand) return @"Mainhand weapons";
+    else if (itemType == ItemTypeWeaponOffhand) return @"Offhand weapons";
+    else if (itemType == ItemTypeArmour) return @"Armour";
+    else if (itemType == ItemTypeGear) return @"Gear";
+    else return @"";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -67,6 +73,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger itemType = [[[Item itemCategories] objectAtIndex:indexPath.section] integerValue];
+    Item *item = [[Item allItemsWithType:itemType] objectAtIndex:indexPath.row];
+    
+    [self.loadout equipItem:item];
+    [[self tableView] reloadData];
+    
+    
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
