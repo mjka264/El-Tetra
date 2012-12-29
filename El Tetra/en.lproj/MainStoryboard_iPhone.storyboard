@@ -862,8 +862,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="DHc-n7-XMQ"/>
                                     <barButtonItem systemItem="edit" id="CFj-yq-mPI">
                                         <connections>
-                                            <action selector="editLoadoutPressed:" destination="qoL-AJ-Pqe" id="ruU-GU-ylI"/>
-                                            <segue destination="W7i-BL-IGg" kind="modal" id="Fpd-wU-67w"/>
+                                            <segue destination="W7i-BL-IGg" kind="modal" identifier="editCharacterLoadout" id="Fpd-wU-67w"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem systemItem="add" id="GQB-Xj-fQi">
@@ -1176,7 +1175,6 @@
         <class className="CharacterLoadoutViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterLoadoutViewController.h"/>
             <relationships>
-                <relationship kind="action" name="editLoadoutPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="newLoadoutPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="trashLoadoutPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="armourSpecialsView" candidateClass="UILabel"/>

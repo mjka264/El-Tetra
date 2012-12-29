@@ -241,5 +241,13 @@
     }
 }
 
+- (CharacterLoadout *)copyWithZone:(NSZone *)zone {
+    CharacterLoadout *new = [CharacterLoadout defaultLoadout];
+    new.mainhand = self.mainhand;
+    new.offhand = self.offhand;
+    new.armour = self.armour;
+    new.gear = [self.gear copy];
+    return new;
+}
 
 @end

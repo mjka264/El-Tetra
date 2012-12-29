@@ -1,5 +1,5 @@
 //
-//  CharacterLoadoutMetaViewController.m
+//  CharacterLoadoutViewController.m
 //  El Tetra
 //
 //  Created by Matthew Kameron on 26/12/12.
@@ -82,7 +82,7 @@
 
 - (void)refreshLoadout {
     // Link the data sources together
-    self.characterLoadout.characterStats = [self.dataSource dataSourceCharacterStats];
+    self.characterLoadout.characterStats = [self.dataSource dataSourceCharacterStats:self];
 
     // Header stuff
     self.menuBarHeading.title = self.characterLoadout.name;
@@ -176,6 +176,10 @@
     }
 }
 
+- (void)initiateSegueEditLoadout {
+    [self performSegueWithIdentifier:@"editCharacterLoadout" sender:self];
+}
+
 #pragma mark -
 #pragma mark CharacterLoadoutEditorViewController Delegate
 
@@ -184,9 +188,7 @@
 }
 
 - (IBAction)newLoadoutPressed:(UIBarButtonItem *)sender {
-}
-
-- (IBAction)editLoadoutPressed:(UIBarButtonItem *)sender {
+    [self.dataSource createNewCharacterloadout:self];
 }
 
 - (IBAction)trashLoadoutPressed:(UIBarButtonItem *)sender {

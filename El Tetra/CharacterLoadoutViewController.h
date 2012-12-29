@@ -10,9 +10,12 @@
 #import "CharacterLoadout.h"
 #import "CharacterLoadoutEditorViewController.h"
 
+@class CharacterLoadoutViewController;
 
 @protocol CharacterLoadoutViewControllerDataSource <NSObject>
-- (id)dataSourceCharacterStats;
+- (id)dataSourceCharacterStats:(CharacterLoadoutViewController *)sender;
+- (void)createNewCharacterloadout:(CharacterLoadoutViewController *)sender;
+
 @end
 
 @interface CharacterLoadoutViewController : UIViewController <CharacterLoadoutEditorViewControllerDelegate>
@@ -21,8 +24,8 @@
 @property (weak, nonatomic) CharacterLoadout *characterLoadout; 
 @property (weak, nonatomic) id<CharacterLoadoutViewControllerDataSource> dataSource;
 
+- (void)initiateSegueEditLoadout; // This will be called by the parent controller on a new loadout
 - (IBAction)newLoadoutPressed:(UIBarButtonItem *)sender;
-- (IBAction)editLoadoutPressed:(UIBarButtonItem *)sender;
 - (IBAction)trashLoadoutPressed:(UIBarButtonItem *)sender;
 
 @property (weak, nonatomic) IBOutlet UIToolbar *menuBarTrash;

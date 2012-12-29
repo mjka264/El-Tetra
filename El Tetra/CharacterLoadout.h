@@ -21,7 +21,7 @@
 - (NSNumber *)effectiveStatRawPrecision;
 @end
 
-@interface CharacterLoadout : NSObject
+@interface CharacterLoadout : NSObject <NSCopying>
 + (CharacterLoadout *)defaultLoadout;
 
 + (NSNumber *)calculateDefenseValueBasedOnStatValue:(NSNumber *)statValue;

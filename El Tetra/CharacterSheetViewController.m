@@ -99,19 +99,6 @@
     return _characterLoadouts;
 }
 
-/*
- // init done - first setup for WWW page modified
- @synthesize pageViewContent = _pageViewContent;
- - (NSArray *) pageViewContent {
- if (!_pageViewContent) _pageViewContent = [NSArray arrayWithObjects:@"AAA", @"BBB", @"CCC", @"DDD", nil];
- return _pageViewContent;
- }
- @synthesize pageViewController = _pageViewController;
- */
-
-//@synthesize storyBoard = _storyboard;
-
-
 - (CharacterLoadoutViewController *)loadoutControllerAtIndex:(NSInteger)index {
     if ([self.characterLoadouts count] == 0 ||
         index >= [self.characterLoadouts count] ||
@@ -127,34 +114,10 @@
     return loadoutController;
 }
 
-/*
- - (CharacterLoadoutViewController *)viewControllerAtIndex:(NSUInteger)index
- {
- // Return the data view controller for the given index.
- if (([self.pageViewContent count] == 0) ||
- (index >= [self.pageViewContent count])) {
- return nil;
- }
- 
- UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone"
- bundle:nil];
- 
- 
- // Create a new view controller and pass suitable data.
- CharacterLoadoutViewController *loadoutController = [storyBoard instantiateViewControllerWithIdentifier:@"CharacterLoadoutViewControllerTemplate"];
- 
- loadoutController.dataObject =
- [self.pageViewContent objectAtIndex:index];
- return loadoutController;
- }
- */
-
 - (NSUInteger)indexOfLoadoutController:(CharacterLoadoutViewController *)loadoutController
 {
     return [self.characterLoadouts indexOfObject:loadoutController.characterLoadout];
 }
-
-// Now the protocol:
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(CharacterLoadoutViewController *)loadoutController
 {
@@ -170,6 +133,40 @@
     else return nil;
 }
 
+
+#pragma mark -
+#pragma mark CharacterLoadoutViewControllerDataSource
+
+- (id)dataSourceCharacterStats:(CharacterLoadoutViewController *)sender {
+    return  self.characterStats;
+}
+
+- (void)createNewCharacterloadout:(CharacterLoadoutViewController *)sender {
+    NSUInteger newIndex = 1 + [self indexOfLoadoutController:sender];
+    CharacterLoadout *newLoadout = [sender.characterLoadout copy];
+    [self.characterLoadouts insertObject:newLoadout atIndex:newIndex];
+    CharacterLoadoutViewController *newController = [self loadoutControllerAtIndex:newIndex];
+    [self.pageViewController setViewControllers:[NSArray arrayWithObject:newController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:^(BOOL finished) {
+                                         [newController initiateSegueEditLoadout];
+                                     }
+     ];
+                                     /*completion:(id)^(BOOL finished) {
+                                         NSLog(@"Inside loop");
+                                     }*/
+     /*
+     
+     setViewControllers:[NSArray arrayWithObject:newLoadout]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:^(BOOL finished) {
+                                         NSLog(@"thingy done");
+                                     }];
+      */
+     }
+
 #pragma mark -
 #pragma mark prepareForSegue - Passes data onto the included controllers
 
@@ -181,6 +178,7 @@
         destination.dataSource = self;
     } else if ([segue.destinationViewController isKindOfClass:[UIPageViewController class]]) {
         UIPageViewController *destination = segue.destinationViewController;
+        self.pageViewController = destination;
         destination.dataSource = self;
         
         CharacterLoadoutViewController *initialLoadoutController =
@@ -194,11 +192,5 @@
     }
 }
 
-#pragma mark -
-#pragma mark CharacterLoadoutViewControllerDataSource
-
-- (id)dataSourceCharacterStats {
-    return self.characterStats;
-}
 
 @end
