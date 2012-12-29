@@ -187,11 +187,47 @@
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
+#pragma mark newLoadoutPressed
 - (IBAction)newLoadoutPressed:(UIBarButtonItem *)sender {
-    [self.dataSource createNewCharacterLoadout:self];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Loadout"
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Save", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert textFieldAtIndex:0].placeholder = @"Title";
+    [alert show];
+    
 }
 
-- (IBAction)trashLoadoutPressed:(UIBarButtonItem *)sender {
-    [self.dataSource deleteCurrentCharacterLoadout:self];
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {  // Other button is cancel
+        [self.dataSource createNewCharacterLoadout:self withName:[alertView textFieldAtIndex:0].text];
+    }
 }
+
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    return [[alertView textFieldAtIndex:0].text length] > 0;
+}
+
+#pragma mark trashLoadoutPressed
+
+- (IBAction)trashLoadoutPressed:(UIBarButtonItem *)sender {    
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Moo"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:@"Delete Loadout"
+                                              otherButtonTitles:nil];
+    
+    [sheet showFromToolbar:[self menuBar]];
+    //[sheet showFromRect:CGRectMake(0, 0, 300, 300) inView:self.view animated:YES];
+    //[sheet showFromBarButtonItem:sender animated:YES];
+    //[sheet showFromToolbar:]
+}
+
+- (void)deleteCurrentCharacterLoadout:(CharacterLoadoutViewController *)sender {
+    NSLog(@"Deleting code");
+}
+
 @end

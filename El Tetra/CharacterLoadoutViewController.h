@@ -1,5 +1,5 @@
 //
-//  CharacterLoadoutMetaViewController.h
+//  CharacterLoadoutViewController.h
 //  El Tetra
 //
 //  Created by Matthew Kameron on 26/12/12.
@@ -14,11 +14,11 @@
 
 @protocol CharacterLoadoutViewControllerDataSource <NSObject>
 - (id)dataSourceCharacterStats:(CharacterLoadoutViewController *)sender;
-- (void)createNewCharacterLoadout:(CharacterLoadoutViewController *)sender;
+- (void)createNewCharacterLoadout:(CharacterLoadoutViewController *)sender withName:(NSString *)loadoutName;
 - (void)deleteCurrentCharacterLoadout:(CharacterLoadoutViewController *)sender;
 @end
 
-@interface CharacterLoadoutViewController : UIViewController <CharacterLoadoutEditorViewControllerDelegate>
+@interface CharacterLoadoutViewController : UIViewController <CharacterLoadoutEditorViewControllerDelegate, UIActionSheetDelegate>
 
 // These fields are both set by the parent controller
 @property (weak, nonatomic) CharacterLoadout *characterLoadout; 
@@ -28,8 +28,9 @@
 - (IBAction)newLoadoutPressed:(UIBarButtonItem *)sender;
 - (IBAction)trashLoadoutPressed:(UIBarButtonItem *)sender;
 
-@property (weak, nonatomic) IBOutlet UIToolbar *menuBarTrash;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarTrash;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarHeading;
+@property (weak, nonatomic) IBOutlet UIToolbar *menuBar;
 
 @property (nonatomic, weak) IBOutlet UILabel *weaponsView;
 @property (weak, nonatomic) IBOutlet UILabel *weaponSpecialsView;

@@ -12,7 +12,7 @@
 #import "CharacterLoadoutViewController.h"
 
 @interface CharacterSheetViewController : UIViewController
-<StatTableViewControllerDataSource, UIPageViewControllerDataSource, CharacterLoadoutViewControllerDataSource, UIActionSheetDelegate>
+<StatTableViewControllerDataSource, UIPageViewControllerDataSource, CharacterLoadoutViewControllerDataSource>
 
 @property (nonatomic, weak) IBOutlet UIPageViewController *pageViewController;
 //@property (nonatomic, strong) IBOutlet NSArray *pageViewContent;

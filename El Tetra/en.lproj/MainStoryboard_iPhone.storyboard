@@ -1093,8 +1093,9 @@
                         <outlet property="blockDefenseValueView" destination="jI8-Rn-ldK" id="Lzh-c5-o0v"/>
                         <outlet property="damageView" destination="kNf-UH-FDb" id="0r9-Ux-SZ2"/>
                         <outlet property="magicDefenseView" destination="wf1-T2-mun" id="lWz-20-Cyl"/>
+                        <outlet property="menuBar" destination="jjx-in-lwb" id="Ecl-DA-EYK"/>
                         <outlet property="menuBarHeading" destination="56B-Tk-3vu" id="hw3-Gd-ycQ"/>
-                        <outlet property="menuBarTrash" destination="jjx-in-lwb" id="HvM-h2-79m"/>
+                        <outlet property="menuBarTrash" destination="F4n-YR-Wc9" id="yPR-m5-pnE"/>
                         <outlet property="parryDefenseTitleView" destination="uZj-jk-RhV" id="HWe-hE-Uoo"/>
                         <outlet property="parryDefenseValueView" destination="ImI-FH-1K0" id="rux-Kj-0fl"/>
                         <outlet property="soakView" destination="Ycx-sm-UJ8" id="iop-Pf-6VJ"/>
@@ -1188,7 +1189,7 @@
                 <relationship kind="outlet" name="gearView" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="magicDefenseView" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="menuBarHeading" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="menuBarTrash" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="menuBarTrash" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="parryDefenseTitleView" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="parryDefenseValueView" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="soakView" candidateClass="UILabel"/>

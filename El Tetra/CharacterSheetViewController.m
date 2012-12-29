@@ -139,58 +139,31 @@
 #pragma mark CharacterLoadoutViewControllerDataSource
 
 - (id)dataSourceCharacterStats:(CharacterLoadoutViewController *)sender {
-    return  self.characterStats;
+    return self.characterStats;
 }
 
 
-NSInteger _indexOfCurrentLoadoutViewControllerForManagingLoadouts;
-
-- (void)createNewCharacterLoadout:(CharacterLoadoutViewController *)sender {
-    _indexOfCurrentLoadoutViewControllerForManagingLoadouts = [self indexOfLoadoutController:sender];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Loadout"
-                                                     message:nil
-                                                    delegate:self
-                                           cancelButtonTitle:@"Cancel"
-                                           otherButtonTitles:@"Save", nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert textFieldAtIndex:0].placeholder = @"Title";
-    [alert show];
-    
+- (void)createNewCharacterLoadout:(CharacterLoadoutViewController *)sender withName:(NSString *)loadoutName {
+    NSUInteger newIndex = 1 + [self indexOfLoadoutController:sender];
+    CharacterLoadout *newLoadout = [[self.characterLoadouts objectAtIndex:[self indexOfLoadoutController:sender]] copy];
+    newLoadout.name = loadoutName;
+    [self.characterLoadouts insertObject:newLoadout atIndex:newIndex];
+    CharacterLoadoutViewController *newController = [self loadoutControllerAtIndex:newIndex];
+    [self.pageViewController setViewControllers:[NSArray arrayWithObject:newController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:^(BOOL finished) {
+                                         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"This is an example alert!" delegate:self cancelButtonTitle:@"Hide" otherButtonTitles:nil];
+                                         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+                                         [newController initiateSegueEditLoadout];
+                                     }];
 }
-
 
 - (void)deleteCurrentCharacterLoadout:(CharacterLoadoutViewController *)sender {
-}
-/*    _indexOfCurrentLoadoutViewControllerForManagingLoadouts = [self indexOfLoadoutController:sender];
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                         destructiveButtonTitle:@"Delete Loadout"
-                                              otherButtonTitles:nil];
-}*/
 
-- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
-{
-    return [[alertView textFieldAtIndex:0].text length] > 0;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        NSUInteger newIndex = 1 + _indexOfCurrentLoadoutViewControllerForManagingLoadouts;
-        CharacterLoadout *newLoadout = [[self.characterLoadouts objectAtIndex:_indexOfCurrentLoadoutViewControllerForManagingLoadouts] copy];
-        newLoadout.name = [alertView textFieldAtIndex:0].text;
-        [self.characterLoadouts insertObject:newLoadout atIndex:newIndex];
-        CharacterLoadoutViewController *newController = [self loadoutControllerAtIndex:newIndex];
-        [self.pageViewController setViewControllers:[NSArray arrayWithObject:newController]
-                                          direction:UIPageViewControllerNavigationDirectionForward
-                                           animated:YES
-                                         completion:^(BOOL finished) {
-                                             UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"This is an example alert!" delegate:self cancelButtonTitle:@"Hide" otherButtonTitles:nil];
-                                             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-                                             [newController initiateSegueEditLoadout];
-                                         }];
-    } // otherwise they must have pressed cancel
-}
+
 
 #pragma mark -
 #pragma mark prepareForSegue - Passes data onto the included controllers
