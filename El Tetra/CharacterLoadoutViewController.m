@@ -86,6 +86,11 @@
 
     // Header stuff
     self.menuBarHeading.title = self.characterLoadout.name;
+    if ([self.dataSource shouldEnableDeleteLoadoutButton:self]) {
+        self.menuBarTrash.enabled = YES;
+    } else {
+        self.menuBarTrash.enabled = NO;
+    }
     
     // Weapon (mainhand and offhand)
     if (![self.characterLoadout offhandName]) {

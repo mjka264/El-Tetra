@@ -16,6 +16,7 @@
 - (id)dataSourceCharacterStats:(CharacterLoadoutViewController *)sender;
 - (void)createNewCharacterLoadout:(CharacterLoadoutViewController *)sender withName:(NSString *)loadoutName;
 - (void)deleteCurrentCharacterLoadout:(CharacterLoadoutViewController *)sender;
+- (BOOL)shouldEnableDeleteLoadoutButton:(CharacterLoadoutViewController *)sender;
 @end
 
 @interface CharacterLoadoutViewController : UIViewController <CharacterLoadoutEditorViewControllerDelegate, UIActionSheetDelegate>
@@ -32,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarHeading;
 @property (weak, nonatomic) IBOutlet UIToolbar *menuBar;
 
-@property (nonatomic, weak) IBOutlet UILabel *weaponsView;
+@property (weak, nonatomic) IBOutlet UILabel *weaponsView;
 @property (weak, nonatomic) IBOutlet UILabel *weaponSpecialsView;
 @property (weak, nonatomic) IBOutlet UILabel *speedView;
 @property (weak, nonatomic) IBOutlet UILabel *attackView;

@@ -189,7 +189,9 @@
                     }];
 }
 
-
+- (BOOL)shouldEnableDeleteLoadoutButton:(CharacterLoadoutViewController *)sender {
+    return [self.characterLoadouts count] > 1;
+}
 
 
 

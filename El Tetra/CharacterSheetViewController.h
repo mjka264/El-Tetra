@@ -14,8 +14,7 @@
 @interface CharacterSheetViewController : UIViewController
 <StatTableViewControllerDataSource, UIPageViewControllerDataSource, CharacterLoadoutViewControllerDataSource, UIPageViewControllerDelegate>
 
-@property (nonatomic, weak) IBOutlet UIPageViewController *pageViewController;
-//@property (nonatomic, strong) IBOutlet NSArray *pageViewContent;
+@property (nonatomic, weak) UIPageViewController *pageViewController;
            
 @property (nonatomic, weak) IBOutlet UILabel *soulStatBody;
 @property (nonatomic, weak) IBOutlet UILabel *soulStatMind;
