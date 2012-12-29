@@ -160,12 +160,9 @@
                                      }];
 }
 
-// This is really annoying. When I wrote it with animated:YES, it refused to clear its cache
-// Which meant that it kept the view controllers even though they were invalied (eg before first or after last)
-// Sicne I have no access to their data structure, I couldn't fix that.
-// So, for the moment, I have just turned off the animation. Hopefully they'll fix that at some stage!
-NSInteger _indexOfDataThatNeedsToReplaceTheNulledCharacterLoadoutPointer;
-//
+// I would have liked to have used the built-in PageView animation here
+// But it had issues to do with remembering the left/right view controllers
+// which led to the user seeing blankish loadouts.
 - (void)deleteCurrentCharacterLoadout:(CharacterLoadoutViewController *)sender {
     NSUInteger deletingIndex = [self indexOfLoadoutController:sender];
     NSUInteger newIndex;
@@ -180,12 +177,20 @@ NSInteger _indexOfDataThatNeedsToReplaceTheNulledCharacterLoadoutPointer;
     
     [self.characterLoadouts removeObjectAtIndex:deletingIndex];
     
-    [self.pageViewController setViewControllers:[NSArray arrayWithObject:[self loadoutControllerAtIndex:newIndex]]
-                                      direction:direction
-                                       animated:NO
-                                     completion:^(BOOL finished) {
-                                      }];
+    [UIView transitionWithView:sender.view
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:nil
+                    completion:^(BOOL finished) {
+                        [self.pageViewController setViewControllers:[NSArray arrayWithObject:[self loadoutControllerAtIndex:newIndex]]
+                                                          direction:direction
+                                                           animated:NO
+                                                         completion:nil];
+                    }];
 }
+
+
+
 
 
 #pragma mark -
