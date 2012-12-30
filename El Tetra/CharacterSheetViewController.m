@@ -7,7 +7,7 @@
 //
 
 #import "CharacterSheetViewController.h"
-#import "CharacterStats.h"
+#import "CharacterStatPresenter.h"
 #import "CharacterLoadoutViewController.h"
 #import "CharacterLoadout.h"
 
@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSDictionary *controllerIdentityStatGroups;
 
 // data Source links
-@property (nonatomic, strong, readonly) CharacterStats *characterStats;
+@property (nonatomic, strong, readonly) CharacterStatPresenter *characterStats;
 @property (nonatomic, strong, readonly) NSMutableArray *characterLoadouts; // of CharacterLoadout
 
 @end
@@ -27,25 +27,25 @@
 - (void)setSoulStatBody:(UILabel *)soulStatBody {
     if (_soulStatBody != soulStatBody) {
         _soulStatBody = soulStatBody;
-        _soulStatBody.text = [NSString stringWithFormat:@"%@", [CharacterStats soulStatFrom:self.characterStats forStat:CharacterStatSoulBody]];
+        _soulStatBody.text = [NSString stringWithFormat:@"%@", [CharacterStatPresenter soulStatFrom:self.characterStats forStat:CharacterStatSoulBody]];
     }
 }
 @synthesize soulStatMind = _soulStatMind;
 - (void)setSoulStatMind:(UILabel *)soulStatMind {
     if (_soulStatMind != soulStatMind) {
         _soulStatMind = soulStatMind;
-        _soulStatMind.text = [NSString stringWithFormat:@"%@", [CharacterStats soulStatFrom:self.characterStats forStat:CharacterStatSoulMind]];
+        _soulStatMind.text = [NSString stringWithFormat:@"%@", [CharacterStatPresenter soulStatFrom:self.characterStats forStat:CharacterStatSoulMind]];
     }
 }
 @synthesize soulStatSpirit = _soulStatSpirit;
 - (void)setSoulStatSpirit:(UILabel *)soulStatSpirit {
     if (_soulStatSpirit != soulStatSpirit) {
         _soulStatSpirit = soulStatSpirit;
-        _soulStatSpirit.text = [NSString stringWithFormat:@"%@", [CharacterStats soulStatFrom:self.characterStats forStat:CharacterStatSoulSpirit]];
+        _soulStatSpirit.text = [NSString stringWithFormat:@"%@", [CharacterStatPresenter soulStatFrom:self.characterStats forStat:CharacterStatSoulSpirit]];
     }
 }
 
-- (CharacterStats *)characterStats:(UIViewController *)source {
+- (CharacterStatPresenter *)characterStats:(UIViewController *)source {
     return [self.characterStats characterWithStatGroup:
             [[self.controllerIdentityStatGroups objectForKey:source.title] integerValue]];
 }
@@ -75,7 +75,7 @@
     return _controllerIdentityStatGroups;
 }
 
-- (CharacterStats *)characterStats
+- (CharacterStatPresenter *)characterStats
 {
     return [self.dataSource characterData:self].stats;
 }

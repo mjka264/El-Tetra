@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CharacterStats.h"
+#import "CharacterStatPresenter.h"
 #import "CharacterStatEditorTableViewCell.h"
 
 @class CharacterStatEditorTableViewController;
 
 @protocol CharacterStatEditorTableViewControllerDataSource <NSObject>
-- (CharacterStats *)characterStatData:(CharacterStatEditorTableViewController *)source;
+- (CharacterStatPresenter *)characterStatData:(CharacterStatEditorTableViewController *)source;
 @end
 
 @interface CharacterStatEditorTableViewController : UITableViewController <CharacterStatEditorTableViewCellDelegate>

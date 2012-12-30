@@ -8,7 +8,7 @@
 
 #import "PrimaryStatColouredCircleView.h"
 #import "ElTetraDummyDelegate.h"
-#import "CharacterStats.h"
+#import "CharacterStatPresenter.h"
 
 @implementation PrimaryStatColouredCircleView
 

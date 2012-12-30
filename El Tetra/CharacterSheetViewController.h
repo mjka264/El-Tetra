@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "StatTableViewController.h"
-#import "CharacterStats.h"
+#import "CharacterStatPresenter.h"
 #import "CharacterLoadoutViewController.h"
 #import "Character.h"
 

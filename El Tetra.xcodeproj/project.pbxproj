@@ -36,8 +36,9 @@
 		C29752A5168551CB00092860 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C29752A3168551CB00092860 /* InfoPlist.strings */; };
 		C29752A8168551CB00092860 /* El_TetraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752A7168551CB00092860 /* El_TetraTests.m */; };
 		C29752B31685629400092860 /* CharacterSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752B21685629400092860 /* CharacterSheetViewController.m */; };
-		C29752C516856F3700092860 /* CharacterStats.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752C416856F3700092860 /* CharacterStats.m */; };
+		C29752C516856F3700092860 /* CharacterStatPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752C416856F3700092860 /* CharacterStatPresenter.m */; };
 		C29752C81685734A00092860 /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752C71685734A00092860 /* StatTableViewController.m */; };
+		C2B597EB16905B05002A333C /* CharacterStat.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B597EA16905B05002A333C /* CharacterStat.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,10 +100,12 @@
 		C29752A7168551CB00092860 /* El_TetraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = El_TetraTests.m; sourceTree = "<group>"; };
 		C29752B11685629400092860 /* CharacterSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSheetViewController.h; sourceTree = "<group>"; };
 		C29752B21685629400092860 /* CharacterSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSheetViewController.m; sourceTree = "<group>"; };
-		C29752C316856F3700092860 /* CharacterStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterStats.h; sourceTree = "<group>"; };
-		C29752C416856F3700092860 /* CharacterStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterStats.m; sourceTree = "<group>"; };
+		C29752C316856F3700092860 /* CharacterStatPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterStatPresenter.h; sourceTree = "<group>"; };
+		C29752C416856F3700092860 /* CharacterStatPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterStatPresenter.m; sourceTree = "<group>"; };
 		C29752C61685734A00092860 /* StatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewController.h; sourceTree = "<group>"; };
 		C29752C71685734A00092860 /* StatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewController.m; sourceTree = "<group>"; };
+		C2B597E916905B05002A333C /* CharacterStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterStat.h; sourceTree = "<group>"; };
+		C2B597EA16905B05002A333C /* CharacterStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterStat.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,8 +214,10 @@
 				C23AF158168FF77200F695D4 /* CharacterStatEditorTableViewController.m */,
 				C23AF15F16900FC800F695D4 /* CharacterStatEditorTableViewCell.h */,
 				C23AF16016900FC800F695D4 /* CharacterStatEditorTableViewCell.m */,
-				C29752C316856F3700092860 /* CharacterStats.h */,
-				C29752C416856F3700092860 /* CharacterStats.m */,
+				C2B597E916905B05002A333C /* CharacterStat.h */,
+				C2B597EA16905B05002A333C /* CharacterStat.m */,
+				C29752C316856F3700092860 /* CharacterStatPresenter.h */,
+				C29752C416856F3700092860 /* CharacterStatPresenter.m */,
 				C23AF15B168FF7D400F695D4 /* CharacterSelector */,
 				C23AF15A168FF78200F695D4 /* CharacterSheetAndStatView */,
 				C260999E168DD2CF000ADB58 /* CharacterLoadoutView */,
@@ -374,7 +379,7 @@
 				C2975280168551CB00092860 /* main.m in Sources */,
 				C2975284168551CB00092860 /* ElTertaAppDelegate.m in Sources */,
 				C29752B31685629400092860 /* CharacterSheetViewController.m in Sources */,
-				C29752C516856F3700092860 /* CharacterStats.m in Sources */,
+				C29752C516856F3700092860 /* CharacterStatPresenter.m in Sources */,
 				C29752C81685734A00092860 /* StatTableViewController.m in Sources */,
 				C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */,
 				C264857A16887C7C00F3B648 /* StatTableViewHeader.m in Sources */,
@@ -388,6 +393,7 @@
 				C23AF156168FE68900F695D4 /* Character.m in Sources */,
 				C23AF159168FF77300F695D4 /* CharacterStatEditorTableViewController.m in Sources */,
 				C23AF16116900FC900F695D4 /* CharacterStatEditorTableViewCell.m in Sources */,
+				C2B597EB16905B05002A333C /* CharacterStat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

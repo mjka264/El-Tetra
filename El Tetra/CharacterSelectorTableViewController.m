@@ -43,7 +43,7 @@
     return self.characterSourceSelectedForViewing;
 }
 
-- (CharacterStats *)characterStatData:(CharacterStatEditorTableViewController *)source {
+- (CharacterStatPresenter *)characterStatData:(CharacterStatEditorTableViewController *)source {
     return self.characterSourceSelectedForViewing.stats;
 }
 

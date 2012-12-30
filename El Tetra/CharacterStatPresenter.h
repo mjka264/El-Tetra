@@ -8,20 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "CharacterLoadout.h"
+#import "CharacterStat.h"
 
-// The implementation of dataStatGroupWhenDisplayingAllForIndex depends on this list starting at 1
 typedef enum {
+    CharacterStatGroupNone = 0,
     CharacterStatGroupSoul = 1,
     CharacterStatGroupPrimary = 2,
-    CharacterStatGroupFireSkills = 3,
-    CharacterStatGroupAirSkills = 4,
-    CharacterStatGroupWaterSkills = 5,
-    CharacterStatGroupEarthSkills = 6,
-    CharacterStatGroupAbilities = 7,
-    CharacterStatGroupChiSkills = 99
+    CharacterStatGroupSkills = 3,
+    CharacterStatGroupAbilities = 4,
 } t_CharacterStatGroup;
 
 typedef enum {
+    CharacterStatElementNone = 0,
     CharacterStatElementFire = 1,
     CharacterStatElementAir = 2,
     CharacterStatElementWater = 3,
@@ -34,12 +32,21 @@ typedef enum {
 } t_CharacterStatElement;
 
 typedef enum {
-    CharacterStatSoulBody = 1,
-    CharacterStatSoulMind = 2,
-    CharacterStatSoulSpirit = 3
-} t_CharacterStatSoul;
+    CharacterStatSoulLinkNone = 0,
+    CharacterStatSoulLinkBody = 1,
+    CharacterStatSoulLinkMind = 2,
+    CharacterStatSoulLinkSpirit = 3
+} t_CharacterStatSoulLink;
 
-@interface CharacterStats : NSObject <NSCopying,CharacterLoadoutAssistsDerivation>
+@interface CharacterStatPresenter : NSObject <NSCopying, CharacterLoadoutAssistsDerivation>
+- (CharacterStat *)statMatchingDescription:(NSString *)description                 // returns a CharacterStat
+- (NSArray *)statsMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
+                                element:(t_CharacterStatElement)elementMembership
+                                   soul:(t_CharacterStatSoulLink)soulMembership;   // returns array of CharacterStat
+
+
+/*
+
 // The interface for view controller that have read-only access to the stats
 // The (id) returned by the first two methods is the parameter to these other methods
 - (id)characterWithAllStats;
@@ -66,6 +73,7 @@ typedef enum {
 + (void)setStatValueFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group to:(NSInteger)value;
 + (NSInteger)statCostFor:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group;
 + (NSInteger)statCostFor:(id)characterData;
+*/
 @end
 
 

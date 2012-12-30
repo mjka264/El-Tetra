@@ -10,18 +10,18 @@
 #import "CharacterStatEditorTableViewCell.h"
 
 @interface CharacterStatEditorTableViewController ()
-@property (readonly, nonatomic) CharacterStats *characterStats;
+@property (readonly, nonatomic) CharacterStatPresenter *characterStats;
 - (t_CharacterStatGroup)statGroupFromSectionNumber:(NSInteger)section;
 @end
 
 @implementation CharacterStatEditorTableViewController
 @synthesize dataSource = _dataSource;
-- (CharacterStats *)characterStats {
+- (CharacterStatPresenter *)characterStats {
     return [self.dataSource characterStatData:self];
 }
 
 - (t_CharacterStatGroup)statGroupFromSectionNumber:(NSInteger)section; {
-    return [[[CharacterStats editableStatGroupsFrom:self.characterStats] objectAtIndex:section] integerValue];
+    return [[[CharacterStatPresenter editableStatGroupsFrom:self.characterStats] objectAtIndex:section] integerValue];
 }
 
 #pragma mark - CharacterStatEditorTableViewCellDelegate
@@ -29,30 +29,30 @@
 - (void)changeValueOfStatFromSender:(CharacterStatEditorTableViewCell *)source {
     NSIndexPath *path = source.dataToLinkToSpecificStat;
     NSNumber *value = [NSNumber numberWithDouble:source.stepperView.value];
-    [CharacterStats setStatValueFrom:self.characterStats atIndex:path.row
+    [CharacterStatPresenter setStatValueFrom:self.characterStats atIndex:path.row
                          inStatGroup:[self statGroupFromSectionNumber:path.section]
                                   to:[value integerValue]];
     source.valueView.text = [value description];
     
     
-    NSLog(@"Cost=%d", [CharacterStats statCostFor:self.characterStats]);
+    NSLog(@"Cost=%d", [CharacterStatPresenter statCostFor:self.characterStats]);
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[CharacterStats editableStatGroupsFrom:self.characterStats] count];
+    return [[CharacterStatPresenter editableStatGroupsFrom:self.characterStats] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [CharacterStats numberOfEntriesFrom:self.characterStats
+    return [CharacterStatPresenter numberOfEntriesFrom:self.characterStats
                                    inStatGroup:[self statGroupFromSectionNumber:section]];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [CharacterStats sectionHeadingFrom:self.characterStats inStatGroup:[self statGroupFromSectionNumber:section]];
+    return [CharacterStatPresenter sectionHeadingFrom:self.characterStats inStatGroup:[self statGroupFromSectionNumber:section]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,10 +60,10 @@
     CharacterStatEditorTableViewCell *cell = (CharacterStatEditorTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"MyEditCell"];
     
     // Initialise straight forward content
-    cell.descriptionView.text = [CharacterStats statDescriptionFrom:self.characterStats
+    cell.descriptionView.text = [CharacterStatPresenter statDescriptionFrom:self.characterStats
                                                        atIndex:indexPath.row
                                                    inStatGroup:[self statGroupFromSectionNumber:indexPath.section]];
-    NSNumber *value = [CharacterStats statValueFrom:self.characterStats
+    NSNumber *value = [CharacterStatPresenter statValueFrom:self.characterStats
                                             atIndex:indexPath.row
                                         inStatGroup:[self statGroupFromSectionNumber:indexPath.section]];
     cell.valueView.text = [value description];
@@ -74,7 +74,6 @@
     [cell.stepperView addTarget:cell action:@selector(stepperValueChanged) forControlEvents:UIControlEventValueChanged];
     cell.stepperView.value = [value doubleValue];
     cell.stepperView.minimumValue = [self statGroupFromSectionNumber:indexPath.section] == CharacterStatGroupAbilities? 0 : 1;
-
     
     return cell;
 }

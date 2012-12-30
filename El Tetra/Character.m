@@ -16,8 +16,8 @@
 }
 
 @synthesize stats = _stats;
-- (CharacterStats *)stats {
-    if (!_stats) _stats = [[CharacterStats alloc] init];
+- (CharacterStatPresenter *)stats {
+    if (!_stats) _stats = [[CharacterStatPresenter alloc] init];
     return _stats;
 }
 

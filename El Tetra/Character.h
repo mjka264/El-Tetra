@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CharacterStats.h"
+#import "CharacterStatPresenter.h"
 #import "CharacterLoadout.h"
 
 @interface Character : NSObject
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) CharacterStats *stats;
+@property (nonatomic, strong) CharacterStatPresenter *stats;
 @property (nonatomic, strong) NSMutableArray *loadouts;     // of CharacterLoadout
 @end
