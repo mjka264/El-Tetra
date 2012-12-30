@@ -53,6 +53,7 @@
 @interface StatTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic, readonly) CharacterStatPresenter *characterStats;
+@property (nonatomic, readonly) NSInteger element;
 @end
 
 
@@ -66,21 +67,24 @@
 
 #pragma mark - StatTableViewHeaderDataSource
 
-
-
-- (NSString *)textForHeading: (UIView *)source {
+- (NSInteger)element {
     CharacterStat *lastObject = [self.characterStats.allStats lastObject];
-    return [CharacterStatPresenter headingForElement:lastObject.elementMembership];
+    return lastObject.elementMembership;
+}
+- (NSString *)textForHeading: (UIView *)source {
+    return [CharacterStatPresenter headingForElement:self.element];
 }
 - (NSNumber *)fontSizeForHeading: (UIView *)source {
     return [NSNumber numberWithInt:16];
 }
 - (NSNumber *)numberForCircle:(UIView *)source {
-    return [self.characterStats
+    return [NSNumber numberWithInteger:[self.characterStats
+                                        statMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                        element:self.element
+                                        soul:CharacterStatSoulLinkNone].value];
 }
 - (NSInteger)elementForCircle:(UIView *)source {
-    return [CharacterStatPresenter statElementforHeadingFrom:[self.dataSource characterStats:self]];
-    //return [self.dataSource elementForDisplay:self];
+    return self.element;
 }
 - (NSNumber *)fontSizeForNumber:(UIView *)source {
     return [NSNumber numberWithInt:16];
@@ -133,25 +137,25 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (self.hideTableData) return 0;
-    else return [CharacterStatPresenter numberOfStatGroupsFrom:[self.dataSource characterStats:self]];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionNumber
 {
-    return [CharacterStatPresenter numberOfEntriesFrom:[self.dataSource characterStats:self]];
+    return [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSkills
+                                                           element:self.element
+                                                               soul:0].allStats count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Stat Cell" forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[StatTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"Stat Cell"];
-    }
     
-    cell.textLabel.text = [CharacterStatPresenter statDescriptionFrom:[self.dataSource characterStats:self] atIndex:indexPath.row];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [CharacterStatPresenter statValueFrom:[self.dataSource characterStats:self] atIndex:indexPath.row]];
-    
+    CharacterStat *stat = [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSkills
+                                                                          element:self.element
+                                                                             soul:0].allStats objectAtIndex:indexPath.row];
+    cell.textLabel.text = stat.description;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", stat.value];
     return cell;
 }
 
