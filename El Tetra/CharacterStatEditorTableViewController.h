@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CharacterStats.h"
+#import "CharacterStatEditorTableViewCell.h"
 
 @class CharacterStatEditorTableViewController;
 
@@ -15,6 +16,6 @@
 - (CharacterStats *)characterStatData:(CharacterStatEditorTableViewController *)source;
 @end
 
-@interface CharacterStatEditorTableViewController : UITableViewController
+@interface CharacterStatEditorTableViewController : UITableViewController <CharacterStatEditorTableViewCellDelegate>
 @property (nonatomic, weak) id<CharacterStatEditorTableViewControllerDataSource> dataSource;
 @end

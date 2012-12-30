@@ -10,6 +10,7 @@
 		C23AF153168F782500F695D4 /* CharacterSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23AF152168F782500F695D4 /* CharacterSelectorTableViewController.m */; };
 		C23AF156168FE68900F695D4 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = C23AF155168FE68900F695D4 /* Character.m */; };
 		C23AF159168FF77300F695D4 /* CharacterStatEditorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23AF158168FF77200F695D4 /* CharacterStatEditorTableViewController.m */; };
+		C23AF16116900FC900F695D4 /* CharacterStatEditorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23AF16016900FC800F695D4 /* CharacterStatEditorTableViewCell.m */; };
 		C248870C168872C400E81E8D /* PrimaryStatColouredCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */; };
 		C260999D168DBB2A000ADB58 /* CharacterLoadoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C260999C168DBB2A000ADB58 /* CharacterLoadoutView.m */; };
 		C26099A1168DD408000ADB58 /* CharacterLoadoutEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26099A0168DD408000ADB58 /* CharacterLoadoutEditorViewController.m */; };
@@ -56,6 +57,8 @@
 		C23AF155168FE68900F695D4 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 		C23AF157168FF77200F695D4 /* CharacterStatEditorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterStatEditorTableViewController.h; sourceTree = "<group>"; };
 		C23AF158168FF77200F695D4 /* CharacterStatEditorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterStatEditorTableViewController.m; sourceTree = "<group>"; };
+		C23AF15F16900FC800F695D4 /* CharacterStatEditorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterStatEditorTableViewCell.h; sourceTree = "<group>"; };
+		C23AF16016900FC800F695D4 /* CharacterStatEditorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterStatEditorTableViewCell.m; sourceTree = "<group>"; };
 		C248870A168872C400E81E8D /* PrimaryStatColouredCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimaryStatColouredCircleView.h; sourceTree = "<group>"; };
 		C248870B168872C400E81E8D /* PrimaryStatColouredCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimaryStatColouredCircleView.m; sourceTree = "<group>"; };
 		C260999B168DBB29000ADB58 /* CharacterLoadoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterLoadoutView.h; sourceTree = "<group>"; };
@@ -206,6 +209,8 @@
 				C297528B168551CB00092860 /* MainStoryboard_iPhone.storyboard */,
 				C23AF157168FF77200F695D4 /* CharacterStatEditorTableViewController.h */,
 				C23AF158168FF77200F695D4 /* CharacterStatEditorTableViewController.m */,
+				C23AF15F16900FC800F695D4 /* CharacterStatEditorTableViewCell.h */,
+				C23AF16016900FC800F695D4 /* CharacterStatEditorTableViewCell.m */,
 				C29752C316856F3700092860 /* CharacterStats.h */,
 				C29752C416856F3700092860 /* CharacterStats.m */,
 				C23AF15B168FF7D400F695D4 /* CharacterSelector */,
@@ -382,6 +387,7 @@
 				C23AF153168F782500F695D4 /* CharacterSelectorTableViewController.m in Sources */,
 				C23AF156168FE68900F695D4 /* Character.m in Sources */,
 				C23AF159168FF77300F695D4 /* CharacterStatEditorTableViewController.m in Sources */,
+				C23AF16116900FC900F695D4 /* CharacterStatEditorTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

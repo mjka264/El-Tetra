@@ -7,6 +7,7 @@
 //
 
 #import "CharacterStatEditorTableViewController.h"
+#import "CharacterStatEditorTableViewCell.h"
 
 @interface CharacterStatEditorTableViewController ()
 @property (readonly, nonatomic) CharacterStats *characterStats;
@@ -71,24 +72,31 @@
     //cell.statValueView.text = @"3";
      */
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyEditCell"];
-    UILabel *statDescription = (UILabel *) [cell viewWithTag:1];
-    UILabel *statValue = (UILabel *) [cell viewWithTag:2];
-    UIStepper *statStepper = (UIStepper *) [cell viewWithTag:3];
-
-    t_CharacterStatGroup group = [[[CharacterStats editableStatGroupsFrom:self.characterStats] objectAtIndex:indexPath.section] integerValue];
+    CharacterStatEditorTableViewCell *cell = (CharacterStatEditorTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"MyEditCell"];
     
-    statDescription.text = [CharacterStats statDescriptionFrom:self.characterStats
-                                                      atIndex:indexPath.row
-                                                  inStatGroup:group];
+    // Initialise straight forward content
+    UILabel *descriptionView = (UILabel *) [cell viewWithTag:1];
+    UILabel *valueView = (UILabel *) [cell viewWithTag:2];
+    t_CharacterStatGroup group = [[[CharacterStats editableStatGroupsFrom:self.characterStats] objectAtIndex:indexPath.section] integerValue];
+    descriptionView.text = [CharacterStats statDescriptionFrom:self.characterStats
+                                                       atIndex:indexPath.row
+                                                   inStatGroup:group];
     NSNumber *value = [CharacterStats statValueFrom:self.characterStats
                                             atIndex:indexPath.row
                                         inStatGroup:group];
+    valueView.text = [value description];
     
-    statValue.text = [value description];
+    // Initialise the stepper callbacks
+    UIStepper *statStepper = (UIStepper *) [cell viewWithTag:3];
+    cell.delegate = self;
+    [statStepper addTarget:cell action:@selector(stepperValueChanged) forControlEvents:UIControlEventValueChanged];
     statStepper.value = [value doubleValue];
                        
     return cell;
+}
+
+- (void)changeValueOfStatFromSender:(CharacterStatEditorTableViewCell *)source {
+    NSLog(@"Change received from: %@", source);
 }
 
 
