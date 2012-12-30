@@ -7,79 +7,83 @@
 //
 
 #import "CharacterSelectorTableViewController.h"
+#import "Character.h"
 
 @interface CharacterSelectorTableViewController ()
-@property (nonatomic, strong) CharacterStats *characterStats;
+@property (nonatomic, strong) NSArray *allCharacters;
+@property (nonatomic, weak) CharacterStats *characterSourceSelectedForViewing; // This is saved to help act as a data source
 @end
 
 @implementation CharacterSelectorTableViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-
-@synthesize characterStats = _characterStats;
-- (CharacterStats *)characterStats:(CharacterSheetViewController *)source {
-    if (!_characterStats) _characterStats = [[CharacterStats alloc] init];
-    return _characterStats;
+@synthesize allCharacters = _allCharacters;
+- (NSArray *)allCharacters {
+    if (!_allCharacters) {
+        _allCharacters = @[
+        [[Character alloc] init],
+        [[Character alloc] init],
+        [[Character alloc] init]];
+    }
+    return _allCharacters;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - CharacterSheetViewController data source
+
+@synthesize characterSourceSelectedForViewing = _characterSourceSelectedForViewing;
+- (CharacterStats *)characterData:(CharacterSheetViewController *)source {
+    return self.characterSourceSelectedForViewing;
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if (section == 0) {
+        return 1;
+    } else {
+        return [self.allCharacters count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Character Sheet";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    cell.textLabel.text = @"Moo";
-    // Configure the cell...
+    UITableViewCell *cell;
+    if (indexPath.section == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Big Button" forIndexPath:indexPath];
+        cell.textLabel.text = @"New Character";
+    } else {
+        Character *character = [self.allCharacters objectAtIndex:indexPath.row];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Character Sheet" forIndexPath:indexPath];
+        cell.textLabel.text = character.name;
+    }
     
     return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return indexPath.section > 0;
 }
-*/
 
-/*
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -87,32 +91,34 @@
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
 }
-*/
 
-/*
+
+
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
 }
-*/
 
-/*
+
+
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
-*/
+
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section > 0) {
+        self.characterSourceSelectedForViewing = [self.allCharacters objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"Segue to Character" sender:self];
+     }
+    
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

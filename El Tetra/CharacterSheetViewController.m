@@ -79,7 +79,7 @@
 
 - (CharacterStats *)characterStats
 {
-    return [self.dataSource characterStats:self];
+    return [self.dataSource characterData:self].stats;
 }
 
 

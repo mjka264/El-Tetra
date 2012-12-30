@@ -10,11 +10,12 @@
 #import "StatTableViewController.h"
 #import "CharacterStats.h"
 #import "CharacterLoadoutViewController.h"
+#import "Character.h"
 
 @class CharacterSheetViewController;
 
 @protocol CharacterSheetViewControllerDataSource <NSObject>
-- (CharacterStats *)characterStats:(CharacterSheetViewController *)source;
+- (Character *)characterData:(CharacterSheetViewController *)source;
 @end
 
 @interface CharacterSheetViewController : UIViewController
