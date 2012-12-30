@@ -948,6 +948,11 @@
                                     <constraint firstItem="Rku-Tt-q3x" firstAttribute="leading" secondItem="TLL-4a-3pJ" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Vmo-35-qnI"/>
                                     <constraint firstItem="VV0-Kg-6iv" firstAttribute="leading" secondItem="fQ2-vY-ghT" secondAttribute="leading" constant="9" id="rAb-4r-x4k"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="descriptionView" destination="VV0-Kg-6iv" id="UFM-Wt-5qc"/>
+                                    <outlet property="stepperView" destination="TLL-4a-3pJ" id="sjf-fI-dQG"/>
+                                    <outlet property="valueView" destination="Rku-Tt-q3x" id="rFx-xy-5yt"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

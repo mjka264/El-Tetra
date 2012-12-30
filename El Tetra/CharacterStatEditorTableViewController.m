@@ -75,22 +75,19 @@
     CharacterStatEditorTableViewCell *cell = (CharacterStatEditorTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"MyEditCell"];
     
     // Initialise straight forward content
-    UILabel *descriptionView = (UILabel *) [cell viewWithTag:1];
-    UILabel *valueView = (UILabel *) [cell viewWithTag:2];
     t_CharacterStatGroup group = [[[CharacterStats editableStatGroupsFrom:self.characterStats] objectAtIndex:indexPath.section] integerValue];
-    descriptionView.text = [CharacterStats statDescriptionFrom:self.characterStats
+    cell.descriptionView.text = [CharacterStats statDescriptionFrom:self.characterStats
                                                        atIndex:indexPath.row
                                                    inStatGroup:group];
     NSNumber *value = [CharacterStats statValueFrom:self.characterStats
                                             atIndex:indexPath.row
                                         inStatGroup:group];
-    valueView.text = [value description];
+    cell.valueView.text = [value description];
     
     // Initialise the stepper callbacks
-    UIStepper *statStepper = (UIStepper *) [cell viewWithTag:3];
     cell.delegate = self;
-    [statStepper addTarget:cell action:@selector(stepperValueChanged) forControlEvents:UIControlEventValueChanged];
-    statStepper.value = [value doubleValue];
+    [cell.stepperView addTarget:cell action:@selector(stepperValueChanged) forControlEvents:UIControlEventValueChanged];
+    cell.stepperView.value = [value doubleValue];
                        
     return cell;
 }
