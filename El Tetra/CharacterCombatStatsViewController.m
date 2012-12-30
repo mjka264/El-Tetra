@@ -17,47 +17,54 @@
 
 // data Source links
 @property (nonatomic, strong, readonly) CharacterStatPresenter *characterStats;
-@property (nonatomic, strong, readonly) NSMutableArray *characterLoadouts; // of CharacterLoadout
+@property (nonatomic, strong, readonly) NSMutableArray *characterLoadouts;      // of CharacterLoadout
 
 @end
 
 
 @implementation CharacterCombatStatsViewController
+- (CharacterStatPresenter *)characterStats {
+    return [self.dataSource characterData:self].stats;
+}
+- (NSMutableArray *)characterLoadouts {
+    return [self.dataSource characterData:self].loadouts;
+}
 
 @synthesize soulStatBody = _soulStatBody;
 - (void)setSoulStatBody:(UILabel *)soulStatBody {
     if (_soulStatBody != soulStatBody) {
         _soulStatBody = soulStatBody;
-        _soulStatBody.text = [NSString stringWithFormat:@"%@", [CharacterStatPresenter soulStatFrom:self.characterStats forStat:CharacterStatSoulBody]];
+        _soulStatBody.text = [NSString stringWithFormat:@"%@", [self.characterStats statMatchingCriteriaGroup:CharacterStatGroupSoul
+                                                                                                      element:CharacterStatElementNone
+                                                                                                         soul:CharacterStatSoulLinkBody]];
     }
 }
 @synthesize soulStatMind = _soulStatMind;
 - (void)setSoulStatMind:(UILabel *)soulStatMind {
     if (_soulStatMind != soulStatMind) {
         _soulStatMind = soulStatMind;
-        _soulStatMind.text = [NSString stringWithFormat:@"%@", [CharacterStatPresenter soulStatFrom:self.characterStats forStat:CharacterStatSoulMind]];
+        _soulStatMind.text = [NSString stringWithFormat:@"%@", [self.characterStats statMatchingCriteriaGroup:CharacterStatGroupSoul
+                                                                                                      element:CharacterStatElementNone
+                                                                                                         soul:CharacterStatSoulLinkMind]];
     }
 }
 @synthesize soulStatSpirit = _soulStatSpirit;
 - (void)setSoulStatSpirit:(UILabel *)soulStatSpirit {
     if (_soulStatSpirit != soulStatSpirit) {
         _soulStatSpirit = soulStatSpirit;
-        _soulStatSpirit.text = [NSString stringWithFormat:@"%@", [CharacterStatPresenter soulStatFrom:self.characterStats forStat:CharacterStatSoulSpirit]];
+        _soulStatSpirit.text = [NSString stringWithFormat:@"%@", [self.characterStats statMatchingCriteriaGroup:CharacterStatGroupSoul
+                                                                                                      element:CharacterStatElementNone
+                                                                                                         soul:CharacterStatSoulLinkSpirit]];
     }
 }
 
 - (CharacterStatPresenter *)characterStatsAll
 {
-    return [self.dataSource characterData:self].stats;
+    return self.characterStats;
 }
 
 #pragma mark -
 #pragma mark CharacterLoadout (PageViewController protocol)
-
-@synthesize characterLoadouts = _characterLoadouts;
-- (NSMutableArray *)characterLoadouts {
-    return [self.dataSource characterData:(self)].loadouts;
-}
 
 - (CharacterLoadoutViewController *)loadoutControllerAtIndex:(NSInteger)index {
     if ([self.characterLoadouts count] == 0 ||
@@ -103,6 +110,7 @@
 }
 
 
+
 - (void)createNewCharacterLoadout:(CharacterLoadoutViewController *)sender withName:(NSString *)loadoutName {
     NSUInteger newIndex = 1 + [self indexOfLoadoutController:sender];
     CharacterLoadout *newLoadout = [[self.characterLoadouts objectAtIndex:[self indexOfLoadoutController:sender]] copy];
@@ -144,6 +152,11 @@
     return [self.characterLoadouts count] > 1;
 }
 
+#pragma mark Stat table view controller - necessary for the little circles!
+
+- (CharacterStatPresenter *)characterStatsFrom:(StatTableViewController *)source {
+    return self.characterStats;
+}
 
 
 #pragma mark -

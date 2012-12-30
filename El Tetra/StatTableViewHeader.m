@@ -21,7 +21,7 @@
 #define CIRCLE_RADIUS 35
 
 
-- (void)setDataSource:(id<StatTableViewHeaderDataSource>) newSource {
+- (void)setDataSource:(id<ColouredCircleAndHeaderDataSource>) newSource {
     if (_dataSource != newSource) {
         _dataSource = newSource;
         [self setupSelf];
@@ -42,7 +42,7 @@
     if ([self.dataSource elementForCircle:self]) {
         if (!_circleView) {
             _circleView = [[PrimaryStatColouredCircleView alloc] init];
-            _circleView.dataSource = (id<StatTableViewHeaderDataSource>) self.dataSource;
+            _circleView.dataSource = (id<ColouredCircleAndHeaderDataSource>) self.dataSource;
         }
     } else {
         _circleView = nil;
