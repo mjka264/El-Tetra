@@ -46,31 +46,6 @@
     }
 }
 
-// This identifies the controller names in the UI and convert them to CharacterData's language
-@synthesize controllerIdentityStatGroups = _controllerIdentityStatGroups;
-- (NSDictionary *)controllerIdentityStatGroups {
-    if (!_controllerIdentityStatGroups) {
-        _controllerIdentityStatGroups = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSNumber numberWithInt:CharacterStatGroupSoul],
-                                         @"SoulStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupPrimary],
-                                         @"PrimaryStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupFireSkills],
-                                         @"FireStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupAirSkills],
-                                         @"AirStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupWaterSkills],
-                                         @"WaterStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupEarthSkills],
-                                         @"EarthStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupChiSkills],
-                                         @"ChiStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupAbilities],
-                                         @"AbilityStatsController", nil];
-    }
-    return _controllerIdentityStatGroups;
-}
-
 - (CharacterStatPresenter *)characterStatsAll
 {
     return [self.dataSource characterData:self].stats;
@@ -177,10 +152,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.destinationViewController isKindOfClass:[StatTableViewController class]]) {
-        StatTableViewController *destination = segue.destinationViewController;
-        destination.dataSource = self;
-    } else if ([segue.destinationViewController isKindOfClass:[UIPageViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass:[UIPageViewController class]]) {
         UIPageViewController *destination = segue.destinationViewController;
         self.pageViewController = destination;
         destination.dataSource = self;

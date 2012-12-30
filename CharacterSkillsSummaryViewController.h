@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StatTableViewController.h"
 
-@interface CharacterSkillsSummaryViewController : UIViewController
+@class CharacterSkillsSummaryViewController;
 
+@protocol CharacterSkillsSummaryViewControllerDataSource <NSObject>
+- (CharacterStatPresenter *)dataSourceCharacterStatsFor:(CharacterSkillsSummaryViewController *)source;
+@end
+
+
+@interface CharacterSkillsSummaryViewController : UIViewController <StatTableViewControllerDataSource>
+@property (nonatomic, weak) id<CharacterSkillsSummaryViewControllerDataSource> dataSource;
 @end

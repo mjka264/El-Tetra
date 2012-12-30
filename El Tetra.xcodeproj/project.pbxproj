@@ -66,8 +66,8 @@
 		C260999C168DBB2A000ADB58 /* CharacterLoadoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterLoadoutView.m; sourceTree = "<group>"; };
 		C260999F168DD408000ADB58 /* CharacterLoadoutEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterLoadoutEditorViewController.h; sourceTree = "<group>"; };
 		C26099A0168DD408000ADB58 /* CharacterLoadoutEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterLoadoutEditorViewController.m; sourceTree = "<group>"; };
-		C26413E116907D4D00B02C42 /* CharacterSkillsSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSkillsSummaryViewController.h; sourceTree = "<group>"; };
-		C26413E216907D4D00B02C42 /* CharacterSkillsSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSkillsSummaryViewController.m; sourceTree = "<group>"; };
+		C26413E116907D4D00B02C42 /* CharacterSkillsSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CharacterSkillsSummaryViewController.h; path = ../CharacterSkillsSummaryViewController.h; sourceTree = "<group>"; };
+		C26413E216907D4D00B02C42 /* CharacterSkillsSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CharacterSkillsSummaryViewController.m; path = ../CharacterSkillsSummaryViewController.m; sourceTree = "<group>"; };
 		C264857816887C7C00F3B648 /* StatTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewHeader.h; sourceTree = "<group>"; };
 		C264857916887C7C00F3B648 /* StatTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewHeader.m; sourceTree = "<group>"; };
 		C27AB560168B232000CA0D39 /* CharacterLoadoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterLoadoutViewController.h; sourceTree = "<group>"; };
@@ -143,6 +143,8 @@
 		C26413E416907EC500B02C42 /* Skills View */ = {
 			isa = PBXGroup;
 			children = (
+				C26413E116907D4D00B02C42 /* CharacterSkillsSummaryViewController.h */,
+				C26413E216907D4D00B02C42 /* CharacterSkillsSummaryViewController.m */,
 				C29752C61685734A00092860 /* StatTableViewController.h */,
 				C29752C71685734A00092860 /* StatTableViewController.m */,
 				C264857816887C7C00F3B648 /* StatTableViewHeader.h */,
@@ -199,8 +201,6 @@
 		C2975264168551CB00092860 = {
 			isa = PBXGroup;
 			children = (
-				C26413E116907D4D00B02C42 /* CharacterSkillsSummaryViewController.h */,
-				C26413E216907D4D00B02C42 /* CharacterSkillsSummaryViewController.m */,
 				C2975279168551CB00092860 /* El Tetra */,
 				C29752A0168551CB00092860 /* El TetraTests */,
 				C2975272168551CB00092860 /* Frameworks */,

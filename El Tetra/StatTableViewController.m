@@ -61,7 +61,7 @@
 
 @synthesize dataSource = _dataSource;
 - (CharacterStatPresenter *)characterStats {
-    return [self.dataSource characterStatData:self];
+    return [self.dataSource characterStatsFrom:self];
 }
 
 #pragma mark - StatTableViewHeaderDataSource
@@ -76,7 +76,7 @@
     return [NSNumber numberWithInt:16];
 }
 - (NSNumber *)numberForCircle:(UIView *)source {
-    return [CharacterStatPresenter primaryStatForSkillGroupFrom:[self.dataSource characterStats:self]];
+    return [CharacterStatPresenter ];
     //return [NSNumber numberWithInt:3];
 }
 - (NSInteger)elementForCircle:(UIView *)source {

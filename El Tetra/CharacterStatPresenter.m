@@ -30,18 +30,20 @@
     return stat;
 }
 
-- (NSArray *)statsMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
-                                element:(t_CharacterStatElement)elementMembership
-                                   soul:(t_CharacterStatSoulLink)soulMembership {
+- (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
+                                                       element:(t_CharacterStatElement)elementMembership
+                                                          soul:(t_CharacterStatSoulLink)soulMembership {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     [self.allStats enumerateObjectsUsingBlock:^(CharacterStat *obj, NSUInteger idx, BOOL *stop) {
-        if (obj.groupMembership == groupMembership &&
-            obj.elementMembership == elementMembership &&
-            obj.soulMembership == elementMembership) {
+        if ((obj.groupMembership == 0 || obj.groupMembership == groupMembership) &&
+            (obj.elementMembership == 0 || obj.elementMembership == elementMembership) &&
+            (obj.soulMembership == 0 || obj.soulMembership == elementMembership)) {
             [array addObject:obj];
         }
     }];
-    return [array copy];
+    CharacterStatPresenter *presenter = [[CharacterStatPresenter alloc] init];
+    presenter.allStats = array;
+    return presenter;
 }
 
 #pragma mark CharacterLoadoutAssistsDerivation protocol
@@ -59,33 +61,33 @@
     return [NSNumber numberWithInteger:[self statMatchingDescription:STAT_PROJECTILE].value];
 }
 - (NSNumber *)effectiveStatDamage {
-    CharacterStat *stat = [[self statsMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                                    element:CharacterStatElementFire
-                                                       soul:CharacterStatSoulLinkNone] lastObject];
+    CharacterStat *stat = [[self statPresenterMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                                            element:CharacterStatElementFire
+                                                               soul:CharacterStatSoulLinkNone].allStats lastObject];
     return [NSNumber numberWithInteger:stat.value];
 }
 - (NSNumber *)effectiveStatRawPrecision {
-    CharacterStat *stat = [[self statsMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                                    element:CharacterStatElementAir
-                                                       soul:CharacterStatSoulLinkNone] lastObject];
+    CharacterStat *stat = [[self statPresenterMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                                            element:CharacterStatElementAir
+                                                               soul:CharacterStatSoulLinkNone].allStats lastObject];
     return [NSNumber numberWithInteger:stat.value];
 }
 - (NSNumber *)effectiveStatDodge {
-    CharacterStat *stat = [[self statsMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                                    element:CharacterStatElementWater
-                                                       soul:CharacterStatSoulLinkNone] lastObject];
+    CharacterStat *stat = [[self statPresenterMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                                            element:CharacterStatElementWater
+                                                               soul:CharacterStatSoulLinkNone].allStats lastObject];
     return [NSNumber numberWithInteger:stat.value];
 }
 - (NSNumber *)effectiveStatSoak {
-    CharacterStat *stat = [[self statsMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                                    element:CharacterStatElementEarth
-                                                       soul:CharacterStatSoulLinkNone] lastObject];
+    CharacterStat *stat = [[self statPresenterMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                                            element:CharacterStatElementEarth
+                                                               soul:CharacterStatSoulLinkNone].allStats lastObject];
     return [NSNumber numberWithInteger:stat.value];
 }
 - (NSNumber *)effectiveStatMagicDefense {
-    CharacterStat *stat = [[self statsMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                                    element:CharacterStatElementChi
-                                                       soul:CharacterStatSoulLinkNone] lastObject];
+    CharacterStat *stat = [[self statPresenterMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                                            element:CharacterStatElementChi
+                                                               soul:CharacterStatSoulLinkNone].allStats lastObject];
     return [NSNumber numberWithInteger:stat.value];
 }
 
@@ -94,10 +96,25 @@
 + (NSString *)headingForGroup:(t_CharacterStatGroup)group {
     NSString *str;
     if (group == CharacterStatGroupSoul) str = @"Expression";
-    if (group == CharacterStatGroupPrimary) str = @"Primary Stats";
-    if (group == CharacterStatGroupAbilities) str = @"Abilities";
+    else if (group == CharacterStatGroupPrimary) str = @"Primary Stats";
+    else if (group == CharacterStatGroupAbilities) str = @"Abilities";
     return str;
 }
+
++ (NSString *)headingForElement:(t_CharacterStatElement)element {
+    NSString *str;
+    if (element == CharacterStatElementFire) str = @"Fire";
+    else if (element == CharacterStatElementAir) str = @"Air";
+    else if (element == CharacterStatElementWater) str = @"Water";
+    else if (element == CharacterStatElementEarth) str = @"Earth";
+    else if (element == CharacterStatElementChi) str = @"Chi";
+    else if (element == CharacterStatElementFireChi) str = @"Fire Chi";
+    else if (element == CharacterStatElementAirChi) str = @"Air Chi";
+    else if (element == CharacterStatElementWaterChi) str = @"Water Chi";
+    else if (element == CharacterStatElementEarthChi) str = @"Earth Chi";
+    return str;
+}
+
 
 - (NSArray *)getEditableStatsInGroups {
     NSMutableArray *soul = [[NSMutableArray alloc] init];
@@ -112,9 +129,9 @@
 }
     
 - (void)setStatWithDescription:(NSString *)description value:(NSInteger)value {
-    CharacterStat *stat = [[self statsMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                                    element:CharacterStatElementEarth
-                                                       soul:CharacterStatSoulLinkNone] lastObject];
+    CharacterStat *stat = [[self statPresenterMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                                            element:CharacterStatElementEarth
+                                                               soul:CharacterStatSoulLinkNone].allStats lastObject];
     stat.value = value;
 }
 

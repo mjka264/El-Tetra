@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "StatTableViewHeader.h"
+#import "CharacterStatPresenter.h"
 
 @class StatTableViewController;
 @class TableViewControllerData;
 
 @protocol StatTableViewControllerDataSource <NSObject>
+- (CharacterStatPresenter *)characterStatsFrom:(StatTableViewController *)source;
 @end
 
 @interface StatTableViewController : UITableViewController <ColouredCircleAndHeaderDataSource>

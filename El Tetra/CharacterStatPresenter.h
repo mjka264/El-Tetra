@@ -41,12 +41,14 @@ typedef enum {
 @interface CharacterStatPresenter : NSObject <CharacterLoadoutAssistsDerivation>
 
 - (CharacterStat *)statMatchingDescription:(NSString *)description;                 // returns a CharacterStat
-- (NSArray *)statsMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
-                                element:(t_CharacterStatElement)elementMembership
-                                   soul:(t_CharacterStatSoulLink)soulMembership;    // returns array of CharacterStat
+- (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
+                                                       element:(t_CharacterStatElement)elementMembership
+                                                          soul:(t_CharacterStatSoulLink)soulMembership;
 
 // This is for CharacterStatEditorTableViewController
 + (NSString *)headingForGroup:(t_CharacterStatGroup)group;
++ (NSString *)headingForElement:(t_CharacterStatElement)element;
+
 - (NSArray *)getEditableStatsInGroups;  // returns a 2d array for presentation
 - (void)setStatWithDescription:(NSString *)stat value:(NSInteger)value;
 - (NSInteger)totalStatCost;

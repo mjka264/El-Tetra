@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CharacterStatPresenter.h"
 #import "CharacterLoadout.h"
+#import "CharacterStat.h"
 
 @interface Character : NSObject
 @property (nonatomic, strong) NSString *name;
