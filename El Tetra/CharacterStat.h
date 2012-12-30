@@ -10,15 +10,16 @@
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic) NSInteger value;
 
+// These 3 fields provide all the information required to identify the stat
+@property (nonatomic) NSInteger groupMembership;     // one of the enum CharacterStatGroup
+@property (nonatomic) NSInteger elementMembership;   // one of the enum CharacterStatElement
+@property (nonatomic) NSInteger soulMembership;      // CharacterStatSpecialNot for most things
+@property (nonatomic, readonly) NSInteger skillCost;      // derived based upon group memberships
+
 #define STAT_ARTFUL @"Artful weapons"
 #define STAT_BRUTAL @"Brutal weapons"
 #define STAT_PROJECTILE @"Projectile weapons"
 #define STAT_INITIATIVE @"Initiative"
-
-// These 3 fields provide all the information required to identify the stat
-@property (nonatomic) t_CharacterStatGroup groupMembership;     // one of the enum CharacterStatGroup
-@property (nonatomic) t_CharacterStatElement elementMembership;   // one of the enum CharacterStatElement
-@property (nonatomic) t_CharacterStatSoulLink soulMembership;   // CharacterStatSpecialNot for most things
 
 + (NSArray *)characterStatsSetCopy;
 

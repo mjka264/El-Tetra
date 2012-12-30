@@ -45,6 +45,7 @@
 }
 
 #pragma mark CharacterLoadoutAssistsDerivation protocol
+
 - (NSNumber *)effectiveStatInitiative {
     return [NSNumber numberWithInteger:[self statMatchingDescription:STAT_INITIATIVE].value];
 }
@@ -86,6 +87,27 @@
                                                     element:CharacterStatElementChi
                                                        soul:CharacterStatSoulLinkNone] lastObject];
     return [NSNumber numberWithInteger:stat.value];
+}
+
+#pragma mark support for CharacterStatEditorTableViewController
+
+- (NSArray *)getEditableStatsInGroups {
+    NSMutableArray *soul = [[NSMutableArray alloc] init];
+    NSMutableArray *primary = [[NSMutableArray alloc] init];
+    NSMutableArray *ability = [[NSMutableArray alloc] init];
+    [self.allStats enumerateObjectsUsingBlock:^(CharacterStat *obj, NSUInteger idx, BOOL *stop) {
+        if (obj.groupMembership == CharacterStatGroupSoul) [soul addObject:obj];
+        else if (obj.groupMembership == CharacterStatGroupPrimary) [primary addObject:obj];
+        else if (obj.groupMembership == CharacterStatGroupSkills) [ability addObject:obj];
+    }];
+    return @[soul, primary, ability];
+}
+    
+- (void)setStatWithDescription:(NSString *)description value:(NSInteger)value {
+    CharacterStat *stat = [[self statsMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                                    element:CharacterStatElementEarth
+                                                       soul:CharacterStatSoulLinkNone] lastObject];
+    stat.value = value;
 }
 
 
