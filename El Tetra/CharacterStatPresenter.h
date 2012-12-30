@@ -39,11 +39,16 @@ typedef enum {
 } t_CharacterStatSoulLink;
 
 @interface CharacterStatPresenter : NSObject <CharacterLoadoutAssistsDerivation>
+@property (nonatomic, strong) NSArray *allStats;
 
 - (CharacterStat *)statMatchingDescription:(NSString *)description;                 // returns a CharacterStat
+- (CharacterStat *)statMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
+                                     element:(t_CharacterStatElement)elementMembership
+                                        soul:(t_CharacterStatSoulLink)soulMembership;
 - (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
                                                        element:(t_CharacterStatElement)elementMembership
                                                           soul:(t_CharacterStatSoulLink)soulMembership;
+- (NSArray *)allStats;
 
 // This is for CharacterStatEditorTableViewController
 + (NSString *)headingForGroup:(t_CharacterStatGroup)group;

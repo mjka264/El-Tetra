@@ -7,6 +7,7 @@
 //
 
 #import "CharacterStat.h"
+#import "CharacterStatPresenter.h"
 
 // This is used to keep a copy of a "blank" character. It is only released as a copy.
 // It is initiated at the bottom of this file
@@ -71,10 +72,10 @@ NSArray *_allStats = nil;
 
 + (NSArray *)characterStatsSetCopy {
     if (!_allStats) [CharacterStat buildAllStats];
-    NSMutableArray *array = [NSMutableArray alloc] initWithCapacity:[_allStats count];
-    [_allStats enumerateObjectsUsingBlock:^(CharacterStat *obj, NSUInteger idx, BOOL *stop) {
-        array addObject:[obj copy];
-    }];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:[_allStats count]];
+    for (CharacterStat *obj in _allStats) {
+        [array addObject:[obj copy]];
+    }
     return [array copy];
 }
 

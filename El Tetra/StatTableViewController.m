@@ -69,15 +69,14 @@
 
 
 - (NSString *)textForHeading: (UIView *)source {
-    return [CharacterStatPresenter sectionHeadingFrom:[self.dataSource characterStats:self]];
-    //return [self.dataSource headingForDisplay:self];
+    CharacterStat *lastObject = [self.characterStats.allStats lastObject];
+    return [CharacterStatPresenter headingForElement:lastObject.elementMembership];
 }
 - (NSNumber *)fontSizeForHeading: (UIView *)source {
     return [NSNumber numberWithInt:16];
 }
 - (NSNumber *)numberForCircle:(UIView *)source {
-    return [CharacterStatPresenter ];
-    //return [NSNumber numberWithInt:3];
+    return [self.characterStats
 }
 - (NSInteger)elementForCircle:(UIView *)source {
     return [CharacterStatPresenter statElementforHeadingFrom:[self.dataSource characterStats:self]];
