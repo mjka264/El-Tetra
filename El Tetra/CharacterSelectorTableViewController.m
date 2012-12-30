@@ -7,11 +7,12 @@
 //
 
 #import "CharacterSelectorTableViewController.h"
+#import "CharacterStatEditorTableViewController.h"
 #import "Character.h"
 
 @interface CharacterSelectorTableViewController ()
 @property (nonatomic, strong) NSArray *allCharacters;
-@property (nonatomic, weak) CharacterStats *characterSourceSelectedForViewing; // This is saved to help act as a data source
+@property (nonatomic, weak) Character *characterSourceSelectedForViewing; // This is saved to help act as a data source
 @end
 
 @implementation CharacterSelectorTableViewController
@@ -34,12 +35,18 @@
     return _allCharacters;
 }
 
-#pragma mark - CharacterSheetViewController data source
+#pragma mark - Data source for my views that come from the tab controller
 
 @synthesize characterSourceSelectedForViewing = _characterSourceSelectedForViewing;
-- (CharacterStats *)characterData:(CharacterSheetViewController *)source {
+
+- (Character *)characterData:(CharacterSheetViewController *)source {
     return self.characterSourceSelectedForViewing;
 }
+
+- (CharacterStats *)characterStatData:(CharacterStatEditorTableViewController *)source {
+    return self.characterSourceSelectedForViewing.stats;
+}
+
 
 #pragma mark - Table view data source
 

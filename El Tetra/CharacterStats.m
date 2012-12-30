@@ -120,13 +120,13 @@
     if (!_statValues) {
         _statValues =
         [NSDictionary dictionaryWithObjectsAndKeys:
-         [NSArray arrayWithObjects:
+         [NSMutableArray arrayWithObjects:
           [NSNumber numberWithInt:5],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:11], nil],
          [NSNumber numberWithInt:CharacterStatGroupSoul],
          
-         [NSArray arrayWithObjects:
+         [NSMutableArray arrayWithObjects:
           [NSNumber numberWithInt:8],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:7],
@@ -134,31 +134,31 @@
           [NSNumber numberWithInt:4], nil],
          [NSNumber numberWithInt:CharacterStatGroupPrimary],
          
-         [NSArray arrayWithObjects:
+         [NSMutableArray arrayWithObjects:
           [NSNumber numberWithInt:5],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
          [NSNumber numberWithInt:CharacterStatGroupFireSkills],
          
-         [NSArray arrayWithObjects:
+         [NSMutableArray arrayWithObjects:
           [NSNumber numberWithInt:6],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
          [NSNumber numberWithInt:CharacterStatGroupAirSkills],
          
-         [NSArray arrayWithObjects:
+         [NSMutableArray arrayWithObjects:
           [NSNumber numberWithInt:7],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
          [NSNumber numberWithInt:CharacterStatGroupWaterSkills],
          
-         [NSArray arrayWithObjects:
+         [NSMutableArray arrayWithObjects:
           [NSNumber numberWithInt:2],
           [NSNumber numberWithInt:3],
           [NSNumber numberWithInt:4], nil],
          [NSNumber numberWithInt:CharacterStatGroupEarthSkills],
          
-         [NSArray arrayWithObjects:
+         [NSMutableArray arrayWithObjects:
           [NSNumber numberWithInt:5], [NSNumber numberWithInt:6],
           [NSNumber numberWithInt:3], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7], [NSNumber numberWithInt:8],
           [NSNumber numberWithInt:6], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7],
@@ -332,6 +332,18 @@
 }
 - (NSNumber *)effectiveStatRawPrecision {
     return [self primaryStatValueWithDescription:@"Precision"];
+}
+
++ (NSArray *)editableStatGroupsFrom:(CharacterStats *)character {
+    return @[
+    [NSNumber numberWithInteger:CharacterStatGroupSoul],
+    [NSNumber numberWithInteger:CharacterStatGroupPrimary],
+    [NSNumber numberWithInteger:CharacterStatGroupAbilities]];
+}
+
++ (void)setStatValueFrom:(CharacterStats *)character atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group to:(NSInteger)value {
+    NSMutableArray *array = [character.statValues objectForKey:[NSNumber numberWithInt:group]];
+    [array replaceObjectAtIndex:index withObject:[NSNumber numberWithInteger:value]];
 }
 
 @end

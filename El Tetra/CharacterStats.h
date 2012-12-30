@@ -39,8 +39,9 @@ typedef enum {
     CharacterStatSoulSpirit = 3
 } t_CharacterStatSoul;
 
-// The (id) returned by the first two methods is the parameter to these other methods
 @interface CharacterStats : NSObject <NSCopying,CharacterLoadoutAssistsDerivation>
+// The interface for view controller that have read-only access to the stats
+// The (id) returned by the first two methods is the parameter to these other methods
 - (id)characterWithAllStats;
 - (id)characterWithStatGroup:(t_CharacterStatGroup)group;
 + (NSInteger)numberOfStatGroupsFrom:(id)characterData;
@@ -59,6 +60,10 @@ typedef enum {
 + (NSNumber *)primaryStatForSkillGroupFrom:(id)characterData;
 + (NSNumber *)primaryStatForSkillGroupFrom:(id)characterData inStatGroup:(t_CharacterStatGroup)group;
 + (NSNumber *)soulStatFrom:(id)characterData forStat:(t_CharacterStatSoul)stat;
+
+// The interface for view controllers that have write access to the data
++ (NSArray *)editableStatGroupsFrom:(id)characterData;  // of NSNumber representing the data in the enum
++ (void)setStatValueFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group to:(NSInteger)value;
 @end
 
 
