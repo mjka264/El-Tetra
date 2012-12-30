@@ -38,16 +38,24 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"%@", self.characterStats.allStats);
+    NSLog(@"%d", [[[self.characterStats getEditableStatsInGroups] objectAtIndex:section] count]);
+    
     return [[[self.characterStats getEditableStatsInGroups] objectAtIndex:section] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    CharacterStat *stat = [[self.characterStats getEditableStatsInGroups] lastObject];
+    CharacterStat *stat = [[[self.characterStats getEditableStatsInGroups] objectAtIndex:section] lastObject];
+    
+    NSLog(@"%@", [CharacterStatPresenter headingForGroup:stat.groupMembership]);
+    
     return [CharacterStatPresenter headingForGroup:stat.groupMembership];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"%@", indexPath);
+    
     CharacterStatEditorTableViewCell *cell = (CharacterStatEditorTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"MyEditCell"];
     CharacterStat *stat = [[[self.characterStats getEditableStatsInGroups] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     

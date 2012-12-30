@@ -4,7 +4,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface CharacterStat : NSObject
+@interface CharacterStat : NSObject <NSCopying>
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic) NSInteger value;
 

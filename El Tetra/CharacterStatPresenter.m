@@ -17,6 +17,11 @@
 @end
 
 @implementation CharacterStatPresenter
+@synthesize allStats = _allStats;
+- (NSArray *)allStats {
+    if (!_allStats) _allStats = [CharacterStat characterStatsSetCopy];
+    return _allStats;
+}
 
 - (CharacterStat *)statMatchingDescription:(NSString *)description {
     __block CharacterStat *stat;

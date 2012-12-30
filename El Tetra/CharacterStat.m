@@ -56,6 +56,18 @@ NSArray *_allStats = nil;
     }
 }
 
+
+
+- (id)copyWithZone:(NSZone *)zone {
+    CharacterStat *copy = [[CharacterStat alloc] init];
+    copy.description = self.description;
+    copy.value = self.value;
+    copy.groupMembership = self.groupMembership;
+    copy.elementMembership = self.elementMembership;
+    copy.soulMembership = self.soulMembership;
+    return copy;
+}
+
 + (CharacterStat *)createStat:(NSString *)description
                  defaultValue:(NSInteger)startingStatValue
                         group:(t_CharacterStatGroup)groupStatBelongsTo
