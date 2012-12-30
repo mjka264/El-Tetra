@@ -143,8 +143,6 @@
                                       direction:UIPageViewControllerNavigationDirectionForward
                                        animated:YES
                                      completion:^(BOOL finished) {
-                                         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"This is an example alert!" delegate:self cancelButtonTitle:@"Hide" otherButtonTitles:nil];
-                                         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
                                          [newController initiateSegueEditLoadout];
                                      }];
 }
@@ -155,15 +153,9 @@
 - (void)deleteCurrentCharacterLoadout:(CharacterLoadoutViewController *)sender {
     NSUInteger deletingIndex = [self indexOfLoadoutController:sender];
     NSUInteger newIndex;
-    NSInteger direction;
-    if (deletingIndex > 0) {
-        newIndex = deletingIndex - 1;
-        direction = UIPageViewControllerNavigationDirectionReverse;
-    } else {
-        newIndex = deletingIndex;
-        direction = UIPageViewControllerNavigationDirectionForward;
-    }
-    
+
+    if (deletingIndex > 0) newIndex = deletingIndex - 1;
+    else newIndex = deletingIndex;
     [self.characterLoadouts removeObjectAtIndex:deletingIndex];
     
     [UIView transitionWithView:sender.view
@@ -172,7 +164,7 @@
                     animations:nil
                     completion:^(BOOL finished) {
                         [self.pageViewController setViewControllers:[NSArray arrayWithObject:[self loadoutControllerAtIndex:newIndex]]
-                                                          direction:direction
+                                                          direction:UIPageViewControllerNavigationDirectionForward
                                                            animated:NO
                                                          completion:nil];
                     }];
