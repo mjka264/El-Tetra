@@ -936,7 +936,7 @@
                                             <color key="textColor" red="0.21960784310000001" green="0.3294117647" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <stepper opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" autorepeat="NO" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="TLL-4a-3pJ"/>
+                                        <stepper opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" autorepeat="NO" value="1" minimumValue="1" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="TLL-4a-3pJ"/>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -1287,6 +1287,77 @@
             <point key="canvasLocation" x="1846" y="-187"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CharacterLoadoutEditorViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterLoadoutEditorViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="unloadCharacterLoadoutViewController:"/>
+            </relationships>
+        </class>
+        <class className="CharacterLoadoutView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterLoadoutView.h"/>
+        </class>
+        <class className="CharacterLoadoutViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterLoadoutViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="newLoadoutPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="trashLoadoutPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="armourSpecialsView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="armourView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="attackView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="basicDefenseView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="blockDefenseTitleView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="blockDefenseValueView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="damageView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="gearSpecialView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="gearView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="magicDefenseView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="menuBar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="menuBarHeading" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="menuBarTrash" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="parryDefenseTitleView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="parryDefenseValueView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="soakView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="speedView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="weaponSpecialsView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="weaponsView" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CharacterSelectorTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterSelectorTableViewController.h"/>
+        </class>
+        <class className="CharacterSheetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterSheetViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="soulStatBody" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="soulStatMind" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="soulStatSpirit" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CharacterStatEditorTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterStatEditorTableViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="descriptionView" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="stepperView" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="valueView" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CharacterStatEditorTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CharacterStatEditorTableViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="StatTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatTableViewCell.h"/>
+        </class>
+        <class className="StatTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

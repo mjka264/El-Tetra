@@ -14,12 +14,12 @@
 - (void)changeValueOfStatFromSender:(CharacterStatEditorTableViewCell *)source;
 @end
 
-
 @interface CharacterStatEditorTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIStepper *stepperView;
 @property (weak, nonatomic) IBOutlet UILabel *valueView;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionView;
 @property (nonatomic, weak) id<CharacterStatEditorTableViewCellDelegate> delegate;
 - (void)stepperValueChanged;
+@property (nonatomic)id dataToLinkToSpecificStat;
 
 @end

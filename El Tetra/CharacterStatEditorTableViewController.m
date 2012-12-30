@@ -86,6 +86,7 @@
     
     // Initialise the stepper callbacks
     cell.delegate = self;
+    cell.dataToLinkToSpecificStat = indexPath;
     [cell.stepperView addTarget:cell action:@selector(stepperValueChanged) forControlEvents:UIControlEventValueChanged];
     cell.stepperView.value = [value doubleValue];
                        
@@ -93,7 +94,11 @@
 }
 
 - (void)changeValueOfStatFromSender:(CharacterStatEditorTableViewCell *)source {
-    NSLog(@"Change received from: %@", source);
+    NSIndexPath *path = source.dataToLinkToSpecificStat;
+    NSNumber *value = [NSNumber numberWithDouble:source.stepperView.value];
+    t_CharacterStatGroup group = [[[CharacterStats editableStatGroupsFrom:self.characterStats] objectAtIndex:path.section] integerValue];
+    [CharacterStats setStatValueFrom:self.characterStats atIndex:path.row inStatGroup:group to:[value integerValue]];
+    source.valueView.text = [value description];
 }
 
 

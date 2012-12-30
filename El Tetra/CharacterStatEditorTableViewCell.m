@@ -9,29 +9,11 @@
 #import "CharacterStatEditorTableViewCell.h"
 
 @implementation CharacterStatEditorTableViewCell
-
-/*
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
- */
-
+@synthesize dataToLinkToSpecificStat = _dataToLinkToSpecificStat;
 @synthesize delegate = _delegate;
+
 - (void)stepperValueChanged {
     [self.delegate changeValueOfStatFromSender:self];
 }
-
 
 @end
