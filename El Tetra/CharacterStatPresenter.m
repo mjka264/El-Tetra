@@ -28,13 +28,17 @@
     for (CharacterStat *stat in self.allStats) {
         [data addObject:[NSString stringWithFormat:@"%d", stat.value]];
     }
-    return [data componentsJoinedByString:@","];
+    if ([data count]) {
+        return [data componentsJoinedByString:@","];
+    } else {
+        return @"-empty-";
+    }
 }
 
 - (CharacterStat *)statMatchingDescription:(NSString *)description {
     __block CharacterStat *stat;
     [self.allStats enumerateObjectsUsingBlock:^(CharacterStat *obj, NSUInteger idx, BOOL *stop) {
-        if ([obj.description isEqualToString:description]) {
+        if ([obj.statName isEqualToString:description]) {
             stat = obj;
             *stop = YES;
         }
@@ -46,9 +50,9 @@
                                      element:(t_CharacterStatElement)elementMembership
                                         soul:(t_CharacterStatSoulLink)soulMembership {
     for (CharacterStat *stat in self.allStats) {
-        if ((stat.groupMembership == 0 || stat.groupMembership == groupMembership) &&
-            (stat.elementMembership == 0 || stat.elementMembership == elementMembership) &&
-            (stat.soulMembership == 0 || stat.soulMembership == elementMembership)) {
+        if ((groupMembership == 0 || stat.groupMembership == groupMembership) &&
+            (elementMembership == 0 || stat.elementMembership == elementMembership) &&
+            (soulMembership == 0 || stat.soulMembership == elementMembership)) {
             return stat;
         }
     }
@@ -58,16 +62,21 @@
 - (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
                                                        element:(t_CharacterStatElement)elementMembership
                                                           soul:(t_CharacterStatSoulLink)soulMembership {
+    //NSLog(@"Hunting: %d %d %d", groupMembership, elementMembership, soulMembership);
+
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    [self.allStats enumerateObjectsUsingBlock:^(CharacterStat *obj, NSUInteger idx, BOOL *stop) {
-        if ((obj.groupMembership == 0 || obj.groupMembership == groupMembership) &&
-            (obj.elementMembership == 0 || obj.elementMembership == elementMembership) &&
-            (obj.soulMembership == 0 || obj.soulMembership == elementMembership)) {
+    for (CharacterStat *obj in self.allStats) {
+        //NSLog(@"Checking: %@", obj);
+        if ((groupMembership == 0 || obj.groupMembership == groupMembership) &&
+            (elementMembership == 0 || obj.elementMembership == elementMembership) &&
+            (soulMembership == 0 || obj.soulMembership == soulMembership)) {
             [array addObject:obj];
         }
-    }];
+    }
     CharacterStatPresenter *presenter = [[CharacterStatPresenter alloc] init];
     presenter.allStats = array;
+    //NSLog(@"%@", presenter);
+
     return presenter;
 }
 

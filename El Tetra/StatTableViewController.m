@@ -72,7 +72,11 @@
     return lastObject.elementMembership;
 }
 - (NSString *)textForHeading: (UIView *)source {
-    return [CharacterStatPresenter headingForElement:self.element];
+    if([self.title isEqualToString:@"SoulStatsController"]) {
+        return [CharacterStatPresenter headingForGroup:CharacterStatGroupSoul];
+    } else {
+        return [CharacterStatPresenter headingForElement:self.element];
+    }
 }
 - (NSNumber *)fontSizeForHeading: (UIView *)source {
     return [NSNumber numberWithInt:16];
@@ -142,19 +146,31 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionNumber
 {
-    return [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSkills
-                                                           element:self.element
-                                                               soul:0].allStats count];
+    if([self.title isEqualToString:@"SoulStatsController"]) {
+        return [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSoul
+                                                                    element:0
+                                                                       soul:0].allStats count];
+    } else {
+        return [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSkills
+                                                                element:self.element
+                                                                   soul:0].allStats count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Stat Cell" forIndexPath:indexPath];
-    
-    CharacterStat *stat = [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSkills
-                                                                          element:self.element
-                                                                             soul:0].allStats objectAtIndex:indexPath.row];
-    cell.textLabel.text = stat.description;
+    CharacterStat *stat;
+    if([self.title isEqualToString:@"SoulStatsController"]) {
+        stat = [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSoul
+                                                                element:0
+                                                                   soul:0].allStats objectAtIndex:indexPath.row];
+    } else {
+        stat = [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSkills
+                                                                element:self.element
+                                                                   soul:0].allStats objectAtIndex:indexPath.row];
+    }
+    cell.textLabel.text = stat.statName;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", stat.value];
     return cell;
 }

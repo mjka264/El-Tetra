@@ -16,7 +16,7 @@ NSArray *_allStats = nil;
 
 @interface CharacterStat ()
 + (void)buildAllStats;
-+ (CharacterStat *)createStat:(NSString *)description
++ (CharacterStat *)createStat:(NSString *)statName
                  defaultValue:(NSInteger)startingStatValue
                         group:(t_CharacterStatGroup)groupStatBelongsTo
                       element:(t_CharacterStatElement)associatedElement
@@ -26,11 +26,16 @@ NSArray *_allStats = nil;
 
 
 @implementation CharacterStat
-@synthesize description = _description;
+@synthesize statName = _statName;
 @synthesize groupMembership = _groupMembership;
 @synthesize elementMembership = _elementMembership;
 @synthesize soulMembership = _soulMembership;
 @synthesize value = _value;
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %d group:%d element:%d soul:%d", self.statName, self.value,
+            self.groupMembership, self.elementMembership, self.soulMembership];
+}
 
 - (NSInteger)skillCost {
     if (self.groupMembership == CharacterStatGroupSoul) return 3;
@@ -58,7 +63,7 @@ NSArray *_allStats = nil;
 
 - (id)copyWithZone:(NSZone *)zone {
     CharacterStat *copy = [[CharacterStat alloc] init];
-    copy.description = self.description;
+    copy.statName = self.statName;
     copy.value = self.value;
     copy.groupMembership = self.groupMembership;
     copy.elementMembership = self.elementMembership;
@@ -66,13 +71,13 @@ NSArray *_allStats = nil;
     return copy;
 }
 
-+ (CharacterStat *)createStat:(NSString *)description
++ (CharacterStat *)createStat:(NSString *)statName
                  defaultValue:(NSInteger)startingStatValue
                         group:(t_CharacterStatGroup)groupStatBelongsTo
                       element:(t_CharacterStatElement)associatedElement
                          soul:(t_CharacterStatSoulLink)associatedSoulStat {
     CharacterStat *stat = [[CharacterStat alloc] init];
-    stat.description = description;
+    stat.statName = statName;
     stat.value = startingStatValue;
     stat.groupMembership = groupStatBelongsTo;
     stat.elementMembership = associatedElement;

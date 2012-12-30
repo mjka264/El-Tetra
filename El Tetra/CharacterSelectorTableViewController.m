@@ -47,6 +47,10 @@
     return self.characterSourceSelectedForViewing.stats;
 }
 
+- (CharacterStatPresenter *)dataSourceCharacterStatsFor:(CharacterSelectorTableViewController *)source {
+    return self.characterSourceSelectedForViewing.stats;
+}
+
 
 #pragma mark - Table view data source
 
@@ -123,7 +127,6 @@
 {
     if (indexPath.section > 0) {
         self.characterSourceSelectedForViewing = [self.allCharacters objectAtIndex:indexPath.row];
-        NSLog(@"%@", self.characterSourceSelectedForViewing.stats);
         [self performSegueWithIdentifier:@"Segue to Character" sender:self];
      }
     

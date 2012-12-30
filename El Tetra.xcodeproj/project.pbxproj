@@ -34,7 +34,6 @@
 		C297529C168551CB00092860 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975273168551CB00092860 /* UIKit.framework */; };
 		C297529D168551CB00092860 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2975275168551CB00092860 /* Foundation.framework */; };
 		C29752A5168551CB00092860 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C29752A3168551CB00092860 /* InfoPlist.strings */; };
-		C29752A8168551CB00092860 /* El_TetraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752A7168551CB00092860 /* El_TetraTests.m */; };
 		C29752B31685629400092860 /* CharacterCombatStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752B21685629400092860 /* CharacterCombatStatsViewController.m */; };
 		C29752C516856F3700092860 /* CharacterStatPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752C416856F3700092860 /* CharacterStatPresenter.m */; };
 		C29752C81685734A00092860 /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752C71685734A00092860 /* StatTableViewController.m */; };
@@ -95,8 +94,6 @@
 		C297529A168551CB00092860 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C29752A2168551CB00092860 /* El TetraTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "El TetraTests-Info.plist"; sourceTree = "<group>"; };
 		C29752A4168551CB00092860 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C29752A6168551CB00092860 /* El_TetraTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = El_TetraTests.h; sourceTree = "<group>"; };
-		C29752A7168551CB00092860 /* El_TetraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = El_TetraTests.m; sourceTree = "<group>"; };
 		C29752B11685629400092860 /* CharacterCombatStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterCombatStatsViewController.h; sourceTree = "<group>"; };
 		C29752B21685629400092860 /* CharacterCombatStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterCombatStatsViewController.m; sourceTree = "<group>"; };
 		C29752C316856F3700092860 /* CharacterStatPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterStatPresenter.h; sourceTree = "<group>"; };
@@ -262,8 +259,6 @@
 		C29752A0168551CB00092860 /* El TetraTests */ = {
 			isa = PBXGroup;
 			children = (
-				C29752A6168551CB00092860 /* El_TetraTests.h */,
-				C29752A7168551CB00092860 /* El_TetraTests.m */,
 				C29752A1168551CB00092860 /* Supporting Files */,
 			);
 			path = "El TetraTests";
@@ -415,7 +410,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C29752A8168551CB00092860 /* El_TetraTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,15 +25,12 @@
     [self.characterStats setStatWithDescription:source.descriptionView.text
                                           value:source.stepperView.value];
     source.valueView.text = [NSString stringWithFormat:@"%d", (NSInteger) source.stepperView.value];
-    
-    NSLog(@"%@", [self.characterStats description]);
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSLog(@"%@", [self.characterStats getEditableStatsInGroups]);
     return [[self.characterStats getEditableStatsInGroups] count];
 }
 
@@ -62,7 +59,7 @@
     //NSLog(@"Creating at %@, %@", indexPath, stat.description);
     
     // Initialise straight forward content
-    cell.descriptionView.text = stat.description;
+    cell.descriptionView.text = stat.statName;
     cell.valueView.text = [NSString stringWithFormat:@"%d", stat.value];
     
     // Initialise the stepper callbacks

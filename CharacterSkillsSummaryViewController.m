@@ -9,6 +9,7 @@
 #import "CharacterSkillsSummaryViewController.h"
 #import "CharacterStatPresenter.h"
 
+
 @interface CharacterSkillsSummaryViewController ()
 @property (nonatomic, strong) NSMutableDictionary *statPresenters;  // Stores the stat presentor for each sub-controller
 @property (nonatomic, readonly) CharacterStatPresenter *characterStats;
@@ -25,38 +26,27 @@
     if (_statPresenters) _statPresenters = [[NSMutableDictionary alloc] init];
     return _statPresenters;
 }
-/*
-- (NSDictionary *)controllerIdentityStatGroups {
-    if (!_controllerIdentityStatGroups) {
-        _controllerIdentityStatGroups = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSNumber numberWithInt:CharacterStatGroupSoul],
-                                         @"SoulStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupPrimary],
-                                         @"PrimaryStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupFireSkills],
-                                         @"FireStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupAirSkills],
-                                         @"AirStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupWaterSkills],
-                                         @"WaterStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupEarthSkills],
-                                         @"EarthStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupChiSkills],
-                                         @"ChiStatsController",
-                                         [NSNumber numberWithInt:CharacterStatGroupAbilities],
-                                         @"AbilityStatsController", nil];
-    }
-    return _controllerIdentityStatGroups;
+
+- (NSInteger)convertDescriptionToElement:(NSString *)text {
+    if ([text isEqualToString:@"FireStatsController"]) return CharacterStatElementFire;
+    else if ([text isEqualToString:@"AirStatsController"]) return CharacterStatElementAir;
+    else if ([text isEqualToString:@"WaterStatsController"]) return CharacterStatElementWater;
+    else if ([text isEqualToString:@"EarthStatsController"]) return CharacterStatElementEarth;
+    else if ([text isEqualToString:@"ChiStatsController"]) return CharacterStatElementChi;
+    else return 0;
 }
- */
 
 - (CharacterStatPresenter *)characterStatsFrom:(StatTableViewController *)source {
-    if ([[self.statPresenters allKeys] containsObject:source.description]) {
-        return [self.statPresenters objectForKey:source];
+    NSString *title = source.title;
+    if ([[self.statPresenters allKeys] containsObject:title]) {
+        return [self.statPresenters objectForKey:title];
     } else {
-        CharacterStatPresenter *presenter = [self.characterStats statPresenterMatchingCriteriaGroup:0
-                                                                                            element:CharacterStatElementAir
-                                                                                               soul:0];
+        CharacterStatPresenter *presenter;
+        NSInteger element = [self convertDescriptionToElement:title];
+        presenter = [self.characterStats statPresenterMatchingCriteriaGroup:0
+                                                                    element:element
+                                                                       soul:0];
+
         [self.statPresenters setObject:presenter forKey:source.description];
         return presenter;
     }

@@ -5,7 +5,7 @@
 
 
 @interface CharacterStat : NSObject <NSCopying>
-@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *statName;
 @property (nonatomic) NSInteger value;
 
 // These 3 fields provide all the information required to identify the stat
