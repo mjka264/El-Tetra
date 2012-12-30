@@ -33,6 +33,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    NSLog(@"%@", [self.characterStats getEditableStatsInGroups]);
     return [[self.characterStats getEditableStatsInGroups] count];
 }
 

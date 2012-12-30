@@ -148,7 +148,7 @@
     for (CharacterStat *stat in self.allStats) {
         if (stat.groupMembership == CharacterStatGroupSoul) [soul addObject:stat];
         else if (stat.groupMembership == CharacterStatGroupPrimary) [primary addObject:stat];
-        else if (stat.groupMembership == CharacterStatGroupSkills) [ability addObject:stat];
+        else if (stat.groupMembership == CharacterStatGroupAbilities) [ability addObject:stat];
     }
     return @[soul, primary, ability];
 }
