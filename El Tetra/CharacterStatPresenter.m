@@ -23,6 +23,14 @@
     return _allStats;
 }
 
+- (NSString *)description {
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+    for (CharacterStat *stat in self.allStats) {
+        [data addObject:[NSString stringWithFormat:@"%d", stat.value]];
+    }
+    return [data componentsJoinedByString:@","];
+}
+
 - (CharacterStat *)statMatchingDescription:(NSString *)description {
     __block CharacterStat *stat;
     [self.allStats enumerateObjectsUsingBlock:^(CharacterStat *obj, NSUInteger idx, BOOL *stop) {
@@ -146,16 +154,14 @@
 }
     
 - (void)setStatWithDescription:(NSString *)description value:(NSInteger)value {
-    CharacterStat *stat = [self statMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                                  element:CharacterStatElementEarth
-                                                     soul:CharacterStatSoulLinkNone];
+    CharacterStat *stat = [self statMatchingDescription:description];
     stat.value = value;
 }
 
 - (NSInteger)totalStatCost {
     NSInteger total = 0;
     for (CharacterStat *stat in self.allStats) {
-        total += stat.skillCost;
+        total += stat.skillCost * stat.value;
     }
     return total;
 }

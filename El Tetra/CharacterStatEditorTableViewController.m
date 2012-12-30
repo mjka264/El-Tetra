@@ -24,9 +24,9 @@
 - (void)changeValueOfStatFromSender:(CharacterStatEditorTableViewCell *)source {
     [self.characterStats setStatWithDescription:source.descriptionView.text
                                           value:source.stepperView.value];
-    source.valueView.text = [NSString stringWithFormat:@"%f", source.stepperView.value];
+    source.valueView.text = [NSString stringWithFormat:@"%d", (NSInteger) source.stepperView.value];
     
-    NSLog(@"CSETVC changeValueOfStatFromSender Cost=%d", [self.characterStats totalStatCost]);
+    NSLog(@"%@", [self.characterStats description]);
 }
 
 #pragma mark - Table view data source
@@ -38,8 +38,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%@", self.characterStats.allStats);
-    NSLog(@"%d", [[[self.characterStats getEditableStatsInGroups] objectAtIndex:section] count]);
+    //NSLog(@"%@", self.characterStats.allStats);
+    //NSLog(@"%d", [[[self.characterStats getEditableStatsInGroups] objectAtIndex:section] count]);
     
     return [[[self.characterStats getEditableStatsInGroups] objectAtIndex:section] count];
 }
@@ -47,17 +47,18 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     CharacterStat *stat = [[[self.characterStats getEditableStatsInGroups] objectAtIndex:section] lastObject];
     
-    NSLog(@"%@", [CharacterStatPresenter headingForGroup:stat.groupMembership]);
+    //NSLog(@"%@", [CharacterStatPresenter headingForGroup:stat.groupMembership]);
     
     return [CharacterStatPresenter headingForGroup:stat.groupMembership];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@", indexPath);
     
     CharacterStatEditorTableViewCell *cell = (CharacterStatEditorTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"MyEditCell"];
     CharacterStat *stat = [[[self.characterStats getEditableStatsInGroups] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    
+    //NSLog(@"Creating at %@, %@", indexPath, stat.description);
     
     // Initialise straight forward content
     cell.descriptionView.text = stat.description;
@@ -66,8 +67,8 @@
     // Initialise the stepper callbacks
     cell.delegate = self;
     [cell.stepperView addTarget:cell action:@selector(stepperValueChanged) forControlEvents:UIControlEventValueChanged];
-    cell.stepperView.value = stat.value;
     cell.stepperView.minimumValue = stat.minimumValue;
+    cell.stepperView.value = stat.value;
     
     return cell;
 }

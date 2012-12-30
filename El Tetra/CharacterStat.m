@@ -56,8 +56,6 @@ NSArray *_allStats = nil;
     }
 }
 
-
-
 - (id)copyWithZone:(NSZone *)zone {
     CharacterStat *copy = [[CharacterStat alloc] init];
     copy.description = self.description;
@@ -134,54 +132,54 @@ NSArray *_allStats = nil;
     
     // --------- Skills --------------- //
     
-    [CharacterStat createStat:@"Power, speed, lifting" defaultValue:0
+    [CharacterStat createStat:@"Power, speed, lifting" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementFire
                          soul:CharacterStatSoulLinkBody],
-    [CharacterStat createStat:@"Instinct, innovation, insight, synthesis" defaultValue:0
+    [CharacterStat createStat:@"Instinct, innovation, insight, synthesis" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementFire
                          soul:CharacterStatSoulLinkMind],
-    [CharacterStat createStat:@"Passion, agression, assertion, intimidation" defaultValue:0
+    [CharacterStat createStat:@"Passion, agression, assertion, intimidation" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementFire
                          soul:CharacterStatSoulLinkSpirit],
     
-    [CharacterStat createStat:@"Craft, lockpicking" defaultValue:0
+    [CharacterStat createStat:@"Craft, lockpicking" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementAir
                          soul:CharacterStatSoulLinkBody],
-    [CharacterStat createStat:@"Logic, science, reasoning, investigation, memory" defaultValue:0
+    [CharacterStat createStat:@"Logic, science, reasoning, investigation, memory" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementAir
                          soul:CharacterStatSoulLinkMind],
-    [CharacterStat createStat:@"Culture, disguise, trickery, cunning" defaultValue:0
+    [CharacterStat createStat:@"Culture, disguise, trickery, cunning" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementAir
                          soul:CharacterStatSoulLinkSpirit],
     
-    [CharacterStat createStat:@"Balance, stealth, reflexes" defaultValue:0
+    [CharacterStat createStat:@"Balance, stealth, reflexes" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementWater
                          soul:CharacterStatSoulLinkBody],
-    [CharacterStat createStat:@"Language, interpretation" defaultValue:0
+    [CharacterStat createStat:@"Language, interpretation" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementWater
                          soul:CharacterStatSoulLinkMind],
-    [CharacterStat createStat:@"Empathy, charm, misdirection" defaultValue:0
+    [CharacterStat createStat:@"Empathy, charm, misdirection" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementWater
                          soul:CharacterStatSoulLinkSpirit],
     
-    [CharacterStat createStat:@"Fortitude, stamina, labour" defaultValue:0
+    [CharacterStat createStat:@"Fortitude, stamina, labour" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementEarth
                          soul:CharacterStatSoulLinkBody],
-    [CharacterStat createStat:@"Perception, observation, procedure, tracking" defaultValue:0
+    [CharacterStat createStat:@"Perception, observation, procedure, tracking" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementEarth
                          soul:CharacterStatSoulLinkMind],
-    [CharacterStat createStat:@"Confidence, bravery, diligence, patience" defaultValue:0
+    [CharacterStat createStat:@"Confidence, bravery, diligence, patience" defaultValue:1
                         group:CharacterStatGroupSkills
                       element:CharacterStatElementEarth
                          soul:CharacterStatSoulLinkSpirit],
