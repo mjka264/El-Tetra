@@ -22,8 +22,8 @@
 }
 
 @synthesize loadouts = _loadouts;
-- (NSArray *)loadouts {
-    if (!_loadouts) _loadouts = @[[CharacterLoadout defaultLoadout]];
+- (NSMutableArray *)loadouts {
+    if (!_loadouts) _loadouts = [NSMutableArray arrayWithObject:[CharacterLoadout defaultLoadout]];
     return _loadouts;
 }
 

@@ -13,5 +13,5 @@
 @interface Character : NSObject
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) CharacterStats *stats;
-@property (nonatomic, strong) NSArray *loadouts;     // of CharacterLoadout
+@property (nonatomic, strong) NSMutableArray *loadouts;     // of CharacterLoadout
 @end

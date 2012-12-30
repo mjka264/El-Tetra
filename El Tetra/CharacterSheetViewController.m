@@ -12,13 +12,11 @@
 #import "CharacterLoadout.h"
 
 @interface CharacterSheetViewController ()
-@property (nonatomic, strong, readonly) CharacterStats *characterStats;
 @property (nonatomic, strong) NSDictionary *controllerIdentityStatGroups;
 
-
-// Controller bits needed for the loadout stuff
-@property (nonatomic, strong) NSMutableArray *characterLoadouts; // of CharacterLoadout
-//@property (nonatomic, weak) UIStoryboard *storyBoard;            // used to make the controllers
+// data Source links
+@property (nonatomic, strong, readonly) CharacterStats *characterStats;
+@property (nonatomic, strong, readonly) NSMutableArray *characterLoadouts; // of CharacterLoadout
 
 @end
 
@@ -88,13 +86,7 @@
 
 @synthesize characterLoadouts = _characterLoadouts;
 - (NSMutableArray *)characterLoadouts {
-    if (!_characterLoadouts) {
-        _characterLoadouts = [NSMutableArray arrayWithObjects:
-                              [CharacterLoadout defaultLoadout],
-                              [CharacterLoadout defaultLoadout],
-                              nil];
-    }
-    return _characterLoadouts;
+    return [self.dataSource characterData:(self)].loadouts;
 }
 
 - (CharacterLoadoutViewController *)loadoutControllerAtIndex:(NSInteger)index {
