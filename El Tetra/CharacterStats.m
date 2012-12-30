@@ -11,8 +11,8 @@
 @interface CharacterStats ()
 // These two dictionaries are each dictionaries of non-mutable arrays
 // They are accessed using the t_characterDataStatGroup keys (in .h) and correspond to one another
-@property (nonatomic, strong) NSDictionary *statDescriptions;    // of arrays
-@property (nonatomic, strong) NSDictionary *statValues;          // of arrays
+@property (nonatomic, strong) NSDictionary *statDescriptions;    // of arrays of string
+@property (nonatomic, strong) NSDictionary *statValues;          // of arrays of number
 @property (nonatomic, strong) NSDictionary *statGroupHeadings;   // of strings
 
 // This is the same as the above, although it currently only has data under the element key
@@ -34,7 +34,7 @@
     if (!_statGroupHeadings) {
         _statGroupHeadings =
         [NSDictionary dictionaryWithObjectsAndKeys:
-         @"Soul", [NSNumber numberWithInt:CharacterStatGroupSoul],
+         @"Expression", [NSNumber numberWithInt:CharacterStatGroupSoul],       // Shape?
          @"Primary Stats", [NSNumber numberWithInt:CharacterStatGroupPrimary],
          @"Ferocity", [NSNumber numberWithInt:CharacterStatGroupFireSkills],
          @"Precision", [NSNumber numberWithInt:CharacterStatGroupAirSkills],
@@ -345,5 +345,45 @@
     NSMutableArray *array = [character.statValues objectForKey:[NSNumber numberWithInt:group]];
     [array replaceObjectAtIndex:index withObject:[NSNumber numberWithInteger:value]];
 }
+
++ (NSInteger)statCostFor:(id)character atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group {
+    if (group == CharacterStatGroupSoul) return 3;
+    else if (group == CharacterStatGroupPrimary) return 2;
+    else if (group == CharacterStatGroupAbilities) {
+        t_CharacterStatElement element = [CharacterStats statElementFrom:character atIndex:index inStatGroup:group];
+        if (element == CharacterStatElementAir ||
+            element == CharacterStatElementFire ||
+            element == CharacterStatElementWater ||
+            element == CharacterStatElementEarth ||
+            element == CharacterStatElementChi) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+    return 0;
+}
+
++ (NSInteger)statCostFor:(id)character {
+    NSInteger cost = 0;
+    for (NSNumber *group in @[
+         [NSNumber numberWithInteger:CharacterStatGroupSoul],
+         [NSNumber numberWithInteger:CharacterStatGroupPrimary],
+         [NSNumber numberWithInteger:CharacterStatGroupFireSkills],
+         [NSNumber numberWithInteger:CharacterStatGroupAirSkills],
+         [NSNumber numberWithInteger:CharacterStatGroupWaterSkills],
+         [NSNumber numberWithInteger:CharacterStatGroupEarthSkills],
+         [NSNumber numberWithInteger:CharacterStatGroupAbilities],
+         [NSNumber numberWithInteger:CharacterStatGroupChiSkills]]) {
+        for (int index = 0; index < [CharacterStats numberOfEntriesFrom:character inStatGroup:[group integerValue]]  ; index ++) {
+            cost +=
+            [[CharacterStats statValueFrom:character atIndex:index inStatGroup:[group integerValue]] integerValue] *
+            [CharacterStats statCostFor:character atIndex:index inStatGroup:[group integerValue]];
+        }
+    }
+    return cost;
+}
+
+
 
 @end

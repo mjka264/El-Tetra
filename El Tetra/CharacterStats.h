@@ -64,6 +64,8 @@ typedef enum {
 // The interface for view controllers that have write access to the data
 + (NSArray *)editableStatGroupsFrom:(id)characterData;  // of NSNumber representing the data in the enum
 + (void)setStatValueFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group to:(NSInteger)value;
++ (NSInteger)statCostFor:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group;
++ (NSInteger)statCostFor:(id)characterData;
 @end
 
 
