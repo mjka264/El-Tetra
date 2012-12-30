@@ -6,12 +6,13 @@
 //  Copyright (c) 2012 Matthew Kameron. All rights reserved.
 //
 
-#import "CharacterSheetViewController.h"
+#import "CharacterCombatStatsViewController.h"
 #import "CharacterStatPresenter.h"
 #import "CharacterLoadoutViewController.h"
 #import "CharacterLoadout.h"
+#import "StatTableViewController.h"
 
-@interface CharacterSheetViewController ()
+@interface CharacterCombatStatsViewController ()
 @property (nonatomic, strong) NSDictionary *controllerIdentityStatGroups;
 
 // data Source links
@@ -21,7 +22,7 @@
 @end
 
 
-@implementation CharacterSheetViewController
+@implementation CharacterCombatStatsViewController
 
 @synthesize soulStatBody = _soulStatBody;
 - (void)setSoulStatBody:(UILabel *)soulStatBody {
@@ -43,11 +44,6 @@
         _soulStatSpirit = soulStatSpirit;
         _soulStatSpirit.text = [NSString stringWithFormat:@"%@", [CharacterStatPresenter soulStatFrom:self.characterStats forStat:CharacterStatSoulSpirit]];
     }
-}
-
-- (CharacterStatPresenter *)characterStats:(UIViewController *)source {
-    return [self.characterStats characterWithStatGroup:
-            [[self.controllerIdentityStatGroups objectForKey:source.title] integerValue]];
 }
 
 // This identifies the controller names in the UI and convert them to CharacterData's language
@@ -75,11 +71,10 @@
     return _controllerIdentityStatGroups;
 }
 
-- (CharacterStatPresenter *)characterStats
+- (CharacterStatPresenter *)characterStatsAll
 {
     return [self.dataSource characterData:self].stats;
 }
-
 
 #pragma mark -
 #pragma mark CharacterLoadout (PageViewController protocol)

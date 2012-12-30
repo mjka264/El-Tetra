@@ -8,7 +8,6 @@
 
 #import "StatTableViewController.h"
 #import "PrimaryStatColouredCircleView.h"
-#import "ElTetraDummyDelegate.h"
 #import "CharacterStatPresenter.h"
 
 
@@ -53,12 +52,17 @@
 
 @interface StatTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic, readonly) CharacterStatPresenter *characterStats;
 @end
 
 
 
 @implementation StatTableViewController
+
 @synthesize dataSource = _dataSource;
+- (CharacterStatPresenter *)characterStats {
+    return [self.dataSource characterStatData:self];
+}
 
 #pragma mark - StatTableViewHeaderDataSource
 

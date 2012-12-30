@@ -91,15 +91,23 @@
 
 #pragma mark support for CharacterStatEditorTableViewController
 
++ (NSString *)headingForGroup:(t_CharacterStatGroup)group {
+    NSString *str;
+    if (group == CharacterStatGroupSoul) str = @"Expression";
+    if (group == CharacterStatGroupPrimary) str = @"Primary Stats";
+    if (group == CharacterStatGroupAbilities) str = @"Abilities";
+    return str;
+}
+
 - (NSArray *)getEditableStatsInGroups {
     NSMutableArray *soul = [[NSMutableArray alloc] init];
     NSMutableArray *primary = [[NSMutableArray alloc] init];
     NSMutableArray *ability = [[NSMutableArray alloc] init];
-    [self.allStats enumerateObjectsUsingBlock:^(CharacterStat *obj, NSUInteger idx, BOOL *stop) {
-        if (obj.groupMembership == CharacterStatGroupSoul) [soul addObject:obj];
-        else if (obj.groupMembership == CharacterStatGroupPrimary) [primary addObject:obj];
-        else if (obj.groupMembership == CharacterStatGroupSkills) [ability addObject:obj];
-    }];
+    for (CharacterStat *stat in self.allStats) {
+        if (stat.groupMembership == CharacterStatGroupSoul) [soul addObject:stat];
+        else if (stat.groupMembership == CharacterStatGroupPrimary) [primary addObject:stat];
+        else if (stat.groupMembership == CharacterStatGroupSkills) [ability addObject:stat];
+    }
     return @[soul, primary, ability];
 }
     
@@ -110,6 +118,13 @@
     stat.value = value;
 }
 
+- (NSInteger)totalStatCost {
+    NSInteger total = 0;
+    for (CharacterStat *stat in self.allStats) {
+        total += stat.skillCost;
+    }
+    return total;
+}
 
 
 /*

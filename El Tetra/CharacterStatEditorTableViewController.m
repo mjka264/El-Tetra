@@ -11,7 +11,6 @@
 
 @interface CharacterStatEditorTableViewController ()
 @property (readonly, nonatomic) CharacterStatPresenter *characterStats;
-- (t_CharacterStatGroup)statGroupFromSectionNumber:(NSInteger)section;
 @end
 
 @implementation CharacterStatEditorTableViewController
@@ -20,60 +19,47 @@
     return [self.dataSource characterStatData:self];
 }
 
-- (t_CharacterStatGroup)statGroupFromSectionNumber:(NSInteger)section; {
-    return [[[CharacterStatPresenter editableStatGroupsFrom:self.characterStats] objectAtIndex:section] integerValue];
-}
-
 #pragma mark - CharacterStatEditorTableViewCellDelegate
 
 - (void)changeValueOfStatFromSender:(CharacterStatEditorTableViewCell *)source {
-    NSIndexPath *path = source.dataToLinkToSpecificStat;
-    NSNumber *value = [NSNumber numberWithDouble:source.stepperView.value];
-    [CharacterStatPresenter setStatValueFrom:self.characterStats atIndex:path.row
-                         inStatGroup:[self statGroupFromSectionNumber:path.section]
-                                  to:[value integerValue]];
-    source.valueView.text = [value description];
+    [self.characterStats setStatWithDescription:source.descriptionView.text
+                                          value:source.stepperView.value];
+    source.valueView.text = [NSString stringWithFormat:@"%f", source.stepperView.value];
     
-    
-    NSLog(@"Cost=%d", [CharacterStatPresenter statCostFor:self.characterStats]);
+    NSLog(@"CSETVC changeValueOfStatFromSender Cost=%d", [self.characterStats totalStatCost]);
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[CharacterStatPresenter editableStatGroupsFrom:self.characterStats] count];
+    return [[self.characterStats getEditableStatsInGroups] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [CharacterStatPresenter numberOfEntriesFrom:self.characterStats
-                                   inStatGroup:[self statGroupFromSectionNumber:section]];
+    return [[[self.characterStats getEditableStatsInGroups] objectAtIndex:section] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [CharacterStatPresenter sectionHeadingFrom:self.characterStats inStatGroup:[self statGroupFromSectionNumber:section]];
+    CharacterStat *stat = [[self.characterStats getEditableStatsInGroups] lastObject];
+    return [CharacterStatPresenter headingForGroup:stat.groupMembership];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CharacterStatEditorTableViewCell *cell = (CharacterStatEditorTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"MyEditCell"];
+    CharacterStat *stat = [[[self.characterStats getEditableStatsInGroups] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
     // Initialise straight forward content
-    cell.descriptionView.text = [CharacterStatPresenter statDescriptionFrom:self.characterStats
-                                                       atIndex:indexPath.row
-                                                   inStatGroup:[self statGroupFromSectionNumber:indexPath.section]];
-    NSNumber *value = [CharacterStatPresenter statValueFrom:self.characterStats
-                                            atIndex:indexPath.row
-                                        inStatGroup:[self statGroupFromSectionNumber:indexPath.section]];
-    cell.valueView.text = [value description];
+    cell.descriptionView.text = stat.description;
+    cell.valueView.text = [NSString stringWithFormat:@"%d", stat.value];
     
     // Initialise the stepper callbacks
     cell.delegate = self;
-    cell.dataToLinkToSpecificStat = indexPath;
     [cell.stepperView addTarget:cell action:@selector(stepperValueChanged) forControlEvents:UIControlEventValueChanged];
-    cell.stepperView.value = [value doubleValue];
-    cell.stepperView.minimumValue = [self statGroupFromSectionNumber:indexPath.section] == CharacterStatGroupAbilities? 0 : 1;
+    cell.stepperView.value = stat.value;
+    cell.stepperView.minimumValue = stat.minimumValue;
     
     return cell;
 }
@@ -86,7 +72,7 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"Nib name" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];

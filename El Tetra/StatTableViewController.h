@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ElTetraProtocols.h"
+#import "StatTableViewHeader.h"
 
 @class StatTableViewController;
 @class TableViewControllerData;
 
+@protocol StatTableViewControllerDataSource <NSObject>
+@end
 
-@interface StatTableViewController : UITableViewController <StatTableViewHeaderDataSource>
+@interface StatTableViewController : UITableViewController <ColouredCircleAndHeaderDataSource>
 @property (nonatomic) BOOL hideTableData;
 @property (nonatomic, weak) id <StatTableViewControllerDataSource> dataSource;
 @end

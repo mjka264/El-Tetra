@@ -7,7 +7,6 @@
 //
 
 #import "StatTableViewHeader.h"
-#import "ElTetraDummyDelegate.h"
 
 
 
@@ -43,7 +42,7 @@
     if ([self.dataSource elementForCircle:self]) {
         if (!_circleView) {
             _circleView = [[PrimaryStatColouredCircleView alloc] init];
-            _circleView.dataSource = self.dataSource;
+            _circleView.dataSource = (id<StatTableViewHeaderDataSource>) self.dataSource;
         }
     } else {
         _circleView = nil;

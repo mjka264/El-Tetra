@@ -2,8 +2,6 @@
 
 
 #import <Foundation/Foundation.h>
-#import "CharacterStatPresenter.h"
-
 
 
 @interface CharacterStat : NSObject
@@ -15,6 +13,7 @@
 @property (nonatomic) NSInteger elementMembership;   // one of the enum CharacterStatElement
 @property (nonatomic) NSInteger soulMembership;      // CharacterStatSpecialNot for most things
 @property (nonatomic, readonly) NSInteger skillCost;      // derived based upon group memberships
+@property (nonatomic, readonly) NSInteger minimumValue;   // 1 for primary/soul/skills, 0 for abilities
 
 #define STAT_ARTFUL @"Artful weapons"
 #define STAT_BRUTAL @"Brutal weapons"

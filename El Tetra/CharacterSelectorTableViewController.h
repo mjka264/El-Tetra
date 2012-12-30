@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CharacterSheetViewController.h"
+#import "CharacterCombatStatsViewController.h"
 
 @interface CharacterSelectorTableViewController : UITableViewController <CharacterSheetViewControllerDataSource, UITabBarControllerDelegate>
 

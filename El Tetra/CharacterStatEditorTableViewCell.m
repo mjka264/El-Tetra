@@ -9,7 +9,6 @@
 #import "CharacterStatEditorTableViewCell.h"
 
 @implementation CharacterStatEditorTableViewCell
-@synthesize dataToLinkToSpecificStat = _dataToLinkToSpecificStat;
 @synthesize delegate = _delegate;
 
 - (void)stepperValueChanged {

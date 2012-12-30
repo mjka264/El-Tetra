@@ -39,7 +39,7 @@
 
 @synthesize characterSourceSelectedForViewing = _characterSourceSelectedForViewing;
 
-- (Character *)characterData:(CharacterSheetViewController *)source {
+- (Character *)characterData:(CharacterCombatStatsViewController *)source {
     return self.characterSourceSelectedForViewing;
 }
 

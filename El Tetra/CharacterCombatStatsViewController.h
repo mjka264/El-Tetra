@@ -12,13 +12,13 @@
 #import "CharacterLoadoutViewController.h"
 #import "Character.h"
 
-@class CharacterSheetViewController;
+@class CharacterCombatStatsViewController;
 
 @protocol CharacterSheetViewControllerDataSource <NSObject>
-- (Character *)characterData:(CharacterSheetViewController *)source;
+- (Character *)characterData:(CharacterCombatStatsViewController *)source;
 @end
 
-@interface CharacterSheetViewController : UIViewController
+@interface CharacterCombatStatsViewController : UIViewController
 <StatTableViewControllerDataSource, UIPageViewControllerDataSource, CharacterLoadoutViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (nonatomic, weak) UIPageViewController *pageViewController;

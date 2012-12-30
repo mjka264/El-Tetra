@@ -31,6 +31,30 @@ NSArray *_allStats = nil;
 @synthesize soulMembership = _soulMembership;
 @synthesize value = _value;
 
+- (NSInteger)skillCost {
+    if (self.groupMembership == CharacterStatGroupSoul) return 3;
+    else if (self.groupMembership == CharacterStatGroupPrimary) return 2;
+    else if (self.groupMembership == CharacterStatGroupSkills) {
+        if (self.elementMembership == CharacterStatElementFire ||
+            self.elementMembership == CharacterStatElementAir ||
+            self.elementMembership == CharacterStatElementWater ||
+            self.elementMembership == CharacterStatElementEarth) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+    return 0;
+}
+
+- (NSInteger)minimumValue {
+    if (self.groupMembership == CharacterStatGroupAbilities) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
 + (CharacterStat *)createStat:(NSString *)description
                  defaultValue:(NSInteger)startingStatValue
                         group:(t_CharacterStatGroup)groupStatBelongsTo

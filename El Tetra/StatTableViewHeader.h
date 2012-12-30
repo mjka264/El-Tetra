@@ -11,10 +11,9 @@
 
 @class StatTableViewHeader;
 
-
 @interface StatTableViewHeader : UIView
 @property (nonatomic, strong) PrimaryStatColouredCircleView *circleView;
-@property (nonatomic, weak) id <StatTableViewHeaderDataSource> dataSource;
+@property (nonatomic, weak) id <ColouredCircleAndHeaderDataSource> dataSource;
 @property (nonatomic, strong) UILabel *headingLabel;
 @end
 

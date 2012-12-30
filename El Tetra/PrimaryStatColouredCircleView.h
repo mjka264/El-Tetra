@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ElTetraProtocols.h"
 
 @class PrimaryStatColouredCircleView;
+
+@protocol ColouredCircleAndHeaderDataSource <NSObject>
+- (NSString *)textForHeading: (UIView *)source;
+- (NSNumber *)fontSizeForHeading: (UIView *)source;
+- (NSNumber *)numberForCircle:(UIView *)source;
+- (NSInteger)elementForCircle:(UIView *)source;
+- (NSNumber *)fontSizeForNumber:(UIView *)source;
+@end
 
 #define ELEMENT_FIRE @"Fire"
 #define ELEMENT_AIR @"Air"
@@ -18,5 +25,5 @@
 #define ELEMENT_CHI @"Chi"
 
 @interface PrimaryStatColouredCircleView : UIView
-@property (nonatomic, weak) id <StatTableViewHeaderDataSource> dataSource;
+@property (nonatomic, weak) id <ColouredCircleAndHeaderDataSource> dataSource;
 @end

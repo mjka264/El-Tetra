@@ -20,6 +20,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionView;
 @property (nonatomic, weak) id<CharacterStatEditorTableViewCellDelegate> delegate;
 - (void)stepperValueChanged;
-@property (nonatomic)id dataToLinkToSpecificStat;
 
 @end
