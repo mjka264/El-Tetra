@@ -80,27 +80,13 @@
     return lastObject.elementMembership;
 }
 - (NSString *)textForHeading: (UIView *)source {
-    if([self.title isEqualToString:@"SoulStatsController"]) {
-        return [CharacterStatPresenter headingForGroup:CharacterStatGroupSoul];
-    } else {
-        return [CharacterStatPresenter headingForElement:self.element];
-    }
+    return self.characterStats.headingStat.statName;
 }
 - (NSNumber *)fontSizeForHeading: (UIView *)source {
     return [NSNumber numberWithInt:16];
 }
 - (NSNumber *)numberForCircle:(UIView *)source {
-    if([self.title isEqualToString:@"SoulStatsController"]) {
-        return [NSNumber numberWithInteger:[self.characterStats
-                                            statMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                            element:0
-                                            soul:CharacterStatSoulLinkNone].value];
-    } else {
-        return [NSNumber numberWithInteger:[self.characterStats
-                                            statMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                            element:self.element
-                                            soul:CharacterStatSoulLinkNone].value];
-    }
+    return [NSNumber numberWithInteger:self.characterStats.headingStat.value];
 }
 - (NSInteger)elementForCircle:(UIView *)source {
     return self.element;
@@ -163,30 +149,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionNumber
 {
-    if([self.title isEqualToString:@"SoulStatsController"]) {
-        return [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSoul
-                                                                    element:0
-                                                                       soul:0].allStats count];
-    } else {
-        return [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSkills
-                                                                element:self.element
-                                                                   soul:0].allStats count];
-    }
+    return [self.characterStats.allStats count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Stat Cell" forIndexPath:indexPath];
     CharacterStat *stat;
-    if([self.title isEqualToString:@"SoulStatsController"]) {
-        stat = [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSoul
-                                                                element:0
-                                                                   soul:0].allStats objectAtIndex:indexPath.row];
-    } else {
-        stat = [[self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSkills
-                                                                element:self.element
-                                                                   soul:0].allStats objectAtIndex:indexPath.row];
-    }
+    
+    stat = [self.characterStats.allStats objectAtIndex:indexPath.row];
+    
     cell.textLabel.text = stat.statName;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", stat.value];
     return cell;

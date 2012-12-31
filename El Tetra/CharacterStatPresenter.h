@@ -48,12 +48,14 @@ typedef enum {
                                         soul:(t_CharacterStatSoulLink)soulMembership;
 - (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
                                                        element:(t_CharacterStatElement)elementMembership
-                                                          soul:(t_CharacterStatSoulLink)soulMembership;
-- (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
-                                                       element:(t_CharacterStatElement)elementMembership
                                                           soul:(t_CharacterStatSoulLink)soulMembership
-                                                   headingStat:(CharacterStat *)headingStat;
-- (NSArray *)allStats;
+                                            includeHeadingStat:(BOOL)yesOrNo;
+- (CharacterStatPresenter *)statPresenterWithStatMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
+                                                               element:(t_CharacterStatElement)elementMembership
+                                                                  soul:(t_CharacterStatSoulLink)soulMembership
+                                                    includeHeadingStat:(BOOL)yesOrNo;
+
+    - (NSArray *)allStats;
 
 // This is for CharacterStatEditorTableViewController
 + (NSString *)headingForGroup:(t_CharacterStatGroup)group;

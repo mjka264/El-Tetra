@@ -55,12 +55,10 @@
     return nil;
 }
 
-
 - (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
                                                        element:(t_CharacterStatElement)elementMembership
-                                                          soul:(t_CharacterStatSoulLink)soulMembership {
-    //NSLog(@"Hunting: %d %d %d", groupMembership, elementMembership, soulMembership);
-
+                                                          soul:(t_CharacterStatSoulLink)soulMembership
+                                            includeHeadingStat:(BOOL)headingStat {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (CharacterStat *obj in self.allStats) {
         //NSLog(@"Checking: %@", obj);
@@ -72,24 +70,31 @@
     }
     CharacterStatPresenter *presenter = [[CharacterStatPresenter alloc] init];
     presenter.allStats = array;
-    //NSLog(@"%@", presenter);
-
-    return presenter;
-}
-
-- (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
-                                                       element:(t_CharacterStatElement)elementMembership
-                                                          soul:(t_CharacterStatSoulLink)soulMembership
-                                                   headingStat:(CharacterStat *)headingStat {
-    if (groupMembership != CharacterStatGroupSkills)
+    if (headingStat && (groupMembership != CharacterStatGroupSkills))
         [NSException raise:@"This function should only be called with Skills" format:@"group:%d", groupMembership];
-    CharacterStatPresenter *presenter = [self statPresenterMatchingCriteriaGroup:groupMembership
-                                                                         element:elementMembership
-                                                                            soul:soulMembership];
-    presenter.headingStat = [self statMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                                    element:elementMembership soul:0];
+    else if (headingStat) {
+        presenter.headingStat = [self statMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                                        element:elementMembership soul:0];
+    }
     return presenter;
 }
+
+- (CharacterStatPresenter *)statPresenterWithStatMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
+                                                               element:(t_CharacterStatElement)elementMembership
+                                                                  soul:(t_CharacterStatSoulLink)soulMembership
+                                                    includeHeadingStat:(BOOL)headingStat
+{
+    CharacterStatPresenter *presenter = [[CharacterStatPresenter alloc] init];
+    presenter.allStats = @[[self statMatchingCriteriaGroup:groupMembership element:elementMembership soul:soulMembership]];
+    if (headingStat && (groupMembership != CharacterStatGroupSkills))
+        [NSException raise:@"This function should only be called with Skills" format:@"group:%d", groupMembership];
+    else if (headingStat) {
+        presenter.headingStat = [self statMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                                        element:elementMembership soul:0];
+    }
+    return presenter;
+}
+
 
 #pragma mark CharacterLoadoutAssistsDerivation protocol
 

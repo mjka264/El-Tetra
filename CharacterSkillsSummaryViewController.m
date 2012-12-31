@@ -28,12 +28,14 @@
 }
 
 - (NSInteger)convertDescriptionToElement:(NSString *)text {
-    if ([text isEqualToString:@"FireStatsController"]) return CharacterStatElementFire;
-    else if ([text isEqualToString:@"AirStatsController"]) return CharacterStatElementAir;
-    else if ([text isEqualToString:@"WaterStatsController"]) return CharacterStatElementWater;
-    else if ([text isEqualToString:@"EarthStatsController"]) return CharacterStatElementEarth;
-    else if ([text isEqualToString:@"ChiStatsController"]) return CharacterStatElementChi;
-    else return 0;
+    NSInteger element = 0;
+    if ([text isEqualToString:@"FireStatsController"]) element = CharacterStatElementFire;
+    else if ([text isEqualToString:@"AirStatsController"]) element = CharacterStatElementAir;
+    else if ([text isEqualToString:@"WaterStatsController"]) element = CharacterStatElementWater;
+    else if ([text isEqualToString:@"EarthStatsController"]) element = CharacterStatElementEarth;
+    else if ([text isEqualToString:@"ChiStatsController"]) element = CharacterStatElementChi;
+    NSLog(@"%@%d", text, element);
+    return element;
 }
 
 - (CharacterStatPresenter *)characterStatsFrom:(StatTableViewController *)source {
@@ -43,10 +45,17 @@
     } else {
         CharacterStatPresenter *presenter;
         NSInteger element = [self convertDescriptionToElement:title];
-        presenter = [self.characterStats statPresenterMatchingCriteriaGroup:0
-                                                                    element:element
-                                                                       soul:0];
-
+        if (element) {
+            presenter = [self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSkills
+                                                                        element:element
+                                                                           soul:0
+                                                             includeHeadingStat:YES];
+        } else {
+            presenter = [self.characterStats statPresenterMatchingCriteriaGroup:CharacterStatGroupSoul
+                                                                        element:0
+                                                                           soul:0
+                                                             includeHeadingStat:NO];
+        }
         [self.statPresenters setObject:presenter forKey:source.description];
         return presenter;
     }
