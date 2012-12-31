@@ -6,14 +6,15 @@
 //  Copyright (c) 2012 Matthew Kameron. All rights reserved.
 //
 
-#import "CharacterStatEditorTableViewController.h"
+#import "CharacterStatEditorViewController_TVC.h"
 #import "CharacterStatEditorTableViewCell.h"
 
-@interface CharacterStatEditorTableViewController ()
+@interface CharacterStatEditorViewController_TVC ()
 @property (readonly, nonatomic) CharacterStatPresenter *characterStats;
 @end
 
-@implementation CharacterStatEditorTableViewController
+@implementation CharacterStatEditorViewController_TVC
+
 @synthesize dataSource = _dataSource;
 - (CharacterStatPresenter *)characterStats {
     return [self.dataSource characterStatData:self];
@@ -24,8 +25,16 @@
 - (void)changeValueOfStatFromSender:(CharacterStatEditorTableViewCell *)source {
     [self.characterStats setStatWithDescription:source.descriptionView.text
                                           value:source.stepperView.value];
+    [self updateContentOfViews];
+}
+
+- (void)updateContentOfViews {
     [self.tableView reloadData];
-    //source.valueView.text = [NSString stringWithFormat:@"%d", (NSInteger) source.stepperView.value];
+    self.characterStatsSummaryView.text = [NSString stringWithFormat:@"%d", [self.characterStats totalStatCost]];
+}
+
+- (void)viewDidLoad {
+    [self updateContentOfViews];
 }
 
 #pragma mark - Table view data source

@@ -73,11 +73,12 @@
 - (NSInteger)skillCost {
     if (self.groupMembership == CharacterStatGroupSoul) return 3;
     else if (self.groupMembership == CharacterStatGroupPrimary) return 2;
-    else if (self.groupMembership == CharacterStatGroupSkills) {
+    else if (self.groupMembership == CharacterStatGroupAbilities) {
         if (self.elementMembership == CharacterStatElementFire ||
             self.elementMembership == CharacterStatElementAir ||
             self.elementMembership == CharacterStatElementWater ||
-            self.elementMembership == CharacterStatElementEarth) {
+            self.elementMembership == CharacterStatElementEarth ||
+            self.elementMembership == CharacterStatElementChi) {
             return 1;
         } else {
             return 2;

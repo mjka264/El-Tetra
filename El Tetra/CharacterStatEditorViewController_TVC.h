@@ -10,12 +10,14 @@
 #import "CharacterStatPresenter.h"
 #import "CharacterStatEditorTableViewCell.h"
 
-@class CharacterStatEditorTableViewController;
+@class CharacterStatEditorViewController_TVC;
 
 @protocol CharacterStatEditorTableViewControllerDataSource <NSObject>
-- (CharacterStatPresenter *)characterStatData:(CharacterStatEditorTableViewController *)source;
+- (CharacterStatPresenter *)characterStatData:(CharacterStatEditorViewController_TVC *)source;
 @end
 
-@interface CharacterStatEditorTableViewController : UITableViewController <CharacterStatEditorTableViewCellDelegate>
+@interface CharacterStatEditorViewController_TVC : UIViewController <CharacterStatEditorTableViewCellDelegate>
 @property (nonatomic, weak) id<CharacterStatEditorTableViewControllerDataSource> dataSource;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *characterStatsSummaryView;
 @end

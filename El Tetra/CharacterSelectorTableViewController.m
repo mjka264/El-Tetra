@@ -7,7 +7,7 @@
 //
 
 #import "CharacterSelectorTableViewController.h"
-#import "CharacterStatEditorTableViewController.h"
+#import "CharacterStatEditorViewController_TVC.h"
 #import "Character.h"
 
 @interface CharacterSelectorTableViewController ()
@@ -43,7 +43,7 @@
     return self.characterSourceSelectedForViewing;
 }
 
-- (CharacterStatPresenter *)characterStatData:(CharacterStatEditorTableViewController *)source {
+- (CharacterStatPresenter *)characterStatData:(CharacterStatEditorViewController_TVC *)source {
     return self.characterSourceSelectedForViewing.stats;
 }
 
