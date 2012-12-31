@@ -14,6 +14,8 @@
 @property (nonatomic) NSInteger soulMembership;      // CharacterStatSpecialNot for most things
 @property (nonatomic, readonly) NSInteger skillCost;      // derived based upon group memberships
 @property (nonatomic, readonly) NSInteger minimumValue;   // 1 for primary/soul/skills, 0 for abilities
+@property (nonatomic, readonly) NSInteger maximumValue;   // 10 for most things, the corresponding skill for abilites
+
 
 #define STAT_ARTFUL @"Artful weapons"
 #define STAT_BRUTAL @"Brutal weapons"

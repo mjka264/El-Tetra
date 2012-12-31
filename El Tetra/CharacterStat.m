@@ -24,9 +24,16 @@
                         group:(t_CharacterStatGroup)groupStatBelongsTo
                       element:(t_CharacterStatElement)associatedElement
                          soul:(t_CharacterStatSoulLink)associatedSoulStat;
-@property (nonatomic, strong) NSArray *parentStats;
-@end
++ (CharacterStat *)createStat:(NSString *)statName
+                 defaultValue:(NSInteger)startingStatValue
+                  ceilingedBy:(NSArray *)parentStats
+                        group:(t_CharacterStatGroup)groupStatBelongsTo
+                      element:(t_CharacterStatElement)associatedElement
+                         soul:(t_CharacterStatSoulLink)associatedSoulStat;
+@property (nonatomic, strong) NSArray *derivationParents;  // This stat is derived based upon the parent's values
+@property (nonatomic, strong) NSArray *ceilingParents;     // This stat has its own value that cannot exceed its parents
 
+@end
 
 @implementation CharacterStat
 @synthesize statName = _statName;
@@ -34,20 +41,22 @@
 @synthesize elementMembership = _elementMembership;
 @synthesize soulMembership = _soulMembership;
 
-// When a stat has parents, use the lower of those stats rather than any intrinsic value
-@synthesize parentStats = _parentStats;
+// When a stat has derivationParents, use the lower of those stats rather than any intrinsic value
+// When it has ceiling parents, check to make sure that it doesn't exceed the ceilings
+@synthesize derivationParents = _derivationParents;
 @synthesize value = _value;
 - (NSInteger)value {
-    if (self.parentStats) {
+    if (self.derivationParents) {
         NSInteger minimum = -1;  // Sentinel value
-        for (CharacterStat *parent in self.parentStats) {
+        for (CharacterStat *parent in self.derivationParents) {
             if (minimum == -1 || parent.value < minimum) {
                 minimum = parent.value;
             }
         }
         _value = minimum;
     }
-    return _value;
+    if (_value > self.maximumValue) return self.maximumValue;  // Note that in this case I keep _value as the "desired" value
+    else return _value;                                        // This corrects against user error, e.g. if they reduce the ceiling stats.
 }
 
 - (NSString *)description {
@@ -85,6 +94,18 @@
     }
 }
 
+- (NSInteger)maximumValue {
+    NSInteger maximum = 10;
+    if (self.ceilingParents) {
+        for (CharacterStat *parent in self.ceilingParents) {
+            if (parent.value < maximum) {
+                maximum = parent.value;
+            }
+        }
+    }
+    return maximum;
+}
+
 + (CharacterStat *)createStat:(NSString *)statName
                  defaultValue:(NSInteger)startingStatValue
                         group:(t_CharacterStatGroup)groupStatBelongsTo
@@ -109,7 +130,22 @@
                                               group:groupStatBelongsTo
                                             element:associatedElement
                                                soul:associatedSoulStat];
-    stat.parentStats = parentStats;
+    stat.derivationParents = parentStats;
+    return stat;
+}
+
++ (CharacterStat *)createStat:(NSString *)statName
+                 defaultValue:(NSInteger)startingStatValue
+                  ceilingedBy:(NSArray *)parentStats
+                        group:(t_CharacterStatGroup)groupStatBelongsTo
+                      element:(t_CharacterStatElement)associatedElement
+                         soul:(t_CharacterStatSoulLink)associatedSoulStat {
+    CharacterStat *stat = [CharacterStat createStat:statName
+                                       defaultValue:startingStatValue
+                                              group:groupStatBelongsTo
+                                            element:associatedElement
+                                               soul:associatedSoulStat];
+    stat.ceilingParents = parentStats;
     return stat;
 }
 
@@ -230,79 +266,97 @@
      // ------------ Abilities -------- //
      
      [CharacterStat createStat:@"Rend" defaultValue:0
+                   ceilingedBy:@[fire]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementFire
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:@"Spellsword" defaultValue:0
+                   ceilingedBy:@[fire]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementFire
                           soul:CharacterStatSoulLinkNone],
      
      [CharacterStat createStat:STAT_ARTFUL defaultValue:0
+                   ceilingedBy:@[air]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementAir
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:STAT_BRUTAL defaultValue:0
+                   ceilingedBy:@[air]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementAir
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:@"Critical strikes" defaultValue:0
+                   ceilingedBy:@[air]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementAir
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:STAT_PROJECTILE defaultValue:0
+                   ceilingedBy:@[air]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementAir
                           soul:CharacterStatSoulLinkNone],
      
      [CharacterStat createStat:STAT_INITIATIVE defaultValue:0
+                   ceilingedBy:@[water]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementWater
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:@"Leap/float" defaultValue:0
+                   ceilingedBy:@[water]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementWater
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:@"Multiple attacks" defaultValue:0
+                   ceilingedBy:@[water]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementWater
                           soul:CharacterStatSoulLinkNone],
      
      [CharacterStat createStat:@"Defensive pause" defaultValue:0
+                   ceilingedBy:@[earth]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementEarth
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:@"Strength within" defaultValue:0
+                   ceilingedBy:@[earth]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementEarth
                           soul:CharacterStatSoulLinkNone],
      
      [CharacterStat createStat:@"Daoism" defaultValue:0
+                   ceilingedBy:@[chi]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementChi
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:@"Shaping" defaultValue:0
+                   ceilingedBy:@[chi]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementChi
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:@"Planewalking" defaultValue:0
+                   ceilingedBy:@[chi]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementChi
                           soul:CharacterStatSoulLinkNone],
      
      [CharacterStat createStat:@"Primal fire" defaultValue:0
+                   ceilingedBy:@[fire, chi]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementFireChi
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:@"Primal Air" defaultValue:0
+                   ceilingedBy:@[air, chi]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementAirChi
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:@"Primal Water" defaultValue:0
+                   ceilingedBy:@[water, chi]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementWaterChi
                           soul:CharacterStatSoulLinkNone],
      [CharacterStat createStat:@"Primal Earth" defaultValue:0
+                   ceilingedBy:@[earth, chi]
                          group:CharacterStatGroupAbilities
                        element:CharacterStatElementEarthChi
                           soul:CharacterStatSoulLinkNone]

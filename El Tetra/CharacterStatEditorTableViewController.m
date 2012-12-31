@@ -24,7 +24,8 @@
 - (void)changeValueOfStatFromSender:(CharacterStatEditorTableViewCell *)source {
     [self.characterStats setStatWithDescription:source.descriptionView.text
                                           value:source.stepperView.value];
-    source.valueView.text = [NSString stringWithFormat:@"%d", (NSInteger) source.stepperView.value];
+    [self.tableView reloadData];
+    //source.valueView.text = [NSString stringWithFormat:@"%d", (NSInteger) source.stepperView.value];
 }
 
 #pragma mark - Table view data source
@@ -66,6 +67,7 @@
     cell.delegate = self;
     [cell.stepperView addTarget:cell action:@selector(stepperValueChanged) forControlEvents:UIControlEventValueChanged];
     cell.stepperView.minimumValue = stat.minimumValue;
+    cell.stepperView.maximumValue = stat.maximumValue;
     cell.stepperView.value = stat.value;
     
     return cell;
