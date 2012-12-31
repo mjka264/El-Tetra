@@ -8,24 +8,13 @@
 
 #import "PrimaryStatColouredCircleView.h"
 #import "CharacterStatPresenter.h"
+#import "ColourChooser.h"
 
 @implementation PrimaryStatColouredCircleView
 
 - (UIColor *)getColourForCircle:(BOOL)perimeterColour {
-    CGFloat brightness = perimeterColour? 0.5 : 1.0;
-    CGFloat saturation = perimeterColour? 1.0 : 0.4;
-    CGFloat hue;
-    
-    NSInteger element = [self.dataSource elementForCircle:self];
-
-    if (element == CharacterStatElementFire) hue = 0.0;
-    else if (element == CharacterStatElementAir) hue = 0.18;
-    else if (element == CharacterStatElementWater) hue = 0.55;
-    else if (element == CharacterStatElementEarth) hue = 0.33;
-    else if (element == CharacterStatElementChi) hue = 0.77;
-    else hue = 0.09;
-    
-    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
+    return [ColourChooser getUIColorForElement:[self.dataSource elementForCircle:self]
+                                     inContext:perimeterColour ? ColourChooserContextLine : ColourChooserContextFill];
 }
     
 - (id)initWithFrame:(CGRect)frame
@@ -61,7 +50,7 @@
     CGFloat radius = rect.size.height < rect.size.width ? rect.size.height/2 : rect.size.width/2;
     
     // Make the background white
-    CGContextSetRGBFillColor(context, 1,1,1, 1);
+    CGContextSetRGBFillColor(context, 1,1,1,1);
     CGContextFillRect(context, rect);
 
     // Draw the outside of the circle

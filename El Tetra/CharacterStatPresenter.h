@@ -31,6 +31,8 @@ typedef enum {
     CharacterStatElementEarthChi = 9,
 } t_CharacterStatElement;
 
+BOOL characterStatElementIsDualElement(t_CharacterStatElement element);
+
 typedef enum {
     CharacterStatSoulLinkNone = 0,
     CharacterStatSoulLinkBody = 1,

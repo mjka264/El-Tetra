@@ -8,6 +8,7 @@
 
 #import "CharacterStatEditorViewController_TVC.h"
 #import "CharacterStatEditorTableViewCell.h"
+#import "ColourChooser.h"
 
 @interface CharacterStatEditorViewController_TVC ()
 @property (readonly, nonatomic) CharacterStatPresenter *characterStats;
@@ -30,7 +31,7 @@
 
 - (void)updateContentOfViews {
     [self.tableView reloadData];
-    self.characterStatsSummaryView.text = [NSString stringWithFormat:@"%d", [self.characterStats totalStatCost]];
+    self.characterStatsSummaryView.text = [NSString stringWithFormat:@"Total points spend: %d", [self.characterStats totalStatCost]];
 }
 
 - (void)viewDidLoad {
@@ -60,17 +61,27 @@
     return [CharacterStatPresenter headingForGroup:stat.groupMembership];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = ((CharacterStatEditorTableViewCell *)cell).targetBackgroundColour;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     CharacterStatEditorTableViewCell *cell = (CharacterStatEditorTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"MyEditCell"];
     CharacterStat *stat = [[[self.characterStats getEditableStatsInGroups] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    
-    //NSLog(@"Creating at %@, %@", indexPath, stat.description);
-    
+        
     // Initialise straight forward content
     cell.descriptionView.text = stat.statName;
-    cell.valueView.text = [NSString stringWithFormat:@"%d", stat.value];
+    if (stat.value) cell.valueView.text = [NSString stringWithFormat:@"%d", stat.value];
+    else cell.valueView.text = @"";
+    cell.targetBackgroundColour = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextSubtleBackground];
+    
+    if (characterStatElementIsDualElement(stat.elementMembership)) {
+        cell.descriptionView.textColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextSolid];
+    } else {
+        cell.descriptionView.textColor = [UIColor blackColor];
+    }
     
     // Initialise the stepper callbacks
     cell.delegate = self;

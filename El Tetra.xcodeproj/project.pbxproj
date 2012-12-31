@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2295E7C1691EB9B00BBCADC /* ColourChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = C2295E7B1691EB9B00BBCADC /* ColourChooser.m */; };
 		C23AF153168F782500F695D4 /* CharacterSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23AF152168F782500F695D4 /* CharacterSelectorTableViewController.m */; };
 		C23AF156168FE68900F695D4 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = C23AF155168FE68900F695D4 /* Character.m */; };
 		C23AF159168FF77300F695D4 /* CharacterStatEditorViewController_TVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C23AF158168FF77200F695D4 /* CharacterStatEditorViewController_TVC.m */; };
@@ -51,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C2295E7A1691EB9A00BBCADC /* ColourChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColourChooser.h; sourceTree = "<group>"; };
+		C2295E7B1691EB9B00BBCADC /* ColourChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColourChooser.m; sourceTree = "<group>"; };
 		C23AF151168F782500F695D4 /* CharacterSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSelectorTableViewController.h; sourceTree = "<group>"; };
 		C23AF152168F782500F695D4 /* CharacterSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSelectorTableViewController.m; sourceTree = "<group>"; };
 		C23AF154168FE68900F695D4 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
@@ -155,6 +158,10 @@
 		C26413E516907ECE00B02C42 /* Combat View */ = {
 			isa = PBXGroup;
 			children = (
+				C27B1FE3168BE10600258807 /* CharacterLoadout.h */,
+				C27B1FE4168BE10600258807 /* CharacterLoadout.m */,
+				C27B1FE7168C74E800258807 /* Item.h */,
+				C27B1FE8168C74E800258807 /* Item.m */,
 				C27AB560168B232000CA0D39 /* CharacterLoadoutViewController.h */,
 				C27AB561168B232000CA0D39 /* CharacterLoadoutViewController.m */,
 				C260999B168DBB29000ADB58 /* CharacterLoadoutView.h */,
@@ -187,10 +194,8 @@
 				C29752C416856F3700092860 /* CharacterStatPresenter.m */,
 				C2B597E916905B05002A333C /* CharacterStat.h */,
 				C2B597EA16905B05002A333C /* CharacterStat.m */,
-				C27B1FE3168BE10600258807 /* CharacterLoadout.h */,
-				C27B1FE4168BE10600258807 /* CharacterLoadout.m */,
-				C27B1FE7168C74E800258807 /* Item.h */,
-				C27B1FE8168C74E800258807 /* Item.m */,
+				C2295E7A1691EB9A00BBCADC /* ColourChooser.h */,
+				C2295E7B1691EB9B00BBCADC /* ColourChooser.m */,
 			);
 			name = "Data Structures";
 			sourceTree = "<group>";
@@ -403,6 +408,7 @@
 				C23AF16116900FC900F695D4 /* CharacterStatEditorTableViewCell.m in Sources */,
 				C2B597EB16905B05002A333C /* CharacterStat.m in Sources */,
 				C26413E316907D4D00B02C42 /* CharacterSkillsSummaryViewController.m in Sources */,
+				C2295E7C1691EB9B00BBCADC /* ColourChooser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,13 @@
 @interface CharacterStatPresenter ()
 @end
 
+BOOL characterStatElementIsDualElement(t_CharacterStatElement element) {
+    return (element == CharacterStatElementAirChi ||
+            element == CharacterStatElementEarthChi ||
+            element == CharacterStatElementFireChi ||
+            element == CharacterStatElementWaterChi);
+}
+
 @implementation CharacterStatPresenter
 @synthesize allStats = _allStats;
 - (NSArray *)allStats {

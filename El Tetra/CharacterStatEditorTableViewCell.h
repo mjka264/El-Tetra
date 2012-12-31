@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *valueView;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionView;
 @property (nonatomic, weak) id<CharacterStatEditorTableViewCellDelegate> delegate;
-- (void)stepperValueChanged;
 
+// For some reason you cannot set the background colour in the delegate's cellForRowAtIndexPath
+// so instead I am setting it in the delegate's willDisplayCell:forCellAtIndexPath
+@property (nonatomic, strong) UIColor *targetBackgroundColour;
+- (void)stepperValueChanged;
 @end
