@@ -10,10 +10,12 @@
 #import "CharacterStatPresenter.h"
 
 typedef enum {
-    ColourChooserContextLine = 1,
-    ColourChooserContextFill = 2,
-    ColourChooserContextSubtleBackground = 3,
-    ColourChooserContextSolid = 4
+    ColourChooserContextLine,
+    ColourChooserContextFill,
+    ColourChooserContextSubtleBackground,
+    ColourChooserContextSubtleForeground,
+    ColourChooserContextStrongBackground,
+    ColourChooserContextStrongForeground
 } t_ColourChooserContext;
 
 @interface ColourChooser : NSObject

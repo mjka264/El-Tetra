@@ -76,12 +76,14 @@
     if (stat.value) cell.valueView.text = [NSString stringWithFormat:@"%d", stat.value];
     else cell.valueView.text = @"";
     cell.targetBackgroundColour = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextSubtleBackground];
+    cell.descriptionView.textColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextSubtleForeground];
     
-    if (characterStatElementIsDualElement(stat.elementMembership)) {
-        cell.descriptionView.textColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextSolid];
-    } else {
-        cell.descriptionView.textColor = [UIColor blackColor];
-    }
+    // Setup the highlight colors
+    UIView *selectionColor = [[UIView alloc] init];
+    selectionColor.backgroundColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextStrongBackground];
+    cell.selectedBackgroundView = selectionColor;
+    cell.valueView.highlightedTextColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextStrongForeground];
+    cell.descriptionView.highlightedTextColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextStrongForeground];
     
     // Initialise the stepper callbacks
     cell.delegate = self;

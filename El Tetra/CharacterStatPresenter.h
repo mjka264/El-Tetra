@@ -11,33 +11,34 @@
 #import "CharacterStat.h"
 
 typedef enum {
-    CharacterStatGroupNone = 0,
-    CharacterStatGroupSoul = 1,
-    CharacterStatGroupPrimary = 2,
-    CharacterStatGroupSkills = 3,
-    CharacterStatGroupAbilities = 4,
+    CharacterStatGroupNone,
+    CharacterStatGroupSoul,
+    CharacterStatGroupPrimary,
+    CharacterStatGroupSkills,
+    CharacterStatGroupAbilities
 } t_CharacterStatGroup;
 
 typedef enum {
-    CharacterStatElementNone = 0,
-    CharacterStatElementFire = 1,
-    CharacterStatElementAir = 2,
-    CharacterStatElementWater = 3,
-    CharacterStatElementEarth = 4,
-    CharacterStatElementChi = 5,
-    CharacterStatElementFireChi = 6,
-    CharacterStatElementAirChi = 7,
-    CharacterStatElementWaterChi = 8,
-    CharacterStatElementEarthChi = 9,
+    CharacterStatElementNone,
+    CharacterStatElementFire,
+    CharacterStatElementAir,
+    CharacterStatElementWater,
+    CharacterStatElementEarth,
+    CharacterStatElementChi,
+    CharacterStatElementFireChi,
+    CharacterStatElementAirChi,
+    CharacterStatElementWaterChi,
+    CharacterStatElementEarthChi,
 } t_CharacterStatElement;
 
 BOOL characterStatElementIsDualElement(t_CharacterStatElement element);
+t_CharacterStatElement characterStatGreekElement(t_CharacterStatElement element);
 
 typedef enum {
-    CharacterStatSoulLinkNone = 0,
-    CharacterStatSoulLinkBody = 1,
-    CharacterStatSoulLinkMind = 2,
-    CharacterStatSoulLinkSpirit = 3
+    CharacterStatSoulLinkNone,
+    CharacterStatSoulLinkBody,
+    CharacterStatSoulLinkMind,
+    CharacterStatSoulLinkSpirit
 } t_CharacterStatSoulLink;
 
 @interface CharacterStatPresenter : NSObject <CharacterLoadoutAssistsDerivation>

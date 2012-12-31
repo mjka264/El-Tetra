@@ -18,6 +18,14 @@ BOOL characterStatElementIsDualElement(t_CharacterStatElement element) {
             element == CharacterStatElementWaterChi);
 }
 
+t_CharacterStatElement characterStatGreekElement(t_CharacterStatElement element) {
+    if (element == CharacterStatElementAirChi) return CharacterStatElementAir;
+    else if (element == CharacterStatElementEarthChi) return CharacterStatElementEarth;
+    else if (element == CharacterStatElementFireChi) return CharacterStatElementFire;
+    else if (element == CharacterStatElementWaterChi) return CharacterStatElementWater;
+    else return element;
+}
+
 @implementation CharacterStatPresenter
 @synthesize allStats = _allStats;
 - (NSArray *)allStats {
