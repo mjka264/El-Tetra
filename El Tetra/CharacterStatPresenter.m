@@ -61,7 +61,6 @@
                                             includeHeadingStat:(BOOL)headingStat {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (CharacterStat *obj in self.allStats) {
-        //NSLog(@"Checking: %@", obj);
         if ((groupMembership == 0 || obj.groupMembership == groupMembership) &&
             (elementMembership == 0 || obj.elementMembership == elementMembership) &&
             (soulMembership == 0 || obj.soulMembership == soulMembership)) {

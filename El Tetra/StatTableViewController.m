@@ -76,8 +76,13 @@
 }
 
 - (NSInteger)element {
-    CharacterStat *lastObject = [self.characterStats.allStats lastObject];
-    return lastObject.elementMembership;
+    CharacterStat *stat;
+    if (self.characterStats.headingStat) {
+        stat = self.characterStats.headingStat;
+    } else {
+        stat = [self.characterStats.allStats lastObject];
+    }
+    return stat.elementMembership;
 }
 - (NSString *)textForHeading: (UIView *)source {
     return self.characterStats.headingStat.statName;
@@ -118,18 +123,16 @@
 {
     [super viewDidLoad];
     
-    StatTableViewHeader *header = [[StatTableViewHeader alloc] init];
-    header.dataSource = self;
-    [header sizeToFit];
-    [self.view addSubview:header];
+    if (self.characterStats.headingStat) {
+        StatTableViewHeader *header = [[StatTableViewHeader alloc] init];
+        header.dataSource = self;
+        [header sizeToFit];
+        [self.view addSubview:header];
+        self.tableView.tableHeaderView = header;
+    }
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.tableHeaderView = header;
-
-    // The next line of code didn't work because it always instantiated my class with default style
-    // So I couldn't save the left detail style. I would have had to reimplement the subviews.
-    //[self.tableView registerClass:[StatTableViewCell class] forCellReuseIdentifier:@"Stat Cell"];
 }
 
 #pragma mark - Table view data source

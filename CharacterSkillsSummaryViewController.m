@@ -34,7 +34,6 @@
     else if ([text isEqualToString:@"WaterStatsController"]) element = CharacterStatElementWater;
     else if ([text isEqualToString:@"EarthStatsController"]) element = CharacterStatElementEarth;
     else if ([text isEqualToString:@"ChiStatsController"]) element = CharacterStatElementChi;
-    NSLog(@"%@%d", text, element);
     return element;
 }
 
