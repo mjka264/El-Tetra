@@ -159,9 +159,7 @@
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Stat Cell" forIndexPath:indexPath];
     CharacterStat *stat;
-    
     stat = [self.characterStats.allStats objectAtIndex:indexPath.row];
-    
     cell.textLabel.text = stat.statName;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", stat.value];
     return cell;

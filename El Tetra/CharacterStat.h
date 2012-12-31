@@ -4,7 +4,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface CharacterStat : NSObject <NSCopying>
+@interface CharacterStat : NSObject  // CharacterStat does *not* support copying - otherwise the links get mucked up
 @property (nonatomic, strong) NSString *statName;
 @property (nonatomic) NSInteger value;
 
@@ -20,6 +20,6 @@
 #define STAT_PROJECTILE @"Projectile weapons"
 #define STAT_INITIATIVE @"Initiative"
 
-+ (NSArray *)characterStatsSetCopy;
++ (NSArray *)newCharacterStatsSet;
 
 @end
