@@ -20,7 +20,6 @@
 
 #define CIRCLE_RADIUS 35
 
-
 - (void)setDataSource:(id<ColouredCircleAndHeaderDataSource>) newSource {
     if (_dataSource != newSource) {
         _dataSource = newSource;
@@ -50,6 +49,7 @@
     return _circleView;
 }
 
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     if (self.circleView) {
@@ -58,6 +58,10 @@
     } else {
         self.headingLabel.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
     }
+}
+
+- (void)drawRect:(CGRect)rect {
+    [self.circleView setNeedsDisplay];
 }
 
 - (void)setupSelf {

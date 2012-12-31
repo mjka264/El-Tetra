@@ -9,11 +9,6 @@
 #import "CharacterStatPresenter.h"
 
 @interface CharacterStatPresenter ()
-/*
-- (NSNumber *)abilityValueWithDescription:(NSString *)description;
-- (NSNumber *)primaryStatValueWithDescription:(NSString *)description;
-*/
-
 @end
 
 @implementation CharacterStatPresenter
@@ -22,6 +17,7 @@
     if (!_allStats) _allStats = [CharacterStat characterStatsSetCopy];
     return _allStats;
 }
+@synthesize headingStat = _headingStat;
 
 - (NSString *)description {
     NSMutableArray *data = [[NSMutableArray alloc] init];
@@ -59,6 +55,7 @@
     return nil;
 }
 
+
 - (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
                                                        element:(t_CharacterStatElement)elementMembership
                                                           soul:(t_CharacterStatSoulLink)soulMembership {
@@ -77,6 +74,20 @@
     presenter.allStats = array;
     //NSLog(@"%@", presenter);
 
+    return presenter;
+}
+
+- (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
+                                                       element:(t_CharacterStatElement)elementMembership
+                                                          soul:(t_CharacterStatSoulLink)soulMembership
+                                                   headingStat:(CharacterStat *)headingStat {
+    if (groupMembership != CharacterStatGroupSkills)
+        [NSException raise:@"This function should only be called with Skills" format:@"group:%d", groupMembership];
+    CharacterStatPresenter *presenter = [self statPresenterMatchingCriteriaGroup:groupMembership
+                                                                         element:elementMembership
+                                                                            soul:soulMembership];
+    presenter.headingStat = [self statMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                                    element:elementMembership soul:0];
     return presenter;
 }
 

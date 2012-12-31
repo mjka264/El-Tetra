@@ -54,6 +54,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic, readonly) CharacterStatPresenter *characterStats;
 @property (nonatomic, readonly) NSInteger element;
+
 @end
 
 
@@ -66,6 +67,13 @@
 }
 
 #pragma mark - StatTableViewHeaderDataSource
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
+    for (UIView *view in self.view.subviews) {
+        [view setNeedsDisplay];
+    }
+}
 
 - (NSInteger)element {
     CharacterStat *lastObject = [self.characterStats.allStats lastObject];
@@ -82,10 +90,17 @@
     return [NSNumber numberWithInt:16];
 }
 - (NSNumber *)numberForCircle:(UIView *)source {
-    return [NSNumber numberWithInteger:[self.characterStats
-                                        statMatchingCriteriaGroup:CharacterStatGroupPrimary
-                                        element:self.element
-                                        soul:CharacterStatSoulLinkNone].value];
+    if([self.title isEqualToString:@"SoulStatsController"]) {
+        return [NSNumber numberWithInteger:[self.characterStats
+                                            statMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                            element:0
+                                            soul:CharacterStatSoulLinkNone].value];
+    } else {
+        return [NSNumber numberWithInteger:[self.characterStats
+                                            statMatchingCriteriaGroup:CharacterStatGroupPrimary
+                                            element:self.element
+                                            soul:CharacterStatSoulLinkNone].value];
+    }
 }
 - (NSInteger)elementForCircle:(UIView *)source {
     return self.element;
@@ -120,6 +135,8 @@
     StatTableViewHeader *header = [[StatTableViewHeader alloc] init];
     header.dataSource = self;
     [header sizeToFit];
+    [self.view addSubview:header];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = header;

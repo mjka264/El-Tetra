@@ -45,6 +45,11 @@
     }
     return self;
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self setNeedsDisplay];
+}
+
 - (CGSize)sizeThatFits:(CGSize)size
 {
     return CGSizeMake(300,300);

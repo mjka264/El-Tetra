@@ -40,6 +40,7 @@ typedef enum {
 
 @interface CharacterStatPresenter : NSObject <CharacterLoadoutAssistsDerivation>
 @property (nonatomic, strong) NSArray *allStats;
+@property (nonatomic, strong) CharacterStat *headingStat;
 
 - (CharacterStat *)statMatchingDescription:(NSString *)description;                 // returns a CharacterStat
 - (CharacterStat *)statMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
@@ -48,6 +49,10 @@ typedef enum {
 - (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
                                                        element:(t_CharacterStatElement)elementMembership
                                                           soul:(t_CharacterStatSoulLink)soulMembership;
+- (CharacterStatPresenter *)statPresenterMatchingCriteriaGroup:(t_CharacterStatGroup)groupMembership
+                                                       element:(t_CharacterStatElement)elementMembership
+                                                          soul:(t_CharacterStatSoulLink)soulMembership
+                                                   headingStat:(CharacterStat *)headingStat;
 - (NSArray *)allStats;
 
 // This is for CharacterStatEditorTableViewController

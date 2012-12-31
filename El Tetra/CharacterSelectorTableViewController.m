@@ -144,7 +144,9 @@
 // This function is probably unnecessary since the dataSources are all set in the prepareForSegue.
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     [viewController performSelector:@selector(setDataSource:) withObject:self];
+    [viewController.view setNeedsDisplay];
 }
+
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[UITabBarController class]]) {
