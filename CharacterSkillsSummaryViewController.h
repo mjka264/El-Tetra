@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "StatTableViewController.h"
+#import "CharacterSelecterProtocol.h"
 
 @class CharacterSkillsSummaryViewController;
 
@@ -17,5 +18,5 @@
 
 
 @interface CharacterSkillsSummaryViewController : UIViewController <StatTableViewControllerDataSource>
-@property (nonatomic, weak) id<CharacterSkillsSummaryViewControllerDataSource> dataSource;
+@property (nonatomic, weak) id<CharacterSelecterProtocol> dataSource;
 @end

@@ -15,4 +15,10 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) CharacterStatPresenter *stats;
 @property (nonatomic, strong) NSMutableArray *loadouts;     // of CharacterLoadout
+
+// The dice pool is a NSArray of NSNumber.
+// It is derived based on the Daoism stat of the character
+- (NSArray *)getDicePool;
+- (void)removeFromDicePool:(NSNumber *)dice;
+- (void)resetDicePool;
 @end

@@ -18,7 +18,7 @@
 
 @synthesize dataSource = _dataSource;
 - (CharacterStatPresenter *)characterStats {
-    return [self.dataSource characterStatData:self];
+    return [self.dataSource dataSourceCharacterStatsPresenter:self];
 }
 
 #pragma mark - CharacterStatEditorTableViewCellDelegate
@@ -31,11 +31,15 @@
 
 - (void)updateContentOfViews {
     [self.tableView reloadData];
-    self.characterStatsSummaryView.text = [NSString stringWithFormat:@"Total points spend: %d", [self.characterStats totalStatCost]];
+    self.characterStatsSummaryView.text = [NSString stringWithFormat:@"Total points spent: %d", [self.characterStats totalStatCost]];
 }
 
 - (void)viewDidLoad {
     [self updateContentOfViews];
+    self.characterStatsSummaryView.backgroundColor = [ColourChooser getUIColorForElement:CharacterStatElementNone
+                                                                               inContext:ColourChooserContextStrongBackground];
+    self.characterStatsSummaryView.textColor = [ColourChooser getUIColorForElement:CharacterStatElementNone
+                                                                               inContext:ColourChooserContextStrongForeground];
 }
 
 #pragma mark - Table view data source
@@ -80,10 +84,10 @@
     
     // Setup the highlight colors
     UIView *selectionColor = [[UIView alloc] init];
-    selectionColor.backgroundColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextStrongBackground];
+    selectionColor.backgroundColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextBrightBackground];
     cell.selectedBackgroundView = selectionColor;
-    cell.valueView.highlightedTextColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextStrongForeground];
-    cell.descriptionView.highlightedTextColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextStrongForeground];
+    cell.valueView.highlightedTextColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextBrightForeground];
+    cell.descriptionView.highlightedTextColor = [ColourChooser getUIColorForElement:stat.elementMembership inContext:ColourChooserContextBrightForeground];
     
     // Initialise the stepper callbacks
     cell.delegate = self;

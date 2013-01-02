@@ -8,6 +8,10 @@
 
 #import "Character.h"
 
+@interface Character ()
+@property (strong, nonatomic)NSArray *dicePool;
+@end
+
 @implementation Character
 @synthesize name = _name;
 - (NSString *)name {
@@ -25,6 +29,32 @@
 - (NSMutableArray *)loadouts {
     if (!_loadouts) _loadouts = [NSMutableArray arrayWithObject:[CharacterLoadout defaultLoadout]];
     return _loadouts;
+}
+
+@synthesize dicePool = _dicePool;
+- (NSArray *)dicePool {
+    if (!_dicePool) {
+        NSMutableArray *newPool = [[NSMutableArray alloc] initWithCapacity:5];
+        [newPool addObject:[NSNumber numberWithInteger:3]];
+        [newPool addObject:[NSNumber numberWithInteger:3]];
+        [newPool addObject:[NSNumber numberWithInteger:5]];
+        [newPool addObject:[NSNumber numberWithInteger:7]];
+        _dicePool = [newPool copy];
+    }
+    return _dicePool;
+}
+- (NSArray *)getDicePool {
+    return self.dicePool;
+}
+
+- (void)removeFromDicePool:(NSNumber *)dice {
+    NSMutableArray *newPool = [NSMutableArray arrayWithArray:self.dicePool];
+    [newPool removeObjectAtIndex:[newPool indexOfObject:dice]];
+    self.dicePool = [newPool copy];
+}
+
+- (void)resetDicePool {
+    self.dicePool = nil;
 }
 
 @end

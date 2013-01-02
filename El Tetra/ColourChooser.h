@@ -15,7 +15,9 @@ typedef enum {
     ColourChooserContextSubtleBackground,
     ColourChooserContextSubtleForeground,
     ColourChooserContextStrongBackground,
-    ColourChooserContextStrongForeground
+    ColourChooserContextStrongForeground,
+    ColourChooserContextBrightBackground,
+    ColourChooserContextBrightForeground
 } t_ColourChooserContext;
 
 @interface ColourChooser : NSObject

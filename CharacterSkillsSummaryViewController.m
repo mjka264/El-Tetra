@@ -8,6 +8,7 @@
 
 #import "CharacterSkillsSummaryViewController.h"
 #import "CharacterStatPresenter.h"
+#import "CharacterSelecterProtocol.h"
 
 
 @interface CharacterSkillsSummaryViewController ()
@@ -18,7 +19,7 @@
 @implementation CharacterSkillsSummaryViewController
 @synthesize dataSource = _dataSource;
 - (CharacterStatPresenter *)characterStats {
-    return [self.dataSource dataSourceCharacterStatsFor:self];
+    return [self.dataSource dataSourceCharacterStatsPresenter:self];
 }
 
 @synthesize statPresenters = _statPresenters;

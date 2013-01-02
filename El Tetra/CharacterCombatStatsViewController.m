@@ -24,10 +24,10 @@
 
 @implementation CharacterCombatStatsViewController
 - (CharacterStatPresenter *)characterStats {
-    return [self.dataSource characterData:self].stats;
+    return [self.dataSource dataSourceCharacter:self].stats;
 }
 - (NSMutableArray *)characterLoadouts {
-    return [self.dataSource characterData:self].loadouts;
+    return [self.dataSource dataSourceCharacter:self].loadouts;
 }
 
 @synthesize soulStatBody = _soulStatBody;

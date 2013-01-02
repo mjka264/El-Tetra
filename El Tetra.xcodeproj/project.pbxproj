@@ -39,6 +39,8 @@
 		C29752C516856F3700092860 /* CharacterStatPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752C416856F3700092860 /* CharacterStatPresenter.m */; };
 		C29752C81685734A00092860 /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29752C71685734A00092860 /* StatTableViewController.m */; };
 		C2B597EB16905B05002A333C /* CharacterStat.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B597EA16905B05002A333C /* CharacterStat.m */; };
+		C2F443EB169454C000FCA7BB /* DiceRollerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F443EA169454C000FCA7BB /* DiceRollerViewController.m */; };
+		C2F443F0169454E400FCA7BB /* DiceRollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F443EF169454E400FCA7BB /* DiceRollerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,11 @@
 		C29752C71685734A00092860 /* StatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewController.m; sourceTree = "<group>"; };
 		C2B597E916905B05002A333C /* CharacterStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterStat.h; sourceTree = "<group>"; };
 		C2B597EA16905B05002A333C /* CharacterStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterStat.m; sourceTree = "<group>"; };
+		C2F443E9169454C000FCA7BB /* DiceRollerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceRollerViewController.h; sourceTree = "<group>"; };
+		C2F443EA169454C000FCA7BB /* DiceRollerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiceRollerViewController.m; sourceTree = "<group>"; };
+		C2F443EE169454E400FCA7BB /* DiceRollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiceRollerView.h; path = ../DiceRollerView.h; sourceTree = "<group>"; };
+		C2F443EF169454E400FCA7BB /* DiceRollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiceRollerView.m; path = ../DiceRollerView.m; sourceTree = "<group>"; };
+		C2F443F11694571B00FCA7BB /* CharacterSelecterProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CharacterSelecterProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,7 +241,9 @@
 			isa = PBXGroup;
 			children = (
 				C297528B168551CB00092860 /* MainStoryboard_iPhone.storyboard */,
+				C2F443F11694571B00FCA7BB /* CharacterSelecterProtocol.h */,
 				C26413E716907EDF00B02C42 /* Data Structures */,
+				C2F443ED169454C800FCA7BB /* DiceRoller */,
 				C23AF15B168FF7D400F695D4 /* CharacterSelector */,
 				C26413E416907EC500B02C42 /* Skills View */,
 				C26413E516907ECE00B02C42 /* Combat View */,
@@ -276,6 +285,17 @@
 				C29752A3168551CB00092860 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C2F443ED169454C800FCA7BB /* DiceRoller */ = {
+			isa = PBXGroup;
+			children = (
+				C2F443E9169454C000FCA7BB /* DiceRollerViewController.h */,
+				C2F443EA169454C000FCA7BB /* DiceRollerViewController.m */,
+				C2F443EE169454E400FCA7BB /* DiceRollerView.h */,
+				C2F443EF169454E400FCA7BB /* DiceRollerView.m */,
+			);
+			name = DiceRoller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,6 +429,8 @@
 				C2B597EB16905B05002A333C /* CharacterStat.m in Sources */,
 				C26413E316907D4D00B02C42 /* CharacterSkillsSummaryViewController.m in Sources */,
 				C2295E7C1691EB9B00BBCADC /* ColourChooser.m in Sources */,
+				C2F443EB169454C000FCA7BB /* DiceRollerViewController.m in Sources */,
+				C2F443F0169454E400FCA7BB /* DiceRollerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

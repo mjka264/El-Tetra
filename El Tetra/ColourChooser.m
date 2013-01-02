@@ -32,19 +32,27 @@
     } else if (drawingContext == ColourChooserContextStrongBackground) {
         brightness = 0.4;
         saturation = 1.0;
+    } else if (drawingContext == ColourChooserContextBrightForeground) {
+        brightness = 0.8;
+        saturation = 1.0;
+    } else if (drawingContext == ColourChooserContextBrightBackground) {
+        brightness = 0.6;
+        saturation = 1.0;
     }
     
     // Helpers to assist with the special cases
     BOOL dualElement = characterStatElementIsDualElement(element);
     BOOL foreground = (drawingContext == ColourChooserContextLine ||
                        drawingContext == ColourChooserContextSubtleForeground ||
-                       drawingContext == ColourChooserContextStrongForeground);
+                       drawingContext == ColourChooserContextStrongForeground ||
+                       drawingContext == ColourChooserContextBrightForeground);
     if (dualElement) element = foreground ? characterStatGreekElement(element) : CharacterStatElementChi;
 
     // Now to work out the colour!    
-    if (drawingContext == ColourChooserContextSubtleForeground && !dualElement) {
+    if (!dualElement && drawingContext == ColourChooserContextSubtleForeground) {
         returnValue = [UIColor blackColor];
-    } else if (drawingContext == ColourChooserContextStrongForeground && !dualElement) {
+    } else if (!dualElement && (drawingContext == ColourChooserContextStrongForeground ||
+                                drawingContext == ColourChooserContextBrightForeground)) {
         returnValue = [UIColor whiteColor];
     } else {
         if (element == CharacterStatElementChi) hue = 0.77;

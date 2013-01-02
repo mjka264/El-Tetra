@@ -15,7 +15,7 @@
 @class CharacterCombatStatsViewController;
 
 @protocol CharacterSheetViewControllerDataSource <NSObject>
-- (Character *)characterData:(CharacterCombatStatsViewController *)source;
+- (Character *)dataSourceCharacter:(CharacterCombatStatsViewController *)source;
 @end
 
 @interface CharacterCombatStatsViewController : UIViewController

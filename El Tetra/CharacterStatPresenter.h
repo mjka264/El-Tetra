@@ -68,36 +68,6 @@ typedef enum {
 - (void)setStatWithDescription:(NSString *)stat value:(NSInteger)value;
 - (NSInteger)totalStatCost;
 
-
-/*
-
-// The interface for view controller that have read-only access to the stats
-// The (id) returned by the first two methods is the parameter to these other methods
-- (id)characterWithAllStats;
-- (id)characterWithStatGroup:(t_CharacterStatGroup)group;
-+ (NSInteger)numberOfStatGroupsFrom:(id)characterData;
-+ (NSInteger)numberOfEntriesFrom:(id)characterData;
-+ (NSInteger)numberOfEntriesFrom:(id)characterData inStatGroup:(t_CharacterStatGroup)group;
-+ (NSString *)sectionHeadingFrom:(id)characterData;
-+ (NSString *)sectionHeadingFrom:(id)characterData inStatGroup:(t_CharacterStatGroup)group;
-+ (NSString *)statDescriptionFrom:(id)characterData atIndex:(NSInteger)index;
-+ (NSString *)statDescriptionFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group;
-+ (NSNumber *)statValueFrom:(id)characterData atIndex:(NSInteger)index;
-+ (NSNumber *)statValueFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group;
-+ (t_CharacterStatElement)statElementFrom:(id)characterData atIndex:(NSInteger)index;
-+ (t_CharacterStatElement)statElementFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group;
-+ (t_CharacterStatElement)statElementforHeadingFrom:(id)characterData;
-+ (NSInteger)dataStatGroupForSectionNumber:(NSInteger)index;
-+ (NSNumber *)primaryStatForSkillGroupFrom:(id)characterData;
-+ (NSNumber *)primaryStatForSkillGroupFrom:(id)characterData inStatGroup:(t_CharacterStatGroup)group;
-+ (NSNumber *)soulStatFrom:(id)characterData forStat:(t_CharacterStatSoul)stat;
-
-// The interface for view controllers that have write access to the data
-+ (NSArray *)editableStatGroupsFrom:(id)characterData;  // of NSNumber representing the data in the enum
-+ (void)setStatValueFrom:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group to:(NSInteger)value;
-+ (NSInteger)statCostFor:(id)characterData atIndex:(NSInteger)index inStatGroup:(t_CharacterStatGroup)group;
-+ (NSInteger)statCostFor:(id)characterData;
-*/
 @end
 
 

@@ -39,15 +39,11 @@
 
 @synthesize characterSourceSelectedForViewing = _characterSourceSelectedForViewing;
 
-- (Character *)characterData:(CharacterCombatStatsViewController *)source {
+- (Character *)dataSourceCharacter:(CharacterCombatStatsViewController *)source {
     return self.characterSourceSelectedForViewing;
 }
 
-- (CharacterStatPresenter *)characterStatData:(CharacterStatEditorViewController_TVC *)source {
-    return self.characterSourceSelectedForViewing.stats;
-}
-
-- (CharacterStatPresenter *)dataSourceCharacterStatsFor:(CharacterSelectorTableViewController *)source {
+- (CharacterStatPresenter *)dataSourceCharacterStatsPresenter:(UIViewController *)source {
     return self.characterSourceSelectedForViewing.stats;
 }
 

@@ -13,7 +13,7 @@
 @class CharacterStatEditorViewController_TVC;
 
 @protocol CharacterStatEditorTableViewControllerDataSource <NSObject>
-- (CharacterStatPresenter *)characterStatData:(CharacterStatEditorViewController_TVC *)source;
+- (CharacterStatPresenter *)dataSourceCharacterStatsPresenter:(CharacterStatEditorViewController_TVC *)source;
 @end
 
 @interface CharacterStatEditorViewController_TVC : UIViewController <CharacterStatEditorTableViewCellDelegate>

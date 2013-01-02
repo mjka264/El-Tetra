@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CharacterCombatStatsViewController.h"
 #import "CharacterStatEditorViewController_TVC.h"
+#import "CharacterSelecterProtocol.h"
 
-@interface CharacterSelectorTableViewController : UITableViewController <CharacterSheetViewControllerDataSource, UITabBarControllerDelegate, CharacterStatEditorTableViewControllerDataSource>
+@interface CharacterSelectorTableViewController : UITableViewController <UITabBarControllerDelegate, CharacterSelecterProtocol>
 
 @end
