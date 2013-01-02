@@ -19,5 +19,9 @@
 @end
 
 @interface DiceRollerViewController : UIViewController
-@property (nonatomic, weak)id<CharacterSelecterProtocol> dataSource;
+@property (nonatomic, weak) id<CharacterSelecterProtocol> dataSource;
+@property (nonatomic, weak) IBOutlet UILabel *headingLabel;
+- (void)initialiseWithDescription:(NSString *)headingForDisplayOrNil
+                       dice:(NSInteger)numberOfDice
+                   modifier:(NSInteger)modifierToRoll;
 @end

@@ -42,6 +42,11 @@ typedef enum {
 } t_CharacterStatSoulLink;
 
 @interface CharacterStatPresenter : NSObject <CharacterLoadoutAssistsDerivation>
+
+// JUST FOR TESTING
+// REMOVE LATER
+
+
 @property (nonatomic, strong) NSArray *allStats;
 @property (nonatomic, strong) CharacterStat *headingStat;
 

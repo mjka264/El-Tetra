@@ -141,6 +141,7 @@
 		C23AF15B168FF7D400F695D4 /* CharacterSelector */ = {
 			isa = PBXGroup;
 			children = (
+				C2F443F11694571B00FCA7BB /* CharacterSelecterProtocol.h */,
 				C23AF151168F782500F695D4 /* CharacterSelectorTableViewController.h */,
 				C23AF152168F782500F695D4 /* CharacterSelectorTableViewController.m */,
 			);
@@ -241,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				C297528B168551CB00092860 /* MainStoryboard_iPhone.storyboard */,
-				C2F443F11694571B00FCA7BB /* CharacterSelecterProtocol.h */,
 				C26413E716907EDF00B02C42 /* Data Structures */,
 				C2F443ED169454C800FCA7BB /* DiceRoller */,
 				C23AF15B168FF7D400F695D4 /* CharacterSelector */,

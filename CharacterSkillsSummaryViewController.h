@@ -19,4 +19,5 @@
 
 @interface CharacterSkillsSummaryViewController : UIViewController <StatTableViewControllerDataSource>
 @property (nonatomic, weak) id<CharacterSelecterProtocol> dataSource;
+
 @end
